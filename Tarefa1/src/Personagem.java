@@ -14,7 +14,9 @@ public abstract class Personagem{
 
     //Métodos
     public void exibirStatus(){
-        System.out.printf("Nome: %s\nPontos de vida: %d\nForça: %s", nome, pontosDeVida, forca);
+        System.out.printf("\nNome: %s", nome);
+        System.out.printf("\nPontos de vida: %d", pontosDeVida);
+        System.out.printf("\nForça: %d", forca);
     }
 
     public abstract void receberDano(int DMG);
