@@ -1,4 +1,4 @@
-public class Personagem{
+public abstract class Personagem{
 
     //Atributos
     String nome;
@@ -13,15 +13,11 @@ public class Personagem{
     }
 
     //Métodos
-    public void receberDano(int DMG){
-        pontosDeVida -= DMG;
+    public void exibirStatus(){
+        System.out.printf("Nome: %s\nPontos de vida: %d\nForça: %s", nome, pontosDeVida, forca);
     }
 
-    public String exibirStatus(){
-        return String.format("Nome do personagem: %s\nQuantidade de vida: %d\n", nome, pontosDeVida);
-    }
+    public abstract void receberDano(int DMG);
 
-    public void atacar(Personagem alvo){
-        alvo.receberDano(forca);
-    }
+    public abstract void atacar(Personagem alvo);
 }

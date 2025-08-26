@@ -1,4 +1,4 @@
-public class Heroi extends Personagem{
+public abstract class Heroi extends Personagem{
 
     //Atributos
     int nivel;
@@ -13,16 +13,7 @@ public class Heroi extends Personagem{
     }
 
     //Métodos
-    public void ganharExperiencia(int new_XP){
-        this.experiencia += new_XP;
-    }
+    public abstract void ganharExperiencia(int new_XP);
 
-    public void usarHabilidadeEspecial(Personagem alvo){
-
-    }
-
-    @Override
-    public String exibirStatus(){
-        return String.format("Nome do personagem: %s\nQuantidade de vida: %d\nNível do personagem: %d\nQuantidade de experiência: %d\n", nome, pontosDeVida, nivel, experiencia);
-    }
+    public abstract void usarHabilidadeEspecial(Personagem alvo);
 }

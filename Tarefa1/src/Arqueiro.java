@@ -1,12 +1,12 @@
-public class Guerreiro extends Heroi{
+public class Arqueiro extends Heroi{
 
     //Atributos
-    int furia;
+    int precisao;
 
     //Construtor
-    public Guerreiro(String nome, int HP, int forca, int nivel, int experiencia, int furia){
+    public Arqueiro(String nome, int HP, int forca, int nivel, int experiencia, int precisao){
         super(nome, HP, forca, nivel, experiencia);
-        this.furia = furia;
+        this.precisao = precisao;
     }
 
     //Métodos
