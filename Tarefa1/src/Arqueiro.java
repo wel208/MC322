@@ -4,8 +4,12 @@ public class Arqueiro extends Heroi{
     int precisao;
 
     //Construtor
-    public Arqueiro(String nome, int HP){
-        super(nome, HP, 35, 10, 7, 0.02);
+    public Arqueiro(String nome, int pontosDeVida){
+        super(nome, pontosDeVida);
+        this.moveSpeed = 5;
+        this.dodgeChance = 0.2;
+        this.forca = 40;
+        this.protecao = 20;
         this.precisao = 70;
     }
 
@@ -20,8 +24,13 @@ public class Arqueiro extends Heroi{
     }
 
     @Override
-    public void atacar(Personagem alvo){}
+    public void atacar(Personagem alvo){
+
+    }
 
     @Override
     public void usarHabilidadeEspecial(Personagem alvo){}
+
+    @Override
+    public void melhorarAtributoUnico(){}
 }

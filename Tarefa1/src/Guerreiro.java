@@ -4,11 +4,12 @@ public class Guerreiro extends Heroi{
     int furia;
 
     //Construtor
-    public Guerreiro(String nome, int HP){
-        super(nome, HP);
+    public Guerreiro(String nome, int pontosDeVida){ //Atributos predefinidos para um guerreiro de nível 0
+        super(nome, pontosDeVida);
+        this.moveSpeed = 7;
         this.dodgeChance = 0.4;
         this.forca = 70;
-        this.protecao = 40;
+        this.protecao = 50;
         this.furia = 2;
     }
 
@@ -24,9 +25,11 @@ public class Guerreiro extends Heroi{
 
     @Override
     public void atacar(Personagem alvo){
+        int contador = 0;
         for (int i = 0; i < attackSpeed; i++){
 
             if (Math.random() > alvo.dodgeChance){         //Caso o herói acerte o seu alvo
+                contador++;
 
                 if (Math.random() < this.criticalChance){  //Caso o ataque seja crítico
                     alvo.receberDano(forca * 1.3);
@@ -37,18 +40,20 @@ public class Guerreiro extends Heroi{
                     System.out.println("\nBOA! O nosso guerreiro ACERTOU um golpe no inimigo!");
                 }
             }
-            else
+            else                                           //Caso o inimigo consiga desviar do ataque do herói
                 System.out.println("\nNÃO! O inimigo ESQUIVOU do ataque do nosso herói!");
         }
+
+        System.out.printf("\nO herói acertou %d dos %d ataques dados!", contador, attackSpeed);
     }
 
     /* A habilidade especial do guerreiro é atacar 'furia' vezes mais que o normal em apenas um turno
        A furia faz com que ele ataque mais vezes e com a força 50% maior que o seu nível de força
        O inimigo também tem uma redução na chance de se esquivar de um ataque do herói */
     @Override
-    public int usarHabilidadeEspecial(Personagem alvo){
+    public void usarHabilidadeEspecial(Personagem alvo){
         int contador = 0;
-        System.out.printf("AHHHH!! O NOSSO HERÓI ENTROU EM FÚRIA E ATACARÁ %d VEZES NESTE TURNO!", attackSpeed * furia);
+        System.out.printf("\nAHHHH!! O NOSSO HERÓI ENTROU EM FÚRIA E ATACARÁ %d VEZES NESTE TURNO!", attackSpeed * furia);
 
         for(int i = 0; i < attackSpeed * furia; i++){       
             if (Math.random() > alvo.dodgeChance * 0.2){   //Caso o herói acerte o seu alvo
@@ -57,11 +62,11 @@ public class Guerreiro extends Heroi{
             }
         }
 
-        return contador;
+        System.out.printf("\nO nosso guerreiro acertou %d golpes!", contador);
     }
 
     @Override
-    public void melhorarAtributoUnico(Personagem heroi){
-
+    public void melhorarAtributoUnico(){
+        this.furia += 1;
     }
 }
