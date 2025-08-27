@@ -3,19 +3,15 @@ public abstract class Personagem{
     //Atributos
     String nome;
     int pontosDeVida;
-    int forca;              //Força do personagem, capacidade de causar dano a inimigos
+    double forca;              //Força do personagem, capacidade de causar dano a inimigos
     int attackSpeed;        //Quantidade de ataques que o personagem consegue dar por turno
     int moveSpeed;          //Distância, em metros, que o personagem consegue percorrer em um turno
     double dodgeChance;     //Chance que o personagem possui de esquivar de um ataque inimigo
 
     //Construtor
-    public Personagem(String nome, int HP, int forca, int attackSpeed, int moveSpeed, double dodgeChance){
+    public Personagem(String nome, int pontosDeVida){
         this.nome = nome;
-        this.pontosDeVida = HP;
-        this.forca = forca;
-        this.attackSpeed = attackSpeed;
-        this.moveSpeed = moveSpeed;
-        this.dodgeChance = dodgeChance;
+        this.pontosDeVida = pontosDeVida;
     }
 
     //Métodos
@@ -25,9 +21,9 @@ public abstract class Personagem{
         System.out.printf("\nForça: %d", forca);
     }
 
-    public void receberDano(int dano){
+    public void receberDano(double dano){
         pontosDeVida -= dano;
     }
 
-    public abstract boolean atacar(Personagem alvo);
+    public abstract void atacar(Personagem alvo);
 }

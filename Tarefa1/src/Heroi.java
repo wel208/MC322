@@ -8,19 +8,19 @@ public abstract class Heroi extends Personagem{
     double criticalChance;  //A chance de um ataque certo causar dano crítico
 
     //Construtor
-    public Heroi(String nome, int HP, int forca, int protecao, int moveSpeed, double dodgeChance){
-        super(nome, HP, forca, 1, moveSpeed, dodgeChance);
-        this.protecao = protecao;
+    public Heroi(String nome, int pontosDeVida){
+        super(nome, pontosDeVida);
+        this.attackSpeed = 1;
         this.nivel = 0;
         this.experiencia = 0;
         this.max_XP = 50;
-        this.criticalChance = 0.05;
+        this.criticalChance = 0.2;
     }
 
     //Métodos
     @Override
-    public void receberDano(int forca){
-        pontosDeVida -= forca * (1 - protecao); //O cálculo leva em consideração a quantidade de proteção que o herói possui contra ataques
+    public void receberDano(double forca){
+        pontosDeVida -= forca * (1 - protecao/100); //O cálculo leva em consideração a quantidade de proteção que o herói possui contra ataques
     }
 
     public boolean ganharExperiencia(int new_XP, int max_XP){
@@ -28,16 +28,18 @@ public abstract class Heroi extends Personagem{
         
         if (experiencia >= max_XP){ //Caso o herói suba de nível
             nivel++;
-            experiencia -= (experiencia - max_XP);
+            experiencia = experiencia - max_XP;
             
             max_XP += 50;
             forca += 5;
-            protecao += 3;
-            criticalChance += 0.02;
-            dodgeChance += 0.02;
+            protecao += 5;
+            criticalChance += 0.05;
+            dodgeChance += 0.05;
 
-            if (nivel > 0 && nivel % 3 == 0)
+            if (nivel > 0 && nivel % 3 == 0){ //A cada três niveis o herói começa a dar um ataque a mais por turno
                 attackSpeed++;
+                this.melhorarAtributoUnico(this);
+            }
 
             return true;
         }
@@ -45,5 +47,7 @@ public abstract class Heroi extends Personagem{
         else return false;
     }
 
-    public abstract void usarHabilidadeEspecial(Personagem alvo);
+    public abstract int usarHabilidadeEspecial(Personagem alvo);
+
+    public abstract void melhorarAtributoUnico(Personagem heroi);
 }
