@@ -25,11 +25,32 @@ public class Arqueiro extends Heroi{
 
     @Override
     public void atacar(Personagem alvo){
+        int contador = 0;
+        for (int i = 0; i < attackSpeed; i++){
 
+            if (Math.random() > alvo.dodgeChance){
+                contador++;
+
+                if (Math.random() < criticalChance){
+                    alvo.receberDano(forca * 1.3);  //PRECISA ADICIONAR O CALCULO DO DANO DO ARQUEIRO CONSIDERANDO DISTANCIA
+                    System.out.println("\nISSO! O nosso guerreiro ACERTOU um ATAQUE CRÍTICO em seu inimigo!");
+                }
+                else{                                      //Caso seja um ataque comum
+                    alvo.receberDano(forca);
+                    System.out.println("\nBOA! O nosso guerreiro ACERTOU um golpe no inimigo!");
+                }
+            }
+            else                                           //Caso o inimigo consiga desviar do ataque do herói
+                System.out.println("\nNÃO! O inimigo ESQUIVOU do ataque do nosso herói!");
+        }
+
+        System.out.printf("\nO herói acertou %d dos %d ataques dados!", contador, attackSpeed);
     }
 
     @Override
-    public void usarHabilidadeEspecial(Personagem alvo){}
+    public void usarHabilidadeEspecial(Personagem alvo){
+        
+    }
 
     @Override
     public void melhorarAtributoUnico(){}

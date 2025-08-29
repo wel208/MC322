@@ -31,7 +31,7 @@ public class Guerreiro extends Heroi{
             if (Math.random() > alvo.dodgeChance){         //Caso o herói acerte o seu alvo
                 contador++;
 
-                if (Math.random() < this.criticalChance){  //Caso o ataque seja crítico
+                if (Math.random() < criticalChance){       //Caso o ataque seja crítico
                     alvo.receberDano(forca * 1.3);
                     System.out.println("\nISSO! O nosso guerreiro ACERTOU um ATAQUE CRÍTICO em seu inimigo!");
                 }
