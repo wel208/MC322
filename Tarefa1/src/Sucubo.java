@@ -1,3 +1,3 @@
-public class Sucubo {
+public class Sucubo extends Monstro{
     
 }

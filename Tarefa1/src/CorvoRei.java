@@ -1,3 +1,3 @@
-public class CorvoRei {
+public class CorvoRei extends Monstro{
     
 }

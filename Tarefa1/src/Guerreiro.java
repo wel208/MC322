@@ -6,6 +6,7 @@ public class Guerreiro extends Heroi{
     //Construtor
     public Guerreiro(String nome, int pontosDeVida){ //Atributos predefinidos para um guerreiro de nível 0
         super(nome, pontosDeVida);
+        this.attackRange = 1;
         this.moveSpeed = 7;
         this.dodgeChance = 0.4;
         this.forca = 70;
@@ -52,7 +53,9 @@ public class Guerreiro extends Heroi{
        O inimigo também tem uma redução na chance de se esquivar de um ataque do herói */
     @Override
     public void usarHabilidadeEspecial(Personagem alvo){
+
         int contador = 0;
+
         System.out.printf("\nAHHHH!! O NOSSO HERÓI ENTROU EM FÚRIA E ATACARÁ %d VEZES NESTE TURNO!", attackSpeed * furia);
 
         for(int i = 0; i < attackSpeed * furia; i++){       
@@ -68,5 +71,60 @@ public class Guerreiro extends Heroi{
     @Override
     public void melhorarAtributoUnico(){
         this.furia += 1;
+    }
+
+    @Override
+    public void mover(Personagem alvo){
+
+        boolean flag = false;
+
+        if (pos < alvo.pos)
+            while (pos < alvo.pos){
+                pos++;
+                if (Utilidades.calcularDistancia(pos, alvo.pos) == 1){
+                    System.out.println("O GUERREIRO ALCANÇOU O MONSTRO E IRÁ ATACAR!");
+                    flag = true;
+                    atacar(alvo);
+                    break;
+                }
+            }
+        else
+            while (pos > alvo.pos){
+                pos--;
+                if (Utilidades.calcularDistancia(pos, alvo.pos) == 1){
+                    System.out.println("O GUERREIRO ALCANÇOU O MONSTRO E IRÁ ATACAR!");
+                    flag = true;
+                    atacar(alvo);
+                    break;
+                }
+            }
+        
+        if (!flag){
+            System.out.println("O nosso guerreiro ainda não alcançou o inimigo. ");
+            System.out.printf("Ele chegou a %d metros do monstro.", Utilidades.calcularDistancia(pos, alvo.pos));
+        }
+    }
+
+    @Override
+    public void tomarDecisao(Personagem alvo){
+        //ADICIONAR TEXTO SEMELHANTE A COMO ESTÁ NA CLASSE ARQUEIRO
+        int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
+
+        System.out.printf("\nO guerreiro está a %d metros do monstro e irá ", distancia);
+
+        if (distancia <= 1){
+            if (Math.random() < 0.25){
+                System.out.print("USAR SUA HABILIDADE ESPECIAL!");
+                usarHabilidadeEspecial(alvo);
+            }
+            else{
+                System.out.print("ATACAR O SEU INIMIGO!");
+                atacar(alvo);
+            }
+        }
+        else{
+            System.out.print("CORRER NA DIREÇÃO DELE!");
+            mover(alvo);
+        }
     }
 }

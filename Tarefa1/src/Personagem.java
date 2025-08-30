@@ -6,11 +6,12 @@ public abstract class Personagem{
     int nivel;              //Nível de experiência do personagem
     double protecao;        //Quantidade de pontos que o personagem possui de proteção contra ataques inimigos
     double forca;           //Força do personagem, capacidade de causar dano a inimigos
+    int attackRange;        //Distância máxima que o ataque do personagem alcança
     int attackSpeed;        //Quantidade de ataques que o personagem consegue dar por turno
     int moveSpeed;          //Distância, em metros, que o personagem consegue percorrer em um turno
     double dodgeChance;     //Chance que o personagem possui de esquivar de um ataque inimigo
     double criticalChance;  //Chance do personagem causar dano crítico ao inimigo
-    int posX, posY;         //Valores que representam a posição do personagem no mapa
+    int pos;                //Valor que representa a posição do personagem no mapa
 
     //Construtor
     public Personagem(String nome, int pontosDeVida){
@@ -26,4 +27,8 @@ public abstract class Personagem{
     }
 
     public abstract void atacar(Personagem alvo);
+
+    public abstract void mover(Personagem alvo);
+
+    public abstract void tomarDecisao(Personagem alvo);
 }

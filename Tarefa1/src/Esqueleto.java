@@ -1,3 +1,3 @@
-public class Esqueleto {
+public class Esqueleto extends Monstro{
     
 }
