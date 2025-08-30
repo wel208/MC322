@@ -12,16 +12,20 @@ public class Utilidades{
         }
     }
 
-    public String verificarClasse(Personagem P){
+    public static String verificarClasse(Personagem P){
         if (P instanceof Goblin)
-            return "Goblin";
+            return "GOBLIN";
         else if (P instanceof CorvoRei)
-            return "Corvo rei";
+            return "CORVO REI";
         else if (P instanceof Esqueleto)
-            return "Esqueleto";
+            return "ESQUELETO";
         else if (P instanceof Rangedor)
-            return "Rangedor";
+            return "RANGEDOR";
+        else if (P instanceof Sucubo)
+            return "SUCUBO";
+        else if (P instanceof Arqueiro)
+            return "ARQUEIRO";
         else
-            return "Sucubo";
+            return "GUERREIRO";
     }
 }

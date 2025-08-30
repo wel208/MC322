@@ -2,16 +2,14 @@ public class Goblin extends Monstro{
     
     //Construtor
     public Goblin(String nome, int nivel, int pos){
-        super(nome);
-        this.nivel = nivel;
-        this.pos = pos;
+        super(nome, nivel, pos);
         this.attackRange = 1;
         this.attackSpeed = 3;
-        this.dodgeChance = 0.4 + 1.2 * nivel;
+        this.dodgeChance = 0.4 + 0.2 * nivel;
         this.forca = 20 + 2 * nivel;
-        this.moveSpeed = 5 + nivel;
-        this.protecao = 15 + 2 * nivel;
-        this.pontosDeVida = 50 + 2 * nivel;
+        this.moveSpeed = 6 + nivel;
+        this.protecao = 15 + 2 * (nivel - 1);
+        this.pontosDeVida = 30 + 2 * nivel;
         this.xpConcedido = 30 + 3 * nivel;
     }
 

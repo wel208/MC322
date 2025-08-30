@@ -6,9 +6,8 @@ public class Arqueiro extends Heroi{
     //Construtor
     public Arqueiro(String nome){
         super(nome);
-        this.pontosDeVida = 40;
-        this.pos = 0;
-        this.moveSpeed = 8;
+        this.pontosDeVida = 60;
+        this.moveSpeed = 6;
         this.dodgeChance = 0.2;
         this.forca = 40;
         this.protecao = 20;
@@ -57,7 +56,7 @@ public class Arqueiro extends Heroi{
                 System.out.println("NÃO! O arqueiro ERROU a flechada!");
         }
 
-        System.out.printf("O herói acertou %d dos %d ataques dados!", contador, attackSpeed);
+        System.out.printf("\nO herói acertou %d dos %d ataques dados!", contador, attackSpeed);
     }
 
     @Override
@@ -88,7 +87,7 @@ public class Arqueiro extends Heroi{
 
     @Override
     public void melhorarAtributoUnico(){
-        precisao += 0.05;
+        precisao += 5;
     }
 
     @Override
@@ -113,7 +112,7 @@ public class Arqueiro extends Heroi{
                 usarHabilidadeEspecial(alvo);
             }
             else if (chance <= 0.85){
-                System.out.print("SE MOVER!");
+                System.out.print("SE AFASTAR!");
                 mover(alvo);
             }
             else{
@@ -127,7 +126,7 @@ public class Arqueiro extends Heroi{
                 usarHabilidadeEspecial(alvo);
             }
             else if (chance <= 0.7){
-                System.out.print("SE MOVER!");
+                System.out.print("SE AFASTAR!");
                 mover(alvo);
             }
             else{
@@ -141,7 +140,7 @@ public class Arqueiro extends Heroi{
                 usarHabilidadeEspecial(alvo);
             }
             else if (chance <= 0.5){
-                System.out.print("SE MOVER!");
+                System.out.print("SE AFASTAR!");
                 mover(alvo);
             }
             else{
@@ -155,7 +154,7 @@ public class Arqueiro extends Heroi{
                 usarHabilidadeEspecial(alvo);
             }
             else if (chance <= 0.35){
-                System.out.print("SE MOVER!");
+                System.out.print("SE AFASTAR!");
                 mover(alvo);
             }
             else{

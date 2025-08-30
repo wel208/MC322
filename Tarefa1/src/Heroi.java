@@ -8,6 +8,7 @@ public abstract class Heroi extends Personagem{
     public Heroi(String nome){ //Valores predefinidos para um guerreiro de nível 0
         super(nome);
         this.attackSpeed = 1;
+        this.pos = 0;
         this.nivel = 0;
         this.experiencia = 0;
         this.max_XP = 50;
@@ -16,13 +17,21 @@ public abstract class Heroi extends Personagem{
 
     //Métodos
     public boolean ganharExperiencia(int new_XP){
-        experiencia += new_XP;
+        boolean flag = false;
+        int contador = 0;
+
+        System.out.printf("\n%s recebeu %d pontos de experiênca nessa batalha!", new_XP);
+        Utilidades.esperar(500);
         
-        if (experiencia >= max_XP){ //Caso o herói suba de nível
+        experiencia += new_XP;
+    
+        while (experiencia >= max_XP){ //Caso o herói suba de nível
+            flag = true;
+            contador++;
             nivel++;
             experiencia = experiencia - max_XP;
             
-            max_XP += 50;
+            max_XP += 25;
             forca += 5;
             protecao += 5;
             moveSpeed++;
@@ -33,11 +42,10 @@ public abstract class Heroi extends Personagem{
                 attackSpeed++;
                 this.melhorarAtributoUnico();
             }
-
-            return true;
         }
 
-        else return false;
+        System.out.printf("\nO herói subiu %d NÍVEIS de experiência!", contador);
+        return flag;
     }
 
     public abstract void exibirStatus();

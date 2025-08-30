@@ -6,9 +6,9 @@ public class Guerreiro extends Heroi{
     //Construtor
     public Guerreiro(String nome){ //Atributos predefinidos para um guerreiro de nível 0
         super(nome);
-        this.pontosDeVida = 80;
+        this.pontosDeVida = 85;
         this.attackRange = 1;
-        this.moveSpeed = 5;
+        this.moveSpeed = 6;
         this.dodgeChance = 0.4;
         this.forca = 70;
         this.protecao = 50;
