@@ -4,11 +4,11 @@ public abstract class Monstro extends Personagem{
     int xpConcedido; //Quantidade de experiência que o monstro cede ao herói que derrotá-lo
 
     //Construtor
-    public Monstro(String nome, int pontosDeVida, int nivel, int xpConcedido){
-        super(nome, pontosDeVida);
-        this.criticalChance = 0.10;
+    public Monstro(String nome){
+        super(nome);
+        this.criticalChance = 0.2;
     }
 
     //Métodos
-    public abstract void apresentarMonstro();
+    public abstract void ambientarMonstro();
 }

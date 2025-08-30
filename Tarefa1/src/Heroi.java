@@ -5,8 +5,8 @@ public abstract class Heroi extends Personagem{
     int max_XP;             //Indica a quantidade de experiência necessária para subir de nível
 
     //Construtor
-    public Heroi(String nome, int pontosDeVida){ //Valores predefinidos para um guerreiro de nível 0
-        super(nome, pontosDeVida);
+    public Heroi(String nome){ //Valores predefinidos para um guerreiro de nível 0
+        super(nome);
         this.attackSpeed = 1;
         this.nivel = 0;
         this.experiencia = 0;
@@ -39,6 +39,8 @@ public abstract class Heroi extends Personagem{
 
         else return false;
     }
+
+    public abstract void exibirStatus();
 
     public abstract void usarHabilidadeEspecial(Personagem alvo);
 

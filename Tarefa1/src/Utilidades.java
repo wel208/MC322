@@ -11,4 +11,17 @@ public class Utilidades{
             Thread.currentThread().interrupt();
         }
     }
+
+    public String verificarClasse(Personagem P){
+        if (P instanceof Goblin)
+            return "Goblin";
+        else if (P instanceof CorvoRei)
+            return "Corvo rei";
+        else if (P instanceof Esqueleto)
+            return "Esqueleto";
+        else if (P instanceof Rangedor)
+            return "Rangedor";
+        else
+            return "Sucubo";
+    }
 }

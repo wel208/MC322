@@ -4,10 +4,11 @@ public class Arqueiro extends Heroi{
     int precisao;
 
     //Construtor
-    public Arqueiro(String nome, int pontosDeVida){
-        super(nome, pontosDeVida);
+    public Arqueiro(String nome){
+        super(nome);
+        this.pontosDeVida = 40;
         this.pos = 0;
-        this.moveSpeed = 5;
+        this.moveSpeed = 8;
         this.dodgeChance = 0.2;
         this.forca = 40;
         this.protecao = 20;
@@ -17,11 +18,17 @@ public class Arqueiro extends Heroi{
     //Métodos
     @Override
     public void exibirStatus(){
-        System.out.printf("\nO nosso arqueiro %s possui %d pontos de vida.", nome, pontosDeVida);
-        System.out.printf("\n%s está no nível %d e possui %d pontos de experiência!", nome, nivel, experiencia);
-        System.out.printf("\nUma admirável força de %d pontos e está provido de uma proteção de %d pontos!", forca, protecao);
-        System.out.printf("\nAtualmente ele possui uma precisão de %.2f%%!", precisao);
-        System.out.printf("\nSua velocidade de ataque é de %d flechadas por turno e a de movimento é de %d metros por turno!", attackSpeed, moveSpeed);
+        System.out.printf("\n%s, O ARQUEIRO possui:", nome); Utilidades.esperar(500);
+        System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(500);
+        System.out.printf("\nNÍVEL %d e %d/%d de EXPERIÊNCIA;", nivel, experiencia, max_XP); Utilidades.esperar(500);
+        System.out.printf("\n%d pontos de FORÇA e %d pontos de PROTEÇÃO;", forca, protecao); Utilidades.esperar(500);
+        System.out.printf("\n%d pontos de PRECISÃO;", precisao); Utilidades.esperar(500);
+        System.out.printf("\ncapacidade de dar %d ATAQUES POR TURNO e pode percorrer %d METROS POR TURNO.", attackSpeed, moveSpeed); Utilidades.esperar(500);
+    }
+
+    @Override
+    public void statusParcial(){
+        System.out.printf("\n%s, O ARQUEIRO está com %d PONTOS DE VIDA.", pontosDeVida);
     }
 
     @Override

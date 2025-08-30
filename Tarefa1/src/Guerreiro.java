@@ -4,10 +4,11 @@ public class Guerreiro extends Heroi{
     int furia;
 
     //Construtor
-    public Guerreiro(String nome, int pontosDeVida){ //Atributos predefinidos para um guerreiro de nível 0
-        super(nome, pontosDeVida);
+    public Guerreiro(String nome){ //Atributos predefinidos para um guerreiro de nível 0
+        super(nome);
+        this.pontosDeVida = 80;
         this.attackRange = 1;
-        this.moveSpeed = 7;
+        this.moveSpeed = 5;
         this.dodgeChance = 0.4;
         this.forca = 70;
         this.protecao = 50;
@@ -17,11 +18,17 @@ public class Guerreiro extends Heroi{
     //Métodos
     @Override
     public void exibirStatus(){
-        System.out.printf("\nO nosso guerreiro %s possui %d pontos de vida.", nome, pontosDeVida);
-        System.out.printf("\n%s está no nível %d e possui %d pontos de experiência!", nome, nivel, experiencia);
-        System.out.printf("\nUma incrível força admirável de %d pontos e está provido de uma proteção de %d pontos!", forca, protecao);
-        System.out.printf("\nSeu nível de fúria está em %d!", furia);
-        System.out.printf("\nSua velocidade de ataque é de %d golpes por turno e a de movimento é de %d metros por turno!", attackSpeed, moveSpeed);
+        System.out.printf("\n%s, O GUERREIRO possui:", nome); Utilidades.esperar(500);
+        System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(500);
+        System.out.printf("\nNÍVEL %d e %d/%d de EXPERIÊNCIA;", nivel, experiencia, max_XP); Utilidades.esperar(500);
+        System.out.printf("\n%d pontos de FORÇA e %d pontos de PROTEÇÃO;", forca, protecao); Utilidades.esperar(500);
+        System.out.printf("\n%d pontos de FURIA;", furia); Utilidades.esperar(500);
+        System.out.printf("\ncapacidade de dar %d ATAQUES POR TURNO e pode percorrer %d METROS POR TURNO.", attackSpeed, moveSpeed); Utilidades.esperar(500);
+    }
+
+    @Override
+    public void statusParcial(){
+        System.out.printf("\n%s, O GUERREIRO está com %d PONTOS DE VIDA.", pontosDeVida);
     }
 
     @Override
@@ -81,7 +88,7 @@ public class Guerreiro extends Heroi{
         if (pos < alvo.pos)
             while (pos < alvo.pos){
                 pos++;
-                if (Utilidades.calcularDistancia(pos, alvo.pos) == 1){
+                if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange){
                     System.out.println("O GUERREIRO ALCANÇOU O MONSTRO E IRÁ ATACAR!");
                     flag = true;
                     atacar(alvo);
@@ -91,7 +98,7 @@ public class Guerreiro extends Heroi{
         else
             while (pos > alvo.pos){
                 pos--;
-                if (Utilidades.calcularDistancia(pos, alvo.pos) == 1){
+                if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange){
                     System.out.println("O GUERREIRO ALCANÇOU O MONSTRO E IRÁ ATACAR!");
                     flag = true;
                     atacar(alvo);
@@ -112,8 +119,8 @@ public class Guerreiro extends Heroi{
 
         System.out.printf("\nO guerreiro está a %d metros do monstro e irá ", distancia);
 
-        if (distancia <= 1){
-            if (Math.random() < 0.25){
+        if (distancia <= attackRange){
+            if (Math.random() < 0.3){
                 System.out.print("USAR SUA HABILIDADE ESPECIAL!");
                 usarHabilidadeEspecial(alvo);
             }

@@ -14,13 +14,12 @@ public abstract class Personagem{
     int pos;                //Valor que representa a posição do personagem no mapa
 
     //Construtor
-    public Personagem(String nome, int pontosDeVida){
+    public Personagem(String nome){
         this.nome = nome;
-        this.pontosDeVida = pontosDeVida;
     }
 
     //Métodos
-    public abstract void exibirStatus();
+    public abstract void statusParcial();
 
     public void receberDano(double forca){
         pontosDeVida -= forca * (1 - protecao/100); //O cálculo leva em consideração a quantidade de proteção que o personagem possui contra ataques
