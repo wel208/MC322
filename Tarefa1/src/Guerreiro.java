@@ -28,6 +28,7 @@ public class Guerreiro extends Heroi{
 
     @Override
     public void statusParcial(){
+        Utilidades.esperar(500);
         System.out.printf("\n%s, O GUERREIRO está com %d PONTOS DE VIDA.", pontosDeVida);
     }
 
@@ -35,6 +36,7 @@ public class Guerreiro extends Heroi{
     public void atacar(Personagem alvo){
         int contador = 0;
         for (int i = 0; i < attackSpeed; i++){
+            Utilidades.esperar(500);
 
             if (Math.random() > alvo.dodgeChance){         //Caso o herói acerte o seu alvo
                 contador++;
@@ -57,22 +59,24 @@ public class Guerreiro extends Heroi{
 
     /* A habilidade especial do guerreiro é atacar 'furia' vezes mais que o normal em apenas um turno
        A furia faz com que ele ataque mais vezes e com a força 50% maior que o seu nível de força
-       O inimigo também tem uma redução na chance de se esquivar de um ataque do herói */
+       O inimigo também tem um aumento na chance de se esquivar de um ataque do herói */
     @Override
     public void usarHabilidadeEspecial(Personagem alvo){
+        Utilidades.esperar(500);
 
         int contador = 0;
 
-        System.out.printf("\nAHHHH!! O NOSSO HERÓI ENTROU EM FÚRIA E ATACARÁ %d VEZES NESTE TURNO!", attackSpeed * furia);
+        System.out.printf("\nRHHAAAA!! O NOSSO HERÓI ENTROU EM FÚRIA E ATACARÁ %d VEZES NESTE TURNO!", attackSpeed * furia); Utilidades.esperar(300);
 
-        for(int i = 0; i < attackSpeed * furia; i++){       
-            if (Math.random() > alvo.dodgeChance * 0.2){   //Caso o herói acerte o seu alvo
+        for(int i = 0; i < attackSpeed * furia; i++){
+            System.out.print("Hah! "); Utilidades.esperar(350);
+            if (Math.random() > alvo.dodgeChance * 1.2){   //Caso o herói acerte o seu alvo
                 alvo.receberDano(forca * 1.5);
                 contador++;
             }
         }
 
-        System.out.printf("\nO nosso guerreiro acertou %d golpes!", contador);
+        System.out.printf("\nO nosso guerreiro acertou %d golpe(s)!", contador);
     }
 
     @Override
