@@ -11,7 +11,7 @@ public class Guerreiro extends Heroi{
         this.moveSpeed = 6;
         this.dodgeChance = 0.4;
         this.forca = 70;
-        this.protecao = 50;
+        this.protecao = 0.5;
         this.furia = 2;
     }
 
@@ -90,7 +90,7 @@ public class Guerreiro extends Heroi{
         boolean flag = false;
 
         if (pos < alvo.pos)
-            while (pos < alvo.pos){
+            for (int i = 0; i < moveSpeed; i++){
                 pos++;
                 if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange){
                     System.out.println("O GUERREIRO ALCANÇOU O MONSTRO E IRÁ ATACAR!");
@@ -100,7 +100,7 @@ public class Guerreiro extends Heroi{
                 }
             }
         else
-            while (pos > alvo.pos){
+            for (int i = 0; i < moveSpeed; i++){
                 pos--;
                 if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange){
                     System.out.println("O GUERREIRO ALCANÇOU O MONSTRO E IRÁ ATACAR!");

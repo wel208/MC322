@@ -22,7 +22,7 @@ public abstract class Personagem{
     public abstract void statusParcial();
 
     public void receberDano(double forca){
-        pontosDeVida -= forca * (1 - protecao/100); //O cálculo leva em consideração a quantidade de proteção que o personagem possui contra ataques
+        pontosDeVida -= forca * (1 - protecao); //O cálculo leva em consideração a quantidade de proteção que o personagem possui contra ataques
     }
 
     public abstract void atacar(Personagem alvo);

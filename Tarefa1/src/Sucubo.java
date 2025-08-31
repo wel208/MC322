@@ -4,11 +4,11 @@ public class Sucubo extends Monstro{
     public Sucubo(String nome, int nivel, int pos){
         super(nome, nivel, pos);
         this.attackRange = 3;
-        this.attackSpeed = (nivel <= 10) ? 1 : 2;
+        this.attackSpeed = (nivel <= 12) ? 1 : 2;
         this.dodgeChance = 0.05 + 0.02 * nivel;
         this.forca = 80 + 2 * nivel;
         this.moveSpeed = 2 + (nivel - 1);
-        this.protecao = 40 + 2 * nivel;
+        this.protecao = 0.4 + 0.02 * nivel;
         this.pontosDeVida = 100 + 2 * nivel;
         this.xpConcedido = 50 + 2 * nivel;
     }

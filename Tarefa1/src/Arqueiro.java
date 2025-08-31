@@ -10,7 +10,7 @@ public class Arqueiro extends Heroi{
         this.moveSpeed = 6;
         this.dodgeChance = 0.2;
         this.forca = 40;
-        this.protecao = 20;
+        this.protecao = 0.2;
         this.precisao = 70;
     }
 
@@ -139,7 +139,7 @@ public class Arqueiro extends Heroi{
                 System.out.print("USAR SUA HABILIDADE ESPECIAL!");
                 usarHabilidadeEspecial(alvo);
             }
-            else if (chance <= 0.5){
+            else if (chance <= 0.4){
                 System.out.print("SE AFASTAR!");
                 mover(alvo);
             }
@@ -149,11 +149,11 @@ public class Arqueiro extends Heroi{
             }
         }
         else{
-            if (chance <= 0.3){
+            if (chance <= 0.4){
                 System.out.print("USAR SUA HABILIDADE ESPECIAL!");
                 usarHabilidadeEspecial(alvo);
             }
-            else if (chance <= 0.35){
+            else if (chance <= 0.42){
                 System.out.print("SE AFASTAR!");
                 mover(alvo);
             }
