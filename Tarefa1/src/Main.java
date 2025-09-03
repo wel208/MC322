@@ -16,7 +16,10 @@ public class Main{
         System.out.println("O ranger das arvores e o corvejar dos corvos deve ter amedrontado os diversos homens que vieram ate aqui para defender o reino que tanto amavam."); Utilidades.esperar(2000);
         System.out.println("Homens esses que, muitas vezes, nunca mais voltaram..."); Utilidades.esperar(2000);
         System.out.println("Mas eu estou pronto. Voltarei para Lumenholt com a princesa a salvo e enfrentarei o que for preciso para que isso aconteca."); Utilidades.esperar(2000);
-        System.out.println("\n" + heroi.nome + " finalmente adentra a floresta e inicia sua busca pela donzela.\n"); Utilidades.esperar(2000);
+        System.out.println("\n" + heroi.nome + " finalmente adentra a floresta e inicia sua busca pela donzela."); Utilidades.esperar(2000);
+
+        heroi.exibirStatus();
+        System.out.print("\n");
 
         //LOOP DE CADA BATALHA
         boolean heroiMorto = false;

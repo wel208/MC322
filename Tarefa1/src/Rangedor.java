@@ -26,7 +26,7 @@ public class Rangedor extends Monstro{
     @Override
     public void ambientarMonstro(Heroi heroi){
         //Ambientação
-        System.out.println("Em seu caminho, " + heroi.nome + " percebe um ranger de arvores cada vez mais forte se aproximando."); Utilidades.esperar(2000);
+        System.out.println("\nEm seu caminho, " + heroi.nome + " percebe um ranger de arvores cada vez mais forte se aproximando."); Utilidades.esperar(2000);
         System.out.println("Rapidamente surge uma raiz de arvore ransgando o chao ate seus pes, mas, com velocidade, consegue se livrar de ser atingido."); Utilidades.esperar(2000);
         System.out.println("Ate que ele entende o que foi aquilo: um RANGEDOR!"); Utilidades.esperar(2000);
         System.out.println("Um monstro humanoide com aparencia das arvores da floresta, coberto de musgos e fungos, que faz um som como o ranger de arvores."); Utilidades.esperar(2000);

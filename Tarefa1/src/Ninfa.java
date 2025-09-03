@@ -24,7 +24,7 @@ public class Ninfa extends Monstro{
     @Override
     public void ambientarMonstro(Heroi heroi){
         //Ambientação
-        System.out.println("Ao caminhar, " + heroi.nome + " comeca a ouvir um choro distante."); Utilidades.esperar(2000);
+        System.out.println("\nAo caminhar, " + heroi.nome + " comeca a ouvir um choro distante."); Utilidades.esperar(2000);
         System.out.println("Seria a princesa?"); Utilidades.esperar(2000);
         System.out.println("Ele vai correndo ate a origem do choro!"); Utilidades.esperar(2000);
         System.out.println("Era, sim, uma mulher! Mas nao era a princesa... Ele segue ate a donzela para entender o que esta acontecendo."); Utilidades.esperar(2000);

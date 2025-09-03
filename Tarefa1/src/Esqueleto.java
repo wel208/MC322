@@ -26,7 +26,7 @@ public class Esqueleto extends Monstro{
     @Override
     public void ambientarMonstro(Heroi heroi){
         //Ambientação
-        System.out.println("Enquanto o nosso guerreiro segue o seu rumo, comeca a ouvir um som de bater de ossos vindo do meio das arvores."); Utilidades.esperar(2000);
+        System.out.println("\nEnquanto o nosso guerreiro segue o seu rumo, comeca a ouvir um som de bater de ossos vindo do meio das arvores."); Utilidades.esperar(2000);
         System.out.println("Ele entao olha em direcao ao barulho, procurando entender de onde vem."); Utilidades.esperar(2000);
         System.out.println("Quando, de repente, uma flecha VEM NA SUA DIRECAO."); Utilidades.esperar(2000);
         System.out.println("Por sorte, " + heroi.nome + " e rapido o suficiente para esquivar."); Utilidades.esperar(2000);

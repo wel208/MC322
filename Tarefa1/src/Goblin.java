@@ -24,7 +24,7 @@ public class Goblin extends Monstro{
     @Override
     public void ambientarMonstro(Heroi heroi){
         //Ambientação
-        System.out.println("Depois de um bom tempo em seu percurso, " + heroi.nome + " comeca a ouvir alguns grunidos vindos de dentro da neblina"); Utilidades.esperar(2000);
+        System.out.println("\nDepois de um bom tempo em seu percurso, " + heroi.nome + " comeca a ouvir alguns grunidos vindos de dentro da neblina"); Utilidades.esperar(2000);
         System.out.println("Ele logo entende o que aquilo significa: GOBLIN!"); Utilidades.esperar(2000);
         System.out.println("Uma verde criatura humanoide estranha. Um monstro baixo e rapido."); Utilidades.esperar(2000);
         System.out.println(nome + " entao aparece de tras de uma arvore, um goblin muito conhecido pelo reino de Lumenholt por suas frequentes aparicoes."); Utilidades.esperar(2000);

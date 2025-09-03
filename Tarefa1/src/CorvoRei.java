@@ -26,7 +26,7 @@ public class CorvoRei extends Monstro{
     @Override
     public void ambientarMonstro(Heroi heroi){
         //Ambientação
-        System.out.println("Apos certo tempo caminhando, o nosso heroi percebe que o barulho dos corvos esta cada vez mais alto."); Utilidades.esperar(2000);
+        System.out.println("\nApos certo tempo caminhando, o nosso heroi percebe que o barulho dos corvos esta cada vez mais alto."); Utilidades.esperar(2000);
         System.out.println("Ate que chega o momento em que " + nome + " aparece, o Corvo Rei."); Utilidades.esperar(2000);
         System.out.println("Um corvo com penas que refletem luz de forma que parece ter pedacos de ouro em suas asas."); Utilidades.esperar(2000);
         System.out.println("Ele, cercado de sua horda de corvos, se mostra pronto para impedir que o heroi complete seu objetivo."); Utilidades.esperar(2000);
