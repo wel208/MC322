@@ -5,7 +5,7 @@ public abstract class Heroi extends Personagem{
     int max_XP;             //Indica a quantidade de experiência necessária para subir de nível
 
     //Construtor
-    public Heroi(String nome){ //Valores predefinidos para um guerreiro de nível 0
+    public Heroi(String nome){ //Valores predefinidos para um heroi de nível 0
         super(nome);
         this.attackSpeed = 1;
         this.pos = 0;
@@ -16,6 +16,11 @@ public abstract class Heroi extends Personagem{
     }
 
     //Métodos
+
+    /*
+     * Metódo chamado ao derrotar um inimigo
+     * Caso suba de nível, terá melhora em seus atributos
+     */
     public void ganharExperiencia(int new_XP){
         int contador = 0;
         boolean subiu = false;
@@ -43,13 +48,13 @@ public abstract class Heroi extends Personagem{
             dodgeChance += 0.05;
             pontosDeVida += 10;
 
-            if (nivel % 2 == 0){    //A cada dois niveis o herói começa a dar um ataque a mais por turno
+            if (nivel % 2 == 0){    //A cada dois niveis o herói começa a dar um ataque a mais por turno e tem um aumento do atributo único
                 attackSpeed++;
                 this.melhorarAtributoUnico();
             }
         }
 
-        if (subiu){
+        if (subiu){                 //Se tiver subido de nível, mostra o melhora nos atributos principais
             System.out.printf("\n%s subiu %d NIVEIS de experiencia!", nome, contador); Utilidades.esperar(600);
             System.out.printf("\n%s teve um aumento de:", nome); Utilidades.esperar(600);
             System.out.printf("\n%d pontos de VIDA;", pontosDeVida - vidaAntigo); Utilidades.esperar(600);
@@ -60,7 +65,7 @@ public abstract class Heroi extends Personagem{
         exibirStatus(); Utilidades.esperar(600);
     }
 
-    public abstract void exibirStatus();
+    public abstract void exibirStatus(); //Método que mostra como está todos os atributos do herói no momento
 
     public abstract void usarHabilidadeEspecial(Personagem alvo);
 

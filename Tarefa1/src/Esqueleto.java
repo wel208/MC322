@@ -1,3 +1,9 @@
+/*
+ * Classe de monstro bem semelhante ao Arqueiro
+ * Não possui muita vida ou proteção
+ * Prefere ataques de longa distância
+ */
+
 public class Esqueleto extends Monstro{
     
     //Atributos
@@ -11,7 +17,7 @@ public class Esqueleto extends Monstro{
         this.forca = 40 + (2 * (nivel - 3));
         this.moveSpeed = 5 + nivel;
         this.precisao = 55 + (5 * nivel);
-        this.protecao = 0.25 + 0.01 * nivel;
+        this.protecao = 0.2 + 0.01 * nivel;
         this.pontosDeVida = 30 + (2 * nivel);
         this.xpConcedido = 40 + 2 * nivel;
     }
@@ -38,6 +44,11 @@ public class Esqueleto extends Monstro{
         System.out.printf("\nNeste momento, mesmo triste pelo que aconteceu com %s, nosso heroi se prepara para a batalha.\n", nome); Utilidades.esperar(1500);
     }
 
+    /*
+     * Escolhe, com base na distância, se vai atacar ou se afastar do inimigo
+     * Quanto mais longe, mais chance de atacar
+     * Quanto mais perto, mais chance de se afastar
+     */
     @Override
     public void tomarDecisao(Personagem alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
@@ -87,22 +98,26 @@ public class Esqueleto extends Monstro{
         }
     }
 
+    /*
+     * O ataque leva em consideração sua precisão
+     * Quanto mais longe, maior o dano causado
+     */
     @Override
     public void atacar(Personagem alvo){
         int contador = 0;
 
         for (int i = 0; i < attackSpeed; i++){
 
-            if (Math.random() < precisao/100){                 //Se o esqueleto possivelmente acerta seu alvo
+            if (Math.random() < precisao/100){             //Se o esqueleto possivelmente acerta seu alvo
                 if (Math.random() > alvo.dodgeChance){     //Se o herói não esquivar
                     contador++;
                     int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
 
-                    if (Math.random() < criticalChance){
+                    if (Math.random() < criticalChance){   //Se ele acertar um ataque crítico no herói
                         alvo.receberDano(forca * 1.2 * distancia/7);
                         System.out.println("NAO! O esqueleto ACERTOU um ATAQUE CRITICO no nosso heroi!"); Utilidades.esperar(1000);
                     }  
-                    else{  
+                    else{                                  //Se ele acertar um ataque comum no herói
                         alvo.receberDano(forca * distancia/7);
                         System.out.println("NAO! O esqueleto ACERTOU o nosso heroi!"); Utilidades.esperar(1000);
                     }
@@ -110,14 +125,16 @@ public class Esqueleto extends Monstro{
                 else                                       //Se o herói esquivar da flecha
                     System.out.println("BOA! O heroi ESQUIVOU da flecha!"); Utilidades.esperar(1000);
             }
-            else
+            else                                           //Se ele errar a flecha
                 System.out.println("ISSO! O esqueleto ERROU a flecha!"); Utilidades.esperar(1000);
         }
 
-        Utilidades.esperar(1500);
         System.out.printf("\nO esqueleto acertou %d da(s) %d flecha(s) atirada(s)!\n", contador, attackSpeed); Utilidades.esperar(1500);
     }
 
+    /*
+     * Ao se movimentar, sempre irá se afastar do inimigo para poder ganhar vantagem
+     */
     @Override
     public void mover(Personagem alvo){
         if (pos > alvo.pos)

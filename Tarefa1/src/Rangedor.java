@@ -1,3 +1,12 @@
+/*
+ * Monstro com aparência das árvores da floresta
+ * Possui dois tipos de ataque, um curta e um para longa distância
+ * Monstro razoavelmente forte
+ * Possui bastante pontos de vida e protecao
+ * Bons pontos de força
+ * Não é tão rápido, chance meio baixa de se esquivar de um ataque
+ */
+
 public class Rangedor extends Monstro{
     
     //Construtor
@@ -6,7 +15,7 @@ public class Rangedor extends Monstro{
         this.attackSpeed = 2;
         this.attackRange = 12;
         this.dodgeChance = 0.15;
-        this.forca = 35 + (2 * (nivel - 2));
+        this.forca = 50 + (2 * (nivel - 2));
         this.moveSpeed = 3;
         this.protecao = 0.45 + (nivel/100);
         this.pontosDeVida = 80 + nivel;
@@ -32,6 +41,10 @@ public class Rangedor extends Monstro{
         System.out.printf("\n%s, entao, com muita coragem, vai para a batalha!\n", heroi.nome); Utilidades.esperar(1500);
     }
 
+    /*
+     * Se estiver a uma distância <= 12, atacará
+     * Se não, irá na direção do heroi
+     */
     @Override
     public void tomarDecisao(Personagem alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
@@ -48,38 +61,47 @@ public class Rangedor extends Monstro{
         }
     }
 
+    /*
+     * Caso esteja a uma distância <= 3 do alvo, usará o ataque de curta distância, que são dois golpes
+     * Se não, usará o ataque de longa distância, que dá uma diminuição de 10% na sua força
+     */
     @Override
     public void atacar(Personagem alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
 
-        if (distancia <= 3){
+        if (distancia <= 3){                            //Condição para ataque de curta distância
             System.out.println("O RANGEDOR dara DOIS ataques CORPO A CORPO!\n"); Utilidades.esperar(1500);
 
-            for (int i = 0; i < 2; i++){
+            for (int i = 0; i < 2; i++){                //for para os dois ataques ao herói
                 Utilidades.esperar(1500);
 
-                if (Math.random() > alvo.dodgeChance){
+                if (Math.random() > alvo.dodgeChance){  //Caso ele acerte o ataque
                     System.out.println("NAO! Ele ACERTOU um ataque no nosso heroi!"); Utilidades.esperar(1000);
                     alvo.receberDano(forca);
                 }
-                else
+                else                                    //Caso o herói esquive do ataque
                     System.out.printf("BOA! O heroi ESQUIVOU do ataque de %s, O RANGEDOR\n", nome); Utilidades.esperar(1000);
             }
         }
-        else{
+        else{                                           //Condição para ataque de longa distância
             System.out.println("O RANGEDOR dara UM ataque A DISTANCIA!\n"); Utilidades.esperar(500);
             System.out.printf("Ele entao finca seus bracos no chao, criando raizes que vao ate %s, o nosso %s!", alvo.nome, Utilidades.verificarClasse(alvo)); Utilidades.esperar(500);
             System.out.println("\nSuas raizes tentam ACERTAR o nosso heroi\n"); Utilidades.esperar(500);
 
-            if (Math.random() > alvo.dodgeChance){
+            if (Math.random() > alvo.dodgeChance){      //Caso ele acerte o ataque
                 System.out.println("NAO! Ele ACERTOU o ataque no nosso heroi!"); Utilidades.esperar(1500);
-                alvo.receberDano(forca * 0.8);
+                alvo.receberDano(forca * 0.9);
             }
-            else
+            else                                        //Caso o heroi esquive do ataque
                 System.out.printf("BOA! O heroi ESQUIVOU do ataque de %s, o RANGEDOR\n", nome); Utilidades.esperar(1500);
         }
     }
 
+    /*
+     * Sempre se moverá em direção ao seu inimigo
+     * Se chegar a uma distância de 11 metros (attackRange - 1) do herói, ele atacará
+     * Se não, será mostrado a distância que ele chegou do herói
+     */
     @Override
     public void mover(Personagem alvo){
         boolean chegou = false;
@@ -87,19 +109,19 @@ public class Rangedor extends Monstro{
         if (pos < alvo.pos)
             for (int i = 0; i < moveSpeed; i++){
                 pos++;
-                if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange - 3){
+                if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange - 1){
                     chegou = true;
-                    System.out.println("O RANGEDOR chegou a uma distância de 9 metros do heroi e ira ATACAR!"); Utilidades.esperar(1500);
+                    System.out.println("O RANGEDOR chegou a uma distância de 11 metros do heroi e ira ATACAR!"); Utilidades.esperar(1500);
                     atacar(alvo);
                 }
             }
         else
             for (int i = 0; i < moveSpeed; i++){
                 pos--;
-                if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange - 3){
+                if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange - 1){
                     chegou = true;
                     Utilidades.esperar(1500);
-                    System.out.println("O RANGEDOR chegou a uma distância de 9 metros do heroi e ira ATACAR!"); Utilidades.esperar(1500);
+                    System.out.println("O RANGEDOR chegou a uma distância de 11 metros do heroi e ira ATACAR!"); Utilidades.esperar(1500);
                     atacar(alvo);
                 }
             }

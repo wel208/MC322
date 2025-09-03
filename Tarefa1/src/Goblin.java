@@ -1,3 +1,11 @@
+/*
+ * Classe de monstro que é rápido
+ * Boa chance de se esquivar de ataques
+ * Não possui muitos pontos de vida, força ou proteção
+ * Dá sempre três ataques por turno
+ * Só dá ataques corpo a corpo
+ */
+
 public class Goblin extends Monstro{
     
     //Construtor
@@ -31,6 +39,10 @@ public class Goblin extends Monstro{
         System.out.printf("\n%s, entao, se prepara para derrotar %s!\n", heroi.nome, nome); Utilidades.esperar(1500);
     }
 
+    /*
+     * Se estiver a uma distância <= 1, irá atacar
+     * Se não, irá correr na direção do inimigo
+     */
     @Override
     public void tomarDecisao(Personagem alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
@@ -47,9 +59,13 @@ public class Goblin extends Monstro{
         }
     }
 
+    /*
+     * Dará sempre três ataques por rodada
+     * Seu dano crítico dá um aumento de 30% em sua força
+     */
     public void atacar(Personagem alvo){
         int contador = 0;
-        for (int i = 0; i < attackSpeed; i++){
+        for (int i = 0; i < attackSpeed; i++){             //for que executa todos os ataques da rodada
 
             if (Math.random() > alvo.dodgeChance){         //Caso o goblin acerte o seu alvo
                 contador++;
@@ -70,6 +86,11 @@ public class Goblin extends Monstro{
         System.out.printf("\nO goblin acertou %d dos %d ataques dados!\n", contador, attackSpeed); Utilidades.esperar(1500);
     }
 
+    /*
+     * Vai sempre se mover em direção ao inimigo
+     * Se alcançá-lo durante a movimentação, irá atacar
+     * Se não, irá mostrar a que distância chegou do herói
+     */
     public void mover(Personagem alvo){
 
         boolean chegou = false;

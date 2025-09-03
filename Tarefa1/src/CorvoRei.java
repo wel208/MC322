@@ -1,5 +1,13 @@
 import java.util.Random;
 
+/*
+ * Classe de monstro com movimentação rápida
+ * Executa ataques a qualquer distância
+ * Não possui muitos pontos de vida ou proteção
+ * Boa chance de esquivar de ataques
+ * Não possui muita força
+ */
+
 public class CorvoRei extends Monstro{
     
     //Construtor
@@ -14,6 +22,7 @@ public class CorvoRei extends Monstro{
         this.xpConcedido = 30 + (2 * nivel);
     }
 
+    //Métodos
     @Override
     public void ambientarMonstro(Heroi heroi){
         //Ambientação
@@ -38,6 +47,10 @@ public class CorvoRei extends Monstro{
         System.out.println("\nAgora, tomado pela raiva, o nosso heroi comeca a sua batalha!"); Utilidades.esperar(2000);
     }
 
+    /*
+     * Se ele estiver a uma distância <= 1 de seu inimigo, irá se movimentar
+     * Se não, ele escolhe entre atacar ou se mover, com preferência pouco maior para atacar
+     */
     @Override
     public void tomarDecisao(Personagem alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
@@ -61,6 +74,10 @@ public class CorvoRei extends Monstro{
         }
     }
 
+    /*
+     * Seu ataque consiste em enviar seus capangas atacarem o herói
+     * Os corvos atacam 'attackSpeed' vezes, tendo chance do guerreiro esquivar
+     */
     @Override
     public void atacar(Personagem alvo){
         Random r = new Random();
@@ -68,20 +85,24 @@ public class CorvoRei extends Monstro{
 
         int contador = 0;
 
-        for (int i = 0; i < attackSpeed; i++){
-            System.out.print(corvejo[r.nextInt(2)] + " ");
+        for (int i = 0; i < attackSpeed; i++){                    //for para executar todos os ataques da rodada
+            System.out.print(corvejo[r.nextInt(2)] + " ");  //Sorteio de qual barulho o corvo que está atacando fará
             Utilidades.esperar(500);
 
-            if (Math.random() > alvo.dodgeChance){
+            if (Math.random() > alvo.dodgeChance){                //Se o corvo acertar seu ataque
                 contador++;
                 alvo.receberDano(forca);
             }
         }
 
-        Utilidades.esperar(1500);
         System.out.printf("\n\nOs corvos acertaram %d dos %d ataques dados!\n", contador, attackSpeed); Utilidades.esperar(1500);
     }
 
+    /*
+     * A movimentação do Corvo Rei não tem um critério de se afastar ou não
+     * existe uma chance 50/50 de ele ir para mais longe ou mais perto do guerreiro
+     * Ele sempre percorrerá 'moveSpeed' metros, ou para perto, ou para longe do herói
+     */
     @Override
     public void mover(Personagem alvo){
         if (Math.random() < 0.5)

@@ -23,8 +23,12 @@ public abstract class Personagem{
         System.out.printf("\n%s, O %s, esta com %d PONTOS DE VIDA.\n", nome, Utilidades.verificarClasse(this), pontosDeVida); Utilidades.esperar(1500);
     }
 
+    /*
+     * O cálculo do dano é feito com base na força do inimigo e na proteção do personagem
+     * 'protecao' < 1 sempre, a proteção absorverá parte da força do inimigo
+    */ 
     public void receberDano(double forca){
-        pontosDeVida -= forca * (1 - protecao); //O cálculo leva em consideração a quantidade de proteção que o personagem possui contra ataques
+        pontosDeVida -= forca * (1 - protecao);
     }
 
     public abstract void atacar(Personagem alvo);

@@ -1,3 +1,10 @@
+/*
+ * Mulher que se transforma num enorme e forte monstro
+ * Muitos pontos de vida e boa proteção
+ * Consegue atacar a uma distância <= 3 metros
+ * Não é rápida, pouca chance de esquivar de um ataque
+ */
+
 public class Ninfa extends Monstro{
     
     //Construtor
@@ -37,6 +44,10 @@ public class Ninfa extends Monstro{
         System.out.printf("\n%s, depois de se afastar do monstro, pensa em como pode derrotar %s.\n", heroi.nome, nome); Utilidades.esperar(1500);
     }
 
+    /*
+     * Se estiver a uma distância <= 3, irá atacar
+     * Se não, irá na direção do heroi
+     */
     @Override
     public void tomarDecisao(Personagem alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
@@ -53,17 +64,21 @@ public class Ninfa extends Monstro{
         }
     }
 
+    /*
+     * Dará 'attackSpeed' ataques no guerreiro
+     * Seu ataque crítico dá um aumento de 10% em sua força
+     */
     @Override
     public void atacar(Personagem alvo){
         int contador = 0;
 
-        for (int i = 0; i < attackSpeed; i++){
+        for (int i = 0; i < attackSpeed; i++){             //for para dar todos os ataques da rodada
 
-            if (Math.random() > alvo.dodgeChance){         //Caso o goblin acerte o seu alvo
+            if (Math.random() > alvo.dodgeChance){         //Caso a ninfa acerte o seu alvo
                 contador++;
 
                 if (Math.random() < criticalChance){       //Caso o ataque seja crítico
-                    alvo.receberDano(forca * 1.2);
+                    alvo.receberDano(forca * 1.1);
                     System.out.println("\nNAO! A ninfa ACERTOU um ATAQUE CRITICO no nosso heroi!"); Utilidades.esperar(1000);
                 }
                 else{                                      //Caso seja um ataque comum
@@ -71,13 +86,18 @@ public class Ninfa extends Monstro{
                     System.out.println("\nNAO! A ninfa ACERTOU um golpe no heroi!"); Utilidades.esperar(1000);
                 }
             }
-            else                                           //Caso o herói consiga desviar do ataque do goblin
+            else                                           //Caso o herói consiga desviar do ataque da ninfa
                 System.out.println("\nUFA! O heroi ESQUIVOU do ataque da ninfa!"); Utilidades.esperar(1000);
         }
 
         System.out.printf("\nA ninfa ACERTOU %d de %d ataque(s) dado(s)!\n", contador, attackSpeed); Utilidades.esperar(1500);
     }
 
+    /*
+     * Sempre se moverá na direção do inimigo
+     * Caso chegue a uma distância == 'attackRange', atacará
+     * Se não, mostrará qual a distância até o guerreiro
+     */
     @Override
     public void mover(Personagem alvo){
 
