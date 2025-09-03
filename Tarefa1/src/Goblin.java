@@ -15,7 +15,7 @@ public class Goblin extends Monstro{
         this.attackSpeed = 3;
         this.dodgeChance = 0.4 + (0.01 * nivel);
         this.forca = 20 + nivel;
-        this.moveSpeed = 5 + nivel;
+        this.moveSpeed = 5 + nivel/2;
         this.protecao = 0.15 + (0.02 * (nivel - 1));
         this.pontosDeVida = 25 + nivel;
         this.xpConcedido = 30 + (2 * nivel);

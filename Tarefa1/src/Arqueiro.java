@@ -156,7 +156,7 @@ public class Arqueiro extends Heroi{
      */
     @Override
     public void usarHabilidadeEspecial(Personagem alvo){
-        System.out.printf("%s atirara %d flechas neste turno!\n\n", nome, attackRange + 3); Utilidades.esperar(1500);
+        System.out.printf("%s atirara %d flechas neste turno!\n\n", nome, attackSpeed + 3); Utilidades.esperar(1500);
 
         int contador = 0;
         for (int i = 0; i < attackSpeed + 3; i++){          //for para executar todos os ataques da rodada

@@ -126,7 +126,7 @@ public class Ninfa extends Monstro{
         
         if (!chegou){
             Utilidades.esperar(1500);
-            System.out.println("\nA NINFA ainda nao alcançou o nosso heroi!");
+            System.out.println("\nA NINFA ainda nao alcancou o nosso heroi!");
             System.out.printf("Ela esta a %d metros de %s.\n", Utilidades.calcularDistancia(pos, alvo.pos), alvo.nome); Utilidades.esperar(1500);
         }
     }
