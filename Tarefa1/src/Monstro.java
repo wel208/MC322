@@ -6,9 +6,11 @@ public abstract class Monstro extends Personagem{
     //Construtor
     public Monstro(String nome, int nivel, int pos){
         super(nome);
+        this.nivel = nivel;
+        this.pos = pos;
         this.criticalChance = 0.2;
     }
 
     //Métodos
-    public abstract void ambientarMonstro();
+    public abstract void ambientarMonstro(Heroi heroi);
 }

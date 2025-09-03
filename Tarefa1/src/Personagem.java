@@ -19,7 +19,9 @@ public abstract class Personagem{
     }
 
     //Métodos
-    public abstract void statusParcial();
+    public void statusParcial(){
+        System.out.printf("\n%s, O %s, esta com %d PONTOS DE VIDA.\n", nome, Utilidades.verificarClasse(this), pontosDeVida); Utilidades.esperar(1500);
+    }
 
     public void receberDano(double forca){
         pontosDeVida -= forca * (1 - protecao); //O cálculo leva em consideração a quantidade de proteção que o personagem possui contra ataques

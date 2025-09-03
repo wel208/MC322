@@ -5,9 +5,10 @@ public class Utilidades{
     }
 
     public static void esperar(int ms) {
-        try {
+        try{
             Thread.sleep(ms);
-        } catch (InterruptedException e) {
+        } 
+        catch (InterruptedException e){
             Thread.currentThread().interrupt();
         }
     }
@@ -21,11 +22,11 @@ public class Utilidades{
             return "ESQUELETO";
         else if (P instanceof Rangedor)
             return "RANGEDOR";
-        else if (P instanceof Sucubo)
-            return "SUCUBO";
+        else if (P instanceof Ninfa)
+            return "NINFA DA FLORESTA";
         else if (P instanceof Arqueiro)
             return "ARQUEIRO";
         else
-            return "GUERREIRO";
+            return "CAVALEIRO";
     }
 }

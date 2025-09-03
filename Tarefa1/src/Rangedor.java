@@ -6,36 +6,44 @@ public class Rangedor extends Monstro{
         this.attackSpeed = 2;
         this.attackRange = 12;
         this.dodgeChance = 0.15;
-        this.forca = 50 + 2 * (nivel - 2);
+        this.forca = 35 + (2 * (nivel - 2));
         this.moveSpeed = 3;
-        this.protecao = 0.45 + nivel/100;
+        this.protecao = 0.45 + (nivel/100);
         this.pontosDeVida = 80 + nivel;
         this.xpConcedido = 40 + 2 * nivel;
     }
 
     //Métodos
     @Override
-    public void ambientarMonstro(){
+    public void ambientarMonstro(Heroi heroi){
+        //Ambientação
+        System.out.println("Em seu caminho, " + heroi.nome + " percebe um ranger de arvores cada vez mais forte se aproximando."); Utilidades.esperar(2000);
+        System.out.println("Rapidamente surge uma raiz de arvore ransgando o chao ate seus pes, mas, com velocidade, consegue se livrar de ser atingido"); Utilidades.esperar(2000);
+        System.out.println("Ate que ele entende o que foi aquilo: um RANGEDOR!"); Utilidades.esperar(2000);
+        System.out.println("Um monstro humanoide com aparencia das arvores da floresta, coberto de musgos e fungos, que faz um som como o ranger de arvores."); Utilidades.esperar(2000);
+        System.out.println("Ele consegue atacar tanto de perto, com seus galhos, quanto de longe, com essa habilidade das raizes."); Utilidades.esperar(2000);
+        
+        System.out.print("\nCriatura forte, alcanca inimigos longe, mas causa menos dano do que em um combate corpo a corpo."); Utilidades.esperar(2000);
+        System.out.printf("\n%s, O RANGEDOR, no nivel %d, possui:", nome, nivel); Utilidades.esperar(2000);
+        System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(2000);
+        System.out.printf("\n%.0f PONTOS DE FORCA;", forca); Utilidades.esperar(2000);
+        System.out.printf("\nE, ao morrer, concedera %d PONTOS DE EXPERIENCIA ao heroi\n", xpConcedido); Utilidades.esperar(2000);
 
-    }
-
-    @Override
-    public void statusParcial(){
-        System.out.printf("\n%s, O RANGEDOR, está com %d PONTOS DE VIDA.", nome, pontosDeVida);
+        System.out.printf("\n%s, entao, com muita coragem, vai para a batalha!\n", heroi.nome); Utilidades.esperar(1500);
     }
 
     @Override
     public void tomarDecisao(Personagem alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
 
-        System.out.printf("\nO rangedor está a %d metros do herói e irá ", distancia);
+        System.out.printf("\nO rangedor esta a %d metros do heroi e ira ", distancia);
 
         if (distancia <= attackRange){
-            System.out.print("ATACAR!");
+            System.out.println("ATACAR!\n"); Utilidades.esperar(1500);
             atacar(alvo);
         }
         else{
-            System.out.print("SE APROXIMAR!");
+            System.out.println("SE APROXIMAR!\n"); Utilidades.esperar(1500);
             mover(alvo);
         }
     }
@@ -45,22 +53,33 @@ public class Rangedor extends Monstro{
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
 
         if (distancia <= 3){
-            System.out.println("O RANGEDOR dará dois ATAQUES CORPO A CORPO!");
+            System.out.println("O RANGEDOR dara DOIS ataques CORPO A CORPO!"); Utilidades.esperar(1500);
 
             for (int i = 0; i < 2; i++){
-                Utilidades.esperar(500);
+                Utilidades.esperar(1500);
 
                 if (Math.random() > alvo.dodgeChance){
-                    System.out.println("NÃO! Ele ACERTOU um ataque no nosso herói!");
+                    System.out.println("NAO! Ele ACERTOU um ataque no nosso heroi!"); Utilidades.esperar(1000);
                     alvo.receberDano(forca);
                 }
                 else
-                    System.out.println("BOA! O herói ESQUIVOU do ataque do monstro!");
+                    System.out.printf("BOA! O heroi ESQUIVOU do ataque de %s, O RANGEDOR\n", nome); Utilidades.esperar(1000);
             }
         }
         else{
-            System.out.println("O RANGEDOR dará um ATAQUE À DISTÂNCIA!");
-            alvo.receberDano(forca * 0.7);
+            System.out.println("O RANGEDOR dara UM ataque A DISTANCIA!");
+            Utilidades.esperar(500);
+            System.out.printf("Ele entao finca seus bracos no chao, criando raizes que vao ate %s, o nosso %s!", alvo.nome, Utilidades.verificarClasse(alvo));
+            Utilidades.esperar(500);
+            System.out.println("\nSuas raizes tentam ACERTAR o nosso heroi\n");
+            Utilidades.esperar(500);
+
+            if (Math.random() > alvo.dodgeChance){
+                System.out.println("NÃO! Ele ACERTOU o ataque no nosso herói!\n"); Utilidades.esperar(1500);
+                alvo.receberDano(forca * 0.8);
+            }
+            else
+                System.out.printf("BOA! O heroi ESQUIVOU do ataque de %s, o RANGEDOR\n", nome); Utilidades.esperar(1500);
         }
     }
 
@@ -68,18 +87,19 @@ public class Rangedor extends Monstro{
     public void mover(Personagem alvo){
         
         if (pos < alvo.pos)
-            for (int i = 0; i < attackSpeed; i++){
+            for (int i = 0; i < moveSpeed; i++){
                 pos++;
                 if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange - 3){
-                    System.out.println("O RANGEDOR chegou a uma distância de 9 metros do herói!");
+                    System.out.println("O RANGEDOR chegou a uma distância de 9 metros do heroi e ira ATACAR!"); Utilidades.esperar(1500);
                     atacar(alvo);
                 }
             }
         else
-            for (int i = 0; i < attackSpeed; i++){
+            for (int i = 0; i < moveSpeed; i++){
                 pos--;
                 if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange - 3){
-                    System.out.println("O RANGEDOR chegou a uma distância de 9 metros do herói!");
+                    Utilidades.esperar(1500);
+                    System.out.println("O RANGEDOR chegou a uma distância de 9 metros do heroi e ira ATACAR!"); Utilidades.esperar(1500);
                     atacar(alvo);
                 }
             }
