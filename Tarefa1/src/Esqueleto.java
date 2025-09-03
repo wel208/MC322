@@ -108,14 +108,14 @@ public class Esqueleto extends Monstro{
                     }
                 }
                 else                                       //Se o herói esquivar da flecha
-                    System.out.println("BOA! O heroi ESQUIVOU da flecha!\n"); Utilidades.esperar(1000);
+                    System.out.println("BOA! O heroi ESQUIVOU da flecha!"); Utilidades.esperar(1000);
             }
             else
                 System.out.println("ISSO! O esqueleto ERROU a flecha!"); Utilidades.esperar(1000);
         }
 
         Utilidades.esperar(1500);
-        System.out.printf("\nO esqueleto acertou %d da(s) %d flecha(s) atirada(s)!", contador, attackSpeed); Utilidades.esperar(1500);
+        System.out.printf("\nO esqueleto acertou %d da(s) %d flecha(s) atirada(s)!\n", contador, attackSpeed); Utilidades.esperar(1500);
     }
 
     @Override

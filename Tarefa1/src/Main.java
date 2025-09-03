@@ -35,17 +35,17 @@ public class Main{
             for (int j = 1; j < 60; j++){
                 System.out.printf("\n---INICIO DO%sTURNO---\n", verificarTurno(j)); Utilidades.esperar(1000);
 
-                System.out.println("\nVez de " + heroi.nome + "!"); Utilidades.esperar(1500);
+                System.out.println("\n- Vez de " + heroi.nome + "! -"); Utilidades.esperar(1500);
 
                 heroi.tomarDecisao(monstro);
                 monstro.statusParcial();
 
                 if (monstro.pontosDeVida <= 0){
-                    System.out.printf("\n%s, %s MORREU\n", monstro.nome, Utilidades.verificarClasse(monstro)); Utilidades.esperar(1500);
+                    System.out.printf("\n%s, O %s, MORREU\n", monstro.nome, Utilidades.verificarClasse(monstro)); Utilidades.esperar(1500);
                     break;
                 }
 
-                System.out.println("\nVez de " + monstro.nome + "!"); Utilidades.esperar(1500);
+                System.out.println("\n- Vez de " + monstro.nome + "! -"); Utilidades.esperar(1500);
 
                 monstro.tomarDecisao(heroi);
                 heroi.statusParcial();

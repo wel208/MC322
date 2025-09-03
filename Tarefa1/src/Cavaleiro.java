@@ -20,8 +20,8 @@ public class Cavaleiro extends Heroi{
     public void exibirStatus(){
         System.out.printf("\n%s, O cavaleiro possui:", nome); Utilidades.esperar(500);
         System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(500);
-        System.out.printf("\nNÍVEL %d e %d/%d de EXPERIÊNCIA;", nivel, experiencia, max_XP); Utilidades.esperar(500);
-        System.out.printf("\n%.0f pontos de FORÇA e %.0f pontos de PROTEÇÃO;", forca, protecao * 100); Utilidades.esperar(500);
+        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", nivel, experiencia, max_XP); Utilidades.esperar(500);
+        System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar(500);
         System.out.printf("\n%d pontos de FURIA;", furia); Utilidades.esperar(500);
         System.out.printf("\ncapacidade de dar %d ATAQUES POR TURNO e pode percorrer %d METROS POR TURNO.\n", attackSpeed, moveSpeed); Utilidades.esperar(500);
     }
@@ -36,15 +36,15 @@ public class Cavaleiro extends Heroi{
 
                 if (Math.random() < criticalChance){       //Caso o ataque seja crítico
                     alvo.receberDano(forca * 1.3);
-                    System.out.println("\nISSO! O nosso cavaleiro ACERTOU um ATAQUE CRITICO em seu inimigo!"); Utilidades.esperar(1500);
+                    System.out.println("ISSO! O nosso cavaleiro ACERTOU um ATAQUE CRITICO em seu inimigo!"); Utilidades.esperar(1500);
                 }
                 else{                                      //Caso seja um ataque comum
                     alvo.receberDano(forca);
-                    System.out.println("\nBOA! O nosso cavaleiro ACERTOU um golpe no inimigo!"); Utilidades.esperar(1500);
+                    System.out.println("BOA! O nosso cavaleiro ACERTOU um golpe no inimigo!"); Utilidades.esperar(1500);
                 }
             }
             else                                           //Caso o inimigo consiga desviar do ataque do herói
-                System.out.println("\nNAO! O inimigo ESQUIVOU do ataque do nosso heroi!"); Utilidades.esperar(1500);
+                System.out.println("NAO! O inimigo ESQUIVOU do ataque do nosso heroi!"); Utilidades.esperar(1500);
         }
 
         System.out.printf("\nO heroi acertou %d dos %d ataques dados!\n", contador, attackSpeed); Utilidades.esperar(1500);
@@ -59,7 +59,7 @@ public class Cavaleiro extends Heroi{
 
         System.out.printf("RHHAAAA!! O NOSSO HEROI ENTROU EM FURIA E ATACARA %d VEZES NESTE TURNO!\n\n", attackSpeed + furia); Utilidades.esperar(1000);
 
-        for(int i = 0; i < attackSpeed * furia; i++){
+        for(int i = 0; i < attackSpeed + furia; i++){
             System.out.print("Hah! "); Utilidades.esperar (500);
             if (Math.random() > alvo.dodgeChance * 1.1){   //Caso o herói acerte o seu alvo
                 alvo.receberDano(forca * 1.2);
@@ -67,7 +67,7 @@ public class Cavaleiro extends Heroi{
             }
         }
 
-        System.out.printf("\n\nO nosso cavaleiro acertou %d golpe(s)!", contador); Utilidades.esperar(1500);
+        System.out.printf("\n\nO nosso cavaleiro acertou %d golpe(s)!\n", contador); Utilidades.esperar(1500);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class Cavaleiro extends Heroi{
             for (int i = 0; i < moveSpeed; i++){
                 pos++;
                 if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange){
-                    System.out.println("O cavaleiro ALCANÇOU O MONSTRO E IRÁ ATACAR!"); Utilidades.esperar(1500);
+                    System.out.println("O cavaleiro ALCANCOU O MONSTRO E IRA ATACAR!\n"); Utilidades.esperar(1500);
                     chegou = true;
                     atacar(alvo);
                     break;
@@ -94,7 +94,7 @@ public class Cavaleiro extends Heroi{
             for (int i = 0; i < moveSpeed; i++){
                 pos--;
                 if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange){
-                    System.out.println("O cavaleiro ALCANÇOU O MONSTRO E IRÁ ATACAR!"); Utilidades.esperar(1500);
+                    System.out.println("O cavaleiro ALCANOCU O MONSTRO E IRA ATACAR!\n"); Utilidades.esperar(1500);
                     chegou = true;
                     atacar(alvo);
                     break;
@@ -102,7 +102,7 @@ public class Cavaleiro extends Heroi{
             }
         
         if (!chegou){
-            System.out.println("O nosso cavaleiro ainda não alcançou o inimigo. ");
+            System.out.println("O nosso cavaleiro ainda nao alcancou o inimigo. ");
             System.out.printf("Ele esta a %d metros do monstro.\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
         }
     }

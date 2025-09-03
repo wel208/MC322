@@ -67,7 +67,7 @@ public class Goblin extends Monstro{
                 System.out.println("UFA! O heroi ESQUIVOU do ataque do goblin!"); Utilidades.esperar(1500);
         }
 
-        System.out.printf("O goblin acertou %d dos %d ataques dados!", contador, attackSpeed); Utilidades.esperar(1500);
+        System.out.printf("\nO goblin acertou %d dos %d ataques dados!\n", contador, attackSpeed); Utilidades.esperar(1500);
     }
 
     public void mover(Personagem alvo){
@@ -78,7 +78,7 @@ public class Goblin extends Monstro{
             for (int i = 0; i < moveSpeed; i ++){
                 pos++;
                 if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange){
-                    System.out.println("O GOBLIN ALCANCOU O HEROI E IRA ATACAR!"); Utilidades.esperar(1500);
+                    System.out.println("O GOBLIN ALCANCOU O HEROI E IRA ATACAR!\n"); Utilidades.esperar(1500);
                     chegou = true;
                     atacar(alvo);
                     break;
@@ -88,7 +88,7 @@ public class Goblin extends Monstro{
             for (int i = 0; i < moveSpeed; i ++){
                 pos--;
                 if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange){
-                    System.out.println("O GOBLIN ALCANCOU O HEROI E IRA ATACAR!"); Utilidades.esperar(1500);
+                    System.out.println("O GOBLIN ALCANCOU O HEROI E IRA ATACAR!\n"); Utilidades.esperar(1500);
                     chegou = true;
                     atacar(alvo);
                     break;
@@ -97,7 +97,7 @@ public class Goblin extends Monstro{
         
         if (!chegou){
             Utilidades.esperar(1500);
-            System.out.println("O goblin ainda não alcançou o nosso herói. ");
+            System.out.println("O goblin ainda nao alcancou o nosso heroi. ");
             System.out.printf("Ele esta a %d metros de distância.", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
         }
     }

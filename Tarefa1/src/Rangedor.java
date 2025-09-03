@@ -18,7 +18,7 @@ public class Rangedor extends Monstro{
     public void ambientarMonstro(Heroi heroi){
         //Ambientação
         System.out.println("Em seu caminho, " + heroi.nome + " percebe um ranger de arvores cada vez mais forte se aproximando."); Utilidades.esperar(2000);
-        System.out.println("Rapidamente surge uma raiz de arvore ransgando o chao ate seus pes, mas, com velocidade, consegue se livrar de ser atingido"); Utilidades.esperar(2000);
+        System.out.println("Rapidamente surge uma raiz de arvore ransgando o chao ate seus pes, mas, com velocidade, consegue se livrar de ser atingido."); Utilidades.esperar(2000);
         System.out.println("Ate que ele entende o que foi aquilo: um RANGEDOR!"); Utilidades.esperar(2000);
         System.out.println("Um monstro humanoide com aparencia das arvores da floresta, coberto de musgos e fungos, que faz um som como o ranger de arvores."); Utilidades.esperar(2000);
         System.out.println("Ele consegue atacar tanto de perto, com seus galhos, quanto de longe, com essa habilidade das raizes."); Utilidades.esperar(2000);
@@ -53,7 +53,7 @@ public class Rangedor extends Monstro{
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
 
         if (distancia <= 3){
-            System.out.println("O RANGEDOR dara DOIS ataques CORPO A CORPO!"); Utilidades.esperar(1500);
+            System.out.println("O RANGEDOR dara DOIS ataques CORPO A CORPO!\n"); Utilidades.esperar(1500);
 
             for (int i = 0; i < 2; i++){
                 Utilidades.esperar(1500);
@@ -67,15 +67,12 @@ public class Rangedor extends Monstro{
             }
         }
         else{
-            System.out.println("O RANGEDOR dara UM ataque A DISTANCIA!");
-            Utilidades.esperar(500);
-            System.out.printf("Ele entao finca seus bracos no chao, criando raizes que vao ate %s, o nosso %s!", alvo.nome, Utilidades.verificarClasse(alvo));
-            Utilidades.esperar(500);
-            System.out.println("\nSuas raizes tentam ACERTAR o nosso heroi\n");
-            Utilidades.esperar(500);
+            System.out.println("O RANGEDOR dara UM ataque A DISTANCIA!\n"); Utilidades.esperar(500);
+            System.out.printf("Ele entao finca seus bracos no chao, criando raizes que vao ate %s, o nosso %s!", alvo.nome, Utilidades.verificarClasse(alvo)); Utilidades.esperar(500);
+            System.out.println("\nSuas raizes tentam ACERTAR o nosso heroi\n"); Utilidades.esperar(500);
 
             if (Math.random() > alvo.dodgeChance){
-                System.out.println("NÃO! Ele ACERTOU o ataque no nosso herói!\n"); Utilidades.esperar(1500);
+                System.out.println("NAO! Ele ACERTOU o ataque no nosso heroi!"); Utilidades.esperar(1500);
                 alvo.receberDano(forca * 0.8);
             }
             else
@@ -85,11 +82,13 @@ public class Rangedor extends Monstro{
 
     @Override
     public void mover(Personagem alvo){
-        
+        boolean chegou = false;
+
         if (pos < alvo.pos)
             for (int i = 0; i < moveSpeed; i++){
                 pos++;
                 if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange - 3){
+                    chegou = true;
                     System.out.println("O RANGEDOR chegou a uma distância de 9 metros do heroi e ira ATACAR!"); Utilidades.esperar(1500);
                     atacar(alvo);
                 }
@@ -98,10 +97,16 @@ public class Rangedor extends Monstro{
             for (int i = 0; i < moveSpeed; i++){
                 pos--;
                 if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange - 3){
+                    chegou = true;
                     Utilidades.esperar(1500);
                     System.out.println("O RANGEDOR chegou a uma distância de 9 metros do heroi e ira ATACAR!"); Utilidades.esperar(1500);
                     atacar(alvo);
                 }
             }
+
+        if (!chegou){
+            System.out.println("O rangedor ainda nao alcancou o guerreiro. ");
+            System.out.printf("Ele esta a %d metros do heroi.\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
+        }
     }
 }
