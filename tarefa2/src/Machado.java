@@ -2,6 +2,8 @@ public class Machado extends Arma {
 
     //Construtor
     public Machado(){
+        this.nome = "Machado";
+        this.tipo = "Corpo a Corpo";
         this.dano = 1.3;
         this.minNivel = 3;
         this.attackRange = 1;

@@ -5,18 +5,16 @@
  * Boa chance de esquivar de ataques inimigos
  */
 
-public class Cavaleiro extends Heroi{
+public class Lutador extends Heroi{
 
     //Atributos
     int furia;
 
     //Construtor
-    public Cavaleiro(String nome){ //Atributos predefinidos para um cavaleiro de nível 0
-        super(nome);
+    public Lutador(String nome, Arma arma){ //Atributos predefinidos para um cavaleiro de nível 0
+        super(nome, arma);
         this.pontosDeVida = 85;
-        this.attackRange = 1;
         this.moveSpeed = 7;
-        this.dodgeChance = 0.4;
         this.forca = 70;
         this.protecao = 0.6;
         this.furia = 2;
@@ -25,12 +23,14 @@ public class Cavaleiro extends Heroi{
     //Métodos
     @Override
     public void exibirStatus(){
-        System.out.printf("\n%s, O cavaleiro possui:", nome); Utilidades.esperar(500);
-        System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(500);
-        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", nivel, experiencia, max_XP); Utilidades.esperar(500);
-        System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar(500);
-        System.out.printf("\n%d pontos de FURIA;", furia); Utilidades.esperar(500);
-        System.out.printf("\ncapacidade de dar %d ATAQUES POR TURNO e pode percorrer %d METROS POR TURNO.\n", attackSpeed, moveSpeed); Utilidades.esperar(500);
+        System.out.printf("\n%s, O lutador possui:", nome); Utilidades.esperar(1000);
+        System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(1000);
+        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", nivel, experiencia, expProximoNivel); Utilidades.esperar(1000);
+        System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar(1000);
+        System.out.printf("\n%d pontos de FURIA;", furia); Utilidades.esperar(1000);
+        System.out.printf("\n%.2f pontos de SORTE;", sorte); Utilidades.esperar(1000);
+        System.out.printf("\n%s esta usando %s como ARMA;", nome, arma.nome); Utilidades.esperar(1000);
+        System.out.printf("\ncapacidade de dar %d ATAQUES POR TURNO e pode percorrer %d METROS POR TURNO.\n", arma.attackSpeed, moveSpeed); Utilidades.esperar(1000);
     }
 
     /*
@@ -43,7 +43,7 @@ public class Cavaleiro extends Heroi{
 
         System.out.printf("\nO cavaleiro esta a %d metros do monstro e ira ", distancia);
 
-        if (distancia <= attackRange){
+        if (distancia <= arma.attackRange){
             if (Math.random() < 0.3){
                 System.out.println("USAR SUA HABILIDADE ESPECIAL!\n"); Utilidades.esperar(1500);
                 usarHabilidadeEspecial(alvo);
@@ -101,7 +101,7 @@ public class Cavaleiro extends Heroi{
         if (pos < alvo.pos)
             for (int i = 0; i < moveSpeed; i++){
                 pos++;
-                if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange){
+                if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.attackRange){
                     System.out.println("O cavaleiro ALCANCOU O MONSTRO E IRA ATACAR!\n"); Utilidades.esperar(1500);
                     chegou = true;
                     atacar(alvo);
@@ -111,7 +111,7 @@ public class Cavaleiro extends Heroi{
         else
             for (int i = 0; i < moveSpeed; i++){
                 pos--;
-                if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange){
+                if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.attackRange){
                     System.out.println("O cavaleiro ALCANOCU O MONSTRO E IRA ATACAR!\n"); Utilidades.esperar(1500);
                     chegou = true;
                     atacar(alvo);
@@ -136,9 +136,9 @@ public class Cavaleiro extends Heroi{
     public void usarHabilidadeEspecial(Personagem alvo){
         int contador = 0;
 
-        System.out.printf("RHHAAAA!! O NOSSO HEROI ENTROU EM FURIA E ATACARA %d VEZES NESTE TURNO!\n\n", attackSpeed + furia); Utilidades.esperar(1000);
+        System.out.printf("RHHAAAA!! O NOSSO HEROI ENTROU EM FURIA E ATACARA %d VEZES NESTE TURNO!\n\n", arma.attackSpeed + furia); Utilidades.esperar(1000);
 
-        for(int i = 0; i < attackSpeed + furia; i++){
+        for(int i = 0; i < arma.attackSpeed + furia; i++){
             System.out.print("Hah! "); Utilidades.esperar (500);
             if (Math.random() > alvo.dodgeChance * 1.1){   //Caso o herói acerte o seu alvo
                 alvo.receberDano(forca * 1.2);

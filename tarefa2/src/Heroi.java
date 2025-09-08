@@ -2,17 +2,17 @@ public abstract class Heroi extends Personagem{
 
     //Atributos
     int experiencia;        //Quantidade de experiência que o herói possui em seu nível atual
-    int max_XP;             //Indica a quantidade de experiência necessária para subir de nível
+    int expProximoNivel;    //Indica a quantidade de experiência necessária para subir de nível
+    double sorte;           //Chance do herói obter sucesso em suas ações
 
     //Construtor
-    public Heroi(String nome){ //Valores predefinidos para um heroi de nível 0
-        super(nome);
-        this.attackSpeed = 1;
+    public Heroi(String nome, Arma arma){ //Valores predefinidos para um heroi de nível 0
+        super(nome, arma);
         this.pos = 0;
         this.nivel = 0;
         this.experiencia = 0;
-        this.max_XP = 20;
-        this.criticalChance = 0.2;
+        this.expProximoNivel = 20;
+        this.sorte = 0.3;
     }
 
     //Métodos
@@ -34,24 +34,10 @@ public abstract class Heroi extends Personagem{
         
         experiencia += new_XP;
     
-        while (experiencia >= max_XP){ //Caso o herói suba de nível
+        while (experiencia >= expProximoNivel){ //Caso o herói suba de nível
+            this.subirDeNivel();
             subiu = true;
-            contador++;
-            nivel++;
-            experiencia = experiencia - max_XP;
-            
-            max_XP += 20;
-            forca += 5;
-            protecao += 0.05;
-            moveSpeed++;
-            criticalChance += 0.05;
-            dodgeChance += 0.05;
-            pontosDeVida += 10;
-
-            if (nivel % 2 == 0){    //A cada dois niveis o herói começa a dar um ataque a mais por turno e tem um aumento do atributo único
-                attackSpeed++;
-                this.melhorarAtributoUnico();
-            }
+            contador++; 
         }
 
         if (subiu){                 //Se tiver subido de nível, mostra o melhora nos atributos principais
@@ -63,6 +49,26 @@ public abstract class Heroi extends Personagem{
         }
 
         exibirStatus(); Utilidades.esperar(600);
+    }
+
+    private void subirDeNivel(){ //Método que melhora os atributos do herói ao subir de nível
+        experiencia = experiencia - expProximoNivel;
+        nivel++;
+        expProximoNivel += 20;
+        forca += 5;
+        protecao += 0.05;
+        pontosDeVida += 10;
+        sorte += 0.1;
+
+        if (nivel % 2 == 0){    //A cada dois niveis o herói começa a dar um ataque a mais por turno e tem um aumento do atributo único
+            this.melhorarAtributoUnico();
+        }
+    }
+
+    //Método que equipa uma nova arma ao herói
+    public void equiparArma(Arma novaArma){
+        this.arma = novaArma;
+        System.out.printf("\n%s esta equipando a arma %s!\n", nome, novaArma.nome); Utilidades.esperar(1500);
     }
 
     public abstract void exibirStatus(); //Método que mostra como está todos os atributos do herói no momento

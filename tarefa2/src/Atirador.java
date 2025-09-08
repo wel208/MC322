@@ -4,17 +4,16 @@
  * Prefere dar ataques a longa distãncia
  */
 
-public class Arqueiro extends Heroi{
+public class Atirador extends Heroi{
 
     //Atributos
     double precisao;
 
     //Construtor
-    public Arqueiro(String nome){
-        super(nome);
+    public Atirador(String nome, Arma arma){
+        super(nome, arma);
         this.pontosDeVida = 60;
         this.moveSpeed = 10;
-        this.dodgeChance = 0.2;
         this.forca = 40;
         this.protecao = 0.4;
         this.precisao = 70;
@@ -23,12 +22,14 @@ public class Arqueiro extends Heroi{
     //Métodos
     @Override
     public void exibirStatus(){
-        System.out.printf("\n%s, O ARQUEIRO possui:", nome); Utilidades.esperar(1000);
+        System.out.printf("\n%s, O ATIRADOR possui:", nome); Utilidades.esperar(1000);
         System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(1000);
-        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", nivel, experiencia, max_XP); Utilidades.esperar(1000);
+        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", nivel, experiencia, expProximoNivel); Utilidades.esperar(1000);
         System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar(1000);
         System.out.printf("\n%.0f pontos de PRECISAO;", precisao); Utilidades.esperar(1000);
-        System.out.printf("\nCapacidade de dar %d ATAQUE(S) POR TURNO e pode percorrer %d METROS POR TURNO.\n", attackSpeed, moveSpeed); Utilidades.esperar(1000);
+        System.out.printf("\n%.2f pontos de SORTE;", sorte); Utilidades.esperar(1000);
+        System.out.printf("\n%s esta utilizando %s como ARMA;", nome,arma.nome); Utilidades.esperar(1000);
+        System.out.printf("\nCapacidade de dar %d ATAQUE(S) POR TURNO e pode percorrer %d METROS POR TURNO.\n", arma.attackSpeed, moveSpeed); Utilidades.esperar(1000);
     }
 
     /*
@@ -108,7 +109,7 @@ public class Arqueiro extends Heroi{
     @Override
     public void atacar(Personagem alvo){
         int contador = 0;
-        for (int i = 0; i < attackSpeed; i++){                  //for para executar todos os ataques que devem ocorrer no turno
+        for (int i = 0; i < arma.attackSpeed; i++){                  //for para executar todos os ataques que devem ocorrer no turno
 
             if (Math.random() < precisao/100){                  //Caso o arqueiro possivelmente acerte o alvo
                 if (Math.random() > alvo.dodgeChance){          //Caso o alvo não consiga se esquivar da flecha
@@ -159,7 +160,7 @@ public class Arqueiro extends Heroi{
         System.out.printf("%s atirara %d flechas neste turno!\n\n", nome, attackSpeed + 3); Utilidades.esperar(1500);
 
         int contador = 0;
-        for (int i = 0; i < attackSpeed + 3; i++){          //for para executar todos os ataques da rodada
+        for (int i = 0; i < arma.attackSpeed + 2; i++){          //for para executar todos os ataques da rodada
 
             if (Math.random() < (precisao/100) * 0.9){      //Caso o arqueiro possivelmente acerte seu alvo
 
