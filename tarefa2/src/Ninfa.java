@@ -8,16 +8,8 @@
 public class Ninfa extends Monstro{
     
     //Construtor
-    public Ninfa(String nome, int nivel, int pos){
-        super(nome, nivel, pos);
-        this.attackRange = 3;
-        this.attackSpeed = (nivel <= 12) ? 1 : 2;
-        this.dodgeChance = 0.05 + (0.02 * nivel);
-        this.forca = 80 + (2 * nivel);
-        this.moveSpeed = 2 + (nivel % 2);
-        this.protecao = 0.4 + (0.02 * nivel);
-        this.pontosDeVida = 100 + (2 * nivel - 2);
-        this.xpConcedido = 50 + (2 * nivel);
+    public Ninfa(String nome, int nivel, int pos, Arma arma){
+        super(nome, nivel, pos, arma);
     }
 
     //Métodos
@@ -36,7 +28,7 @@ public class Ninfa extends Monstro{
 
         //Apresentação de atributos
         System.out.print("\nA ninfa e um ser muito forte, mas lento, seu ataque pode alcancar ate 3 metros de distancia."); Utilidades.esperar(2000);
-        System.out.printf("\n%s, A NINFA, no nivel %d, possui:", nome, nivel); Utilidades.esperar(2000);
+        System.out.printf("\n%s, A NINFA, no nivel %d de dificuldade, possui:", nome, nivelDificuldade); Utilidades.esperar(2000);
         System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(2000);
         System.out.printf("\n%.0f PONTOS DE FORCA;", forca); Utilidades.esperar(2000);
         System.out.printf("\nE, ao morrer, concedera %d PONTOS DE EXPERIENCIA ao heroi.\n", xpConcedido); Utilidades.esperar(2000);
@@ -54,7 +46,7 @@ public class Ninfa extends Monstro{
 
         System.out.printf("\nA NINFA esta a %d metros do nosso heroi e ira ", distancia);
 
-        if (distancia <= attackRange){
+        if (distancia <= arma.attackRange){
             System.out.print("ATACAR!\n"); Utilidades.esperar(1500);
             atacar(alvo);
         }
@@ -72,9 +64,9 @@ public class Ninfa extends Monstro{
     public void atacar(Personagem alvo){
         int contador = 0;
 
-        for (int i = 0; i < attackSpeed; i++){             //for para dar todos os ataques da rodada
+        for (int i = 0; i < arma.attackSpeed; i++){             //for para dar todos os ataques da rodada
 
-            if (Math.random() > alvo.dodgeChance){         //Caso a ninfa acerte o seu alvo
+            if (Math.random() > alvo.sorte){         //Caso a ninfa acerte o seu alvo
                 contador++;
 
                 if (Math.random() < criticalChance){       //Caso o ataque seja crítico
@@ -106,7 +98,7 @@ public class Ninfa extends Monstro{
         if (pos < alvo.pos)
             for (int i = 0; i < moveSpeed; i ++){
                 pos++;
-                if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange){
+                if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.attackRange){
                     System.out.println("A NINFA ALCANCOU O HEROI E IRA ATACAR!"); Utilidades.esperar(1500);
                     chegou = true;
                     atacar(alvo);
@@ -116,7 +108,7 @@ public class Ninfa extends Monstro{
         else
             for (int i = 0; i < moveSpeed; i ++){
                 pos--;
-                if (Utilidades.calcularDistancia(pos, alvo.pos) == attackRange){
+                if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.attackRange){
                     System.out.println("A NINFA ALCANÇOU O HEROI E IRA ATACAR!"); Utilidades.esperar(1500);
                     chegou = true;
                     atacar(alvo);

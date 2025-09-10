@@ -1,18 +1,20 @@
 public abstract class Heroi extends Personagem{
 
     //Atributos
-    int experiencia;        //Quantidade de experiência que o herói possui em seu nível atual
-    int expProximoNivel;    //Indica a quantidade de experiência necessária para subir de nível
-    double sorte;           //Chance do herói obter sucesso em suas ações
+    protected int experiencia;        //Quantidade de experiência que o herói possui em seu nível atual
+    protected int expProximoNivel;    //Indica a quantidade de experiência necessária para subir de nível
+    protected int nivel;              //Nível de experiência do personagem
 
     //Construtor
     public Heroi(String nome, Arma arma){ //Valores predefinidos para um heroi de nível 0
-        super(nome, arma);
+        super(nome);
+        this.arma = arma;
         this.pos = 0;
         this.nivel = 0;
         this.experiencia = 0;
         this.expProximoNivel = 20;
         this.sorte = 0.3;
+        this.criticalChance = 0.05;
     }
 
     //Métodos
@@ -73,7 +75,7 @@ public abstract class Heroi extends Personagem{
 
     public abstract void exibirStatus(); //Método que mostra como está todos os atributos do herói no momento
 
-    public abstract void usarHabilidadeEspecial(Personagem alvo);
+    protected abstract void usarHabilidadeEspecial(Personagem alvo);
 
-    public abstract void melhorarAtributoUnico();
+    protected abstract void melhorarAtributoUnico();
 }

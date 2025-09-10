@@ -10,16 +10,8 @@ public class Esqueleto extends Monstro{
     double precisao;
 
     //Construtor
-    public Esqueleto(String nome, int nivel, int pos){
-        super(nome, nivel, pos);
-        this.attackSpeed = (nivel <= 8) ? 1 : 2;
-        this.dodgeChance = 0.15 + 0.05 * nivel;
-        this.forca = 40 + (2 * (nivel - 3));
-        this.moveSpeed = 5 + nivel;
-        this.precisao = 55 + (5 * nivel);
-        this.protecao = 0.2 + 0.01 * nivel;
-        this.pontosDeVida = 30 + (2 * nivel);
-        this.xpConcedido = 40 + 2 * nivel;
+    public Esqueleto(String nome, int nivel, int pos, Arma arma){
+        super(nome, nivel, pos, arma);
     }
 
     //Métodos
@@ -36,7 +28,7 @@ public class Esqueleto extends Monstro{
 
         //Apresentação de atributos
         System.out.print("\nBom atirador, prefere ataques feitos a longa distancia."); Utilidades.esperar(2000);
-        System.out.printf("\n%s, O ESQUELETO ARQUEIRO, no nivel %d, possui:", nome, nivel); Utilidades.esperar(2000);
+        System.out.printf("\n%s, O ESQUELETO ARQUEIRO, no nivel %d de dificuldade, possui:", nome, nivelDificuldade); Utilidades.esperar(2000);
         System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(2000);
         System.out.printf("\n%.0f PONTOS DE FORCA;", forca); Utilidades.esperar(2000);
         System.out.printf("\nE, ao morrer, concedera %d PONTOS DE EXPERIENCIA ao heroi\n", xpConcedido); Utilidades.esperar(2000);

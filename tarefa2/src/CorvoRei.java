@@ -11,15 +11,8 @@ import java.util.Random;
 public class CorvoRei extends Monstro{
     
     //Construtor
-    public CorvoRei(String nome, int nivel, int pos){
-        super(nome, nivel, pos);
-        this.attackSpeed = 5 + nivel % 3;
-        this.dodgeChance = 0.4 + 0.02 * nivel;
-        this.forca = 6 + nivel/5;
-        this.moveSpeed = 12;
-        this.protecao = 0.1;
-        this.pontosDeVida = 20 + (2 * (nivel - 2));
-        this.xpConcedido = 30 + (2 * nivel);
+    public CorvoRei(String nome, int nivel, int pos, Arma arma){
+        super(nome, nivel, pos, arma);
     }
 
     //Métodos

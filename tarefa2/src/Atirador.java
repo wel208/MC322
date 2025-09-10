@@ -16,9 +16,9 @@ public class Atirador extends Heroi{
         this.moveSpeed = 10;
         this.forca = 40;
         this.protecao = 0.4;
-        this.precisao = 70;
+        this.precisao = 0.3;
     }
-
+    
     //Métodos
     @Override
     public void exibirStatus(){
@@ -33,7 +33,7 @@ public class Atirador extends Heroi{
     }
 
     /*
-     * O arqueiro toma sua decisão com base na distância que ele está do inimigo
+     * O atirador toma sua decisão com base na distância que ele está do inimigo
      * Quanto mais perto, mais chance de se afastar
      * Quanto mais longe, mais chance de atacar ou usar sua habilidade especial
      */
@@ -42,153 +42,150 @@ public class Atirador extends Heroi{
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
         double chance = Math.random();
 
-        System.out.printf("\nO arqueiro esta a %d metros do monstro e ira ", distancia);
-
-        if (distancia <= 5){
-            if (chance <= 0.1){
-                System.out.println("USAR SUA HABILIDADE ESPECIAL!\n"); Utilidades.esperar(1500);
-                usarHabilidadeEspecial(alvo);
-            }
-            else if (chance <= 0.85){
-                System.out.println("SE AFASTAR!\n"); Utilidades.esperar(1500);
+        System.out.printf("\nO atirador esta a %d metros do monstro e ira ", distancia); Utilidades.esperar(1500);
+        
+        if (distancia < (double)arma.attackRange * 0.3){ //Se estiver muito perto, tenta se afastar
+            if (chance < 0.7){
+                System.out.println("se AFASTAR do inimigo!\n"); Utilidades.esperar(1500);
                 mover(alvo);
             }
-            else{
-                System.out.println("ATACAR!\n"); Utilidades.esperar(1500);
+            else if (chance < 0.9){
+                System.out.println("ATACAR o inimigo!\n"); Utilidades.esperar(1500);
                 atacar(alvo);
+            }
+            else{
+                System.out.println("USAR SUA HABILIDADE ESPECIAL nesse turno!\n"); Utilidades.esperar(1500);
+                usarHabilidadeEspecial(alvo);
             }
         }
-        else if (distancia <= 10){
-            if (chance <= 0.15){
-                System.out.println("USAR SUA HABILIDADE ESPECIAL!\n"); Utilidades.esperar(1500);
-                usarHabilidadeEspecial(alvo);
-            }
-            else if (chance <= 0.7){
-                System.out.println("SE AFASTAR!\n"); Utilidades.esperar(1500);
+        else if (distancia <= (double)arma.attackRange * 0.8){ //Se estiver a uma distância média, pode atacar ou se afastar
+            if (chance < 0.4){
+                System.out.println("se AFASTAR do inimigo!\n"); Utilidades.esperar(1500);
                 mover(alvo);
             }
-            else{
-                System.out.println("ATACAR!\n"); Utilidades.esperar(1500);
+            else if (chance < 0.8){
+                System.out.println("ATACAR o inimigo!\n"); Utilidades.esperar(1500);
                 atacar(alvo);
+            }
+            else{
+                System.out.println("USAR SUA HABILIDADE ESPECIAL nesse turno!\n"); Utilidades.esperar(1500);
+                usarHabilidadeEspecial(alvo);
             }
         }
-        else if (distancia <= 15){
-            if (chance <= 0.25){
-                System.out.println("USAR SUA HABILIDADE ESPECIAL!\n"); Utilidades.esperar(1500);
-                usarHabilidadeEspecial(alvo);
-            }
-            else if (chance <= 0.4){
-                System.out.println("SE AFASTAR!\n"); Utilidades.esperar(1500);
+        else{ //Se estiver longe, prefere atacar ou usar sua habilidade especial
+            if (chance < 0.2){
+                System.out.println("se AFASTAR do inimigo!\n"); Utilidades.esperar(1500);
                 mover(alvo);
             }
-            else{
-                System.out.println("ATACAR!\n"); Utilidades.esperar(1500);
+            else if (chance < 0.6){
+                System.out.println("ATACAR o inimigo!\n"); Utilidades.esperar(1500);
                 atacar(alvo);
             }
-        }
-        else{
-            if (chance <= 0.4){
-                System.out.println("USAR SUA HABILIDADE ESPECIAL!\n"); Utilidades.esperar(1500);
+            else{
+                System.out.println("USAR SUA HABILIDADE ESPECIAL nesse turno!\n"); Utilidades.esperar(1500);
                 usarHabilidadeEspecial(alvo);
-            }
-            else if (chance <= 0.42){
-                System.out.println("SE AFASTAR!\n"); Utilidades.esperar(1500);
-                mover(alvo);
-            }
-            else{
-                System.out.println("ATACAR!\n"); Utilidades.esperar(1500);
-                atacar(alvo);
             }
         }
     }
 
     /*
-     * O ataque do arqueiro leva em consideração sua precisão
-     * Quanto mais longe do inimigo o arqueiro estiver, maior o dano causado
+     * O ataque do atirador leva em consideração sua precisão
+     * Quanto mais longe do inimigo o atirador estiver, maior o dano causado
      */
     @Override
-    public void atacar(Personagem alvo){
+    protected void atacar(Personagem alvo){
         int contador = 0;
-        for (int i = 0; i < arma.attackSpeed; i++){                  //for para executar todos os ataques que devem ocorrer no turno
 
-            if (Math.random() < precisao/100){                  //Caso o arqueiro possivelmente acerte o alvo
-                if (Math.random() > alvo.dodgeChance){          //Caso o alvo não consiga se esquivar da flecha
+        for (int i = 0; i < arma.attackSpeed; i++) {
+
+            double chanceAcerto = Math.min(1.0, precisao + sorte);
+
+            if (Math.random() < chanceAcerto) {
+
+                if (Math.random() > alvo.sorte){
                     contador++;
                     int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
 
-                    if (Math.random() < criticalChance){       //Caso o Arqueiro acerte um ataque crítico
-                        alvo.receberDano(forca * 1.3 * distancia/7);
-                        System.out.println("ISSO! O nosso arqueiro ACERTOU um ATAQUE CRITICO em seu inimigo!"); Utilidades.esperar(1500);
-                    }
-                    else{                                      //Caso seja um ataque comum
-                        alvo.receberDano(forca * distancia/7);
-                        System.out.println("BOA! O nosso arqueiro ACERTOU uma flecha no inimigo!"); Utilidades.esperar(1500);
-                    }
-                }
-                else                                           //Caso o inimigo consiga desviar do ataque do herói
-                    System.out.println("NAO! O inimigo ESQUIVOU da flecha do nosso heroi!"); Utilidades.esperar(1500);
-            }
-            else                                               //Caso o arqueiro erre o alvo
-                System.out.println("NAO! O arqueiro ERROU a flechada!"); Utilidades.esperar(1500);
-        }
+                    // Verifica se é crítico
+                    boolean critico = Math.random() < criticalChance;
+                    double multiplicador = critico ? 1.2 : 1.0;
 
-        System.out.printf("\nO heroi acertou %d de %d ataque(s) dado(s)!\n", contador, attackSpeed); Utilidades.esperar(1500);
+                    alvo.receberDano(forca * arma.dano * distancia/5 * multiplicador);
+
+                    if (critico) {
+                        System.out.println("BOA! O atirador ACERTOU um ataque CRITICO no inimigo!");
+                    }
+                    else{
+                        System.out.println("O atirador ACERTOU o inimigo!");
+                    }
+                    Utilidades.esperar(1500);
+                }
+                else{
+                    System.out.println("O inimigo ESQUIVOU do ataque!"); Utilidades.esperar(1500);
+                }
+            }
+            else
+                System.out.println("O atirador ERROU o ataque!"); Utilidades.esperar(1500);
+        }
+        System.out.printf("\nO heroi acertou %d de %d ataque(s) dado(s)!\n", contador, arma.attackSpeed); Utilidades.esperar(1500);
     }
 
     /*
-     * A movimentação do arqueiro é sempre a de se afastar do inimigo
+     * A movimentação do atirador é sempre a de se afastar do inimigo
      * Por não ter tanta vida e não ter um bom dano em curta distância
      * Ele sempre tentará ficar longe do monstro para poder ter vantagem
      */
     @Override
-    public void mover(Personagem alvo){
+    protected void mover(Personagem alvo){
         if (pos > alvo.pos)     //Verificação para não ir para mais perto do inimigo
             pos += moveSpeed;
         else
             pos -= moveSpeed;
         
-        System.out.printf("O arqueiro chegou a uma distancia de %d metros do monstro!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
+        System.out.printf("O atirador chegou a uma distancia de %d metros do monstro!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
     }
 
     /*
-     * A habilidade especial do arqueiro é de atirar 3 flechas a mais em um turno
+     * A habilidade especial do atirador é de atirar 2 projéteis a mais em um turno
      * Em contrapartida, recebe uma redução na porcentagem de precisão
      * Mas também recebe um aumento em seu dano
      */
     @Override
-    public void usarHabilidadeEspecial(Personagem alvo){
-        System.out.printf("%s atirara %d flechas neste turno!\n\n", nome, attackSpeed + 3); Utilidades.esperar(1500);
-
+    protected void usarHabilidadeEspecial(Personagem alvo){
+        System.out.printf("%s atirara %d projeteis neste turno!\n\n", nome, arma.attackSpeed + 2); Utilidades.esperar(1500);
+        int qtdAtque = arma.attackSpeed + 2;
         int contador = 0;
-        for (int i = 0; i < arma.attackSpeed + 2; i++){          //for para executar todos os ataques da rodada
 
-            if (Math.random() < (precisao/100) * 0.9){      //Caso o arqueiro possivelmente acerte seu alvo
+        for (int i = 0; i < qtdAtque; i++){                 //for para executar todos os ataques da rodada
 
-                if (Math.random() > alvo.dodgeChance){      //Caso o inimigo NÃO consiga esquivar da flecha
+            if (Math.random() < (precisao + sorte) * 0.9){  //Caso o atirador possivelmente acerte seu alvo
+
+                if (Math.random() > alvo.sorte){            //Caso o inimigo NÃO consiga esquivar da flecha
                     contador++;
 
                     int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
 
-                    alvo.receberDano(forca * distancia/5);
-                    System.out.println("ISSO! O nosso arqueiro ACERTOU o inimigo!"); Utilidades.esperar(1500);
+                    // Dano agora considera o dano da arma
+                    alvo.receberDano(forca * arma.dano * distancia/5 * 1.1);
+                    System.out.println("ISSO! O nosso atirador ACERTOU o inimigo!"); Utilidades.esperar(1500);
                 }
-                else{                                       //Caso o inimigo consiga esquivar da flecha
-                    System.out.println("NAO! O inimigo ESQUIVOU da flecha do nosso arqueiro!"); Utilidades.esperar(1500);
+                else{                                       //Caso o inimigo consiga esquivar do projétil
+                    System.out.println("NAO! O inimigo ESQUIVOU do projetil do nosso atirador!"); Utilidades.esperar(1500);
                     continue;
                 }
             }
-            else                                            //Caso o arqueiro erre a flecha
-                System.out.println("NAO! O arqueiro ERROU flecha!"); Utilidades.esperar(1500);
+            else                                            //Caso o atirador erre o projétil
+                System.out.println("NAO! O atirador ERROU o projetil!"); Utilidades.esperar(1500);
         }
 
-        System.out.printf("\nO heroi acertou %d flechas das %d flechas atiradas!", contador, attackSpeed + 3); Utilidades.esperar(1500);
+        System.out.printf("\nO heroi acertou %d projeteis de %d projeteis atirados!", contador, qtdAtque); Utilidades.esperar(1500);
     }
 
     /*
-     * Método que aumenta a precisão do arqueiro a cada nível de XP par alcançado
+     * Método que aumenta a precisão do atirador a cada nível de XP par alcançado
      */
     @Override
-    public void melhorarAtributoUnico(){
-        precisao += 5;
+    protected void melhorarAtributoUnico(){
+        precisao += 0.05;
     }
 }

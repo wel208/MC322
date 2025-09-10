@@ -9,5 +9,4 @@ public class Crossbow extends Arma {
         this.attackRange = 30;
         this.attackSpeed = 1;
     }
-    
 }
