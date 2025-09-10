@@ -8,7 +8,7 @@
 public class Lutador extends Heroi{
 
     //Atributos
-    int furia;
+    private int furia;
 
     //Construtor
     public Lutador(String nome, Arma arma){ //Atributos predefinidos para um lutador de nível 0
@@ -25,7 +25,7 @@ public class Lutador extends Heroi{
     public void exibirStatus(){
         System.out.printf("\n%s, O lutador possui:", nome); Utilidades.esperar(1000);
         System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(1000);
-        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", nivel, experiencia, expProximoNivel); Utilidades.esperar(1000);
+        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", getNivel(), getExperiencia(), getExpProximoNivel()); Utilidades.esperar(1000);
         System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar(1000);
         System.out.printf("\n%d pontos de FURIA;", furia); Utilidades.esperar(1000);
         System.out.printf("\n%.2f pontos de SORTE;", sorte); Utilidades.esperar(1000);

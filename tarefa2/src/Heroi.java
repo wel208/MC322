@@ -1,9 +1,9 @@
 public abstract class Heroi extends Personagem{
 
     //Atributos
-    protected int experiencia;        //Quantidade de experiência que o herói possui em seu nível atual
-    protected int expProximoNivel;    //Indica a quantidade de experiência necessária para subir de nível
-    protected int nivel;              //Nível de experiência do personagem
+    private int experiencia;        //Quantidade de experiência que o herói possui em seu nível atual
+    private int expProximoNivel;    //Indica a quantidade de experiência necessária para subir de nível
+    private int nivel;              //Nível de experiência do personagem
 
     //Construtor
     public Heroi(String nome, Arma arma){ //Valores predefinidos para um heroi de nível 0
@@ -71,6 +71,16 @@ public abstract class Heroi extends Personagem{
     public void equiparArma(Arma novaArma){
         this.arma = novaArma;
         System.out.printf("\n%s esta equipando a arma %s!\n", nome, novaArma.nome); Utilidades.esperar(1500);
+    }
+
+    protected int getExperiencia(){
+        return experiencia;
+    }
+    protected int getExpProximoNivel(){
+        return expProximoNivel;
+    }
+    protected int getNivel(){
+        return nivel;
     }
 
     public abstract void exibirStatus(); //Método que mostra como está todos os atributos do herói no momento

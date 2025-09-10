@@ -7,7 +7,7 @@
 public class Atirador extends Heroi{
 
     //Atributos
-    double precisao;
+    private double precisao;
 
     //Construtor
     public Atirador(String nome, Arma arma){
@@ -24,7 +24,7 @@ public class Atirador extends Heroi{
     public void exibirStatus(){
         System.out.printf("\n%s, O ATIRADOR possui:", nome); Utilidades.esperar(1000);
         System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(1000);
-        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", nivel, experiencia, expProximoNivel); Utilidades.esperar(1000);
+        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", getNivel(), getExperiencia(), getExpProximoNivel()); Utilidades.esperar(1000);
         System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar(1000);
         System.out.printf("\n%.0f pontos de PRECISAO;", precisao); Utilidades.esperar(1000);
         System.out.printf("\n%.2f pontos de SORTE;", sorte); Utilidades.esperar(1000);
