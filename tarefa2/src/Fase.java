@@ -63,9 +63,16 @@ public class Fase {
                 return; // encerra a fase e o jogo
             } else {
                 System.out.println("\nO monstro foi derrotado!");
-            }
-        }
 
+                if(monstro.largaArma() && monstro.arma != null) {
+                    //Drop da arma
+                    System.out.println(monstro.getNome() + " ???, Acho que caiu uma arma: " + monstro.arma.getNome());
+                    //Equipa automaticamente
+                    heroi.setArma(monstro.arma);
+                    System.out.println(heroi.getNome() + " equipado " + monstro.arma.getNome() + "!");
+                }
+                }
+            }
         System.out.println("\nFase concluída!");
     }
 
