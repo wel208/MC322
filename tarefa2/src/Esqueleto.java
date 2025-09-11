@@ -4,7 +4,7 @@
  * Prefere ataques de longa distância
  */
 
-public class Esqueleto extends Monstro{
+public class Esqueleto extends Monstro {
     
     //Atributos
     double precisao;
@@ -14,10 +14,8 @@ public class Esqueleto extends Monstro{
         super(nome, nivel, pos, arma);
     }
 
-    //Métodos
     @Override
     public void ambientarMonstro(Heroi heroi){
-        //Ambientação
         System.out.println("\nEnquanto o nosso guerreiro segue o seu rumo, comeca a ouvir um som de bater de ossos vindo do meio das arvores."); Utilidades.esperar(2000);
         System.out.println("Ele entao olha em direcao ao barulho, procurando entender de onde vem."); Utilidades.esperar(2000);
         System.out.println("Quando, de repente, uma flecha VEM NA SUA DIRECAO."); Utilidades.esperar(2000);
@@ -26,7 +24,6 @@ public class Esqueleto extends Monstro{
         System.out.println(nome + " foi um corajoso batalhador nessa longa guerra, mas infelizmente foi morto pelas aberracoes ao tentar derrotar o Corvo Rei."); Utilidades.esperar(2000);
         System.out.println("Infelizmente nao ha o que o nosso heroi fazer a nao ser derrota-lo."); Utilidades.esperar(2000);
 
-        //Apresentação de atributos
         System.out.print("\nBom atirador, prefere ataques feitos a longa distancia."); Utilidades.esperar(2000);
         System.out.printf("\n%s, O ESQUELETO ARQUEIRO, no nivel %d de dificuldade, possui:", nome, nivelDificuldade); Utilidades.esperar(2000);
         System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(2000);
@@ -36,17 +33,21 @@ public class Esqueleto extends Monstro{
         System.out.printf("\nNeste momento, mesmo triste pelo que aconteceu com %s, nosso heroi se prepara para a batalha.\n", nome); Utilidades.esperar(1500);
     }
 
-    /*
-     * Escolhe, com base na distância, se vai atacar ou se afastar do inimigo
-     * Quanto mais longe, mais chance de atacar
-     * Quanto mais perto, mais chance de se afastar
-     */
     @Override
     public void tomarDecisao(Personagem alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
         double chance = Math.random();
 
         System.out.printf("\nO esqueleto esta a %d metro(s) do nosso heroi e ira ", distancia); 
+
+        if (chance < 0.1) {
+            disparoPreciso(alvo);
+            return;
+        }
+        else if (chance < 0.2) {
+            flechaEnvenenada(alvo);
+            return;
+        }
 
         if (distancia <= 5){
             if (chance <= 0.2){
@@ -90,43 +91,35 @@ public class Esqueleto extends Monstro{
         }
     }
 
-    /*
-     * O ataque leva em consideração sua precisão
-     * Quanto mais longe, maior o dano causado
-     */
     @Override
     public void atacar(Personagem alvo){
         int contador = 0;
 
         for (int i = 0; i < attackSpeed; i++){
-
-            if (Math.random() < precisao/100){             //Se o esqueleto possivelmente acerta seu alvo
-                if (Math.random() > alvo.dodgeChance){     //Se o herói não esquivar
+            if (Math.random() < precisao/100){
+                if (Math.random() > alvo.dodgeChance){
                     contador++;
                     int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
 
-                    if (Math.random() < criticalChance){   //Se ele acertar um ataque crítico no herói
+                    if (Math.random() < criticalChance){
                         alvo.receberDano(forca * 1.2 * distancia/7);
                         System.out.println("NAO! O esqueleto ACERTOU um ATAQUE CRITICO no nosso heroi!"); Utilidades.esperar(1000);
                     }  
-                    else{                                  //Se ele acertar um ataque comum no herói
+                    else{
                         alvo.receberDano(forca * distancia/7);
                         System.out.println("NAO! O esqueleto ACERTOU o nosso heroi!"); Utilidades.esperar(1000);
                     }
                 }
-                else                                       //Se o herói esquivar da flecha
+                else
                     System.out.println("BOA! O heroi ESQUIVOU da flecha!"); Utilidades.esperar(1000);
             }
-            else                                           //Se ele errar a flecha
+            else
                 System.out.println("ISSO! O esqueleto ERROU a flecha!"); Utilidades.esperar(1000);
         }
 
         System.out.printf("\nO esqueleto acertou %d da(s) %d flecha(s) atirada(s)!\n", contador, attackSpeed); Utilidades.esperar(1500);
     }
 
-    /*
-     * Ao se movimentar, sempre irá se afastar do inimigo para poder ganhar vantagem
-     */
     @Override
     public void mover(Personagem alvo){
         if (pos > alvo.pos)
@@ -135,5 +128,62 @@ public class Esqueleto extends Monstro{
             pos -= moveSpeed;
         
         System.out.printf("O esqueleto chegou a uma distancia de %d metro(s) do heroi!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
+    }
+
+    public void disparoPreciso(Personagem alvo) {
+        System.out.println("\nO esqueleto se concentra... seus ossos rangem enquanto ele prepara um DISPARO PRECISO!");
+        Utilidades.esperar(2000);
+
+        int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
+        double chanceAcerto = (precisao + 20) / 100;
+        double chanceCritico = criticalChance + 0.15;
+
+        if (Math.random() < chanceAcerto) {
+            if (Math.random() > (alvo.dodgeChance * 0.5)) {
+                double danoBase = forca * (distancia / 6.0);
+
+                if (Math.random() < chanceCritico) {
+                    danoBase *= 1.5;
+                    System.out.println("ATAQUE CRÍTICO! A flecha perfura a armadura do herói!");
+                } else {
+                    System.out.println("A flecha atinge o herói com força!");
+                }
+
+                alvo.receberDano(danoBase);
+            } else {
+                System.out.println("O herói conseguiu se esquivar por pouco!");
+            }
+        } else {
+            System.out.println("O disparo passou raspando e errou o alvo!");
+        }
+
+        Utilidades.esperar(1500);
+    }
+
+    public void flechaEnvenenada(Personagem alvo) {
+        System.out.println("\nO esqueleto prepara uma FLECHA ENVENENADA e a dispara contra o herói!");
+        Utilidades.esperar(2000);
+
+        int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
+        double chanceAcerto = precisao / 100;
+        double danoBase = forca * (distancia / 8.0);
+
+        if (Math.random() < chanceAcerto) {
+            if (Math.random() > alvo.dodgeChance) {
+                alvo.receberDano(danoBase);
+                System.out.println("A flecha envenenada acerta o herói! O veneno começa a agir...");
+                Utilidades.esperar(1500);
+
+                alvo.aplicarStatus("Envenenado", 3);
+                System.out.println("O herói está ENVENENADO e perderá vida a cada turno!");
+                Utilidades.esperar(1500);
+            } else {
+                System.out.println("O herói esquiva da flecha envenenada!");
+                Utilidades.esperar(1500);
+            }
+        } else {
+            System.out.println("A flecha envenenada erra o alvo!");
+            Utilidades.esperar(1500);
+        }
     }
 }

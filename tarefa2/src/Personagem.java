@@ -1,24 +1,35 @@
-public abstract class Personagem{
+import java.util.ArrayList;
+import java.util.List;
 
-    //Atributos
-    protected String nome;            //Nome dado ao personagem
-    protected int pontosDeVida;       //Quantidade de pontos de vida que o personagem possui
-    protected double protecao;        //Quantidade de pontos que o personagem possui de proteção contra ataques inimigos
-    protected double forca;           //Força do personagem, capacidade de causar dano a inimigos
-    protected int moveSpeed;          //Distância, em metros, que o personagem consegue percorrer em um turno
-    protected int pos;                //Valor que representa a posição do personagem no mapa
-    protected double criticalChance;  //Chance do personagem causar dano crítico ao inimigo
-    protected double sorte;           //Chance do personagem obter sucesso em suas ações
-    protected Arma arma;              //Arma que o personagem está utilizando
+public abstract class Personagem {
 
-    //Construtor
+    // Atributos
+    protected String nome;            // Nome dado ao personagem
+    protected int pontosDeVida;       // Quantidade de pontos de vida que o personagem possui
+    protected int pontosDeVidaMax;    // Pontos de vida maxima que o personagem pode se curar
+    protected double protecao;        // Proteção contra ataques inimigos
+    protected double forca;           // Força do personagem
+    protected int moveSpeed;          // Distância que o personagem percorre por turno
+    protected int pos;                // Posição no mapa
+    protected double criticalChance;  // Chance de causar dano crítico
+    protected double sorte;           // Chance de sucesso em ações
+    protected double dodgeChance;     // Chance de esquivar de ataques (0.0 a 1.0)
+    protected int attackSpeed;        // Quantidade de ataques por turno
+    protected Arma arma;              // Arma utilizada
+
+    // Lista para armazenar status ativos
+    protected List<Status> statusAtivos = new ArrayList<>();
+
+    // Construtor
     public Personagem(String nome){
         this.nome = nome;
     }
 
-    //Métodos
+    // Métodos
     public void statusParcial(){
-        System.out.printf("\n%s, O %s, esta com %d PONTOS DE VIDA.\n", nome, Utilidades.verificarClasse(this), pontosDeVida); Utilidades.esperar(1500);
+        System.out.printf("\n%s, O %s, está com %d PONTOS DE VIDA.\n",
+            nome, Utilidades.verificarClasse(this), pontosDeVida);
+        Utilidades.esperar(1500);
     }
 
     /*
@@ -29,9 +40,72 @@ public abstract class Personagem{
         pontosDeVida -= forca * (1 - protecao);
     }
 
+    // Método para aplicar status
+    public void aplicarStatus(String nomeStatus, int duracao){
+        statusAtivos.add(new Status(nomeStatus, duracao));
+        System.out.printf("%s recebeu o status %s por %d turnos.\n", nome, nomeStatus, duracao);
+    }
+
+    // Getters e Setters
+    public double getDodgeChance() {
+        return dodgeChance;
+    }
+
+    public void setDodgeChance(double dodgeChance) {
+        this.dodgeChance = dodgeChance;
+    }
+
+    public int getAttackSpeed() {
+        return attackSpeed;
+    }
+
+    public void setAttackSpeed(int attackSpeed) {
+        this.attackSpeed = attackSpeed;
+    }
+
+    public double getCriticalChance() {
+        return criticalChance;
+    }
+
+    public double getForca() {
+        return forca;
+    }
+
+    public int getPos() {
+        return pos;
+    }
+    public int getPontosDeVida() {
+    return pontosDeVida;
+    }
+
+    public void setPontosDeVida(int pontosDeVida) {
+        this.pontosDeVida = pontosDeVida;
+    }
+
+    public int getPontosDeVidaMax() {
+        return pontosDeVidaMax;
+    }
+
+    public void setPontosDeVidaMax(int pontosDeVidaMax) {
+        this.pontosDeVidaMax = pontosDeVidaMax;
+    }
+
+
+    // Métodos abstratos que as subclasses devem implementar
     protected abstract void atacar(Personagem alvo);
 
     protected abstract void mover(Personagem alvo);
 
     public abstract void tomarDecisao(Personagem alvo);
+
+    // Classe interna simples para representar um status
+    protected static class Status {
+        String nome;
+        int duracao;
+
+        Status(String nome, int duracao){
+            this.nome = nome;
+            this.duracao = duracao;
+        }
+    }
 }

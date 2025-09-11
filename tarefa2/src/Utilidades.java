@@ -12,7 +12,6 @@ public class Utilidades{
     static String[] nomesCorvoRei = {"Morrigan", "Nocthar", "Kaelthar", "Bran"};
     static String[] nomesEsqueleto = {"Rattor", "Calvorn", "Drymor", "Ossarion"};
     static String[] nomesNinfa = {"Sylvara", "Lythienne", "Veyra", "Thalindra"};
-    static String[] nomesRangedor = {"Oakmar", "Thryndor", "Elmgrim", "Dorvanth"};
     static String[] nomesGoblin = {"Snagrot", "Gribnak", "Zurgal", "Krivix"};
     static String[] nomesTroll = {"Grumgar", "Brogath", "Throgg", "Murgol"};
     static String[] nomesGoblinGigante = {"Grobnar", "Snarlg", "Bruglox", "Drakz"};
@@ -30,47 +29,32 @@ public class Utilidades{
     static String[] armasGoblin = {"Espada", "Lança", "Faca de arremesso", "Adagas", "Clava Comum"};
     static String[] armasGoblinGigante = {"Machado", "Clava de Espinhos", "Espada", "Lança"};
     static String[] armasTroll = {"Machado", "Clava de Espinhos", "Espada", "Lança"};
+    static String[] armasTrollAnciao = {"Machado", "Clava de Espinhos", "Espada", "Lança"};
 
-    static List<String> monstrosCastelo = new ArrayList<>(Arrays.asList("Esqueleto", "Goblin", "Cavaleiro Corrompido", "Troll", "Zumbi"));
-    static List<String> monstrosVilarejo = new ArrayList<>(Arrays.asList("Esqueleto", "Goblin", "Zumbi", "Troll"));
-    static List<String> monstrosAcampamento = new ArrayList<>(Arrays.asList("Ninfa da Floresta", "Esqueleto", "Cavaleiro Corrompido", "Goblin Gigante", "Troll"));
+    static List<String> monstrosCastelo = new ArrayList<>(Arrays.asList("Esqueleto", "Goblin", "Cavaleiro Corrompido", "Troll", "TrollAnciao", "Zumbi"));
+    static List<String> monstrosVilarejo = new ArrayList<>(Arrays.asList("Esqueleto", "Goblin", "Zumbi", "Troll", "TrollAnciao"));
+    static List<String> monstrosAcampamento = new ArrayList<>(Arrays.asList("Ninfa da Floresta", "Esqueleto", "Cavaleiro Corrompido", "Goblin Gigante", "Troll", "TrollAnciao"));
     static Random random = new Random();
 
-    /*
-     * Método que cria um herói com nome sorteado entre os 15 definidos
-     * Chances iguais de criar um Cavaleiro ou um Arqueiro
-     */
     public static Heroi criarHeroi(){
-        String nome = nomesHeroi[random.nextInt(15)];
+        String nome = nomesHeroi[random.nextInt(nomesHeroi.length)];
         if (Math.random() < 0.5)
             return new Lutador(nome, escolherArma(armasLutador));
         else
             return new Atirador(nome, escolherArma(armasAtirador));
     }
 
-    /*
-     * Método que sorteia um dos 8 monstros para batalhar com o herói
-     * Não deixa que nenhum monstro apareça em mais de uma batalha
-     * Cada monstro aparece a uma distância aleatória do herói dentro de um intervalo definido para ela
-     * Os níveis dos monstros também são aleatórios dentro de um intervalo definido para cada batalha
-     * O nome dos monstros é sorteado dentre os 4 definidos para cada classe
-     */
     public static Monstro criarMonstro(String ambiente, int fase){
-        int indice;
-        String monstro;
+        List<String> lista;
+        if (ambiente.equals("Castelo"))
+            lista = monstrosCastelo;
+        else if (ambiente.equals("Vilarejo Destruído"))
+            lista = monstrosVilarejo;
+        else
+            lista = monstrosAcampamento;
 
-        if (ambiente.equals("Castelo")){
-            indice = random.nextInt(monstrosCastelo.size());
-            monstro = monstrosCastelo.get(indice);
-        }
-        else if (ambiente.equals("Vilarejo Destruído")){
-            indice = random.nextInt(monstrosVilarejo.size());
-            monstro = monstrosVilarejo.get(indice);
-        }
-        else{
-            indice = random.nextInt(monstrosAcampamento.size());
-            monstro = monstrosAcampamento.get(indice);
-        }
+        int indice = random.nextInt(lista.size());
+        String monstro = lista.remove(indice); // remove para não repetir
 
         int posicao = escolherPosicao(monstro);
 
@@ -88,70 +72,55 @@ public class Utilidades{
             return new Zumbi(nomesZumbi[random.nextInt(nomesZumbi.length)], fase, posicao, escolherArma(armasZumbi));
         else if (monstro.equals("Goblin Gigante"))
             return new GoblinGigante(nomesGoblinGigante[random.nextInt(nomesGoblinGigante.length)], fase, posicao, escolherArma(armasGoblinGigante));
-        else //Troll
+        else if (monstro.equals("TrollAnciao"))
+            return new TrollAnciao(nomesTroll[random.nextInt(nomesTroll.length)], fase, posicao, escolherArma(armasTrollAnciao));
+        else
             return new Troll(nomesTroll[random.nextInt(nomesTroll.length)], fase, posicao, escolherArma(armasTroll));
     }
 
-    /*
-     * Método que escolhe uma arma dentre as disponíveis para o personagem
-     * Retorna um objeto do tipo Arma
-     */
     private static Arma escolherArma(String[] armas){
         String armaEscolhida = armas[random.nextInt(armas.length)];
         switch (armaEscolhida){
-            case "Espada":
-                return new Espada();
-            case "Machado":
-                return new Machado();
-            case "Clava Comum":
-                return new ClavaComum();
-            case "Clava de Espinhos":
-                return new ClavaEspinhos();
-            case "Funda":
-                return new Funda();
-            case "Arco":
-                return new Arco();
-            case "Crossbow":
-                return new Crossbow();
-            case "Faca de arremesso":
-                return new FacaArremesso();
-            case "Adagas":
-                return new Adagas();
-            case "Lança":
-                return new Lança();
-            case "Penas de corvo":
-                return new PenasCorvo();
-            case "Garras de Corvo":
-                return new GarrasCorvo();
-            default:
-                return null;
+            case "Espada": return new Espada();
+            case "Machado": return new Machado();
+            case "Clava Comum": return new ClavaComum();
+            case "Clava de Espinhos": return new ClavaEspinhos();
+            case "Funda": return new Funda();
+            case "Arco": return new Arco();
+            case "Crossbow": return new Crossbow();
+            case "Faca de arremesso": return new FacaArremesso();
+            case "Adagas": return new Adagas();
+            case "Lança": return new Lança();
+            case "Penas de corvo": return new PenasCorvo();
+            case "Garras de Corvo": return new GarrasCorvo();
+            default: return null;
         }
     }
 
-    /*
-     * Sorteio da distância que o monstro irá aparecer na floresta
-     * Cada classe possui um intervalo predefinido
-     */
-    public static int escolherPosicao(String monstro){
+   public static int escolherPosicao(String monstro){
         if (monstro.equals("Corvo Rei"))
-            return 12 + random.nextInt(-3, 3);
+            return 12 + random.nextInt((3 - (-3)) + 1) + (-3);
         else if (monstro.equals("Esqueleto"))
-            return 16 + random.nextInt(-4, 2);
+            return 16 + random.nextInt((2 - (-4)) + 1) + (-4);
         else if (monstro.equals("Goblin"))
-            return 10 + random.nextInt(-2, 4);
+            return 10 + random.nextInt((4 - (-2)) + 1) + (-2);
         else if (monstro.equals("Ninfa da Floresta"))
-            return 3 + random.nextInt(-1, 5);
+            return 3 + random.nextInt((5 - (-1)) + 1) + (-1);
         else if (monstro.equals("Cavaleiro Corrompido"))
-            return 10 + random.nextInt(-2, 3);
+            return 10 + random.nextInt((3 - (-2)) + 1) + (-2);
         else if (monstro.equals("Zumbi"))
-            return 8 + random.nextInt(-2, 3);
+            return 8 + random.nextInt((3 - (-2)) + 1) + (-2);
         else if (monstro.equals("Goblin Gigante"))
-            return 10 + random.nextInt(-3, 4);
+            return 10 + random.nextInt((4 - (-3)) + 1) + (-3);
         else if (monstro.equals("Troll"))
-            return 10 + random.nextInt(-3, 3);
+            return 10 + random.nextInt((3 - (-3)) + 1) + (-3);
+        else if (monstro.equals("TrollAnciao"))
+            return 10 + random.nextInt((3 - (-3)) + 1) + (-3);
         else
-            return 12 + random.nextInt(-4, 4);
-    }
+            return 12 + random.nextInt((4 - (-4)) + 1) + (-4);
+}
+
+
 
     //Metódo que auxilia a identificar que turno estamos para printar corretamente por extenso
     public static String verificarTurno(int turno){
@@ -176,11 +145,13 @@ public class Utilidades{
     }
 
     //Retorna de qual classe concreta o personagem é
-    public static String verificarClasse(Personagem P){
+   public static String verificarClasse(Personagem P){
         if (P instanceof Goblin)
             return "GOBLIN";
         else if (P instanceof GoblinGigante)
             return "GOBLIN GIGANTE";
+        else if (P instanceof TrollAnciao)
+            return "TROLL ANCIÃO";
         else if (P instanceof Troll)
             return "TROLL";
         else if (P instanceof Zumbi)
