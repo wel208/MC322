@@ -55,24 +55,24 @@ public class Utilidades{
      * Os níveis dos monstros também são aleatórios dentro de um intervalo definido para cada batalha
      * O nome dos monstros é sorteado dentre os 4 definidos para cada classe
      */
-    public static Monstro criarMonstro(int fase, int pos){
+    public static Monstro criarMonstro(String ambiente, int fase){
         int indice;
         String monstro;
 
-        if (fase == 1){
+        if (ambiente.equals("Castelo")){
             indice = random.nextInt(monstrosCastelo.size());
-            monstro = monstrosCastelo.remove(indice);
+            monstro = monstrosCastelo.get(indice);
         }
-        else if (fase == 2){
+        else if (ambiente.equals("Vilarejo Destruído")){
             indice = random.nextInt(monstrosVilarejo.size());
-            monstro = monstrosVilarejo.remove(indice);
+            monstro = monstrosVilarejo.get(indice);
         }
         else{
             indice = random.nextInt(monstrosAcampamento.size());
-            monstro = monstrosAcampamento.remove(indice);
+            monstro = monstrosAcampamento.get(indice);
         }
 
-        int posicao = escolherPosicao(monstro, pos);
+        int posicao = escolherPosicao(monstro);
 
         if (monstro.equals("Corvo Rei"))
             return new CorvoRei(nomesCorvoRei[random.nextInt(nomesCorvoRei.length)], fase, posicao, escolherArma(armasCorvoRei));
@@ -132,25 +132,25 @@ public class Utilidades{
      * Sorteio da distância que o monstro irá aparecer na floresta
      * Cada classe possui um intervalo predefinido
      */
-    public static int escolherPosicao(String monstro, int pos){
+    public static int escolherPosicao(String monstro){
         if (monstro.equals("Corvo Rei"))
-            return pos + 12 + random.nextInt(-3, 3);
+            return 12 + random.nextInt(-3, 3);
         else if (monstro.equals("Esqueleto"))
-            return pos + 16 + random.nextInt(-4, 2);
+            return 16 + random.nextInt(-4, 2);
         else if (monstro.equals("Goblin"))
-            return pos + 10 + random.nextInt(-2, 4);
+            return 10 + random.nextInt(-2, 4);
         else if (monstro.equals("Ninfa da Floresta"))
-            return pos + 3 + random.nextInt(-1, 5);
+            return 3 + random.nextInt(-1, 5);
         else if (monstro.equals("Cavaleiro Corrompido"))
-            return pos + 10 + random.nextInt(-2, 3);
+            return 10 + random.nextInt(-2, 3);
         else if (monstro.equals("Zumbi"))
-            return pos + 8 + random.nextInt(-2, 3);
+            return 8 + random.nextInt(-2, 3);
         else if (monstro.equals("Goblin Gigante"))
-            return pos + 10 + random.nextInt(-3, 4);
+            return 10 + random.nextInt(-3, 4);
         else if (monstro.equals("Troll"))
-            return pos + 10 + random.nextInt(-3, 3);
+            return 10 + random.nextInt(-3, 3);
         else
-            return pos + 12 + random.nextInt(-4, 4);
+            return 12 + random.nextInt(-4, 4);
     }
 
     //Metódo que auxilia a identificar que turno estamos para printar corretamente por extenso
