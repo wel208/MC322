@@ -75,7 +75,7 @@ public class Lutador extends Heroi{
                 boolean critico = Math.random() < criticalChance + (sorte / 10.0); //Chance de causar um dano crítico
                 double multiplicador = critico ? 1.2 : 1.0;
 
-                alvo.receberDano(forca * multiplicador);
+                alvo.receberDano(forca * arma.dano * multiplicador);
 
                 if (critico){   //Caso o ataque seja crítico
                     System.out.println("ISSO! O nosso lutador ACERTOU um ATAQUE CRITICO em seu inimigo!"); Utilidades.esperar(1500);
@@ -101,29 +101,18 @@ public class Lutador extends Heroi{
 
         boolean chegou = false;
 
-        if (pos < alvo.pos)
-            for (int i = 0; i < moveSpeed; i++){
-                pos++;
-                if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.attackRange){
-                    System.out.println("O lutador ALCANCOU O MONSTRO E IRA ATACAR!\n"); Utilidades.esperar(1500);
-                    chegou = true;
-                    atacar(alvo);
-                    break;
-                }
+        for (int i = 0; i < moveSpeed; i++){
+            pos += (pos < alvo.pos) ? 1 : -1;
+            if (Utilidades.calcularDistancia(pos, alvo.pos) <= arma.attackRange){
+                System.out.println("O lutador ALCANCOU O MONSTRO E IRA ATACAR!\n"); Utilidades.esperar(1500);
+                chegou = true;
+                atacar(alvo);
+                break;
             }
-        else
-            for (int i = 0; i < moveSpeed; i++){
-                pos--;
-                if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.attackRange){
-                    System.out.println("O lutador ALCANOCU O MONSTRO E IRA ATACAR!\n"); Utilidades.esperar(1500);
-                    chegou = true;
-                    atacar(alvo);
-                    break;
-                }
-            }
+        }
         
         if (!chegou){
-            System.out.println("O nosso lutador ainda nao alcancou o inimigo. ");
+            System.out.println("O nosso lutador ainda nao alcancou o inimigo.");
             System.out.printf("Ele esta a %d metros do monstro.\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
         }
     }
@@ -144,7 +133,7 @@ public class Lutador extends Heroi{
         for(int i = 0; i < arma.attackSpeed + furia; i++){
             System.out.print("Hah! "); Utilidades.esperar (500);
             if (Math.random() > alvo.sorte * 1.1){   //Chance maior do inimigo esquivar do ataque do lutador
-                alvo.receberDano(forca * 1.1);       //Dano 10% maior que o normal
+                alvo.receberDano(forca * arma.dano * 1.1);       //Dano 10% maior que o normal
                 contador++;
             }
         }

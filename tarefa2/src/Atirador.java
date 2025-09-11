@@ -44,7 +44,7 @@ public class Atirador extends Heroi{
 
         System.out.printf("\nO atirador esta a %d metros do monstro e ira ", distancia); Utilidades.esperar(1500);
         
-        if (distancia < (double)arma.attackRange * 0.3){ //Se estiver muito perto, tenta se afastar
+        if (distancia < (double)arma.attackRange * 0.3){ //Se estiver muito perto, prefere se afastar
             if (chance < 0.7){
                 System.out.println("se AFASTAR do inimigo!\n"); Utilidades.esperar(1500);
                 mover(alvo);
@@ -72,7 +72,7 @@ public class Atirador extends Heroi{
                 usarHabilidadeEspecial(alvo);
             }
         }
-        else{ //Se estiver longe, prefere atacar ou usar sua habilidade especial
+        else if (distancia <= arma.attackRange){ //Se estiver longe, prefere atacar ou usar sua habilidade especial
             if (chance < 0.2){
                 System.out.println("se AFASTAR do inimigo!\n"); Utilidades.esperar(1500);
                 mover(alvo);
@@ -85,6 +85,11 @@ public class Atirador extends Heroi{
                 System.out.println("USAR SUA HABILIDADE ESPECIAL nesse turno!\n"); Utilidades.esperar(1500);
                 usarHabilidadeEspecial(alvo);
             }
+        }
+        else{
+            System.out.println("se APROXIMAR do inimigo!\n"); Utilidades.esperar(1500);
+            System.out.println("O atirador esta longe demais para conseguir atacar."); Utilidades.esperar(1500);
+            mover(alvo);
         }
     }
 
@@ -132,17 +137,37 @@ public class Atirador extends Heroi{
 
     /*
      * A movimentação do atirador é sempre a de se afastar do inimigo
+     * A menos que ele esteja longe demais
+     * Nesse caso, ele se aproxima
      * Por não ter tanta vida e não ter um bom dano em curta distância
      * Ele sempre tentará ficar longe do monstro para poder ter vantagem
      */
     @Override
     protected void mover(Personagem alvo){
-        if (pos > alvo.pos)     //Verificação para não ir para mais perto do inimigo
-            pos += moveSpeed;
-        else
-            pos -= moveSpeed;
+        int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
+        boolean chegou = false;
+
+        if (distancia > arma.attackRange){
+            for (int i = 0; i < moveSpeed; i++){
+                pos += (pos < alvo.pos) ? 1 : -1;
+                if (distancia == arma.attackRange){
+                    System.out.println("O atirador ALCANCOU A DISTANCIA IDEAL e ira ATACAR!\n"); Utilidades.esperar(1500);
+                    chegou = true;
+                    break;
+                }
+            }
+        }
+        else{
+            pos += (pos < alvo.pos) ? -moveSpeed : moveSpeed;
+        }
         
-        System.out.printf("O atirador chegou a uma distancia de %d metros do monstro!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
+        if (chegou){
+            atacar(alvo);
+            return;
+        }
+        else{
+            System.out.printf("O atirador chegou a uma distancia de %d metros do monstro!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
+        }
     }
 
     /*
