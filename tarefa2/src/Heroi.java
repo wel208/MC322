@@ -82,6 +82,9 @@ public abstract class Heroi extends Personagem{
     protected int getNivel(){
         return nivel;
     }
+    protected void setArma(Arma arma){
+        this.arma = arma;
+    }
 
     public abstract void exibirStatus(); //Método que mostra como está todos os atributos do herói no momento
 
