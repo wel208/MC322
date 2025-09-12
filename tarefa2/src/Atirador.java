@@ -107,7 +107,7 @@ public class Atirador extends Heroi{
 
             if (Math.random() < chanceAcerto) {
 
-                if (Math.random() > alvo.sorte){
+                if (Math.random() > alvo.dodgeChance){
                     contador++;
                     int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
 
@@ -158,7 +158,15 @@ public class Atirador extends Heroi{
             }
         }
         else{
-            pos += (pos < alvo.pos) ? -moveSpeed : moveSpeed;
+            for (int i = 0; i < moveSpeed; i++){
+                pos += (pos < alvo.pos) ? -1 : 1;
+                distancia = Utilidades.calcularDistancia(pos, alvo.pos);
+                if (distancia > arma.attackRange){
+                    System.out.println("O atirador SE AFASTOU do inimigo e esta na DISTANCIA IDEAL para ATACAR!\n"); Utilidades.esperar(1500);
+                    chegou = true;
+                    break;
+                }
+            }
         }
         
         if (chegou){
@@ -185,7 +193,7 @@ public class Atirador extends Heroi{
 
             if (Math.random() < (precisao + sorte) * 0.9){  //Caso o atirador possivelmente acerte seu alvo
 
-                if (Math.random() > alvo.sorte){            //Caso o inimigo NÃO consiga esquivar da flecha
+                if (Math.random() > alvo.dodgeChance){            //Caso o inimigo NÃO consiga esquivar da flecha
                     contador++;
 
                     int distancia = Utilidades.calcularDistancia(pos, alvo.pos);

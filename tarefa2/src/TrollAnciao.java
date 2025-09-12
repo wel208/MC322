@@ -1,17 +1,15 @@
 public class TrollAnciao extends Monstro {
 
-    private boolean emFuria = false;
-
-    public TrollAnciao(String nome, int nivel, int pos, Arma arma){
-        super(nome, nivel, pos, arma);
-        this.pontosDeVidaMax = 120 + (nivel * 20);
+    public TrollAnciao(String nome, int nivelDificuldade, int pos, Arma arma){
+        super(nome, nivelDificuldade, pos, arma);
+        this.pontosDeVidaMax = 120 + (nivelDificuldade * 20);
         this.pontosDeVida = this.pontosDeVidaMax;
         this.protecao = 0.15;
-        this.forca = 15 + (nivel * 3);
-        this.criticalChance = 0.08;
-        this.sorte = 0.05;
-        this.dodgeChance = 0.03;
-        this.attackSpeed = 2;
+        this.forca = 15 + (nivelDificuldade * 3);
+        this.sorte = 0.3 + (nivelDificuldade * 0.01);
+        this.moveSpeed = 3;
+        this.xpConcedido = 40 + (nivelDificuldade * 15);
+        this.dodgeChance = 0.1 + (nivelDificuldade * 0.01);
     }
 
     @Override
@@ -28,8 +26,6 @@ public class TrollAnciao extends Monstro {
 
     @Override
     public void tomarDecisao(Personagem alvo){
-        verificarFuria();
-
         int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
         double chance = Math.random();
 
@@ -54,12 +50,12 @@ public class TrollAnciao extends Monstro {
     @Override
     public void atacar(Personagem alvo){
         int contador = 0;
-        for (int i = 0; i < this.getAttackSpeed(); i++){
+        for (int i = 0; i < arma.attackSpeed; i++){
             if (Math.random() > alvo.getDodgeChance()){
                 contador++;
-                double dano = forca;
+                double dano = forca * arma.dano;
 
-                if (Math.random() < this.getCriticalChance()){
+                if (Math.random() < getCriticalChance()){
                     dano *= 1.4;
                     System.out.println("O Troll Ancião acerta um GOLPE CRÍTICO devastador!");
                 }
@@ -76,18 +72,24 @@ public class TrollAnciao extends Monstro {
                 System.out.println("O herói esquiva do ataque do Troll Ancião!");
             }
         }
-        System.out.printf("\nO Troll Ancião acertou %d de %d ataques!\n", contador, this.getAttackSpeed());
+        System.out.printf("\nO Troll Ancião acertou %d de %d ataques!\n", contador, arma.attackSpeed);
     }
 
     @Override
     public void mover(Personagem alvo){
-        if (pos < alvo.getPos())
-            pos += moveSpeed;
-        else
-            pos -= moveSpeed;
+        boolean chegou = false;
+        for (int i = 0; i < moveSpeed; i++){
+            pos += (pos < alvo.getPos()) ? 1 : -1;
+            if (Utilidades.calcularDistancia(pos, alvo.getPos()) == arma.attackRange){
+                chegou = true;
+                System.out.println("O Troll Ancião avança com passos pesados e está pronto para atacar!");
+                atacar(alvo);
+                break;
+            }
+        }
 
-        System.out.printf("O Troll Ancião se aproxima e agora está a %d metro(s) do herói!\n",
-            Utilidades.calcularDistancia(pos, alvo.getPos()));
+        if (!chegou)
+            System.out.printf("O Troll Ancião se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.getPos()));
     }
 
     public void regeneracaoSelvagem() {
@@ -103,7 +105,7 @@ public class TrollAnciao extends Monstro {
     public void golpeDemolidor(Personagem alvo) {
         System.out.println("\nO Troll Ancião levanta sua clava gigante para um GOLPE DEMOLIDOR!");
         if (Math.random() > alvo.getDodgeChance() * 0.7) {
-            double dano = forca * 2.0;
+            double dano = forca * arma.dano * 2.0;
             alvo.receberDano(dano);
             System.out.println("O golpe atinge o herói com força esmagadora!");
 
@@ -111,15 +113,6 @@ public class TrollAnciao extends Monstro {
             System.out.println("O herói está ATORDOADO e perderá o próximo turno!");
         } else {
             System.out.println("O herói consegue evitar o golpe demolidor!");
-        }
-    }
-
-    private void verificarFuria() {
-        if (!emFuria && pontosDeVida <= (pontosDeVidaMax / 2)) {
-            emFuria = true;
-            forca *= 1.5;
-            this.attackSpeed = this.getAttackSpeed() + 1;
-            System.out.println("\nO Troll Ancião entra em FÚRIA! Sua força e velocidade aumentam!");
         }
     }
 }

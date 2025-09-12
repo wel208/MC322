@@ -1,17 +1,16 @@
 public class CavaleiroCorrompido extends Monstro {
 
-   public CavaleiroCorrompido(String nome, int nivel, int pos, Arma arma){
-        super(nome, nivel, pos, arma);
+   public CavaleiroCorrompido(String nome, int nivelDificuldade, int pos, Arma arma){
+        super(nome, nivelDificuldade, pos, arma);
 
-        this.pontosDeVidaMax = 80 + (nivel * 15);
+        this.pontosDeVidaMax = 80 + (nivelDificuldade * 15);
         this.pontosDeVida = this.pontosDeVidaMax;
 
-        this.protecao = 0.2;
-        this.forca = 12 + (nivel * 3);
-        this.criticalChance = 0.1;
-        this.sorte = 0.1;
-        this.dodgeChance = 0.05;
-        this.attackSpeed = 2;
+        this.protecao = 0.2 + (nivelDificuldade * 0.03);
+        this.forca = 12 + (nivelDificuldade * 3);
+        this.sorte = 0.2 + (nivelDificuldade * 0.01);
+        this.moveSpeed = 5;
+        this.xpConcedido = 20 + (nivelDificuldade * 10);
 }
 
     @Override
@@ -36,16 +35,18 @@ public class CavaleiroCorrompido extends Monstro {
 
         System.out.printf("\nO cavaleiro está a %d metro(s) do herói e irá ", distancia);
 
-        if (chance < 0.1 && distancia <= 2) {
+        if (chance < 0.1 && distancia <= arma.getAttackRange()) {
+            System.out.println("USAR GOLPE PESADO!\n"); Utilidades.esperar(1500);
             golpePesado(alvo);
             return;
         }
-        else if (chance < 0.2 && distancia > 2 && distancia <= 8) {
+        else if (chance < 0.2 && distancia > arma.getAttackRange() && distancia <= 8) {
+            System.out.println("USAR INVESTIDA SOMBRIA!\n"); Utilidades.esperar(1500);
             investidaSombria(alvo);
             return;
         }
 
-        if (distancia <= 2){
+        if (distancia <= arma.getAttackRange()){
             System.out.println("ATACAR!\n"); Utilidades.esperar(1500);
             atacar(alvo);
         }
@@ -59,10 +60,10 @@ public class CavaleiroCorrompido extends Monstro {
     public void atacar(Personagem alvo){
         int contador = 0;
 
-        for (int i = 0; i < this.getAttackSpeed(); i++){
+        for (int i = 0; i < arma.attackSpeed; i++){
             if (Math.random() > alvo.getDodgeChance()){
                 contador++;
-                double dano = forca;
+                double dano = forca + arma.dano;
 
                 if (Math.random() < this.getCriticalChance()){
                     dano *= 1.5;
@@ -83,25 +84,33 @@ public class CavaleiroCorrompido extends Monstro {
             }
         }
 
-        System.out.printf("\nO cavaleiro acertou %d de %d golpes!\n", contador, this.getAttackSpeed());
+        System.out.printf("\nO cavaleiro acertou %d de %d golpes!\n", contador, arma.getAttackSpeed());
     }
 
     @Override
     public void mover(Personagem alvo){
-        if (pos < alvo.getPos())
-            pos += moveSpeed;
-        else
-            pos -= moveSpeed;
+        boolean chegou = false;
 
-        System.out.printf("O cavaleiro se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.getPos()));
+        for (int i = 0; i < moveSpeed; i++){
+            pos += (pos < alvo.pos) ? 1 : -1;
+            if (Utilidades.calcularDistancia(pos, alvo.pos) <= arma.attackRange){
+                System.out.println("O cavaleiro corrompido ALCANCOU o heroi E IRA ATACAR!\n"); Utilidades.esperar(1500);
+                chegou = true;
+                atacar(alvo);
+                break;
+            }
+        }
+
+        if (!chegou)
+            System.out.printf("O cavaleiro se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.getPos()));
     }
 
     // Golpe Pesado — aplica Atordoado
     public void golpePesado(Personagem alvo){
         System.out.println("\nO cavaleiro ergue sua espada com ambas as mãos, preparando um GOLPE PESADO!");
 
-        if (Math.random() > alvo.getDodgeChance() * 0.7){
-            double dano = forca * 2.0;
+        if (Math.random() > (alvo.getDodgeChance() + alvo.getSorte()) * 0.7){
+            double dano = forca * arma.dano * 2.0;
             alvo.receberDano(dano);
             System.out.println("O golpe atinge o herói com força devastadora!");
 
@@ -116,15 +125,12 @@ public class CavaleiroCorrompido extends Monstro {
     public void investidaSombria(Personagem alvo){
         System.out.println("\nO cavaleiro envolve-se em sombras e avança rapidamente em uma INVESTIDA SOMBRIA!");
 
-        if (pos < alvo.getPos())
-            pos = alvo.getPos() - 1;
-        else
-            pos = alvo.getPos() + 1;
+        pos = alvo.getPos() + arma.attackRange;
 
         System.out.println("O cavaleiro fecha a distância em um instante!");
 
-        if (Math.random() > alvo.getDodgeChance()){
-            double dano = forca * 1.3;
+        if (Math.random() > alvo.getDodgeChance() + alvo.getSorte()){
+            double dano = forca * arma.dano * 1.3;
             alvo.receberDano(dano);
             System.out.println("A investida atinge o herói com impacto brutal!");
 

@@ -1,18 +1,16 @@
 public class Zumbi extends Monstro {
 
     // Construtor
-    public Zumbi(String nome, int nivel, int pos, Arma arma) {
-    super(nome, nivel, pos, arma);
-
-    this.pontosDeVidaMax = 50 + (nivel * 10);
+    public Zumbi(String nome, int nivelDificuldade, int pos, Arma arma) {
+    super(nome, nivelDificuldade, pos, arma);
+    this.pontosDeVidaMax = 50 + (nivelDificuldade * 10);
     this.pontosDeVida = this.pontosDeVidaMax;
-
-    this.protecao = 0.1;
-    this.forca = 8 + (nivel * 2);
-    this.criticalChance = 0.05;
-    this.sorte = 0.1;
-    this.dodgeChance = 0.05;
-    this.attackSpeed = 2;
+    this.protecao = 0.2 + (nivelDificuldade * 0.03);
+    this.forca = 15 + (nivelDificuldade * 4);
+    this.moveSpeed = 3 + nivelDificuldade;
+    this.xpConcedido = 30 + (nivelDificuldade * 10);
+    this.sorte = 0.2 + (nivelDificuldade * 0.01);
+    this.dodgeChance = 0.05 + (nivelDificuldade * 0.01);
 }
 
     @Override
@@ -59,31 +57,36 @@ public class Zumbi extends Monstro {
     @Override
     public void atacar(Personagem alvo){
         int contador = 0;
-        for (int i = 0; i < attackSpeed; i++){
+        for (int i = 0; i < arma.attackSpeed; i++){
             if (Math.random() > alvo.dodgeChance){
                 contador++;
                 if (Math.random() < criticalChance){
-                    alvo.receberDano(forca * 1.2);
+                    alvo.receberDano(forca * arma.dano * 1.2);
                     System.out.println("O Zumbi desfere um golpe CRÍTICO com suas garras!"); Utilidades.esperar(1500);
                 } else {
-                    alvo.receberDano(forca);
+                    alvo.receberDano(forca * arma.dano);
                     System.out.println("O Zumbi acerta um golpe pesado no herói!"); Utilidades.esperar(1500);
                 }
             } else {
                 System.out.println("O herói esquiva do ataque lento do Zumbi!"); Utilidades.esperar(1500);
             }
         }
-        System.out.printf("\nO Zumbi acertou %d de %d ataques!\n", contador, attackSpeed); Utilidades.esperar(1500);
+        System.out.printf("\nO Zumbi acertou %d de %d ataques!\n", contador, arma.attackSpeed); Utilidades.esperar(1500);
     }
 
     @Override
     public void mover(Personagem alvo){
-        if (pos < alvo.pos)
-            pos += moveSpeed;
-        else
-            pos -= moveSpeed;
+        boolean chegou = false;
+        for (int i = 0; i < moveSpeed; i++){
+            pos++;
+            if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.attackRange){
+                chegou = true;
+                break;
+            }
+        }
 
-        System.out.printf("O Zumbi se arrasta e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
+        if (!chegou)
+            System.out.printf("O Zumbi se arrasta e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
     }
 
     // Habilidade especial: Regeneração Macabra
@@ -100,7 +103,7 @@ public class Zumbi extends Monstro {
         Utilidades.esperar(2000);
 
         if (Math.random() > alvo.dodgeChance * 0.9) {
-            double dano = forca * 1.5;
+            double dano = forca * arma.dano * 1.5;
             alvo.receberDano(dano);
             System.out.println("A mordida rasga a carne do herói, espalhando infecção!");
             Utilidades.esperar(1500);

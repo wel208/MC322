@@ -15,7 +15,6 @@ public abstract class Personagem {
     protected double criticalChance;
     protected double sorte;
     protected double dodgeChance;
-    protected int attackSpeed;
     protected Arma arma;
 
     // Estados temporários derivados de Status
@@ -80,11 +79,10 @@ public abstract class Personagem {
     // Getters e Setters
     public double getDodgeChance() { return dodgeChance; }
     public void setDodgeChance(double dodgeChance) { this.dodgeChance = dodgeChance; }
-    public int getAttackSpeed() { return attackSpeed; }
-    public void setAttackSpeed(int attackSpeed) { this.attackSpeed = attackSpeed; }
     public double getCriticalChance() { return criticalChance; }
     public double getForca() { return forca; }
     public int getPos() { return pos; }
+    public double getSorte() { return sorte; }
     public int getPontosDeVida() { return pontosDeVida; }
     public void setPontosDeVida(int pontosDeVida) {
         this.pontosDeVida = Math.max(0, Math.min(pontosDeVida, pontosDeVidaMax));

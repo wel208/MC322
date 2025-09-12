@@ -10,6 +10,13 @@ public class Ninfa extends Monstro{
     //Construtor
     public Ninfa(String nome, int nivel, int pos, Arma arma){
         super(nome, nivel, pos, arma);
+        this.pontosDeVidaMax = 100 + (nivel - 1) * 20;
+        this.pontosDeVida = this.pontosDeVidaMax;
+        this.protecao = 0.4 + (nivel - 1) * 0.01;
+        this.forca = 20 + (nivel - 1) * 5;
+        this.moveSpeed = 3;
+        this.xpConcedido = 30 + (nivel * 15);
+        this.sorte = 0.3 + (nivel * 0.02);
     }
 
     @Override
@@ -60,20 +67,20 @@ public class Ninfa extends Monstro{
             mover(alvo);
         }
     }
-
+    
     @Override
     public void atacar(Personagem alvo){
         int contador = 0;
 
         for (int i = 0; i < arma.attackSpeed; i++){
-            if (Math.random() > alvo.sorte){
+            if (Math.random() > alvo.dodgeChance){
                 contador++;
                 if (Math.random() < criticalChance){
-                    alvo.receberDano(forca * 1.1);
+                    alvo.receberDano(forca * arma.dano * 1.1);
                     System.out.println("\nNAO! A ninfa ACERTOU um ATAQUE CRITICO no nosso heroi!"); Utilidades.esperar(1000);
                 }
                 else{
-                    alvo.receberDano(forca);
+                    alvo.receberDano(forca * arma.dano);
                     System.out.println("\nNAO! A ninfa ACERTOU um golpe no heroi!"); Utilidades.esperar(1000);
                 }
             }
@@ -81,7 +88,7 @@ public class Ninfa extends Monstro{
                 System.out.println("\nUFA! O heroi ESQUIVOU do ataque da ninfa!"); Utilidades.esperar(1000);
         }
 
-        System.out.printf("\nA ninfa ACERTOU %d de %d ataque(s) dado(s)!\n", contador, attackSpeed); Utilidades.esperar(1500);
+        System.out.printf("\nA ninfa ACERTOU %d de %d ataque(s) dado(s)!\n", contador, arma.attackSpeed); Utilidades.esperar(1500);
     }
 
     @Override
@@ -123,7 +130,7 @@ public class Ninfa extends Monstro{
 
         if (Utilidades.calcularDistancia(pos, alvo.pos) <= arma.attackRange) {
             if (Math.random() > alvo.dodgeChance * 0.8) {
-                double dano = forca * 1.8;
+                double dano = forca * arma.dano * 1.8;
                 alvo.receberDano(dano);
                 System.out.println("A Ninfa esmaga o herói com força brutal!");
                 Utilidades.esperar(1500);
@@ -147,7 +154,7 @@ public class Ninfa extends Monstro{
         Utilidades.esperar(2000);
 
         // Chance de acertar o efeito
-        if (Math.random() > alvo.sorte) {
+        if (Math.random() < sorte) {
             // 50% de chance de aplicar Cegueira, 50% de aplicar Defesa Reduzida
             if (Math.random() < 0.5) {
                 alvo.aplicarStatus("Cegueira", 2);

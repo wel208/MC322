@@ -12,7 +12,6 @@ public abstract class Monstro extends Personagem {
         this.arma = arma;
 
         // Valores padrão para todos os monstros
-        this.attackSpeed = 1 + (nivelDificuldade / 3); // Exemplo: aumenta com a dificuldade
         this.dodgeChance = 0.05 + (nivelDificuldade * 0.01); // Exemplo: 5% base + 1% por nível
     }
 

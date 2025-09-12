@@ -9,14 +9,8 @@ public class Main {
         Heroi heroi = Utilidades.criarHeroi();
         heroi.exibirStatus();
 
-        // Se já começar morto
-        if (heroi.getPontosDeVida() <= 0) {
-            System.out.println("O herói morreu!");
-            return;
-        }
-
-        // Gera um número entre 2 e 10
-        int fases = r.nextInt((10 - 2) + 1) + 2;
+        // Gera um número aleatório de fases entre 2 e 9
+        int fases = r.nextInt(2, 10);
 
         // Gera as fases e guarda a lista
         List<Fase> listaFases = ConstrutorDeCenario.gerarFases(fases);

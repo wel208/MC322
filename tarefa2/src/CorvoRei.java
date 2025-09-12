@@ -2,8 +2,15 @@ import java.util.Random;
 
 public class CorvoRei extends Monstro{
     
-    public CorvoRei(String nome, int nivel, int pos, Arma arma){
-        super(nome, nivel, pos, arma);
+    public CorvoRei(String nome, int nivelDificuldade, int pos, Arma arma){
+        super(nome, nivelDificuldade, pos, arma);
+        this.pontosDeVidaMax = 60 + (nivelDificuldade - 1) * 15;
+        this.pontosDeVida = this.pontosDeVidaMax;
+        this.protecao = 0.3 + (nivelDificuldade - 1) * 0.05;
+        this.forca = 10 + nivelDificuldade;
+        this.moveSpeed = 12;
+        this.xpConcedido = 20 + (nivelDificuldade * 15);
+        this.sorte = 0.15 + (nivelDificuldade * 0.03);
     }
 
     @Override
@@ -66,7 +73,7 @@ public class CorvoRei extends Monstro{
 
         int contador = 0;
 
-        for (int i = 0; i < attackSpeed; i++){
+        for (int i = 0; i < arma.attackSpeed; i++){
             System.out.print(corvejo[r.nextInt(3)] + " ");
             Utilidades.esperar(500);
 
@@ -76,7 +83,7 @@ public class CorvoRei extends Monstro{
             }
         }
 
-        System.out.printf("\n\nOs corvos acertaram %d dos %d ataques dados!\n", contador, attackSpeed); Utilidades.esperar(1500);
+        System.out.printf("\n\nOs corvos acertaram %d dos %d ataques dados!\n", contador, arma.attackSpeed); Utilidades.esperar(1500);
     }
 
     @Override
@@ -92,13 +99,13 @@ public class CorvoRei extends Monstro{
     // Habilidade especial: Chuva de Corvos (com cegueira)
     public void chuvaDeCorvos(Personagem alvo){
         System.out.println("\nO CORVO REI solta um grito ensurdecedor e uma CHUVA DE CORVOS ataca o herói!"); Utilidades.esperar(2000);
-        int ataques = attackSpeed + 2;
+        int ataques = arma.attackSpeed + 2;
         int acertos = 0;
 
         for (int i = 0; i < ataques; i++){
             if (Math.random() > alvo.dodgeChance){
                 acertos++;
-                alvo.receberDano(forca * 0.8);
+                alvo.receberDano(forca * arma.dano * 0.8);
             }
         }
 
@@ -112,13 +119,10 @@ public class CorvoRei extends Monstro{
     public void vooRasante(Personagem alvo){
         System.out.println("\nO CORVO REI mergulha em um VOO RASANTE contra o herói!"); Utilidades.esperar(2000);
 
-        if (pos < alvo.pos)
-            pos = alvo.pos - 1;
-        else
-            pos = alvo.pos + 1;
+        pos = alvo.pos + 1;
 
         if (Math.random() > alvo.dodgeChance){
-            alvo.receberDano(forca * 1.2);
+            alvo.receberDano(forca * arma.dano * 1.2);
             System.out.println("O ataque acerta em cheio!"); Utilidades.esperar(1500);
         } else {
             System.out.println("O herói esquiva do voo rasante!"); Utilidades.esperar(1500);

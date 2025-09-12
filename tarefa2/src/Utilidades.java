@@ -45,16 +45,21 @@ public class Utilidades{
     }
 
     public static Monstro criarMonstro(String ambiente, int fase){
-        List<String> lista;
-        if (ambiente.equals("Castelo"))
-            lista = monstrosCastelo;
-        else if (ambiente.equals("Vilarejo Destruído"))
-            lista = monstrosVilarejo;
-        else
-            lista = monstrosAcampamento;
+        int indice;
+        String monstro;
 
-        int indice = random.nextInt(lista.size());
-        String monstro = lista.remove(indice); // remove para não repetir
+        if (ambiente.equals("Castelo")){
+            indice = random.nextInt(monstrosCastelo.size());
+            monstro = monstrosCastelo.get(indice);
+        }
+        else if (ambiente.equals("Vilarejo Destruído")){
+            indice = random.nextInt(monstrosVilarejo.size());
+            monstro = monstrosVilarejo.get(indice);
+        }
+        else{
+            indice = random.nextInt(monstrosAcampamento.size());
+            monstro = monstrosAcampamento.get(indice);
+        }
 
         int posicao = escolherPosicao(monstro);
 

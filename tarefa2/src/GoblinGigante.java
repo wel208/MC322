@@ -1,8 +1,15 @@
 public class GoblinGigante extends Monstro {
 
     // Construtor
-    public GoblinGigante(String nome, int nivel, int pos, Arma arma){
-        super(nome, nivel, pos, arma);
+    public GoblinGigante(String nome, int nivelDificuldade, int pos, Arma arma){
+        super(nome, nivelDificuldade, pos, arma);
+        this.pontosDeVidaMax = 80 + (nivelDificuldade - 1) * 20;
+        this.pontosDeVida = this.pontosDeVidaMax;
+        this.protecao = 0.4 + (nivelDificuldade - 1) * 0.05;
+        this.forca = 12 + (nivelDificuldade - 1) * 4;
+        this.moveSpeed = 4;
+        this.xpConcedido = 25 + (nivelDificuldade * 15);
+        this.sorte = 0.1 + (nivelDificuldade * 0.01);
     }
 
     @Override
@@ -46,31 +53,39 @@ public class GoblinGigante extends Monstro {
     @Override
     public void atacar(Personagem alvo){
         int contador = 0;
-        for (int i = 0; i < attackSpeed; i++){
+        for (int i = 0; i < arma.attackSpeed; i++){
             if (Math.random() > alvo.dodgeChance){
                 contador++;
                 if (Math.random() < criticalChance){
-                    alvo.receberDano(forca * 1.4);
+                    alvo.receberDano(forca * arma.dano * 1.4);
                     System.out.println("O Goblin Gigante acerta um GOLPE CRÍTICO devastador!"); Utilidades.esperar(1500);
                 } else {
-                    alvo.receberDano(forca);
+                    alvo.receberDano(forca * arma.dano);
                     System.out.println("O Goblin Gigante acerta um golpe pesado no herói!"); Utilidades.esperar(1500);
                 }
             } else {
                 System.out.println("O herói esquiva do ataque pesado do Goblin Gigante!"); Utilidades.esperar(1500);
             }
         }
-        System.out.printf("\nO Goblin Gigante acertou %d de %d ataques!\n", contador, attackSpeed); Utilidades.esperar(1500);
+        System.out.printf("\nO Goblin Gigante acertou %d de %d ataques!\n", contador, arma.attackSpeed); Utilidades.esperar(1500);
     }
 
     @Override
     public void mover(Personagem alvo){
-        if (pos < alvo.pos)
-            pos += moveSpeed;
-        else
-            pos -= moveSpeed;
+        boolean chegou = false;
 
-        System.out.printf("O Goblin Gigante se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
+        for (int i = 0; i < moveSpeed; i++){
+            pos++;
+            if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.attackRange){
+                chegou = true;
+                System.out.println("O Goblin Gigante alcançou o herói e irá atacar!");
+                atacar(alvo);
+                break;
+            }
+        }
+
+        if (!chegou)
+            System.out.printf("O Goblin Gigante se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
     }
 
     // Habilidade especial: Esmagamento Brutal
@@ -79,7 +94,7 @@ public class GoblinGigante extends Monstro {
         Utilidades.esperar(2000);
 
         if (Math.random() > alvo.dodgeChance * 0.8) {
-            double dano = forca * 2.0;
+            double dano = forca * arma.dano * 2.0;
             alvo.receberDano(dano);
             System.out.println("O golpe atinge o herói com força esmagadora!");
             Utilidades.esperar(1500);

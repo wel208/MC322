@@ -12,6 +12,14 @@ public class Esqueleto extends Monstro {
     //Construtor
     public Esqueleto(String nome, int nivel, int pos, Arma arma){
         super(nome, nivel, pos, arma);
+        this.pontosDeVidaMax = 50 + (nivel - 1) * 10;
+        this.pontosDeVida = this.pontosDeVidaMax;
+        this.protecao = 0.2 + (nivel - 1) * 0.03;
+        this.forca = 30 + (nivel - 1) * 2;
+        this.precisao = 0.5 + (nivel - 1) * 0.05;
+        this.moveSpeed = 10;
+        this.xpConcedido = 15 + (nivel * 10);
+        this.sorte = 0.3 + (nivel * 0.01);
     }
 
     @Override
@@ -95,18 +103,18 @@ public class Esqueleto extends Monstro {
     public void atacar(Personagem alvo){
         int contador = 0;
 
-        for (int i = 0; i < attackSpeed; i++){
-            if (Math.random() < precisao/100){
+        for (int i = 0; i < arma.attackSpeed; i++){
+            if (Math.random() < precisao){
                 if (Math.random() > alvo.dodgeChance){
                     contador++;
                     int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
 
                     if (Math.random() < criticalChance){
-                        alvo.receberDano(forca * 1.2 * distancia/7);
+                        alvo.receberDano(forca * arma.dano * 1.2 * distancia/7);
                         System.out.println("NAO! O esqueleto ACERTOU um ATAQUE CRITICO no nosso heroi!"); Utilidades.esperar(1000);
                     }  
                     else{
-                        alvo.receberDano(forca * distancia/7);
+                        alvo.receberDano(forca * arma.dano * distancia/7);
                         System.out.println("NAO! O esqueleto ACERTOU o nosso heroi!"); Utilidades.esperar(1000);
                     }
                 }
@@ -117,7 +125,7 @@ public class Esqueleto extends Monstro {
                 System.out.println("ISSO! O esqueleto ERROU a flecha!"); Utilidades.esperar(1000);
         }
 
-        System.out.printf("\nO esqueleto acertou %d da(s) %d flecha(s) atirada(s)!\n", contador, attackSpeed); Utilidades.esperar(1500);
+        System.out.printf("\nO esqueleto acertou %d da(s) %d flecha(s) atirada(s)!\n", contador, arma.attackSpeed); Utilidades.esperar(1500);
     }
 
     @Override
@@ -135,12 +143,12 @@ public class Esqueleto extends Monstro {
         Utilidades.esperar(2000);
 
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
-        double chanceAcerto = (precisao + 20) / 100;
+        double chanceAcerto = precisao + 0.2;
         double chanceCritico = criticalChance + 0.15;
 
         if (Math.random() < chanceAcerto) {
-            if (Math.random() > (alvo.dodgeChance * 0.5)) {
-                double danoBase = forca * (distancia / 6.0);
+            if (Math.random() > ((alvo.dodgeChance + alvo.sorte) * 0.5)) {
+                double danoBase = forca * arma.dano * (distancia / 6.0);
 
                 if (Math.random() < chanceCritico) {
                     danoBase *= 1.5;
@@ -165,8 +173,8 @@ public class Esqueleto extends Monstro {
         Utilidades.esperar(2000);
 
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
-        double chanceAcerto = precisao / 100;
-        double danoBase = forca * (distancia / 8.0);
+        double chanceAcerto = precisao;
+        double danoBase = forca * arma.dano * distancia / 8;
 
         if (Math.random() < chanceAcerto) {
             if (Math.random() > alvo.dodgeChance) {

@@ -2,6 +2,14 @@ public class Goblin extends Monstro{
     
     public Goblin(String nome, int nivel, int pos, Arma arma){
         super(nome, nivel, pos, arma);
+        this.pontosDeVidaMax = 40 + (nivel - 1) * 8;
+        this.pontosDeVida = this.pontosDeVidaMax;
+        this.protecao = 0.2 + (nivel - 1) * 0.02;
+        this.forca = 25 + (nivel - 1) * 2;
+        this.moveSpeed = 12;
+        this.xpConcedido = 10 + (nivel * 8);
+        this.sorte = 0.25 + (nivel * 0.01);
+        this.dodgeChance = 0.1 + (nivel * 0.01);
     }
 
     @Override
@@ -51,14 +59,14 @@ public class Goblin extends Monstro{
     public void atacar(Personagem alvo){
         int contador = 0;
         for (int i = 0; i < arma.attackSpeed; i++){
-            if (Math.random() > alvo.sorte){
+            if (Math.random() > alvo.dodgeChance){
                 contador++;
                 if (Math.random() < criticalChance){
-                    alvo.receberDano(forca * 1.3);
+                    alvo.receberDano(forca * arma.dano * 1.3);
                     System.out.println("NAO! O goblin ACERTOU um ATAQUE CRITICO no nosso heroi!"); Utilidades.esperar(1500);
                 }
                 else{
-                    alvo.receberDano(forca);
+                    alvo.receberDano(forca * arma.dano);
                     System.out.println("NAO! O goblin ACERTOU um golpe no heroi!"); Utilidades.esperar(1500);
                 }
             }
@@ -102,7 +110,7 @@ public class Goblin extends Monstro{
     // Habilidade especial: Ataque Furtivo (com sangramento)
     public void ataqueFurtivo(Personagem alvo){
         System.out.println("\nO goblin se move rapidamente pelas sombras e tenta um ATAQUE FURTIVO!"); Utilidades.esperar(1500);
-        if (Math.random() > alvo.sorte * 0.8){
+        if (Math.random() > (alvo.dodgeChance) * 0.8){
             double dano = forca * 1.5;
             alvo.receberDano(dano);
             System.out.println("O ataque pega o herói de surpresa!"); Utilidades.esperar(1500);
@@ -118,8 +126,8 @@ public class Goblin extends Monstro{
     // Habilidade especial: Golpe Atordoante
     public void golpeAtordoante(Personagem alvo){
         System.out.println("\nO goblin mira um golpe rápido para atordoar o herói!"); Utilidades.esperar(1500);
-        if (Math.random() > alvo.sorte){
-            alvo.receberDano(forca * 1.1);
+        if (Math.random() > alvo.dodgeChance){
+            alvo.receberDano(forca * arma.dano * 1.1);
             alvo.aplicarStatus("Atordoado", 1);
             System.out.println("O herói foi ATORDOADO e perderá o próximo turno!"); Utilidades.esperar(1500);
         } else {

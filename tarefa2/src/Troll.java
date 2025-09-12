@@ -3,6 +3,13 @@ public class Troll extends Monstro {
     // Construtor
     public Troll(String nome, int nivel, int pos, Arma arma){
         super(nome, nivel, pos, arma);
+        this.pontosDeVidaMax = 150 + (nivel - 1) * 30;
+        this.pontosDeVida = this.pontosDeVidaMax;
+        this.protecao = 0.5 + (nivel - 1) * 0.04;
+        this.forca = 25 + (nivel - 1) * 6;
+        this.moveSpeed = 4;
+        this.xpConcedido = 50 + (nivel * 20);
+        this.sorte = 0.3 + (nivel * 0.01);
     }
 
     @Override
@@ -49,36 +56,41 @@ public class Troll extends Monstro {
     @Override
     public void atacar(Personagem alvo){
         int contador = 0;
-        for (int i = 0; i < attackSpeed; i++){
+        for (int i = 0; i < arma.attackSpeed; i++){
             if (Math.random() > alvo.dodgeChance){
                 contador++;
                 if (Math.random() < criticalChance){
-                    alvo.receberDano(forca * 1.3);
+                    alvo.receberDano(forca * arma.dano * 1.3);
                     System.out.println("O Troll acerta um GOLPE CRÍTICO com sua clava!"); Utilidades.esperar(1500);
                 } else {
-                    alvo.receberDano(forca);
+                    alvo.receberDano(forca * arma.dano);
                     System.out.println("O Troll acerta um golpe pesado no herói!"); Utilidades.esperar(1500);
                 }
             } else {
                 System.out.println("O herói esquiva do ataque do Troll!"); Utilidades.esperar(1500);
             }
         }
-        System.out.printf("\nO Troll acertou %d de %d ataques!\n", contador, attackSpeed); Utilidades.esperar(1500);
+        System.out.printf("\nO Troll acertou %d de %d ataques!\n", contador, arma.attackSpeed); Utilidades.esperar(1500);
     }
 
     @Override
     public void mover(Personagem alvo){
-        if (pos < alvo.pos)
-            pos += moveSpeed;
-        else
-            pos -= moveSpeed;
+        boolean chegou = false;
+        for (int i = 0; i < moveSpeed; i++){
+            pos++;
+            if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.attackRange){
+                chegou = true;
+                break;
+            }
+        }
 
-        System.out.printf("O Troll se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
+        if (!chegou) 
+            System.out.printf("O Troll se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
     }
 
     // Habilidade especial: Regeneração Selvagem
     public void regeneracaoSelvagem() {
-        int cura = (int)(pontosDeVida * 0.15); // recupera 15% da vida atual
+        int cura = (int)((double)pontosDeVida * 0.15); // recupera 15% da vida atual
         pontosDeVida += cura;
         System.out.printf("\nO Troll ruge e sua pele se regenera, recuperando %d pontos de vida! Vida atual: %d\n", cura, pontosDeVida);
         Utilidades.esperar(1500);
@@ -90,7 +102,7 @@ public class Troll extends Monstro {
         Utilidades.esperar(2000);
 
         if (Math.random() > alvo.dodgeChance * 0.7) {
-            double dano = forca * 2.0;
+            double dano = forca * arma.dano * 2.0;
             alvo.receberDano(dano);
             System.out.println("O golpe atinge o herói com força esmagadora!");
             Utilidades.esperar(1500);
