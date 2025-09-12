@@ -18,7 +18,7 @@ public class Utilidades{
     static String[] nomesZumbi = {"Morbidus", "Putridius", "Cadaveron", "Necros"};
     static String[] nomesCavaleiroCorrompido = {"Sir Malrick", "Darthorn", "Vargan", "Mortivar"};
 
-    static String[] armasLutador = {"Espada", "Clava"};
+    static String[] armasLutador = {"Espada", "Clava Comum"};
     static String[] armasAtirador = {"Funda", "Arco"};
 
     static String[] armasCavaleiroCorrompido = {"Espada", "Machado", "Clava Comum", "Clava de Espinhos"};
@@ -31,9 +31,9 @@ public class Utilidades{
     static String[] armasTroll = {"Machado", "Clava de Espinhos", "Espada", "Lança"};
     static String[] armasTrollAnciao = {"Machado", "Clava de Espinhos", "Espada", "Lança"};
 
-    static List<String> monstrosCastelo = new ArrayList<>(Arrays.asList("Esqueleto", "Goblin", "Cavaleiro Corrompido", "Troll", "TrollAnciao", "Zumbi"));
-    static List<String> monstrosVilarejo = new ArrayList<>(Arrays.asList("Esqueleto", "Goblin", "Zumbi", "Troll", "TrollAnciao"));
-    static List<String> monstrosAcampamento = new ArrayList<>(Arrays.asList("Ninfa da Floresta", "Esqueleto", "Cavaleiro Corrompido", "Goblin Gigante", "Troll", "TrollAnciao"));
+    static List<String> monstrosCastelo = new ArrayList<>(Arrays.asList("Goblin", "Cavaleiro Corrompido", "Troll", "TrollAnciao", "Zumbi"));
+    static List<String> monstrosVilarejo = new ArrayList<>(Arrays.asList("Goblin", "Zumbi", "Troll", "TrollAnciao"));
+    static List<String> monstrosAcampamento = new ArrayList<>(Arrays.asList("Ninfa da Floresta", "Cavaleiro Corrompido", "Goblin Gigante", "Troll", "TrollAnciao"));
     static Random random = new Random();
 
     public static Heroi criarHeroi(){
@@ -47,18 +47,22 @@ public class Utilidades{
     public static Monstro criarMonstro(String ambiente, int fase){
         int indice;
         String monstro;
+        List<String> listaMonstros;
 
         if (ambiente.equals("Castelo")){
-            indice = random.nextInt(monstrosCastelo.size());
-            monstro = monstrosCastelo.get(indice);
+            listaMonstros = new ArrayList<>(monstrosCastelo);
+            indice = random.nextInt(listaMonstros.size());
+            monstro = listaMonstros.remove(indice);
         }
         else if (ambiente.equals("Vilarejo Destruído")){
-            indice = random.nextInt(monstrosVilarejo.size());
-            monstro = monstrosVilarejo.get(indice);
+            listaMonstros = new ArrayList<>(monstrosVilarejo);
+            indice = random.nextInt(listaMonstros.size());
+            monstro = listaMonstros.remove(indice);
         }
         else{
-            indice = random.nextInt(monstrosAcampamento.size());
-            monstro = monstrosAcampamento.get(indice);
+            listaMonstros = new ArrayList<>(monstrosAcampamento);
+            indice = random.nextInt(listaMonstros.size());
+            monstro = listaMonstros.remove(indice);
         }
 
         int posicao = escolherPosicao(monstro);

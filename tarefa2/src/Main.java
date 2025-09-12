@@ -7,7 +7,6 @@ public class Main {
 
         //Cria o herói
         Heroi heroi = Utilidades.criarHeroi();
-        heroi.exibirStatus();
 
         // Gera um número aleatório de fases entre 2 e 9
         int fases = r.nextInt(2, 10);

@@ -5,7 +5,7 @@ public class Adagas extends Arma {
         this.nome = "Adagas";
         this.tipo = "Corpo a Corpo";
         this.dano = 0.8;
-        this.minNivel = 1;
+        this.minNivel = 2;
         this.attackRange = 0;
         this.attackSpeed = 4;
     }

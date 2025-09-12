@@ -24,6 +24,7 @@ public class ConstrutorDeCenario {
             fases.add(f);
         }
 
+        System.out.println("O jogo terá " + nFases + " fase(s).");
         return fases;
     }
 }

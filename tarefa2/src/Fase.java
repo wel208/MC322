@@ -36,11 +36,16 @@ public class Fase {
         System.out.printf("\n=== Fase %d: %s ===\n", nivel, ambiente);
         Random rng = new Random();
 
+        System.out.println("A fase possui " + monstros.size() + " monstros!");
+
         for (Monstro monstro : monstros) {
-            System.out.println("\nUm " + monstro.getClass().getSimpleName() + " aparece!");
+            heroi.exibirStatus();
+            
+            System.out.println("\nUm " + monstro.getClass().getSimpleName() + " equipado com " + monstro.arma.nome + " aparece!");
 
             // Loop de combate
-            while (heroi.getPontosDeVida() > 0 && monstro.getPontosDeVida() > 0) {
+            for (int i = 1; i < 60 && heroi.getPontosDeVida() > 0 && monstro.getPontosDeVida() > 0; i++) {
+                System.out.println("\n---" + Utilidades.verificarTurno(i) + "TURNO ---");
 
                 // Processa status antes das ações
                 heroi.processarStatus();
@@ -49,11 +54,14 @@ public class Fase {
                 // Turno do herói
                 if (heroi.getPontosDeVida() > 0) {
                     executarAcaoComStatus(heroi, monstro, rng);
+                    monstro.statusParcial();
+                    System.out.println("\n----------------------------------------");
                 }
 
                 // Turno do monstro
                 if (monstro.getPontosDeVida() > 0) {
                     executarAcaoComStatus(monstro, heroi, rng);
+                    heroi.statusParcial();
                 }
             }
 
@@ -63,16 +71,37 @@ public class Fase {
                 return; // encerra a fase e o jogo
             } else {
                 System.out.println("\nO monstro foi derrotado!");
+                heroi.ganharExperiencia(monstro.xpConcedido);
 
-                if(monstro.largaArma() && monstro.arma != null) {
+                if(monstro.largaArma()) {
                     //Drop da arma
-                    System.out.println(monstro.getNome() + " ???, Acho que caiu uma arma: " + monstro.arma.getNome());
+                    System.out.println(monstro.getNome() + " deixou sua arma: " + monstro.arma.getNome());
                     //Equipa automaticamente
-                    heroi.setArma(monstro.arma);
-                    System.out.println(heroi.getNome() + " equipado " + monstro.arma.getNome() + "!");
-                }
+                    if (heroi instanceof Lutador){
+                        if (monstro.arma.getTipo() != "Corpo a Corpo"){
+                            System.out.println("\n" + heroi.getNome() + " não pode equipar essa arma!\n");
+                        }
+                        else{
+                            if (heroi.arma.minNivel > monstro.arma.minNivel && heroi.getNivel() < monstro.arma.minNivel){
+                                System.out.println(heroi.getNome() + " soltou " + heroi.arma.getNome() + " e equipou " + monstro.arma.getNome() + "!");
+                                heroi.setArma(monstro.arma);
+                            }
+                        }
+                    }
+                    else{
+                        if (monstro.arma.getTipo() != "Longo Alcance"){
+                            System.out.println(heroi.getNome() + " não pode equipar essa arma!\n");
+                        }
+                        else{
+                            if (heroi.arma.minNivel > monstro.arma.minNivel && heroi.getNivel() < monstro.arma.minNivel){
+                                System.out.println(heroi.getNome() + " soltou " + heroi.arma.getNome() + " e equipou " + monstro.arma.getNome() + "!\n");
+                                heroi.setArma(monstro.arma);
+                            }
+                        }
+                    }
                 }
             }
+        }
         System.out.println("\nFase concluída!");
     }
 

@@ -32,7 +32,7 @@ public abstract class Heroi extends Personagem{
         double protecaoAntigo = protecao;
 
         System.out.printf("\n%s recebeu %d pontos de experienca nessa batalha!\n", nome, new_XP);
-        Utilidades.esperar(500);
+        Utilidades.esperar(200);
         
         experiencia += new_XP;
     
@@ -43,23 +43,21 @@ public abstract class Heroi extends Personagem{
         }
 
         if (subiu){                 //Se tiver subido de nível, mostra o melhora nos atributos principais
-            System.out.printf("\n%s subiu %d NIVEIS de experiencia!", nome, contador); Utilidades.esperar(600);
-            System.out.printf("\n%s teve um aumento de:", nome); Utilidades.esperar(600);
-            System.out.printf("\n%d pontos de VIDA;", pontosDeVida - vidaAntigo); Utilidades.esperar(600);
-            System.out.printf("\n%.0f pontos de FORCA;", forca - forcaAntigo); Utilidades.esperar(600);
-            System.out.printf("\n%.0f pontos de PROTECAO.\n", (protecao - protecaoAntigo) * 100); Utilidades.esperar(600);
+            System.out.printf("\n%s subiu %d NIVEIS de experiencia!", nome, contador); Utilidades.esperar(200);
+            System.out.printf("\n%s teve um aumento de:", nome); Utilidades.esperar(200);
+            System.out.printf("\n%d pontos de VIDA;", pontosDeVida - vidaAntigo); Utilidades.esperar(200);
+            System.out.printf("\n%.0f pontos de FORCA;", forca - forcaAntigo); Utilidades.esperar(200);
+            System.out.printf("\n%.0f pontos de PROTECAO.\n", (protecao - protecaoAntigo) * 100); Utilidades.esperar(200);
         }
-
-        exibirStatus(); Utilidades.esperar(600);
     }
 
     private void subirDeNivel(){ //Método que melhora os atributos do herói ao subir de nível
         experiencia = experiencia - expProximoNivel;
         nivel++;
-        expProximoNivel += 20;
+        expProximoNivel += 10;
         forca += 5;
         protecao += 0.05;
-        pontosDeVida += 10;
+        pontosDeVida += 30;
         sorte += 0.02;
 
         if (nivel % 2 == 0){    //A cada dois niveis o herói começa a dar um ataque a mais por turno e tem um aumento do atributo único
@@ -70,7 +68,7 @@ public abstract class Heroi extends Personagem{
     //Método que equipa uma nova arma ao herói
     public void equiparArma(Arma novaArma){
         this.arma = novaArma;
-        System.out.printf("\n%s esta equipando a arma %s!\n", nome, novaArma.nome); Utilidades.esperar(1500);
+        System.out.printf("\n%s esta equipando a arma %s!\n", nome, novaArma.nome); Utilidades.esperar(200);
     }
 
     protected int getExperiencia(){

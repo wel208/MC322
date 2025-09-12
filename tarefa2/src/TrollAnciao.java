@@ -14,14 +14,14 @@ public class TrollAnciao extends Monstro {
 
     @Override
     public void ambientarMonstro(Heroi heroi){
-        System.out.println("\nUm rugido profundo ecoa pela caverna..."); Utilidades.esperar(2000);
-        System.out.println("Das sombras surge um Troll Ancião, mais alto e mais largo que qualquer outro."); Utilidades.esperar(2000);
-        System.out.println("Suas cicatrizes contam histórias de batalhas antigas, e seus olhos brilham com ódio ancestral."); Utilidades.esperar(2000);
+        System.out.println("\nUm rugido profundo ecoa pela caverna..."); Utilidades.esperar(200);
+        System.out.println("Das sombras surge um Troll Ancião, mais alto e mais largo que qualquer outro."); Utilidades.esperar(200);
+        System.out.println("Suas cicatrizes contam histórias de batalhas antigas, e seus olhos brilham com ódio ancestral."); Utilidades.esperar(200);
 
-        System.out.printf("\n%s, o TROLL ANCIÃO, no nível %d de dificuldade, possui:", nome, nivelDificuldade);
-        System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida);
-        System.out.printf("\n%.0f PONTOS DE FORÇA;", forca);
-        System.out.printf("\nE, ao morrer, concederá %d PONTOS DE EXPERIÊNCIA ao herói.\n", xpConcedido);
+        System.out.printf("\n%s, o TROLL ANCIÃO, no nível %d de dificuldade, possui:", nome, nivelDificuldade); Utilidades.esperar(200);
+        System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(200);
+        System.out.printf("\n%.0f PONTOS DE FORÇA;", forca); Utilidades.esperar(200);
+        System.out.printf("\nE, ao morrer, concederá %d PONTOS DE EXPERIÊNCIA ao herói.\n", xpConcedido); Utilidades.esperar(200);
     }
 
     @Override

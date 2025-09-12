@@ -2,6 +2,8 @@ public class Espada extends Arma {
 
     //Construtor
     public Espada(){
+        this.nome = "Espada";
+        this.tipo = "Corpo a Corpo";
         this.dano = 1.1;
         this.minNivel = 1;
         this.attackRange = 1;

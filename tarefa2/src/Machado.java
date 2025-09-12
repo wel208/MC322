@@ -5,7 +5,7 @@ public class Machado extends Arma {
         this.nome = "Machado";
         this.tipo = "Corpo a Corpo";
         this.dano = 1.3;
-        this.minNivel = 3;
+        this.minNivel = 4;
         this.attackRange = 1;
         this.attackSpeed = 2;
     }

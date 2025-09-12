@@ -38,7 +38,7 @@ public abstract class Personagem {
     public void statusParcial(){
         System.out.printf("\n%s, O %s, está com %d PONTOS DE VIDA.\n",
             getNome(), Utilidades.verificarClasse(this), pontosDeVida);
-        Utilidades.esperar(1500);
+        Utilidades.esperar(200);
     }
 
     protected void receberDano(double forca){

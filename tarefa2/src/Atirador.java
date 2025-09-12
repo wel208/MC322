@@ -12,7 +12,7 @@ public class Atirador extends Heroi{
     //Construtor
     public Atirador(String nome, Arma arma){
         super(nome, arma);
-        this.pontosDeVida = 60;
+        this.pontosDeVida = 150;
         this.moveSpeed = 10;
         this.forca = 40;
         this.protecao = 0.4;
@@ -22,14 +22,14 @@ public class Atirador extends Heroi{
     //Métodos
     @Override
     public void exibirStatus(){
-        System.out.printf("\n%s, O ATIRADOR possui:", nome); Utilidades.esperar(1000);
-        System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(1000);
-        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", getNivel(), getExperiencia(), getExpProximoNivel()); Utilidades.esperar(1000);
-        System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar(1000);
-        System.out.printf("\n%.0f pontos de PRECISAO;", precisao); Utilidades.esperar(1000);
-        System.out.printf("\n%.2f pontos de SORTE;", sorte); Utilidades.esperar(1000);
-        System.out.printf("\n%s esta utilizando %s como ARMA;", nome,arma.nome); Utilidades.esperar(1000);
-        System.out.printf("\nCapacidade de dar %d ATAQUE(S) POR TURNO e pode percorrer %d METROS POR TURNO.\n", arma.attackSpeed, moveSpeed); Utilidades.esperar(1000);
+        System.out.printf("\n%s, O ATIRADOR possui:", nome); Utilidades.esperar(200);
+        System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(200);
+        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", getNivel(), getExperiencia(), getExpProximoNivel()); Utilidades.esperar(200);
+        System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar(200);
+        System.out.printf("\n%.0f pontos de PRECISAO;", precisao); Utilidades.esperar(200);
+        System.out.printf("\n%.2f pontos de SORTE;", sorte); Utilidades.esperar(200);
+        System.out.printf("\n%s esta utilizando %s como ARMA;", nome,arma.nome); Utilidades.esperar(200);
+        System.out.printf("\nCapacidade de dar %d ATAQUE(S) POR TURNO e pode percorrer %d METROS POR TURNO.\n", arma.attackSpeed, moveSpeed); Utilidades.esperar(200);
     }
 
     /*
@@ -42,53 +42,53 @@ public class Atirador extends Heroi{
         int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
         double chance = Math.random();
 
-        System.out.printf("\nO atirador esta a %d metros do monstro e ira ", distancia); Utilidades.esperar(1500);
+        System.out.printf("\nO atirador esta a %d metros do monstro e ira ", distancia); Utilidades.esperar(200);
         
-        if (distancia < (double)arma.attackRange * 0.3){ //Se estiver muito perto, prefere se afastar
+        if (distancia < (double)arma.attackRange * 0.3){
             if (chance < 0.7){
-                System.out.println("se AFASTAR do inimigo!\n"); Utilidades.esperar(1500);
+                System.out.println("se AFASTAR do inimigo!\n"); Utilidades.esperar(200);
                 mover(alvo);
             }
             else if (chance < 0.9){
-                System.out.println("ATACAR o inimigo!\n"); Utilidades.esperar(1500);
+                System.out.println("ATACAR o inimigo!\n"); Utilidades.esperar(200);
                 atacar(alvo);
             }
             else{
-                System.out.println("USAR SUA HABILIDADE ESPECIAL nesse turno!\n"); Utilidades.esperar(1500);
+                System.out.println("USAR SUA HABILIDADE ESPECIAL nesse turno!\n"); Utilidades.esperar(200);
                 usarHabilidadeEspecial(alvo);
             }
         }
-        else if (distancia <= (double)arma.attackRange * 0.8){ //Se estiver a uma distância média, pode atacar ou se afastar
+        else if (distancia <= (double)arma.attackRange * 0.8){
             if (chance < 0.4){
-                System.out.println("se AFASTAR do inimigo!\n"); Utilidades.esperar(1500);
+                System.out.println("se AFASTAR do inimigo!\n"); Utilidades.esperar(200);
                 mover(alvo);
             }
             else if (chance < 0.8){
-                System.out.println("ATACAR o inimigo!\n"); Utilidades.esperar(1500);
+                System.out.println("ATACAR o inimigo!\n"); Utilidades.esperar(200);
                 atacar(alvo);
             }
             else{
-                System.out.println("USAR SUA HABILIDADE ESPECIAL nesse turno!\n"); Utilidades.esperar(1500);
+                System.out.println("USAR SUA HABILIDADE ESPECIAL nesse turno!\n"); Utilidades.esperar(200);
                 usarHabilidadeEspecial(alvo);
             }
         }
-        else if (distancia <= arma.attackRange){ //Se estiver longe, prefere atacar ou usar sua habilidade especial
+        else if (distancia <= arma.attackRange){
             if (chance < 0.2){
-                System.out.println("se AFASTAR do inimigo!\n"); Utilidades.esperar(1500);
+                System.out.println("se AFASTAR do inimigo!\n"); Utilidades.esperar(200);
                 mover(alvo);
             }
             else if (chance < 0.6){
-                System.out.println("ATACAR o inimigo!\n"); Utilidades.esperar(1500);
+                System.out.println("ATACAR o inimigo!\n"); Utilidades.esperar(200);
                 atacar(alvo);
             }
             else{
-                System.out.println("USAR SUA HABILIDADE ESPECIAL nesse turno!\n"); Utilidades.esperar(1500);
+                System.out.println("USAR SUA HABILIDADE ESPECIAL nesse turno!\n"); Utilidades.esperar(200);
                 usarHabilidadeEspecial(alvo);
             }
         }
         else{
-            System.out.println("se APROXIMAR do inimigo!\n"); Utilidades.esperar(1500);
-            System.out.println("O atirador esta longe demais para conseguir atacar."); Utilidades.esperar(1500);
+            System.out.println("se APROXIMAR do inimigo!\n"); Utilidades.esperar(200);
+            System.out.println("O atirador esta longe demais para conseguir atacar."); Utilidades.esperar(200);
             mover(alvo);
         }
     }
@@ -111,7 +111,6 @@ public class Atirador extends Heroi{
                     contador++;
                     int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
 
-                    // Verifica se é crítico
                     boolean critico = Math.random() < criticalChance;
                     double multiplicador = critico ? 1.2 : 1.0;
 
@@ -123,16 +122,16 @@ public class Atirador extends Heroi{
                     else{
                         System.out.println("O atirador ACERTOU o inimigo!");
                     }
-                    Utilidades.esperar(1500);
+                    Utilidades.esperar(200);
                 }
                 else{
-                    System.out.println("O inimigo ESQUIVOU do ataque!"); Utilidades.esperar(1500);
+                    System.out.println("O inimigo ESQUIVOU do ataque!"); Utilidades.esperar(200);
                 }
             }
             else
-                System.out.println("O atirador ERROU o ataque!"); Utilidades.esperar(1500);
+                System.out.println("O atirador ERROU o ataque!"); Utilidades.esperar(200);
         }
-        System.out.printf("\nO heroi acertou %d de %d ataque(s) dado(s)!\n", contador, arma.attackSpeed); Utilidades.esperar(1500);
+        System.out.printf("\nO heroi acertou %d de %d ataque(s) dado(s)!\n", contador, arma.attackSpeed); Utilidades.esperar(200);
     }
 
     /*
@@ -151,7 +150,7 @@ public class Atirador extends Heroi{
             for (int i = 0; i < moveSpeed; i++){
                 pos += (pos < alvo.pos) ? 1 : -1;
                 if (distancia == arma.attackRange){
-                    System.out.println("O atirador ALCANCOU A DISTANCIA IDEAL e ira ATACAR!\n"); Utilidades.esperar(1500);
+                    System.out.println("O atirador ALCANCOU A DISTANCIA IDEAL e ira ATACAR!\n"); Utilidades.esperar(200);
                     chegou = true;
                     break;
                 }
@@ -162,7 +161,7 @@ public class Atirador extends Heroi{
                 pos += (pos < alvo.pos) ? -1 : 1;
                 distancia = Utilidades.calcularDistancia(pos, alvo.pos);
                 if (distancia > arma.attackRange){
-                    System.out.println("O atirador SE AFASTOU do inimigo e esta na DISTANCIA IDEAL para ATACAR!\n"); Utilidades.esperar(1500);
+                    System.out.println("O atirador SE AFASTOU do inimigo e esta na DISTANCIA IDEAL para ATACAR!\n"); Utilidades.esperar(200);
                     chegou = true;
                     break;
                 }
@@ -174,7 +173,7 @@ public class Atirador extends Heroi{
             return;
         }
         else{
-            System.out.printf("O atirador chegou a uma distancia de %d metros do monstro!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(1500);
+            System.out.printf("O atirador chegou a uma distancia de %d metros do monstro!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(200);
         }
     }
 
@@ -185,33 +184,32 @@ public class Atirador extends Heroi{
      */
     @Override
     protected void usarHabilidadeEspecial(Personagem alvo){
-        System.out.printf("%s atirara %d projeteis neste turno!\n\n", nome, arma.attackSpeed + 2); Utilidades.esperar(1500);
+        System.out.printf("%s atirara %d projeteis neste turno!\n\n", nome, arma.attackSpeed + 2); Utilidades.esperar(200);
         int qtdAtque = arma.attackSpeed + 2;
         int contador = 0;
 
-        for (int i = 0; i < qtdAtque; i++){                 //for para executar todos os ataques da rodada
+        for (int i = 0; i < qtdAtque; i++){
 
-            if (Math.random() < (precisao + sorte) * 0.9){  //Caso o atirador possivelmente acerte seu alvo
+            if (Math.random() < (precisao + sorte) * 0.9){
 
-                if (Math.random() > alvo.dodgeChance){            //Caso o inimigo NÃO consiga esquivar da flecha
+                if (Math.random() > alvo.dodgeChance){
                     contador++;
 
                     int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
 
-                    // Dano agora considera o dano da arma
                     alvo.receberDano(forca * arma.dano * distancia/5 * 1.1);
-                    System.out.println("ISSO! O nosso atirador ACERTOU o inimigo!"); Utilidades.esperar(1500);
+                    System.out.println("ISSO! O nosso atirador ACERTOU o inimigo!"); Utilidades.esperar(200);
                 }
-                else{                                       //Caso o inimigo consiga esquivar do projétil
-                    System.out.println("NAO! O inimigo ESQUIVOU do projetil do nosso atirador!"); Utilidades.esperar(1500);
+                else{
+                    System.out.println("NAO! O inimigo ESQUIVOU do projetil do nosso atirador!"); Utilidades.esperar(200);
                     continue;
                 }
             }
-            else                                            //Caso o atirador erre o projétil
-                System.out.println("NAO! O atirador ERROU o projetil!"); Utilidades.esperar(1500);
+            else
+                System.out.println("NAO! O atirador ERROU o projetil!"); Utilidades.esperar(200);
         }
 
-        System.out.printf("\nO heroi acertou %d projeteis de %d projeteis atirados!", contador, qtdAtque); Utilidades.esperar(1500);
+        System.out.printf("\nO heroi acertou %d projeteis de %d projeteis atirados!", contador, qtdAtque); Utilidades.esperar(200);
     }
 
     /*
