@@ -13,21 +13,6 @@ public class CavaleiroCorrompido extends Monstro {
 }
 
     @Override
-    public void ambientarMonstro(Heroi heroi){
-        System.out.println("\nO som de metal arranhando ecoa pela estrada..."); Utilidades.esperar(200);
-        System.out.println("Das sombras, surge uma figura imponente, coberta por uma armadura negra e enferrujada."); Utilidades.esperar(200);
-        System.out.println("E " + nome + ", outrora um cavaleiro nobre, agora corrompido pelas trevas."); Utilidades.esperar(200);
-        System.out.println("Seus olhos brilham em um tom vermelho intenso, e sua espada parece sedenta por sangue."); Utilidades.esperar(200);
-
-        System.out.printf("\n%s, o CAVALEIRO CORROMPIDO, no nivel %d de dificuldade, possui:", nome, nivelDificuldade); Utilidades.esperar(200);
-        System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(200);
-        System.out.printf("\n%.0f PONTOS DE FORCA;", forca); Utilidades.esperar(200);
-        System.out.printf("\nE, ao morrer, concedera %d PONTOS DE EXPERIENCIA ao heroi.\n", xpConcedido); Utilidades.esperar(200);
-
-        System.out.println("\nO heroi sente o peso da presenca desse inimigo e se prepara para a batalha."); Utilidades.esperar(200);
-    }
-
-    @Override
     public void tomarDecisao(Personagem alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
