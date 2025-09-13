@@ -15,7 +15,7 @@ public abstract class Monstro extends Personagem {
         this.dodgeChance = 0.05 + (nivelDificuldade * 0.01); // Exemplo: 5% base + 1% por nível
     }
 
-    public boolean largaArma() {
+    public static boolean largaArma() {
         return Math.random() < 0.6; // 60% de chance de largar uma arma
     }
 }
