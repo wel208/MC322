@@ -29,11 +29,10 @@ public class Utilidades{
     static String[] armasGoblin = {"Espada", "Lança", "Faca de arremesso", "Adagas", "Clava Comum"};
     static String[] armasGoblinGigante = {"Machado", "Clava de Espinhos", "Espada", "Lança"};
     static String[] armasTroll = {"Machado", "Clava de Espinhos", "Espada", "Lança"};
-    static String[] armasTrollAnciao = {"Machado", "Clava de Espinhos", "Espada", "Lança"};
 
-    static List<String> monstrosCastelo = new ArrayList<>(Arrays.asList("Goblin", "Cavaleiro Corrompido", "Troll", "TrollAnciao", "Zumbi"));
-    static List<String> monstrosVilarejo = new ArrayList<>(Arrays.asList("Goblin", "Zumbi", "Troll", "TrollAnciao"));
-    static List<String> monstrosAcampamento = new ArrayList<>(Arrays.asList("Ninfa da Floresta", "Cavaleiro Corrompido", "Goblin Gigante", "Troll", "TrollAnciao"));
+    static List<String> monstrosCastelo = new ArrayList<>(Arrays.asList("Goblin", "Cavaleiro Corrompido", "Troll", "Zumbi"));
+    static List<String> monstrosVilarejo = new ArrayList<>(Arrays.asList("Goblin", "Zumbi", "Troll"));
+    static List<String> monstrosAcampamento = new ArrayList<>(Arrays.asList("Ninfa da Floresta", "Cavaleiro Corrompido", "Goblin Gigante", "Troll"));
     static Random random = new Random();
 
     public static Heroi criarHeroi(){
@@ -81,8 +80,6 @@ public class Utilidades{
             return new Zumbi(nomesZumbi[random.nextInt(nomesZumbi.length)], fase, posicao, escolherArma(armasZumbi));
         else if (monstro.equals("Goblin Gigante"))
             return new GoblinGigante(nomesGoblinGigante[random.nextInt(nomesGoblinGigante.length)], fase, posicao, escolherArma(armasGoblinGigante));
-        else if (monstro.equals("TrollAnciao"))
-            return new TrollAnciao(nomesTroll[random.nextInt(nomesTroll.length)], fase, posicao, escolherArma(armasTrollAnciao));
         else
             return new Troll(nomesTroll[random.nextInt(nomesTroll.length)], fase, posicao, escolherArma(armasTroll));
     }
@@ -159,8 +156,6 @@ public class Utilidades{
             return "GOBLIN";
         else if (P instanceof GoblinGigante)
             return "GOBLIN GIGANTE";
-        else if (P instanceof TrollAnciao)
-            return "TROLL ANCIÃO";
         else if (P instanceof Troll)
             return "TROLL";
         else if (P instanceof Zumbi)
