@@ -120,8 +120,6 @@ public class Utilidades{
             return 10 + random.nextInt((4 - (-3)) + 1) + (-3);
         else if (monstro.equals("Troll"))
             return 10 + random.nextInt((3 - (-3)) + 1) + (-3);
-        else if (monstro.equals("TrollAnciao"))
-            return 10 + random.nextInt((3 - (-3)) + 1) + (-3);
         else
             return 12 + random.nextInt((4 - (-4)) + 1) + (-4);
 }
