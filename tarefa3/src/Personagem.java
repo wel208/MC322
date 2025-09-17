@@ -29,15 +29,37 @@ public abstract class Personagem implements Combatente{
         return (int)(forca * (1 - protecao));
     }
 
+    public void receberCura(int cura){
+        pontosDeVida += cura;
+        if (pontosDeVida > pontosDeVidaMax)
+            pontosDeVida = pontosDeVidaMax;
+    }
+
+    public boolean estaVivo(){
+        return pontosDeVida > 0;
+    }
+
     // Getters e Setters
     public String getNome(){
         return nome;
     }
-    public double getDodgeChance(){ 
-        return dodgeChance;
+    public Arma getArma(){
+        return arma;
+    }
+    public double getForca(){
+        return forca;
+    }
+    public int getPontosDeVida(){
+        return pontosDeVida;
+    }
+    public int getPontosDeVidaMax(){
+        return pontosDeVidaMax;
     }
     public int getMoveSpeed(){
         return moveSpeed;
+    }
+    public double getDodgeChance(){ 
+        return dodgeChance;
     }
     public double getCriticalChance(){ 
         return criticalChance; 
@@ -47,14 +69,6 @@ public abstract class Personagem implements Combatente{
     }
     public void setPos(int pos){
         this.pos = pos;
-    }
-    public boolean estaVivo(){
-        return pontosDeVida > 0;
-    }
-    public void receberCura(int cura){
-        pontosDeVida += cura;
-        if (pontosDeVida > pontosDeVidaMax)
-            pontosDeVida = pontosDeVidaMax;
     }
     public double getSorte(){ 
         return sorte; 

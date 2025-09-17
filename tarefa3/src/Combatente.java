@@ -2,7 +2,7 @@ public interface Combatente {
     String getNome();
     Arma getArma();
     int getPos();
-    int getForca();
+    double getForca();
     int getMoveSpeed();
     double getSorte();
     double getAtributoUnico();
