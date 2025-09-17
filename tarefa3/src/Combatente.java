@@ -5,7 +5,7 @@ public interface Combatente {
     int getPos();
     int getForca();
     double getSorte();
-    double getPrecisao();
+    double getAtributoUnico();
     double getCriticalChance();
     double getDodgeChance();
     boolean estaVivo();

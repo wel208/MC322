@@ -4,7 +4,7 @@ public class AtaqueComum implements AcaoDeCombate{
         int contador = 0, dano = 0;
         int qtdAtque = usuario.getArma().getAttackSpeed();
 
-        if (usuario.getArma().getTipo() == "Corpo a corpo"){
+        if (usuario.getArma().getTipo() == "Corpo a Corpo"){
 
             for (int i = 0; i < qtdAtque; i ++){
 
@@ -33,7 +33,7 @@ public class AtaqueComum implements AcaoDeCombate{
             
             for (int i = 0; i < qtdAtque; i++){
 
-                double chanceAcerto = Math.min(0.95, usuario.getPrecisao() + usuario.getSorte());
+                double chanceAcerto = Math.min(0.95, usuario.getAtributoUnico() + usuario.getSorte());
 
                 if (Math.random() < chanceAcerto){
 

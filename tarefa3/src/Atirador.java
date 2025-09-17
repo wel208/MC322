@@ -193,7 +193,7 @@ public class Atirador extends Heroi {
 
         for (int i = 0; i < qtdAtque; i++){
 
-            double chanceAcerto = Math.min(0.99, (precisao + sorte) * 0.9);
+            double chanceAcerto = Math.min(0.9, (precisao + sorte) * 0.9);
 
             if (Math.random() < chanceAcerto){
 
