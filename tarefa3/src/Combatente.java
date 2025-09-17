@@ -1,5 +1,6 @@
 public interface Combatente {
     String getNome();
+    Arma getArma();
     boolean estaVivo();
     void receberDano(int dano);
     void receberCura(int cura);
