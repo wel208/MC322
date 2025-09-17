@@ -26,11 +26,11 @@ public class Ninfa extends Monstro{
         System.out.printf("\nA NINFA está a %d metros do nosso herói e ira ", distancia);
 
         if (distancia <= arma.getAttackRange()){
-            System.out.print("ATACAR!\n"); Utilidades.esperar(200);
+            System.out.print("ATACAR!\n"); Utilidades.esperar();
             atacar(alvo);
         }
         else{
-            System.out.print("SE APROXIMAR!\n"); Utilidades.esperar(200);
+            System.out.print("SE APROXIMAR!\n"); Utilidades.esperar();
             mover(alvo);
         }
     }
@@ -55,14 +55,14 @@ public class Ninfa extends Monstro{
                 else{
                     System.out.println("\nNAO! A ninfa ACERTOU um golpe no heroi!");
                 }
-                Utilidades.esperar(200);
+                Utilidades.esperar();
             }
             else{
-                System.out.println("\nUFA! O heroi ESQUIVOU do ataque da ninfa!"); Utilidades.esperar(200);
+                System.out.println("\nUFA! O heroi ESQUIVOU do ataque da ninfa!"); Utilidades.esperar();
             }
         }
 
-        System.out.printf("\nA ninfa ACERTOU %d de %d ataque(s) dado(s)!\n", contador, arma.getAttackSpeed()); Utilidades.esperar(200);
+        System.out.printf("\nA ninfa ACERTOU %d de %d ataque(s) dado(s)!\n", contador, arma.getAttackSpeed()); Utilidades.esperar();
     }
 
     @Override
@@ -74,7 +74,7 @@ public class Ninfa extends Monstro{
             pos += direcao;
 
             if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.attackRange){
-                System.out.println("A NINFA ALCANCOU O HEROI E IRA ATACAR!"); Utilidades.esperar(200);
+                System.out.println("A NINFA ALCANCOU O HEROI E IRA ATACAR!"); Utilidades.esperar();
                 chegou = true;
                 atacar(alvo);
                 break;
@@ -82,9 +82,9 @@ public class Ninfa extends Monstro{
         }
         
         if (!chegou){
-            Utilidades.esperar(200);
+            Utilidades.esperar();
             System.out.println("\nA NINFA ainda nao alcancou o nosso heroi!");
-            System.out.printf("Ela esta a %d metros de %s.\n", Utilidades.calcularDistancia(pos, alvo.pos), alvo.nome); Utilidades.esperar(200);
+            System.out.printf("Ela esta a %d metros de %s.\n", Utilidades.calcularDistancia(pos, alvo.pos), alvo.nome); Utilidades.esperar();
         }
     }
 }

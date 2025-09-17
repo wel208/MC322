@@ -35,7 +35,7 @@ public abstract class Heroi extends Personagem{
         double protecaoAntigo = protecao;
 
         System.out.printf("\n%s recebeu %d pontos de experienca nessa batalha!\n", nome, new_XP);
-        Utilidades.esperar(200);
+        Utilidades.esperar();
         
         experiencia += new_XP;
     
@@ -46,11 +46,11 @@ public abstract class Heroi extends Personagem{
         }
 
         if (subiu){                 //Se tiver subido de nível, mostra o melhora nos atributos principais
-            System.out.printf("\n%s subiu %d NIVEIS de experiencia!", nome, contador); Utilidades.esperar(200);
-            System.out.printf("\n%s teve um aumento de:", nome); Utilidades.esperar(200);
-            System.out.printf("\n%d pontos de VIDA;", pontosDeVida - vidaAntigo); Utilidades.esperar(200);
-            System.out.printf("\n%.0f pontos de FORCA;", forca - forcaAntigo); Utilidades.esperar(200);
-            System.out.printf("\n%.0f pontos de PROTECAO.\n", (protecao - protecaoAntigo) * 100); Utilidades.esperar(200);
+            System.out.printf("\n%s subiu %d NIVEIS de experiencia!", nome, contador); Utilidades.esperar();
+            System.out.printf("\n%s teve um aumento de:", nome); Utilidades.esperar();
+            System.out.printf("\n%d pontos de VIDA;", pontosDeVida - vidaAntigo); Utilidades.esperar();
+            System.out.printf("\n%.0f pontos de FORCA;", forca - forcaAntigo); Utilidades.esperar();
+            System.out.printf("\n%.0f pontos de PROTECAO.\n", (protecao - protecaoAntigo) * 100); Utilidades.esperar();
         }
     }
 
@@ -71,7 +71,7 @@ public abstract class Heroi extends Personagem{
     //Método que equipa uma nova arma ao herói
     public void equiparArma(Arma novaArma){
         this.arma = novaArma;
-        System.out.printf("\n%s esta equipando a arma %s!\n", nome, novaArma.nome); Utilidades.esperar(200);
+        System.out.printf("\n%s esta equipando a arma %s!\n", nome, novaArma.nome); Utilidades.esperar();
     }
 
     protected int getExperiencia(){

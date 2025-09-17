@@ -6,7 +6,7 @@ public class HabilidadeEspecial implements AcaoDeCombate {
 
         if (usuario instanceof Lutador){
 
-            System.out.printf("RHHAAAA!! O NOSSO HEROI ENTROU EM FURIA E ATACARA %d VEZES NESTE TURNO!\n\n", qtdAtque); Utilidades.esperar(200);
+            System.out.printf("RHHAAAA!! O NOSSO HEROI ENTROU EM FURIA E ATACARA %d VEZES NESTE TURNO!\n\n", qtdAtque); Utilidades.esperar();
 
             for(int i = 0; i < qtdAtque; i++){
                 System.out.print("Hah! "); Utilidades.esperar (200);
@@ -29,6 +29,6 @@ public class HabilidadeEspecial implements AcaoDeCombate {
             }
         }
 
-        System.out.printf("\n\nO nosso heroi acertou %d ataques(s), causando %d de dano!\n", contador, dano); Utilidades.esperar(200);
+        System.out.printf("\n\nO nosso heroi acertou %d ataques(s), causando %d de dano!\n", contador, dano); Utilidades.esperar();
     }
 }

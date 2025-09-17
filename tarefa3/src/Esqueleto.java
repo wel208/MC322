@@ -32,40 +32,40 @@ public class Esqueleto extends Monstro {
 
         if (distancia <= range * 0.3){
             if (chance <= 0.2){
-                System.out.println("ATACAR!\n"); Utilidades.esperar(200);
+                System.out.println("ATACAR!\n"); Utilidades.esperar();
                 atacar(alvo);
             }
             else{
-                System.out.println("SE AFASTAR!\n"); Utilidades.esperar(200);
+                System.out.println("SE AFASTAR!\n"); Utilidades.esperar();
                 mover(alvo);
             }
         }
         else if (distancia <= range * 0.5){
             if (chance <= 0.4){
-                System.out.println("ATACAR!\n"); Utilidades.esperar(200);
+                System.out.println("ATACAR!\n"); Utilidades.esperar();
                 atacar(alvo);
             }
             else{
-                System.out.println("SE AFASTAR!\n"); Utilidades.esperar(200);
+                System.out.println("SE AFASTAR!\n"); Utilidades.esperar();
                 mover(alvo);
             }
         }
         else if (distancia <= range * 0.8){
             if (chance <= 0.7){
-                System.out.println("ATACAR!\n"); Utilidades.esperar(200);
+                System.out.println("ATACAR!\n"); Utilidades.esperar();
                 atacar(alvo);
             }
             else{
-                System.out.println("SE AFASTAR!\n"); Utilidades.esperar(200);
+                System.out.println("SE AFASTAR!\n"); Utilidades.esperar();
                 mover(alvo);
             }
         }
         else if (distancia <= range){
-                System.out.println("ATACAR!\n"); Utilidades.esperar(200);
+                System.out.println("ATACAR!\n"); Utilidades.esperar();
                 atacar(alvo);
         }
         else{
-            System.out.println("SE APROXIMAR para poder atacar!\n"); Utilidades.esperar(200);
+            System.out.println("SE APROXIMAR para poder atacar!\n"); Utilidades.esperar();
             mover(alvo);
         }
     }
@@ -91,16 +91,16 @@ public class Esqueleto extends Monstro {
                     else{
                         System.out.println("NAO! O esqueleto ACERTOU o nosso heroi!");
                     }
-                    Utilidades.esperar(200);
+                    Utilidades.esperar();
                 }
                 else
-                    System.out.println("BOA! O heroi ESQUIVOU da flecha!"); Utilidades.esperar(200);
+                    System.out.println("BOA! O heroi ESQUIVOU da flecha!"); Utilidades.esperar();
             }
             else
-                System.out.println("ISSO! O esqueleto ERROU a flecha!"); Utilidades.esperar(200);
+                System.out.println("ISSO! O esqueleto ERROU a flecha!"); Utilidades.esperar();
         }
 
-        System.out.printf("\nO esqueleto acertou %d da(s) %d flecha(s) atirada(s)!\n", contador, arma.getAttackSpeed()); Utilidades.esperar(200);
+        System.out.printf("\nO esqueleto acertou %d da(s) %d flecha(s) atirada(s)!\n", contador, arma.getAttackSpeed()); Utilidades.esperar();
     }
 
     @Override
@@ -127,11 +127,11 @@ public class Esqueleto extends Monstro {
         }
         
         if (chegou){
-            System.out.println("O esqueleto chegou na distancia ideal para ATACAR o heroi!"); Utilidades.esperar(200);
+            System.out.println("O esqueleto chegou na distancia ideal para ATACAR o heroi!"); Utilidades.esperar();
             atacar(alvo);
         }
         else{
-            System.out.println("O esqueleto não conseguiu chegar na distancia ideal para ATACAR o heroi."); Utilidades.esperar(200);
+            System.out.println("O esqueleto não conseguiu chegar na distancia ideal para ATACAR o heroi."); Utilidades.esperar();
         }
     }
 }

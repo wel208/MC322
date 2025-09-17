@@ -19,11 +19,11 @@ public class Goblin extends Monstro{
         System.out.printf("\nO GOBLIN esta a %d metros do nosso heroi e ira ", distancia);
 
         if (distancia <= arma.getAttackRange()){
-            System.out.println("ATACA-LO!\n"); Utilidades.esperar(200);
+            System.out.println("ATACA-LO!\n"); Utilidades.esperar();
             atacar(alvo);
         }
         else{
-            System.out.println("CORRER NA DIRECAO DELE!\n"); Utilidades.esperar(200);
+            System.out.println("CORRER NA DIRECAO DELE!\n"); Utilidades.esperar();
             mover(alvo);
         }
     }
@@ -47,14 +47,14 @@ public class Goblin extends Monstro{
                 else{
                     System.out.println("NAO! O goblin ACERTOU um golpe no heroi!");
                 }
-                Utilidades.esperar(200);
+                Utilidades.esperar();
             }
             else{
-                System.out.println("UFA! O heroi ESQUIVOU do ataque do goblin!"); Utilidades.esperar(200);
+                System.out.println("UFA! O heroi ESQUIVOU do ataque do goblin!"); Utilidades.esperar();
             }
         }
 
-        System.out.printf("\nO goblin acertou %d dos %d ataques dados!\n", contador, arma.attackSpeed); Utilidades.esperar(200);
+        System.out.printf("\nO goblin acertou %d dos %d ataques dados!\n", contador, arma.attackSpeed); Utilidades.esperar();
     }
 
     public void mover(Personagem alvo){
@@ -64,7 +64,7 @@ public class Goblin extends Monstro{
         for (int i = 0; i < moveSpeed; i++){
             pos += direcao;
             if (Utilidades.calcularDistancia(pos, alvo.getPos()) == arma.getAttackRange()){
-                System.out.println("O GOBLIN ALCANCOU O HEROI E IRA ATACAR!\n"); Utilidades.esperar(200);
+                System.out.println("O GOBLIN ALCANCOU O HEROI E IRA ATACAR!\n"); Utilidades.esperar();
                 chegou = true;
                 atacar(alvo);
                 break;
@@ -72,8 +72,8 @@ public class Goblin extends Monstro{
         }
         
         if (!chegou){
-            System.out.println("O goblin ainda nao alcancou o nosso heroi. "); Utilidades.esperar(200);
-            System.out.printf("Ele esta a %d metros de distância.", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(200);
+            System.out.println("O goblin ainda nao alcancou o nosso heroi. "); Utilidades.esperar();
+            System.out.printf("Ele esta a %d metros de distância.", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar();
         }
     }
 }

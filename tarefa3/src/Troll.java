@@ -19,11 +19,11 @@ public class Troll extends Monstro {
         System.out.printf("\nO TROLL está a %d metro(s) do herói e irá ", distancia);
 
         if (distancia <= arma.getAttackRange()){
-            System.out.println("ATACAR!\n"); Utilidades.esperar(200);
+            System.out.println("ATACAR!\n"); Utilidades.esperar();
             atacar(alvo);
         } 
         else{
-            System.out.println("SE APROXIMAR!\n"); Utilidades.esperar(200);
+            System.out.println("SE APROXIMAR!\n"); Utilidades.esperar();
             mover(alvo);
         }
     }
@@ -48,13 +48,13 @@ public class Troll extends Monstro {
                 else{
                     System.out.println("O Troll acerta um golpe pesado no herói!");
                 }
-                Utilidades.esperar(200);
+                Utilidades.esperar();
             } 
             else{
-                System.out.println("O herói esquiva do ataque do Troll!"); Utilidades.esperar(200);
+                System.out.println("O herói esquiva do ataque do Troll!"); Utilidades.esperar();
             }
         }
-        System.out.printf("\nO Troll acertou %d de %d ataques!\n", contador, arma.getAttackSpeed()); Utilidades.esperar(200);
+        System.out.printf("\nO Troll acertou %d de %d ataques!\n", contador, arma.getAttackSpeed()); Utilidades.esperar();
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Troll extends Monstro {
         }
 
         if (!chegou){
-            System.out.printf("O Troll se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(200);
+            System.out.printf("O Troll se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar();
         }
     }
 }

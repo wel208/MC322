@@ -20,8 +20,7 @@ public abstract class Personagem implements Combatente{
 
     // Métodos utilitários
     public void statusParcial(){
-        System.out.printf("\n%s, O %s, está com %d PONTOS DE VIDA.\n", nome, Utilidades.verificarClasse(this), pontosDeVida);
-        Utilidades.esperar(200);
+        System.out.printf("\n%s, O %s, está com %d PONTOS DE VIDA.\n", nome, Utilidades.verificarClasse(this), pontosDeVida); Utilidades.esperar();
     }
 
     public int receberDano(double forca){

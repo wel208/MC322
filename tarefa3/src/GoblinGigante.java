@@ -19,10 +19,10 @@ public class GoblinGigante extends Monstro {
         System.out.printf("\nO GOBLIN GIGANTE está a %d metro(s) do herói e irá ", distancia);
 
         if (distancia <= arma.getAttackRange()){
-            System.out.println("ATACAR!\n"); Utilidades.esperar(200);
+            System.out.println("ATACAR!\n"); Utilidades.esperar();
             atacar(alvo);
         } else {
-            System.out.println("AVANÇAR!\n"); Utilidades.esperar(200);
+            System.out.println("AVANÇAR!\n"); Utilidades.esperar();
             mover(alvo);
         }
     }
@@ -46,13 +46,13 @@ public class GoblinGigante extends Monstro {
                 else{
                     System.out.println("O Goblin Gigante acerta um golpe pesado no herói!");
                 }
-                Utilidades.esperar(200);
+                Utilidades.esperar();
             } 
             else{
-                System.out.println("O herói esquiva do ataque pesado do Goblin Gigante!"); Utilidades.esperar(200);
+                System.out.println("O herói esquiva do ataque pesado do Goblin Gigante!"); Utilidades.esperar();
             }
         }
-        System.out.printf("\nO Goblin Gigante acertou %d de %d ataques!\n", contador, arma.getAttackSpeed()); Utilidades.esperar(200);
+        System.out.printf("\nO Goblin Gigante acertou %d de %d ataques!\n", contador, arma.getAttackSpeed()); Utilidades.esperar();
     }
 
     @Override
@@ -72,6 +72,6 @@ public class GoblinGigante extends Monstro {
         }
 
         if (!chegou)
-            System.out.printf("O Goblin Gigante se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(200);
+            System.out.printf("O Goblin Gigante se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar();
     }
 }

@@ -22,10 +22,10 @@ public class AtaqueComum implements AcaoDeCombate{
                     else{
                         System.out.printf("%s, %s, ACERTOU um ataque em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), Utilidades.verificarClasse(alvo));
                     }
-                    Utilidades.esperar(200);
+                    Utilidades.esperar();
                 }
                 else{
-                    System.out.printf("%s ESQUIVOU do ataque de %s!\n", Utilidades.verificarClasse(alvo)); Utilidades.esperar(200);
+                    System.out.printf("%s ESQUIVOU do ataque de %s!\n", Utilidades.verificarClasse(alvo)); Utilidades.esperar();
                 }
             }
         }
@@ -53,10 +53,10 @@ public class AtaqueComum implements AcaoDeCombate{
                         else{
                             System.out.printf("%s, %s, ACERTOU um ataque em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), Utilidades.verificarClasse(alvo));
                         }
-                            Utilidades.esperar(200);
+                            Utilidades.esperar();
                     }
                     else{
-                        System.out.printf("%s ESQUIVOU do ataque de %s!\n", alvo.getNome(), usuario.getNome()); Utilidades.esperar(200);
+                        System.out.printf("%s ESQUIVOU do ataque de %s!\n", alvo.getNome(), usuario.getNome()); Utilidades.esperar();
                     }
                 }
                 else{
@@ -65,6 +65,6 @@ public class AtaqueComum implements AcaoDeCombate{
             }
         }
 
-        System.out.printf("%s, %s, acertou %d de %d ataque(s) dados, causando %d de dano.", usuario.getNome(), Utilidades.verificarClasse(usuario), contador, qtdAtque, dano); Utilidades.esperar(200);
+        System.out.printf("%s, %s, acertou %d de %d ataque(s) dados, causando %d de dano.", usuario.getNome(), Utilidades.verificarClasse(usuario), contador, qtdAtque, dano); Utilidades.esperar();
     }
 }

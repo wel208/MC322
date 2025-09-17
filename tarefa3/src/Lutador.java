@@ -23,14 +23,14 @@ public class Lutador extends Heroi{
     //Métodos
     @Override
     public void exibirStatus(){
-        System.out.printf("\n%s, O lutador possui:", nome); Utilidades.esperar(200);
-        System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar(200);
-        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", getNivel(), getExperiencia(), getExpProximoNivel()); Utilidades.esperar(200);
-        System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar(200);
-        System.out.printf("\n%d pontos de FURIA;", furia); Utilidades.esperar(200);
-        System.out.printf("\n%.2f pontos de SORTE;", sorte); Utilidades.esperar(200);
-        System.out.printf("\n%s esta usando %s como ARMA;", nome, arma.nome); Utilidades.esperar(200);
-        System.out.printf("\ncapacidade de dar %d ATAQUES POR TURNO e pode percorrer %d METROS POR TURNO.\n", arma.attackSpeed, moveSpeed); Utilidades.esperar(200);
+        System.out.printf("\n%s, O lutador possui:", nome); Utilidades.esperar();
+        System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar();
+        System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", getNivel(), getExperiencia(), getExpProximoNivel()); Utilidades.esperar();
+        System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar();
+        System.out.printf("\n%d pontos de FURIA;", furia); Utilidades.esperar();
+        System.out.printf("\n%.2f pontos de SORTE;", sorte); Utilidades.esperar();
+        System.out.printf("\n%s esta usando %s como ARMA;", nome, arma.nome); Utilidades.esperar();
+        System.out.printf("\ncapacidade de dar %d ATAQUES POR TURNO e pode percorrer %d METROS POR TURNO.\n", arma.attackSpeed, moveSpeed); Utilidades.esperar();
     }
 
     /*
@@ -45,16 +45,16 @@ public class Lutador extends Heroi{
 
         if (distancia <= arma.attackRange){
             if (Math.random() < 0.3){
-                System.out.println("USAR SUA HABILIDADE ESPECIAL!\n"); Utilidades.esperar(200);
+                System.out.println("USAR SUA HABILIDADE ESPECIAL!\n"); Utilidades.esperar();
                 usarHabilidadeEspecial(alvo);
             }
             else{
-                System.out.println("ATACAR O SEU INIMIGO!"); Utilidades.esperar(200);
+                System.out.println("ATACAR O SEU INIMIGO!"); Utilidades.esperar();
                 atacar(alvo);
             }
         }
         else{
-            System.out.println("CORRER NA DIRECAO DELE!\n"); Utilidades.esperar(200);
+            System.out.println("CORRER NA DIRECAO DELE!\n"); Utilidades.esperar();
             mover(alvo);
         }
     }
@@ -78,17 +78,17 @@ public class Lutador extends Heroi{
                 alvo.receberDano(forca * arma.dano * multiplicador);
 
                 if (critico){   //Caso o ataque seja crítico
-                    System.out.println("ISSO! O nosso lutador ACERTOU um ATAQUE CRITICO em seu inimigo!"); Utilidades.esperar(200);
+                    System.out.println("ISSO! O nosso lutador ACERTOU um ATAQUE CRITICO em seu inimigo!"); Utilidades.esperar();
                 }
                 else{           //Caso seja um ataque comum
-                    System.out.println("BOA! O nosso lutador ACERTOU um golpe no inimigo!"); Utilidades.esperar(200);
+                    System.out.println("BOA! O nosso lutador ACERTOU um golpe no inimigo!"); Utilidades.esperar();
                 }
             }
             else                                  //Caso o inimigo consiga desviar do ataque do herói
-                System.out.println("NAO! O inimigo ESQUIVOU do ataque do nosso heroi!"); Utilidades.esperar(200);
+                System.out.println("NAO! O inimigo ESQUIVOU do ataque do nosso heroi!"); Utilidades.esperar();
         }
 
-        System.out.printf("\nO heroi acertou %d dos %d ataques dados!\n", contador, arma.attackSpeed); Utilidades.esperar(200);
+        System.out.printf("\nO heroi acertou %d dos %d ataques dados!\n", contador, arma.attackSpeed); Utilidades.esperar();
     }
 
     /*
@@ -104,7 +104,7 @@ public class Lutador extends Heroi{
         for (int i = 0; i < moveSpeed; i++){
             pos += (pos < alvo.pos) ? 1 : -1;
             if (Utilidades.calcularDistancia(pos, alvo.pos) <= arma.attackRange){
-                System.out.println("O lutador ALCANCOU O MONSTRO E IRA ATACAR!\n"); Utilidades.esperar(200);
+                System.out.println("O lutador ALCANCOU O MONSTRO E IRA ATACAR!\n"); Utilidades.esperar();
                 chegou = true;
                 atacar(alvo);
                 break;
@@ -113,7 +113,7 @@ public class Lutador extends Heroi{
         
         if (!chegou){
             System.out.println("O nosso lutador ainda nao alcancou o inimigo.");
-            System.out.printf("Ele esta a %d metros do monstro.\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(200);
+            System.out.printf("Ele esta a %d metros do monstro.\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar();
         }
     }
 
@@ -128,17 +128,17 @@ public class Lutador extends Heroi{
     protected void usarHabilidadeEspecial(Personagem alvo){
         int contador = 0;
 
-        System.out.printf("RHHAAAA!! O NOSSO HEROI ENTROU EM FURIA E ATACARA %d VEZES NESTE TURNO!\n\n", arma.attackSpeed + furia); Utilidades.esperar(200);
+        System.out.printf("RHHAAAA!! O NOSSO HEROI ENTROU EM FURIA E ATACARA %d VEZES NESTE TURNO!\n\n", arma.attackSpeed + furia); Utilidades.esperar();
 
         for(int i = 0; i < arma.attackSpeed + furia; i++){
-            System.out.print("Hah! "); Utilidades.esperar (200);
+            System.out.print("Hah! "); Utilidades.esperar();
             if (Math.random() > alvo.sorte * 1.1){   //Chance maior do inimigo esquivar do ataque do lutador
                 alvo.receberDano(forca * arma.dano * 1.1);       //Dano 10% maior que o normal
                 contador++;
             }
         }
 
-        System.out.printf("\n\nO nosso lutador acertou %d golpe(s)!\n", contador); Utilidades.esperar(200);
+        System.out.printf("\n\nO nosso lutador acertou %d golpe(s)!\n", contador); Utilidades.esperar();
     }
 
     /*

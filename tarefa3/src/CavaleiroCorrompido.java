@@ -19,11 +19,11 @@ public class CavaleiroCorrompido extends Monstro {
         System.out.printf("\nO cavaleiro esta a %d metro(s) do heroi e ira ", distancia);
 
         if (distancia <= arma.getAttackRange()){
-            System.out.println("ATACAR!\n"); Utilidades.esperar(200);
+            System.out.println("ATACAR!\n"); Utilidades.esperar();
             atacar(alvo);
         }
         else{
-            System.out.println("AVANCAR!\n"); Utilidades.esperar(200);
+            System.out.println("AVANCAR!\n"); Utilidades.esperar();
             mover(alvo);
         }
     }
@@ -48,13 +48,13 @@ public class CavaleiroCorrompido extends Monstro {
                 else{
                     System.out.println("NAO! O cavaleiro ATINGE o heroi com sua espada!");
                 }
-                Utilidades.esperar(200);
+                Utilidades.esperar();
             } 
             else
-                System.out.println("BOA! O heroi esquiva do golpe pesado do cavaleiro!"); Utilidades.esperar(200);
+                System.out.println("BOA! O heroi esquiva do golpe pesado do cavaleiro!"); Utilidades.esperar();
         }
 
-        System.out.printf("\nO cavaleiro corrompido acertou %d de %d golpes!\n", contador, arma.getAttackSpeed()); Utilidades.esperar(200);
+        System.out.printf("\nO cavaleiro corrompido acertou %d de %d golpes!\n", contador, arma.getAttackSpeed()); Utilidades.esperar();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class CavaleiroCorrompido extends Monstro {
         for (int i = 0; i < moveSpeed; i++){
             pos += (pos < alvo.pos) ? 1 : -1;
             if (Utilidades.calcularDistancia(pos, alvo.pos) <= arma.getAttackRange()){
-                System.out.println("O cavaleiro corrompido ALCANCOU o heroi E IRA ATACAR!\n"); Utilidades.esperar(200);
+                System.out.println("O cavaleiro corrompido ALCANCOU o heroi E IRA ATACAR!\n"); Utilidades.esperar();
                 chegou = true;
                 atacar(alvo);
                 break;
@@ -72,6 +72,6 @@ public class CavaleiroCorrompido extends Monstro {
         }
 
         if (!chegou)
-            System.out.printf("O cavaleiro se aproxima e agora esta a %d metro(s) do heroi!\n", Utilidades.calcularDistancia(pos, alvo.getPos())); Utilidades.esperar(200);
+            System.out.printf("O cavaleiro se aproxima e agora esta a %d metro(s) do heroi!\n", Utilidades.calcularDistancia(pos, alvo.getPos())); Utilidades.esperar();
     }
 }

@@ -20,11 +20,11 @@ public class Zumbi extends Monstro {
         System.out.printf("\nO ZUMBI está a %d metro(s) do herói e irá ", distancia);
 
         if (distancia <= arma.getAttackRange()){
-            System.out.println("ATACAR!\n"); Utilidades.esperar(200);
+            System.out.println("ATACAR!\n"); Utilidades.esperar();
             atacar(alvo);
         }
         else{
-            System.out.println("SE APROXIMAR!\n"); Utilidades.esperar(200);
+            System.out.println("SE APROXIMAR!\n"); Utilidades.esperar();
             mover(alvo);
         }
     }
@@ -49,13 +49,13 @@ public class Zumbi extends Monstro {
                 else{
                     System.out.println("O Zumbi acerta um golpe pesado no herói!");
                 }
-                Utilidades.esperar(200);
+                Utilidades.esperar();
             } 
             else{
-                System.out.println("O herói esquiva do ataque lento do Zumbi!"); Utilidades.esperar(200);
+                System.out.println("O herói esquiva do ataque lento do Zumbi!"); Utilidades.esperar();
             }
         }
-        System.out.printf("\nO Zumbi acertou %d de %d ataques!\n", contador, arma.getAttackSpeed()); Utilidades.esperar(200);
+        System.out.printf("\nO Zumbi acertou %d de %d ataques!\n", contador, arma.getAttackSpeed()); Utilidades.esperar();
     }
 
     @Override
@@ -73,6 +73,6 @@ public class Zumbi extends Monstro {
         }
 
         if (!chegou)
-            System.out.printf("O Zumbi se arrasta e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(200);
+            System.out.printf("O Zumbi se arrasta e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar();
     }
 }

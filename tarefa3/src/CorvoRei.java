@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class CorvoRei extends Monstro implements Atiradores{
+public class CorvoRei extends Monstro {
 
     private double precisao;
     
@@ -23,16 +23,16 @@ public class CorvoRei extends Monstro implements Atiradores{
         System.out.printf("\nO CORVO REI esta a %d metro(s) do %s e ira ", distancia, Utilidades.verificarClasse(alvo));
 
         if (distancia <= 1){
-            System.out.println("SE MOVER!\n"); Utilidades.esperar(200);
+            System.out.println("SE MOVER!\n"); Utilidades.esperar();
             mover(alvo);
         }
         else{
             if (chance < 0.4){
-                System.out.println("SE MOVER!\n"); Utilidades.esperar(200);
+                System.out.println("SE MOVER!\n"); Utilidades.esperar();
                 mover(alvo);
             }
             else{
-                System.out.println("ATACAR!\n"); Utilidades.esperar(200);
+                System.out.println("ATACAR!\n"); Utilidades.esperar();
                 atacar(alvo);
             }
         }
@@ -47,7 +47,7 @@ public class CorvoRei extends Monstro implements Atiradores{
 
         for (int i = 0; i < arma.getAttackSpeed(); i++){
             System.out.print(corvejo[r.nextInt(3)] + " ");
-            Utilidades.esperar(200);
+            Utilidades.esperar();
 
             if (Math.random() > alvo.getDodgeChance()){
                 contador++;
@@ -55,7 +55,7 @@ public class CorvoRei extends Monstro implements Atiradores{
             }
         }
 
-        System.out.printf("\n\n%s acertou %d de %d ataques dados!\n", nome, contador, arma.getAttackSpeed()); Utilidades.esperar(200);
+        System.out.printf("\n\n%s acertou %d de %d ataques dados!\n", nome, contador, arma.getAttackSpeed()); Utilidades.esperar();
     }
 
     @Override
@@ -65,6 +65,6 @@ public class CorvoRei extends Monstro implements Atiradores{
         else
             pos -= moveSpeed;
         
-        System.out.printf("%s, o CORVO REI, agora esta a %d metros do nosso guerreiro!\n", nome, Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar(200);
+        System.out.printf("%s, o CORVO REI, agora esta a %d metros do nosso guerreiro!\n", nome, Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar();
     }
 }
