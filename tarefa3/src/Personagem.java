@@ -1,4 +1,4 @@
-public abstract class Personagem {
+public abstract class Personagem implements Combatente{
 
     // Atributos base
     protected String nome;
@@ -18,11 +18,6 @@ public abstract class Personagem {
         this.nome = nome;
     }
 
-    // Getter para o nome
-    public String getNome(){
-        return nome;
-    }
-
     // Métodos utilitários
     public void statusParcial(){
         System.out.printf("\n%s, O %s, está com %d PONTOS DE VIDA.\n", nome, Utilidades.verificarClasse(this), pontosDeVida);
@@ -30,11 +25,14 @@ public abstract class Personagem {
     }
 
     protected void receberDano(double forca){
-        pontosDeVida -= forca * (1 - protecao);
+        pontosDeVida -= (int)(forca * (1 - protecao));
         if (pontosDeVida < 0) pontosDeVida = 0;
     }
 
     // Getters
+    public String getNome(){
+        return nome;
+    }
     public double getDodgeChance(){ 
         return dodgeChance;
     }
@@ -55,11 +53,12 @@ public abstract class Personagem {
     }
     public void setPontosDeVidaMax(int pontosDeVidaMax) {
         this.pontosDeVidaMax = pontosDeVidaMax;
-        if (pontosDeVida > pontosDeVidaMax) pontosDeVida = pontosDeVidaMax;
+        if (pontosDeVida > pontosDeVidaMax)
+            pontosDeVida = pontosDeVidaMax;
     }
 
     // Métodos abstratos
     protected abstract void atacar(Personagem alvo);
     protected abstract void mover(Personagem alvo);
-    public abstract void tomarDecisao(Personagem alvo);
+    public abstract void escolherAcao(Combatente alvo);
 }
