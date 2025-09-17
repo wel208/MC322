@@ -56,9 +56,4 @@ public abstract class Personagem implements Combatente{
         if (pontosDeVida > pontosDeVidaMax)
             pontosDeVida = pontosDeVidaMax;
     }
-
-    // Métodos abstratos
-    protected abstract void atacar(Personagem alvo);
-    protected abstract void mover(Personagem alvo);
-    public abstract void escolherAcao(Combatente alvo);
 }
