@@ -1,17 +1,17 @@
 public abstract class Personagem implements Combatente{
 
     // Atributos base
-    protected String nome;
-    protected int pontosDeVida;
-    protected int pontosDeVidaMax;
-    protected double protecao;
-    protected double forca;
-    protected int moveSpeed;
-    protected int pos;
-    protected double criticalChance;
-    protected double sorte;
-    protected double dodgeChance;
-    protected Arma arma;
+    private String nome;
+    private int pontosDeVida;
+    private int pontosDeVidaMax;
+    private double protecao;
+    private double forca;
+    private int moveSpeed;
+    private int pos;
+    private double criticalChance;
+    private double sorte;
+    private double dodgeChance;
+    private Arma arma;
 
     // Construtor
     public Personagem(String nome){
@@ -50,6 +50,15 @@ public abstract class Personagem implements Combatente{
     }
     public int getPontosDeVidaMax(){ 
         return pontosDeVidaMax;
+    }
+    public double getForca(){
+        return forca;
+    }
+    public int getMoveSpeed(){
+        return moveSpeed;
+    }
+    public Arma getArma(){
+        return arma;
     }
     public void setPontosDeVidaMax(int pontosDeVidaMax) {
         this.pontosDeVidaMax = pontosDeVidaMax;
