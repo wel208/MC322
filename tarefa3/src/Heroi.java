@@ -1,9 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Heroi extends Personagem{
 
     //Atributos
     private int experiencia;        //Quantidade de experiência que o herói possui em seu nível atual
     private int expProximoNivel;    //Indica a quantidade de experiência necessária para subir de nível
     private int nivel;              //Nível de experiência do personagem
+    private List<AcaoDeCombate> acoes = List.of(new AtaqueComum(), new HabilidadeEspecial());
 
     //Construtor
     public Heroi(String nome, Arma arma){ //Valores predefinidos para um heroi de nível 0
