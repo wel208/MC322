@@ -9,6 +9,7 @@ public interface Combatente {
     double getAtributoUnico();
     double getCriticalChance();
     double getDodgeChance();
+    void setPos(int pos);
     boolean estaVivo();
     int receberDano(double dano);
     void receberCura(int cura);

@@ -105,26 +105,24 @@ public class Utilidades{
 
    public static int escolherPosicao(String monstro){
         if (monstro.equals("Corvo Rei"))
-            return 12 + random.nextInt((3 - (-3)) + 1) + (-3);
+            return 12 + random.nextInt(-3, 3);
         else if (monstro.equals("Esqueleto"))
-            return 16 + random.nextInt((2 - (-4)) + 1) + (-4);
+            return 16 + random.nextInt(-4, 2);
         else if (monstro.equals("Goblin"))
-            return 10 + random.nextInt((4 - (-2)) + 1) + (-2);
+            return 10 + random.nextInt(-2, 4);
         else if (monstro.equals("Ninfa da Floresta"))
-            return 3 + random.nextInt((5 - (-1)) + 1) + (-1);
+            return 3 + random.nextInt(-2, 2);
         else if (monstro.equals("Cavaleiro Corrompido"))
-            return 10 + random.nextInt((3 - (-2)) + 1) + (-2);
+            return 10 + random.nextInt(-2, 2);
         else if (monstro.equals("Zumbi"))
-            return 8 + random.nextInt((3 - (-2)) + 1) + (-2);
+            return 8 + random.nextInt(-2, 3);
         else if (monstro.equals("Goblin Gigante"))
-            return 10 + random.nextInt((4 - (-3)) + 1) + (-3);
+            return 10 + random.nextInt(-3, 2);
         else if (monstro.equals("Troll"))
-            return 10 + random.nextInt((3 - (-3)) + 1) + (-3);
+            return 10 + random.nextInt(-3, 2);
         else
-            return 12 + random.nextInt((4 - (-4)) + 1) + (-4);
-}
-
-
+            return 12 + random.nextInt(-4, 0);
+    }
 
     //Metódo que auxilia a identificar que turno estamos para printar corretamente por extenso
     public static String verificarTurno(int turno){
@@ -151,26 +149,24 @@ public class Utilidades{
     //Retorna de qual classe concreta o personagem é
    public static String verificarClasse(Combatente P){
         if (P instanceof Goblin)
-            return "GOBLIN";
+            return "o Goblin";
         else if (P instanceof GoblinGigante)
-            return "GOBLIN GIGANTE";
+            return "o Goblin Gigante";
         else if (P instanceof Troll)
-            return "TROLL";
+            return "o Troll";
         else if (P instanceof Zumbi)
-            return "ZUMBI";
+            return "o Zumbi";
         else if (P instanceof CavaleiroCorrompido)
-            return "CAVALEIRO CORROMPIDO";
+            return "o Cavaleiro Corrompido";
         else if (P instanceof CorvoRei)
-            return "CORVO REI";
+            return "o Corvo Rei";
         else if (P instanceof Esqueleto)
-            return "ESQUELETO";
+            return "o Esqueleto";
         else if (P instanceof Ninfa)
-            return "NINFA DA FLORESTA";
+            return "a Ninfa";
         else if (P instanceof Atirador)
-            return "ATIRADOR";
-        else if (P instanceof Lutador)
-            return "LUTADOR";
+            return "o Atirador";
         else
-            return "DESCONHECIDO";
+            return "o Lutador";
     }
 }
