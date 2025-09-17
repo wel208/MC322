@@ -139,9 +139,9 @@ public class Utilidades{
     }
 
     //Método para fazer uma pausa entre operações/prints do programa
-    public static void esperar(int ms) {
+    public static void esperar() {
         try{
-            Thread.sleep(ms);
+            Thread.sleep(200);
         } 
         catch (InterruptedException e){
             Thread.currentThread().interrupt();

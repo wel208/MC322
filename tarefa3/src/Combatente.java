@@ -4,6 +4,7 @@ public interface Combatente {
     Arma getArma();
     int getPos();
     int getForca();
+    int getMoveSpeed();
     double getSorte();
     double getAtributoUnico();
     double getCriticalChance();
