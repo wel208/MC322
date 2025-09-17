@@ -149,7 +149,7 @@ public class Utilidades{
     }
 
     //Retorna de qual classe concreta o personagem é
-   public static String verificarClasse(Personagem P){
+   public static String verificarClasse(Combatente P){
         if (P instanceof Goblin)
             return "GOBLIN";
         else if (P instanceof GoblinGigante)

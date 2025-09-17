@@ -1,6 +1,8 @@
 import java.util.Random;
 
-public class CorvoRei extends Monstro{
+public class CorvoRei extends Monstro implements Atiradores{
+
+    private double precisao;
     
     public CorvoRei(String nome, int nivelDificuldade, int pos, Arma arma){
         super(nome, nivelDificuldade, pos, arma);

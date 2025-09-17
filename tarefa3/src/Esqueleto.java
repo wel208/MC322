@@ -7,7 +7,7 @@
 public class Esqueleto extends Monstro {
     
     //Atributos
-    double precisao;
+    private double precisao;
 
     //Construtor
     public Esqueleto(String nome, int nivel, int pos, Arma arma){

@@ -1,0 +1,70 @@
+public class AtaqueComum implements AcaoDeCombate{
+    
+    public void executar(Combatente usuario, Combatente alvo){
+        int contador = 0, dano = 0;
+        int qtdAtque = usuario.getArma().getAttackSpeed();
+
+        if (usuario.getArma().getTipo() == "Corpo a corpo"){
+
+            for (int i = 0; i < qtdAtque; i ++){
+
+                if (Math.random() > alvo.getDodgeChance()){
+                    contador++;
+
+                    boolean critico = Math.random() < usuario.getCriticalChance();
+                    double multiplicador = critico ? 1.2 : 1.0;
+
+                    dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * multiplicador);
+
+                    if (critico){
+                        System.out.printf("%s, %s, ACERTOU um ataque CRITICO em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), Utilidades.verificarClasse(alvo));
+                    }
+                    else{
+                        System.out.printf("%s, %s, ACERTOU um ataque em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), Utilidades.verificarClasse(alvo));
+                    }
+                    Utilidades.esperar(200);
+                }
+                else{
+                    System.out.printf("%s ESQUIVOU do ataque de %s!\n", Utilidades.verificarClasse(alvo)); Utilidades.esperar(200);
+                }
+            }
+        }
+        else{
+            
+            for (int i = 0; i < qtdAtque; i++){
+
+                double chanceAcerto = Math.min(0.95, usuario.getPrecisao() + usuario.getSorte());
+
+                if (Math.random() < chanceAcerto){
+
+                    if (Math.random() > alvo.getDodgeChance()){
+                        contador++;
+
+                        int distancia = Utilidades.calcularDistancia(usuario.getPos(), usuario.getPos());
+
+                        boolean critico = Math.random() < usuario.getCriticalChance();
+                        double multiplicador = critico ? 1.2 : 1.0;
+
+                        dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * distancia/8 * multiplicador);
+
+                        if (critico){
+                            System.out.printf("%s, %s, ACERTOU um ataque CRITICO em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), Utilidades.verificarClasse(alvo));
+                        }
+                        else{
+                            System.out.printf("%s, %s, ACERTOU um ataque em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), Utilidades.verificarClasse(alvo));
+                        }
+                            Utilidades.esperar(200);
+                    }
+                    else{
+                        System.out.printf("%s ESQUIVOU do ataque de %s!\n", alvo.getNome(), usuario.getNome()); Utilidades.esperar(200);
+                    }
+                }
+                else{
+                    System.out.printf("%s, %s, ERROU seu alvo!");
+                }
+            }
+        }
+
+        System.out.printf("%s, %s, acertou %d de %d ataque(s) dados, causando %d de dano.", usuario.getNome(), Utilidades.verificarClasse(usuario), contador, qtdAtque, dano); Utilidades.esperar(200);
+    }
+}

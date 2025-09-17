@@ -1,7 +1,15 @@
 public interface Combatente {
     String getNome();
+    String getClasse();
+    Arma getArma();
+    int getPos();
+    int getForca();
+    double getSorte();
+    double getPrecisao();
+    double getCriticalChance();
+    double getDodgeChance();
     boolean estaVivo();
-    void receberDano(int dano);
+    int receberDano(double dano);
     void receberCura(int cura);
     void escolherAcao(Combatente alvo);
 }

@@ -4,7 +4,7 @@
  * Prefere dar ataques a longa distãncia
  */
 
-public class Atirador extends Heroi{
+public class Atirador extends Heroi {
 
     //Atributos
     private double precisao;
@@ -38,7 +38,7 @@ public class Atirador extends Heroi{
      * Quanto mais longe, mais chance de atacar ou usar sua habilidade especial
      */
     @Override
-    public void tomarDecisao(Personagem alvo){
+    public void escolherAcao(Combatente alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
         double chance = Math.random();
 

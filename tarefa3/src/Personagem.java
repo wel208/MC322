@@ -24,9 +24,10 @@ public abstract class Personagem implements Combatente{
         Utilidades.esperar(200);
     }
 
-    protected void receberDano(double forca){
+    public int receberDano(double forca){
         pontosDeVida -= (int)(forca * (1 - protecao));
         if (pontosDeVida < 0) pontosDeVida = 0;
+        return (int)(forca * (1 - protecao));
     }
 
     // Getters
