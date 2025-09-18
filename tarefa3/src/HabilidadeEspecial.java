@@ -16,6 +16,7 @@ public class HabilidadeEspecial implements AcaoDeCombate {
                 }
             }
         }
+        
         else{
             int distancia = Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos());
 

@@ -46,6 +46,9 @@ public abstract class Personagem implements Combatente{
     public Arma getArma(){
         return arma;
     }
+    public void setArma(Arma arma){
+        this.arma = arma;
+    }
     public double getForca(){
         return forca;
     }

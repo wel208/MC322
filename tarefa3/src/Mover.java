@@ -5,7 +5,13 @@ public class Mover implements AcaoDeCombate {
 
         boolean chegou = false;
 
-        if (usuario.getArma().getTipo() == "Corpo a Corpo"){
+        if (usuario instanceof CorvoRei){
+            if (Math.random() < 0.5)
+                usuario.setPos(usuario.getPos() + usuario.getMoveSpeed());
+            else
+                usuario.setPos(usuario.getPos() - usuario.getMoveSpeed());
+        }
+        else if (usuario.getArma().getTipo() == "Corpo a Corpo"){
             int direcao = usuario.getPos() < alvo.getPos() ? 1 : -1;
 
             for (int i = 0; i < usuario.getMoveSpeed(); i++){

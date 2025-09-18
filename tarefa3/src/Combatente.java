@@ -1,6 +1,7 @@
 public interface Combatente {
     String getNome();
     Arma getArma();
+    void setArma(Arma arma);
     int getPos();
     double getForca();
     int getMoveSpeed();

@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class AtaqueComum implements AcaoDeCombate{
     
     public void executar(Combatente usuario, Combatente alvo){
@@ -29,6 +31,7 @@ public class AtaqueComum implements AcaoDeCombate{
                 }
             }
         }
+
         else{
             
             for (int i = 0; i < qtdAtque; i++){

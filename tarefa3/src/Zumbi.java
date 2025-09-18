@@ -1,5 +1,3 @@
-import java.net.CookieManager;
-
 public class Zumbi extends Monstro {
 
     // Construtor

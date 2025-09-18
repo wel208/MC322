@@ -4,6 +4,7 @@ import java.util.List;
 public class CorvoRei extends Monstro {
 
     private double precisao;
+    private List<Arma> armasPossiveis = List.of(new GarrasCorvo(), new PenasCorvo());
     
     public CorvoRei(String nome, int nivelDificuldade, int pos, Arma arma){
         super(nome, nivelDificuldade, pos, arma);
@@ -14,7 +15,7 @@ public class CorvoRei extends Monstro {
         this.moveSpeed = 12;
         this.xpConcedido = 20 + (nivelDificuldade * 15);
         this.sorte = 0.15 + (nivelDificuldade * 0.03);
-        this.acoes = List.of(new MoverCorvo, new AtaqueCorvo());
+        this.acoes = List.of(new Mover(), new AtaqueComum());
     }
 
     @Override
@@ -35,38 +36,22 @@ public class CorvoRei extends Monstro {
             }
             else{
                 System.out.println("ATACAR!\n"); Utilidades.esperar();
-                acoes.get(1).executar(this, alvo);;
+
+                Random r = new Random();
+                setArma(armasPossiveis.get(r.nextInt(2))); //Chance de utilizar suas penas ou suas garras
+
+                System.out.printf("\n%s, %s, ira utilizar %s!\n\n", nome, Utilidades.verificarClasse(this), arma.getNome());
+
+                acoes.get(1).executar(this, alvo);
+
+                if (arma.getTipo() == "Corpo a Corpo"){
+                    setPos(alvo.getPos() + r.nextInt(1, 5));
+                }
             }
         }
     }
 
-    @Override
-    public void atacar(Personagem alvo){
-        Random r = new Random();
-        String[] corvejo = {"CROAC!", "CRAC!", "CRO!"};
-
-        int contador = 0;
-
-        for (int i = 0; i < arma.getAttackSpeed(); i++){
-            System.out.print(corvejo[r.nextInt(3)] + " ");
-            Utilidades.esperar();
-
-            if (Math.random() > alvo.getDodgeChance()){
-                contador++;
-                alvo.receberDano(forca);
-            }
-        }
-
-        System.out.printf("\n\n%s acertou %d de %d ataques dados!\n", nome, contador, arma.getAttackSpeed()); Utilidades.esperar();
-    }
-
-    @Override
-    public void mover(Personagem alvo){
-        if (Math.random() < 0.5)
-            pos += moveSpeed;
-        else
-            pos -= moveSpeed;
-        
-        System.out.printf("%s, o CORVO REI, agora esta a %d metros do nosso guerreiro!\n", nome, Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar();
+    public double getAtributoUnico(){
+        return precisao;
     }
 }
