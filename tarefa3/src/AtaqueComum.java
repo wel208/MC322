@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class AtaqueComum implements AcaoDeCombate{
     
     public void executar(Combatente usuario, Combatente alvo){

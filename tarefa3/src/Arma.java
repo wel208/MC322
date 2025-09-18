@@ -1,4 +1,4 @@
-public abstract class Arma implements Item{
+public abstract class Arma implements Item {
     
     // Atributos
     protected String nome;
