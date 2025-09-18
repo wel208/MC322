@@ -6,7 +6,7 @@ public abstract class Heroi extends Personagem{
     private int experiencia;        //Quantidade de experiência que o herói possui em seu nível atual
     private int expProximoNivel;    //Indica a quantidade de experiência necessária para subir de nível
     private int nivel;              //Nível de experiência do personagem
-    protected List<AcaoDeCombate> acoes = List.of(new AtaqueComum(), new HabilidadeEspecial(), new Mover());
+    protected List<AcaoDeCombate> acoes = List.of(new Mover(), new AtaqueComum(), new HabilidadeEspecial());
 
     //Construtor
     public Heroi(String nome, Arma arma){ //Valores predefinidos para um heroi de nível 0
@@ -88,8 +88,6 @@ public abstract class Heroi extends Personagem{
     }
 
     public abstract void exibirStatus(); //Método que mostra como está todos os atributos do herói no momento
-
-    protected abstract void usarHabilidadeEspecial(Personagem alvo);
 
     protected abstract void melhorarAtributoUnico();
 }

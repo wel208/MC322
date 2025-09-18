@@ -38,107 +38,25 @@ public class Lutador extends Heroi{
      * Se ele já estiver a uma distância <= 1, ele decidirá entre usar o ataque comum ou sua habilidade especial
      */
     @Override
-    public void tomarDecisao(Personagem alvo){
-        int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
+    public void escolherAcao(Combatente alvo){
+        int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
         System.out.printf("\nO lutador esta a %d metros do monstro e ira ", distancia);
 
-        if (distancia <= arma.attackRange){
-            if (Math.random() < 0.3){
-                System.out.println("USAR SUA HABILIDADE ESPECIAL!\n"); Utilidades.esperar();
-                usarHabilidadeEspecial(alvo);
-            }
-            else{
-                System.out.println("ATACAR O SEU INIMIGO!"); Utilidades.esperar();
-                atacar(alvo);
-            }
+        if (distancia > arma.attackRange){
+            System.out.println("CORRER NA DIRECAO DELE!\n"); Utilidades.esperar();
+            acoes.get(0).executar(this, alvo);
         }
         else{
-            System.out.println("CORRER NA DIRECAO DELE!\n"); Utilidades.esperar();
-            mover(alvo);
-        }
-    }
-
-    /*
-     * O ataque comum do lutador consiste em dar 'attackSpeed' ataques no seu inimigo
-     * Caso acerte um dano crítico, dará 30% a mais de dano que o normal
-     * Existe a possibilidade do inimigo esquivar do ataque
-     */
-    @Override
-    protected void atacar(Personagem alvo){
-        int contador = 0;
-        for (int i = 0; i < arma.attackSpeed; i++){
-
-            if (Math.random() > alvo.sorte){      //Caso o herói acerte o seu alvo
-                contador++;
-
-                boolean critico = Math.random() < criticalChance + (sorte / 10.0); //Chance de causar um dano crítico
-                double multiplicador = critico ? 1.2 : 1.0;
-
-                alvo.receberDano(forca * arma.dano * multiplicador);
-
-                if (critico){   //Caso o ataque seja crítico
-                    System.out.println("ISSO! O nosso lutador ACERTOU um ATAQUE CRITICO em seu inimigo!"); Utilidades.esperar();
-                }
-                else{           //Caso seja um ataque comum
-                    System.out.println("BOA! O nosso lutador ACERTOU um golpe no inimigo!"); Utilidades.esperar();
-                }
+            if (Math.random() >= 0.3){
+                System.out.println("ATACAR O SEU INIMIGO!"); Utilidades.esperar();
+                acoes.get(1).executar(this, alvo);
             }
-            else                                  //Caso o inimigo consiga desviar do ataque do herói
-                System.out.println("NAO! O inimigo ESQUIVOU do ataque do nosso heroi!"); Utilidades.esperar();
-        }
-
-        System.out.printf("\nO heroi acertou %d dos %d ataques dados!\n", contador, arma.attackSpeed); Utilidades.esperar();
-    }
-
-    /*
-     * O lutador vai em direção do seu alvo
-     * Caso ele alcance o alvo nessa investida, irá atacá-lo
-     * Se não, será exibida a distância que ele chegou do monstro
-     */
-    @Override
-    protected void mover(Personagem alvo){
-
-        boolean chegou = false;
-
-        for (int i = 0; i < moveSpeed; i++){
-            pos += (pos < alvo.pos) ? 1 : -1;
-            if (Utilidades.calcularDistancia(pos, alvo.pos) <= arma.attackRange){
-                System.out.println("O lutador ALCANCOU O MONSTRO E IRA ATACAR!\n"); Utilidades.esperar();
-                chegou = true;
-                atacar(alvo);
-                break;
+            else{
+                System.out.println("USAR SUA HABILIDADE ESPECIAL!\n"); Utilidades.esperar();
+                acoes.get(2).executar(this, alvo);
             }
         }
-        
-        if (!chegou){
-            System.out.println("O nosso lutador ainda nao alcancou o inimigo.");
-            System.out.printf("Ele esta a %d metros do monstro.\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar();
-        }
-    }
-
-
-    /* 
-     * A habilidade especial do lutador é atacar 'furia' vezes a mais que o normal em apenas um turno
-     * A furia faz com que ele ataque mais vezes e com a força 20% maior que o seu nível de força
-     * O inimigo também tem um aumento na chance de se esquivar de um ataque do herói 
-    */
-
-    @Override
-    protected void usarHabilidadeEspecial(Personagem alvo){
-        int contador = 0;
-
-        System.out.printf("RHHAAAA!! O NOSSO HEROI ENTROU EM FURIA E ATACARA %d VEZES NESTE TURNO!\n\n", arma.attackSpeed + furia); Utilidades.esperar();
-
-        for(int i = 0; i < arma.attackSpeed + furia; i++){
-            System.out.print("Hah! "); Utilidades.esperar();
-            if (Math.random() > alvo.sorte * 1.1){   //Chance maior do inimigo esquivar do ataque do lutador
-                alvo.receberDano(forca * arma.dano * 1.1);       //Dano 10% maior que o normal
-                contador++;
-            }
-        }
-
-        System.out.printf("\n\nO nosso lutador acertou %d golpe(s)!\n", contador); Utilidades.esperar();
     }
 
     /*
