@@ -224,4 +224,9 @@ public class Atirador extends Heroi {
         precisao += 0.05;
         if (precisao > 0.6) precisao = 0.6;
     }
+
+    @Override
+    public double getAtributoUnico(){
+        return precisao;
+    }
 }

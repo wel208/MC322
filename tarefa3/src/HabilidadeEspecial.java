@@ -9,7 +9,7 @@ public class HabilidadeEspecial implements AcaoDeCombate {
             System.out.printf("RHHAAAA!! O NOSSO HEROI ENTROU EM FURIA E ATACARA %d VEZES NESTE TURNO!\n\n", qtdAtque); Utilidades.esperar();
 
             for(int i = 0; i < qtdAtque; i++){
-                System.out.print("Hah! "); Utilidades.esperar (200);
+                System.out.print("Hah! "); Utilidades.esperar();
                 if (Math.random() > alvo.getDodgeChance() && Math.random() < usuario.getSorte() * 0.9){   //Chance maior do inimigo esquivar do ataque do lutador
                     dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * 1.1);             //Dano 10% maior que o normal
                     contador++;

@@ -1,8 +1,10 @@
+import java.util.List;
 public abstract class Monstro extends Personagem {
 
     // Atributos
     protected int xpConcedido;      // Quantidade de experiência que o monstro concede ao herói que derrotá-lo
     protected int nivelDificuldade; // Nível de dificuldade do monstro
+    protected List<AcaoDeCombate> acoes = List.of(new AtaqueComum(), new Mover());
 
     // Construtor
     public Monstro(String nome, int nivelDificuldade, int pos, Arma arma) {

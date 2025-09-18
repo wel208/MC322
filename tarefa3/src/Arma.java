@@ -1,4 +1,4 @@
-public abstract class Arma {
+public abstract class Arma implements Item{
     
     // Atributos
     protected String nome;
@@ -8,7 +8,7 @@ public abstract class Arma {
     protected int attackRange;
     protected int attackSpeed;
 
-    // Getters e Setters
+    // Getters
     public int getAttackRange() {
         return attackRange;
     }

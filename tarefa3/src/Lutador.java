@@ -148,4 +148,9 @@ public class Lutador extends Heroi{
     protected void melhorarAtributoUnico(){
         this.furia += 1;
     }
+
+    @Override
+    public double getAtributoUnico(){
+        return furia;
+    }
 }
