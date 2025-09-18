@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.List;
 
 public class CorvoRei extends Monstro {
 
@@ -13,10 +14,11 @@ public class CorvoRei extends Monstro {
         this.moveSpeed = 12;
         this.xpConcedido = 20 + (nivelDificuldade * 15);
         this.sorte = 0.15 + (nivelDificuldade * 0.03);
+        this.acoes = List.of(new MoverCorvo, new AtaqueCorvo());
     }
 
     @Override
-    public void tomarDecisao(Personagem alvo){
+    public void escolherAcao(Combatente alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
         double chance = Math.random();
 
@@ -24,16 +26,16 @@ public class CorvoRei extends Monstro {
 
         if (distancia <= 1){
             System.out.println("SE MOVER!\n"); Utilidades.esperar();
-            mover(alvo);
+            acoes.get(0).executar(this, alvo);
         }
         else{
             if (chance < 0.4){
                 System.out.println("SE MOVER!\n"); Utilidades.esperar();
-                mover(alvo);
+                acoes.get(0).executar(this, alvo);
             }
             else{
                 System.out.println("ATACAR!\n"); Utilidades.esperar();
-                atacar(alvo);
+                acoes.get(1).executar(this, alvo);;
             }
         }
     }

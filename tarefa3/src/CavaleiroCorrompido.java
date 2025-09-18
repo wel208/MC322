@@ -13,65 +13,18 @@ public class CavaleiroCorrompido extends Monstro {
 }
 
     @Override
-    public void tomarDecisao(Personagem alvo){
+    public void escolherAcao(Combatente alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
         System.out.printf("\nO cavaleiro esta a %d metro(s) do heroi e ira ", distancia);
 
         if (distancia <= arma.getAttackRange()){
             System.out.println("ATACAR!\n"); Utilidades.esperar();
-            atacar(alvo);
+            acoes.get(1).executar(this, alvo);
         }
         else{
             System.out.println("AVANCAR!\n"); Utilidades.esperar();
-            mover(alvo);
+            acoes.get(0).executar(this, alvo);
         }
-    }
-
-    @Override
-    public void atacar(Personagem alvo){
-        int contador = 0;
-
-        for (int i = 0; i < arma.getAttackSpeed(); i++){
-
-            if (Math.random() > alvo.getDodgeChance()){
-                contador++;
-
-                boolean critico = Math.random() < this.getCriticalChance();
-                double multiplicador = critico ? 1.2 : 1.0;
-
-                alvo.receberDano(forca * arma.getDano() * multiplicador);
-
-                if (critico){
-                    System.out.println("NAO! O cavaleiro desfere um GOLPE CRITICO com sua espada maldita!");
-                }
-                else{
-                    System.out.println("NAO! O cavaleiro ATINGE o heroi com sua espada!");
-                }
-                Utilidades.esperar();
-            } 
-            else
-                System.out.println("BOA! O heroi esquiva do golpe pesado do cavaleiro!"); Utilidades.esperar();
-        }
-
-        System.out.printf("\nO cavaleiro corrompido acertou %d de %d golpes!\n", contador, arma.getAttackSpeed()); Utilidades.esperar();
-    }
-
-    @Override
-    public void mover(Personagem alvo){
-        boolean chegou = false;
-
-        for (int i = 0; i < moveSpeed; i++){
-            pos += (pos < alvo.pos) ? 1 : -1;
-            if (Utilidades.calcularDistancia(pos, alvo.pos) <= arma.getAttackRange()){
-                System.out.println("O cavaleiro corrompido ALCANCOU o heroi E IRA ATACAR!\n"); Utilidades.esperar();
-                chegou = true;
-                atacar(alvo);
-                break;
-            }
-        }
-
-        if (!chegou)
-            System.out.printf("O cavaleiro se aproxima e agora esta a %d metro(s) do heroi!\n", Utilidades.calcularDistancia(pos, alvo.getPos())); Utilidades.esperar();
     }
 }

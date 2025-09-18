@@ -23,115 +23,49 @@ public class Esqueleto extends Monstro {
     }
 
     @Override
-    public void tomarDecisao(Personagem alvo){
-        int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
-        double range = (double)arma.getAttackRange();
+    public void escolherAcao(Combatente alvo){
+        int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
+        int distanciaBase = arma.getAttackRange();
         double chance = Math.random();
+        boolean seMover = false, atacarInim = false;
 
         System.out.printf("\nO esqueleto esta a %d metro(s) do nosso heroi e ira ", distancia); 
 
-        if (distancia <= range * 0.3){
-            if (chance <= 0.2){
-                System.out.println("ATACAR!\n"); Utilidades.esperar();
-                atacar(alvo);
-            }
-            else{
-                System.out.println("SE AFASTAR!\n"); Utilidades.esperar();
-                mover(alvo);
-            }
-        }
-        else if (distancia <= range * 0.5){
-            if (chance <= 0.4){
-                System.out.println("ATACAR!\n"); Utilidades.esperar();
-                atacar(alvo);
-            }
-            else{
-                System.out.println("SE AFASTAR!\n"); Utilidades.esperar();
-                mover(alvo);
-            }
-        }
-        else if (distancia <= range * 0.8){
-            if (chance <= 0.7){
-                System.out.println("ATACAR!\n"); Utilidades.esperar();
-                atacar(alvo);
-            }
-            else{
-                System.out.println("SE AFASTAR!\n"); Utilidades.esperar();
-                mover(alvo);
-            }
-        }
-        else if (distancia <= range){
-                System.out.println("ATACAR!\n"); Utilidades.esperar();
-                atacar(alvo);
-        }
-        else{
-            System.out.println("SE APROXIMAR para poder atacar!\n"); Utilidades.esperar();
-            mover(alvo);
-        }
-    }
-
-    @Override
-    public void atacar(Personagem alvo){
-        int contador = 0;
-
-        for (int i = 0; i < arma.getAttackSpeed(); i++){
-            if (Math.random() < precisao){
-                if (Math.random() > alvo.getDodgeChance()){
-                    contador++;
-                    int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
-
-                    boolean critico = Math.random() < criticalChance;
-                    double multiplicador = critico ? 1.2 : 1.0;
-
-                    alvo.receberDano(forca * arma.getDano() * multiplicador * distancia/7);
-
-                    if (critico){
-                        System.out.println("NAO! O esqueleto ACERTOU um ATAQUE CRITICO no nosso heroi!");
-                    }  
-                    else{
-                        System.out.println("NAO! O esqueleto ACERTOU o nosso heroi!");
-                    }
-                    Utilidades.esperar();
-                }
-                else
-                    System.out.println("BOA! O heroi ESQUIVOU da flecha!"); Utilidades.esperar();
-            }
+        if (distancia <= distanciaBase * 0.3)
+            if (chance <= 0.2)
+                atacarInim = true;
             else
-                System.out.println("ISSO! O esqueleto ERROU a flecha!"); Utilidades.esperar();
-        }
+                seMover = true;
 
-        System.out.printf("\nO esqueleto acertou %d da(s) %d flecha(s) atirada(s)!\n", contador, arma.getAttackSpeed()); Utilidades.esperar();
-    }
+        else if (distancia <= distanciaBase * 0.5)
+            if (chance <= 0.4)
+                atacarInim = true;
+            else
+                seMover = true;
 
-    @Override
-    public void mover(Personagem alvo){
-        boolean chegou = false;
+        else if (distancia <= distanciaBase * 0.8)
+            if (chance <= 0.7)
+                atacarInim = true;
+            else
+                seMover = true;
 
-        if (pos < arma.getAttackRange()){
-            for (int i = 0; i < moveSpeed; i++){
-                pos += (pos < alvo.getPos()) ? 1 : -1;
-                if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.getAttackRange()){
-                    chegou = true;
-                    break;
-                }
-            }
+        else if (distancia <= distanciaBase)
+            atacarInim = true;
+
+        else
+            seMover = true;
+
+        if (seMover){
+            if (distancia < arma.getAttackRange())
+                System.out.println("SE AFASTAR!\n");
+            else
+                System.out.println("SE APROXIMAR para poder atacar!\n");
+            Utilidades.esperar();
+            acoes.get(0).executar(this, alvo);
         }
-        else{
-            for (int i = 0; i < moveSpeed; i++){
-                pos += (pos < alvo.getPos()) ? -1 : 1;
-                if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.getAttackRange()){
-                    chegou = true;
-                    break;
-                }
-            }
-        }
-        
-        if (chegou){
-            System.out.println("O esqueleto chegou na distancia ideal para ATACAR o heroi!"); Utilidades.esperar();
-            atacar(alvo);
-        }
-        else{
-            System.out.println("O esqueleto não conseguiu chegar na distancia ideal para ATACAR o heroi."); Utilidades.esperar();
+        else if (atacarInim){
+            System.out.println("ATACAR!\n"); Utilidades.esperar();
+            acoes.get(1).executar(this, alvo);
         }
     }
 }

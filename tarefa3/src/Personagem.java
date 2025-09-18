@@ -73,4 +73,8 @@ public abstract class Personagem implements Combatente{
     public double getSorte(){ 
         return sorte; 
     }
+
+    public double getAtributoUnico() {
+        return 0;
+    }
 }
