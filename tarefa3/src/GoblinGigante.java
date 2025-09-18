@@ -13,65 +13,18 @@ public class GoblinGigante extends Monstro {
     }
 
     @Override
-    public void tomarDecisao(Personagem alvo){
-        int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
+    public void escolherAcao(Combatente alvo){
+        int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
         System.out.printf("\nO GOBLIN GIGANTE está a %d metro(s) do herói e irá ", distancia);
 
         if (distancia <= arma.getAttackRange()){
             System.out.println("ATACAR!\n"); Utilidades.esperar();
-            atacar(alvo);
-        } else {
+            acoes.get(1).executar(this, alvo);
+        } 
+        else{
             System.out.println("AVANÇAR!\n"); Utilidades.esperar();
-            mover(alvo);
+            acoes.get(0).executar(this, alvo);
         }
-    }
-
-    @Override
-    public void atacar(Personagem alvo){
-        int contador = 0;
-
-        for (int i = 0; i < arma.getAttackRange(); i++){
-
-            if (Math.random() > alvo.dodgeChance){
-                contador++;
-
-                boolean critico = Math.random() < criticalChance;
-                double multiplicador = critico ? 1.2 : 1.0;
-
-                alvo.receberDano(forca * arma.getDano() * multiplicador);
-                if (critico){
-                    System.out.println("O Goblin Gigante acerta um GOLPE CRÍTICO devastador!");
-                } 
-                else{
-                    System.out.println("O Goblin Gigante acerta um golpe pesado no herói!");
-                }
-                Utilidades.esperar();
-            } 
-            else{
-                System.out.println("O herói esquiva do ataque pesado do Goblin Gigante!"); Utilidades.esperar();
-            }
-        }
-        System.out.printf("\nO Goblin Gigante acertou %d de %d ataques!\n", contador, arma.getAttackSpeed()); Utilidades.esperar();
-    }
-
-    @Override
-    public void mover(Personagem alvo){
-        boolean chegou = false;
-        int direcao = pos < alvo.getPos() ? 1 : -1;
-
-        for (int i = 0; i < moveSpeed; i++){
-            pos += direcao;
-
-            if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.getAttackSpeed()){
-                chegou = true;
-                System.out.println("O Goblin Gigante alcançou o herói e irá atacar!");
-                atacar(alvo);
-                break;
-            }
-        }
-
-        if (!chegou)
-            System.out.printf("O Goblin Gigante se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar();
     }
 }

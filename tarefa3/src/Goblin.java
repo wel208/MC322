@@ -13,67 +13,18 @@ public class Goblin extends Monstro{
     }
 
     @Override
-    public void tomarDecisao(Personagem alvo){
+    public void escolherAcao(Combatente alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
         System.out.printf("\nO GOBLIN esta a %d metros do nosso heroi e ira ", distancia);
 
         if (distancia <= arma.getAttackRange()){
             System.out.println("ATACA-LO!\n"); Utilidades.esperar();
-            atacar(alvo);
+            acoes.get(1).executar(this, alvo);
         }
         else{
             System.out.println("CORRER NA DIRECAO DELE!\n"); Utilidades.esperar();
-            mover(alvo);
-        }
-    }
-
-    public void atacar(Personagem alvo){
-        int contador = 0;
-
-        for (int i = 0; i < arma.getAttackSpeed(); i++){
-
-            if (Math.random() > alvo.getDodgeChance()){
-                contador++;
-
-                boolean critico = Math.random() < criticalChance;
-                double multiplicador = critico ? 1.2 : 1.0;
-
-                alvo.receberDano(forca * arma.getDano() * multiplicador);
-
-                if (critico){
-                    System.out.println("NAO! O goblin ACERTOU um ATAQUE CRITICO no nosso heroi!");
-                }
-                else{
-                    System.out.println("NAO! O goblin ACERTOU um golpe no heroi!");
-                }
-                Utilidades.esperar();
-            }
-            else{
-                System.out.println("UFA! O heroi ESQUIVOU do ataque do goblin!"); Utilidades.esperar();
-            }
-        }
-
-        System.out.printf("\nO goblin acertou %d dos %d ataques dados!\n", contador, arma.attackSpeed); Utilidades.esperar();
-    }
-
-    public void mover(Personagem alvo){
-        boolean chegou = false;
-        int direcao = pos < alvo.getPos() ? 1 : -1;
-
-        for (int i = 0; i < moveSpeed; i++){
-            pos += direcao;
-            if (Utilidades.calcularDistancia(pos, alvo.getPos()) == arma.getAttackRange()){
-                System.out.println("O GOBLIN ALCANCOU O HEROI E IRA ATACAR!\n"); Utilidades.esperar();
-                chegou = true;
-                atacar(alvo);
-                break;
-            }
-        }
-        
-        if (!chegou){
-            System.out.println("O goblin ainda nao alcancou o nosso heroi. "); Utilidades.esperar();
-            System.out.printf("Ele esta a %d metros de distância.", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar();
+            acoes.get(0).executar(this, alvo);
         }
     }
 }

@@ -1,3 +1,5 @@
+import java.net.CookieManager;
+
 public class Zumbi extends Monstro {
 
     // Construtor
@@ -14,65 +16,18 @@ public class Zumbi extends Monstro {
 }
 
     @Override
-    public void tomarDecisao(Personagem alvo){
-        int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
+    public void escolherAcao(Combatente alvo){
+        int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
         System.out.printf("\nO ZUMBI está a %d metro(s) do herói e irá ", distancia);
 
         if (distancia <= arma.getAttackRange()){
             System.out.println("ATACAR!\n"); Utilidades.esperar();
-            atacar(alvo);
+            acoes.get(1).executar(this, alvo);
         }
         else{
             System.out.println("SE APROXIMAR!\n"); Utilidades.esperar();
-            mover(alvo);
+            acoes.get(0).executar(this, alvo);
         }
-    }
-
-    @Override
-    public void atacar(Personagem alvo){
-        int contador = 0;
-
-        for (int i = 0; i < arma.getAttackSpeed(); i++){
-
-            if (Math.random() > alvo.getDodgeChance()){
-                contador++;
-
-                boolean critico = Math.random() < criticalChance;
-                double multiplicador = critico ? 1.2 : 1.1;
-
-                alvo.receberDano(forca * arma.getDano() * multiplicador);
-
-                if (critico){
-                    System.out.println("O Zumbi desfere um golpe CRÍTICO com suas garras!");
-                } 
-                else{
-                    System.out.println("O Zumbi acerta um golpe pesado no herói!");
-                }
-                Utilidades.esperar();
-            } 
-            else{
-                System.out.println("O herói esquiva do ataque lento do Zumbi!"); Utilidades.esperar();
-            }
-        }
-        System.out.printf("\nO Zumbi acertou %d de %d ataques!\n", contador, arma.getAttackSpeed()); Utilidades.esperar();
-    }
-
-    @Override
-    public void mover(Personagem alvo){
-        boolean chegou = false;
-        int direcao = pos < alvo.getPos() ? 1 : -1;
-
-        for (int i = 0; i < moveSpeed; i++){
-            pos += direcao;
-            if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.attackRange){
-                System.out.println("O zumbi ALCANCOU o heroi e vai ATACAR");
-                chegou = true;
-                break;
-            }
-        }
-
-        if (!chegou)
-            System.out.printf("O Zumbi se arrasta e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar();
     }
 }

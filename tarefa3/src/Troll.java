@@ -13,67 +13,18 @@ public class Troll extends Monstro {
     }
 
     @Override
-    public void tomarDecisao(Personagem alvo){
-        int distancia = Utilidades.calcularDistancia(pos, alvo.pos);
+    public void escolherAcao(Combatente alvo){
+        int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
         System.out.printf("\nO TROLL está a %d metro(s) do herói e irá ", distancia);
 
         if (distancia <= arma.getAttackRange()){
             System.out.println("ATACAR!\n"); Utilidades.esperar();
-            atacar(alvo);
+            acoes.get(1).executar(this, alvo);
         } 
         else{
             System.out.println("SE APROXIMAR!\n"); Utilidades.esperar();
-            mover(alvo);
-        }
-    }
-
-    @Override
-    public void atacar(Personagem alvo){
-        int contador = 0;
-
-        for (int i = 0; i < arma.getAttackSpeed(); i++){
-
-            if (Math.random() > alvo.getDodgeChance()){
-                contador++;
-
-                boolean critico = Math.random() < criticalChance;
-                double multiplicador = critico ? 1.2 : 1.0;
-
-                alvo.receberDano(forca * arma.getDano() * multiplicador);
-
-                if (Math.random() < criticalChance){
-                    System.out.println("O Troll acerta um GOLPE CRÍTICO com sua clava!");
-                } 
-                else{
-                    System.out.println("O Troll acerta um golpe pesado no herói!");
-                }
-                Utilidades.esperar();
-            } 
-            else{
-                System.out.println("O herói esquiva do ataque do Troll!"); Utilidades.esperar();
-            }
-        }
-        System.out.printf("\nO Troll acertou %d de %d ataques!\n", contador, arma.getAttackSpeed()); Utilidades.esperar();
-    }
-
-    @Override
-    public void mover(Personagem alvo){
-        boolean chegou = false;
-        int direcao = pos < alvo.getPos() ? 1 : -1;
-
-        for (int i = 0; i < moveSpeed; i++){
-            pos += direcao;
-            if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.getAttackRange()){
-                System.out.println("O troll ALCANCOU o heroi e vai ATACAR");
-                atacar(alvo);
-                chegou = true;
-                break;
-            }
-        }
-
-        if (!chegou){
-            System.out.printf("O Troll se aproxima e agora está a %d metro(s) do herói!\n", Utilidades.calcularDistancia(pos, alvo.pos)); Utilidades.esperar();
+            acoes.get(0).executar(this, alvo);
         }
     }
 }

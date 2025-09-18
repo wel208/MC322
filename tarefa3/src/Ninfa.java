@@ -20,71 +20,18 @@ public class Ninfa extends Monstro{
     }
 
     @Override
-    public void tomarDecisao(Personagem alvo){
+    public void escolherAcao(Combatente alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
         System.out.printf("\nA NINFA está a %d metros do nosso herói e ira ", distancia);
 
         if (distancia <= arma.getAttackRange()){
             System.out.print("ATACAR!\n"); Utilidades.esperar();
-            atacar(alvo);
+            acoes.get(1).executar(this, alvo);
         }
         else{
             System.out.print("SE APROXIMAR!\n"); Utilidades.esperar();
-            mover(alvo);
-        }
-    }
-    
-    @Override
-    public void atacar(Personagem alvo){
-        int contador = 0;
-
-        for (int i = 0; i < arma.getAttackSpeed(); i++){
-
-            if (Math.random() > alvo.getDodgeChance()){
-                contador++;
-
-                boolean critico = Math.random() < criticalChance;
-                double multiplicador = critico ? 1.2 : 1.0;
-
-                alvo.receberDano(forca * arma.getDano() * multiplicador);
-
-                if (critico){
-                    System.out.println("\nNAO! A ninfa ACERTOU um ATAQUE CRITICO no nosso heroi!");
-                }
-                else{
-                    System.out.println("\nNAO! A ninfa ACERTOU um golpe no heroi!");
-                }
-                Utilidades.esperar();
-            }
-            else{
-                System.out.println("\nUFA! O heroi ESQUIVOU do ataque da ninfa!"); Utilidades.esperar();
-            }
-        }
-
-        System.out.printf("\nA ninfa ACERTOU %d de %d ataque(s) dado(s)!\n", contador, arma.getAttackSpeed()); Utilidades.esperar();
-    }
-
-    @Override
-    public void mover(Personagem alvo){
-        boolean chegou = false;
-        int direcao = pos < alvo.getPos() ? 1 : -1;
-
-        for (int i = 0; i < moveSpeed; i++){
-            pos += direcao;
-
-            if (Utilidades.calcularDistancia(pos, alvo.pos) == arma.attackRange){
-                System.out.println("A NINFA ALCANCOU O HEROI E IRA ATACAR!"); Utilidades.esperar();
-                chegou = true;
-                atacar(alvo);
-                break;
-            }
-        }
-        
-        if (!chegou){
-            Utilidades.esperar();
-            System.out.println("\nA NINFA ainda nao alcancou o nosso heroi!");
-            System.out.printf("Ela esta a %d metros de %s.\n", Utilidades.calcularDistancia(pos, alvo.pos), alvo.nome); Utilidades.esperar();
+            acoes.get(0).executar(this, alvo);
         }
     }
 }
