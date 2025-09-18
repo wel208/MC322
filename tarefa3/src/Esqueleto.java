@@ -68,4 +68,9 @@ public class Esqueleto extends Monstro {
             acoes.get(1).executar(this, alvo);
         }
     }
+
+    @Override
+    public double getAtributoUnico(){
+        return precisao;
+    }
 }
