@@ -17,7 +17,11 @@ public abstract class Monstro extends Personagem implements Lootavel {
         this.dodgeChance = 0.05 + (nivelDificuldade * 0.01); // Exemplo: 5% base + 1% por nível
     }
 
-    public Item droparLoot(){
+    public Arma droparLoot(){
         return arma;
+    }
+
+    public int getXpConcedido(){
+        return xpConcedido;
     }
 }

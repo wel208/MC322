@@ -19,7 +19,7 @@ public class CorvoRei extends Monstro {
     }
 
     @Override
-    public void escolherAcao(Combatente alvo){
+    public AcaoDeCombate escolherAcao(Combatente alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
         double chance = Math.random();
 
@@ -27,12 +27,12 @@ public class CorvoRei extends Monstro {
 
         if (distancia <= 1){
             System.out.println("SE MOVER!\n"); Utilidades.esperar();
-            acoes.get(0).executar(this, alvo);
+            return acoes.get(0);
         }
         else{
             if (chance < 0.4){
                 System.out.println("SE MOVER!\n"); Utilidades.esperar();
-                acoes.get(0).executar(this, alvo);
+                return acoes.get(0);
             }
             else{
                 System.out.println("ATACAR!\n"); Utilidades.esperar();
@@ -42,11 +42,7 @@ public class CorvoRei extends Monstro {
 
                 System.out.printf("\n%s, %s, ira utilizar %s!\n\n", nome, Utilidades.verificarClasse(this), arma.getNome());
 
-                acoes.get(1).executar(this, alvo);
-
-                if (arma.getTipo() == "Corpo a Corpo"){
-                    setPos(alvo.getPos() + r.nextInt(1, 5));
-                }
+                return acoes.get(1);
             }
         }
     }

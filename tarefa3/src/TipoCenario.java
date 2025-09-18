@@ -16,4 +16,8 @@ public enum TipoCenario {
     public void descreverCenario(){
         System.out.println(descricao);
     }
+
+    public String getDescricao(){
+        return descricao;
+    }
 }

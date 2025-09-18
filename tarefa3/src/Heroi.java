@@ -69,9 +69,8 @@ public abstract class Heroi extends Personagem{
     }
 
     //Método que equipa uma nova arma ao herói
-    public void equiparArma(Arma novaArma){
+    public void setArma(Arma novaArma){
         this.arma = novaArma;
-        System.out.printf("\n%s esta equipando a arma %s!\n", nome, novaArma.nome); Utilidades.esperar();
     }
 
     protected int getExperiencia(){

@@ -38,23 +38,23 @@ public class Lutador extends Heroi{
      * Se ele já estiver a uma distância <= attackRange da arma, ele decidirá entre usar o ataque comum ou sua habilidade especial
      */
     @Override
-    public void escolherAcao(Combatente alvo){
+    public AcaoDeCombate escolherAcao(Combatente alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
         System.out.printf("\nO lutador esta a %d metros do monstro e ira ", distancia);
 
         if (distancia > arma.attackRange){
             System.out.println("CORRER NA DIRECAO DELE!\n"); Utilidades.esperar();
-            acoes.get(0).executar(this, alvo);
+            return acoes.get(0);
         }
         else{
             if (Math.random() > 0.3){
                 System.out.println("ATACAR O SEU INIMIGO!"); Utilidades.esperar();
-                acoes.get(1).executar(this, alvo);
+                return acoes.get(1);
             }
             else{
                 System.out.println("USAR SUA HABILIDADE ESPECIAL!\n"); Utilidades.esperar();
-                acoes.get(2).executar(this, alvo);
+                return acoes.get(2);
             }
         }
     }

@@ -38,11 +38,11 @@ public class Atirador extends Heroi {
      * Quanto mais longe, mais chance de atacar ou usar sua habilidade especial
      */
     @Override
-    public void escolherAcao(Combatente alvo){
+    public AcaoDeCombate escolherAcao(Combatente alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
         double distanciaBase = (double)arma.getAttackRange();
         double chance = Math.random();
-        boolean seMover = false, atacarInim = false, usarHabEsp = false;
+        boolean seMover = false, atacarInim = false;
 
         System.out.printf("\nO atirador esta a %d metros do monstro e ira ", distancia); Utilidades.esperar();
 
@@ -51,24 +51,18 @@ public class Atirador extends Heroi {
                 seMover = true;
             else if (chance < 0.95)
                 atacarInim = true;
-            else
-                usarHabEsp = true;
 
         else if (distancia <= distanciaBase * 0.8)
             if (chance < 0.45)
                 seMover = true;
             else if (chance < 0.9)
                 atacarInim = true;
-            else
-                usarHabEsp = true;
 
         else if (distancia <= arma.getAttackRange())
             if (chance < 0.15)
                 seMover = true;
             else if (chance < 0.75)
                 atacarInim = true;
-            else
-                usarHabEsp = true;
 
         else
             seMover = true;
@@ -80,15 +74,15 @@ public class Atirador extends Heroi {
             else{
                 System.out.println("ter que se APROXIMAR do inimigo para tentar atacar!\n"); Utilidades.esperar();
             }
-            acoes.get(0).executar(this, alvo);
+            return acoes.get(0);
         }
         else if (atacarInim){
             System.out.println("ATACAR seu inimigo!\n");
-            acoes.get(1).executar(this, alvo);
+            return acoes.get(1);
         }
-        else if (usarHabEsp){
+        else{
             System.out.println("usar sua HABILIDADE ESPECIAL!\n");
-            acoes.get(2).executar(this, alvo);
+            return acoes.get(2);
         }
     }
 
