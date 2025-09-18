@@ -1,4 +1,4 @@
 public interface Evento {
-    boolean verificarGatilho();
-    void executar();
+    boolean verificarGatilho(Combatente heroi, Combatente monstro);
+    void executar(Combatente alvo);
 }

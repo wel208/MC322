@@ -10,6 +10,8 @@ public interface Combatente {
     double getCriticalChance();
     double getDodgeChance();
     void setPos(int pos);
+    int getPontosDeVida();
+    int getPontosDeVidaMax();
     boolean estaVivo();
     int receberDano(double dano);
     void receberCura(int cura);
