@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -18,21 +17,21 @@ public class Utilidades{
     static String[] nomesZumbi = {"Morbidus", "Putridius", "Cadaveron", "Necros"};
     static String[] nomesCavaleiroCorrompido = {"Sir Malrick", "Darthorn", "Vargan", "Mortivar"};
 
-    static String[] armasLutador = {"Espada", "Clava Comum"};
-    static String[] armasAtirador = {"Funda", "Arco"};
+    static List<Arma> armasLutador = List.of(new Espada(), new ClavaComum());
+    static List<Arma> armasAtirador = List.of(new Funda(), new Arco());
 
-    static String[] armasCavaleiroCorrompido = {"Espada", "Machado", "Clava Comum", "Clava de Espinhos"};
-    static String[] armasEsqueleto = {"Funda", "Arco", "Crossbow", "Faca de arremesso"};
-    static String[] armasNinfa = {"Lança", "Adagas", "Machado", "Clava de Espinhos"};
-    static String[] armasCorvoRei = {"Penas de corvo", "Garras de Corvo"};
-    static String[] armasZumbi = {"Espada", "Machado", "Clava", "Clava de Espinhos"};
-    static String[] armasGoblin = {"Espada", "Lança", "Faca de arremesso", "Adagas", "Clava Comum"};
-    static String[] armasGoblinGigante = {"Machado", "Clava de Espinhos", "Espada", "Lança"};
-    static String[] armasTroll = {"Machado", "Clava de Espinhos", "Espada", "Lança"};
-
-    static List<String> monstrosCastelo = new ArrayList<>(Arrays.asList("Goblin", "Cavaleiro Corrompido", "Troll", "Zumbi"));
-    static List<String> monstrosVilarejo = new ArrayList<>(Arrays.asList("Goblin", "Zumbi", "Troll"));
-    static List<String> monstrosAcampamento = new ArrayList<>(Arrays.asList("Ninfa da Floresta", "Cavaleiro Corrompido", "Goblin Gigante", "Troll"));
+    static List<Arma> armasCavaleiroCorrompido = List.of(new Espada(), new Machado(), new ClavaComum(), new ClavaEspinhos());
+    static List<Arma> armasEsqueleto = List.of(new Funda(), new Arco(), new Crossbow(), new FacaArremesso());
+    static List<Arma> armasNinfa = List.of(new Lança(), new Adagas(), new Machado(), new ClavaEspinhos());
+    static List<Arma> armasCorvoRei = List.of(new PenasCorvo(), new GarrasCorvo());
+    static List<Arma> armasZumbi = List.of(new Espada(), new Machado(), new ClavaComum(), new ClavaEspinhos());
+    static List<Arma> armasGoblin = List.of(new Espada(), new Lança(), new FacaArremesso(), new Adagas(), new Adagas());
+    static List<Arma> armasGoblinGigante = List.of(new Machado(), new ClavaEspinhos(), new Espada(), new Lança());    
+    static List<Arma> armasTroll = List.of(new Machado(), new ClavaEspinhos(), new Espada(), new Lança());
+    
+    static List<String> monstrosCastelo = List.of("Goblin", "Cavaleiro Corrompido", "Troll", "Zumbi");
+    static List<String> monstrosVilarejo = List.of("Goblin", "Zumbi", "Troll", "Goblin Gigante");
+    static List<String> monstrosAcampamento = List.of("Ninfa da Floresta", "Cavaleiro Corrompido", "Goblin Gigante", "Corvo Rei");
     static Random random = new Random();
 
     public static Heroi criarHeroi(){
@@ -43,25 +42,25 @@ public class Utilidades{
             return new Atirador(nome, escolherArma(armasAtirador));
     }
 
-    public static Monstro criarMonstro(String ambiente, int fase){
+    public static Monstro criarMonstro(TipoCenario cenario, int fase){
         int indice;
         String monstro;
         List<String> listaMonstros;
 
-        if (ambiente.equals("Castelo")){
+        if (cenario.equals(TipoCenario.CASTELO)){
             listaMonstros = new ArrayList<>(monstrosCastelo);
             indice = random.nextInt(listaMonstros.size());
-            monstro = listaMonstros.remove(indice);
+            monstro = listaMonstros.get(indice);
         }
-        else if (ambiente.equals("Vilarejo Destruído")){
+        else if (cenario.equals(TipoCenario.VILAREJO)){
             listaMonstros = new ArrayList<>(monstrosVilarejo);
             indice = random.nextInt(listaMonstros.size());
-            monstro = listaMonstros.remove(indice);
+            monstro = listaMonstros.get(indice);
         }
         else{
             listaMonstros = new ArrayList<>(monstrosAcampamento);
             indice = random.nextInt(listaMonstros.size());
-            monstro = listaMonstros.remove(indice);
+            monstro = listaMonstros.get(indice);
         }
 
         int posicao = escolherPosicao(monstro);
@@ -84,23 +83,8 @@ public class Utilidades{
             return new Troll(nomesTroll[random.nextInt(nomesTroll.length)], fase, posicao, escolherArma(armasTroll));
     }
 
-    private static Arma escolherArma(String[] armas){
-        String armaEscolhida = armas[random.nextInt(armas.length)];
-        switch (armaEscolhida){
-            case "Espada": return new Espada();
-            case "Machado": return new Machado();
-            case "Clava Comum": return new ClavaComum();
-            case "Clava de Espinhos": return new ClavaEspinhos();
-            case "Funda": return new Funda();
-            case "Arco": return new Arco();
-            case "Crossbow": return new Crossbow();
-            case "Faca de arremesso": return new FacaArremesso();
-            case "Adagas": return new Adagas();
-            case "Lança": return new Lança();
-            case "Penas de corvo": return new PenasCorvo();
-            case "Garras de Corvo": return new GarrasCorvo();
-            default: return null;
-        }
+    private static Arma escolherArma(List<Arma> armas){
+        return armas.get(random.nextInt(armas.size()));
     }
 
    public static int escolherPosicao(String monstro){
@@ -147,7 +131,7 @@ public class Utilidades{
     }
 
     //Retorna de qual classe concreta o personagem é
-   public static String verificarClasse(Combatente P){
+    public static String verificarClasse(Combatente P){
         if (P instanceof Goblin)
             return "o Goblin";
         else if (P instanceof GoblinGigante)
@@ -168,5 +152,14 @@ public class Utilidades{
             return "o Atirador";
         else
             return "o Lutador";
+    }
+
+    public static ArrayList<Monstro> criarListaDeMonstro(TipoCenario cenario, int numMontros, int nivel){
+        ArrayList<Monstro> monstros = new ArrayList<>();
+
+        for (int i = 0; i < numMontros; i++)
+            monstros.add(criarMonstro(cenario, nivel));
+        
+        return monstros;
     }
 }

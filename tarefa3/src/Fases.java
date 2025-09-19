@@ -11,7 +11,7 @@ public class Fases implements Fase {
         this.cenario = cenario;
     }
 
-    public void iniciar(Heroi heroi){
+    public void iniciar(Heroi heroi, int nivel){
 
         for (Monstro monstro : Monstros){
             System.out.println("\n=============================\n");
@@ -24,7 +24,11 @@ public class Fases implements Fase {
                 acao.executar(heroi, monstro);
 
                 if (monstro.estaVivo()){
-                    //ADICIONAR EVENTO
+
+                    AjudaExterna ajuda = new AjudaExterna();
+                    if (ajuda.verificarGatilho(heroi, monstro))
+                        ajuda.executar(monstro);
+
                     acao = monstro.escolherAcao(heroi);
                     acao.executar(monstro, heroi);
                 }
@@ -55,11 +59,11 @@ public class Fases implements Fase {
                             System.out.printf("\n%s nao ira equipar a arma largada pelo monstro.\n", heroi.getNome()); Utilidades.esperar();
                         }
                     }
+                    Monstros.remove(monstro);
                 }
-                //ADICIONAR EVENTO AQUI
             }
 
-            if (heroi.estaVivo() && Monstros.size() > 0){
+            if (!isConcluida()){
                 System.out.printf("\nAinda ha mais %d monstros para derrotar!\n", Monstros.size());
             }
         }
