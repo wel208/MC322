@@ -154,8 +154,9 @@ public class Utilidades{
             return "o Lutador";
     }
 
-    public static ArrayList<Monstro> criarListaDeMonstro(TipoCenario cenario, int numMontros, int nivel){
+    public static ArrayList<Monstro> criarListaDeMonstro(TipoCenario cenario, int nivel){
         ArrayList<Monstro> monstros = new ArrayList<>();
+        int numMontros = random.nextInt(2, 6);
 
         for (int i = 0; i < numMontros; i++)
             monstros.add(criarMonstro(cenario, nivel));
