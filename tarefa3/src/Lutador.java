@@ -28,7 +28,7 @@ public class Lutador extends Heroi{
         System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", getNivel(), getExperiencia(), getExpProximoNivel()); Utilidades.esperar();
         System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar();
         System.out.printf("\n%d pontos de FURIA;", furia); Utilidades.esperar();
-        System.out.printf("\n%.2f pontos de SORTE;", sorte); Utilidades.esperar();
+        System.out.printf("\n%.0f/100 pontos de SORTE;", sorte * 100); Utilidades.esperar();
         System.out.printf("\n%s esta usando %s como ARMA;", nome, arma.nome); Utilidades.esperar();
         System.out.printf("\ncapacidade de dar %d ATAQUES POR TURNO e pode percorrer %d METROS POR TURNO.\n", arma.attackSpeed, moveSpeed); Utilidades.esperar();
     }
@@ -41,7 +41,7 @@ public class Lutador extends Heroi{
     public AcaoDeCombate escolherAcao(Combatente alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
-        System.out.printf("\nO lutador esta a %d metros do monstro e ira ", distancia);
+        System.out.printf("\n%s, o lutador, esta a %d metros do monstro e ira ", nome, distancia);
 
         if (distancia > arma.attackRange){
             System.out.println("CORRER NA DIRECAO DELE!\n"); Utilidades.esperar();
@@ -49,7 +49,7 @@ public class Lutador extends Heroi{
         }
         else{
             if (Math.random() > 0.3){
-                System.out.println("ATACAR O SEU INIMIGO!"); Utilidades.esperar();
+                System.out.println("ATACAR O SEU INIMIGO!\n"); Utilidades.esperar();
                 return acoes.get(1);
             }
             else{

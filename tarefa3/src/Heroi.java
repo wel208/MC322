@@ -60,8 +60,12 @@ public abstract class Heroi extends Personagem{
         expProximoNivel += 10;
         forca += 5;
         protecao += 0.05;
-        pontosDeVida += 30;
+        pontosDeVidaMax += 20;
         sorte += 0.02;
+
+        receberCura(30);
+        protecao = Math.min(0.9, protecao);
+        sorte = Math.min(0.9, sorte);
 
         if (nivel % 2 == 0){    //A cada dois niveis o herói começa a dar um ataque a mais por turno e tem um aumento do atributo único
             this.melhorarAtributoUnico();

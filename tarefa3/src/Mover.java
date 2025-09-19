@@ -11,7 +11,8 @@ public class Mover implements AcaoDeCombate {
             else
                 usuario.setPos(usuario.getPos() - usuario.getMoveSpeed());
         }
-        else if (usuario.getArma().getTipo() == "Corpo a Corpo"){
+
+        else if ("Corpo a Corpo".equals(usuario.getArma().getTipo())){
             int direcao = usuario.getPos() < alvo.getPos() ? 1 : -1;
 
             for (int i = 0; i < usuario.getMoveSpeed(); i++){
@@ -19,13 +20,13 @@ public class Mover implements AcaoDeCombate {
 
                 if (Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos()) == usuario.getArma().getAttackRange()){
                     chegou = true;
-                    System.out.printf("%s ALNCANCOU %s e ira ATACAR!\n", usuario.getNome(), Utilidades.verificarClasse(alvo));
+                    System.out.printf("%s ALNCANCOU %s e ira ATACAR!\n\n", usuario.getNome(), Utilidades.verificarClasse(alvo)); Utilidades.esperar();
                     break;
                 }
             }
         }
-        else{
 
+        else{
             boolean afastando = Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos()) < usuario.getArma().getAttackRange();
             int direcao;
 
@@ -38,19 +39,19 @@ public class Mover implements AcaoDeCombate {
                 usuario.setPos(usuario.getPos() + direcao);
                 if (Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos()) == usuario.getArma().getAttackRange()){
                     chegou = true;
-                    System.out.printf("%s chegou a uma distancia ideial e ira ATACAR %s!\n", usuario.getNome(), Utilidades.verificarClasse(alvo)); Utilidades.esperar();
+                    System.out.printf("%s chegou a uma distancia ideial e ira ATACAR %s!\n\n", usuario.getNome(), Utilidades.verificarClasse(alvo)); Utilidades.esperar();
                     break;
                 }
             }
+        }
 
-            if (chegou){
-                AtaqueComum ataque = new AtaqueComum();
-                ataque.executar(usuario, alvo);
-            }
-            else{
-                int distancia = Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos());
-                System.out.printf("%s se movimentou e agora esta a %d metros de %s, %s!\n", usuario.getNome(), distancia, alvo.getNome(), Utilidades.verificarClasse(alvo)); Utilidades.esperar();
-            }
+        if (chegou){
+            AtaqueComum ataque = new AtaqueComum();
+            ataque.executar(usuario, alvo);
+        }
+        else{
+            int distancia = Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos());
+            System.out.printf("%s se movimentou e agora esta a %d metros de %s, %s!\n", usuario.getNome(), distancia, alvo.getNome(), Utilidades.verificarClasse(alvo)); Utilidades.esperar();
         }
     }
 }

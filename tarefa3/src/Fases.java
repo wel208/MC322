@@ -11,13 +11,24 @@ public class Fases implements Fase {
         this.cenario = cenario;
     }
 
-    public void iniciar(Heroi heroi, int nivel){
+    public void iniciar(Heroi heroi){
 
-        for (Monstro monstro : Monstros){
-            System.out.println("\n=============================\n");
-            System.out.printf("%s, %s, aparece para uma batalha! Vamos la!\n", monstro.getNome(), Utilidades.verificarClasse(monstro));
+        cenario.descreverCenario();
+
+        System.out.println("\n--------------------------\n"); Utilidades.esperar();
+
+        for (; Monstros.size() > 0;){
+            Monstro monstro = Monstros.remove(0);
+
+            System.out.printf("%s, %s, aparece para uma batalha! Vamos la!\n", monstro.getNome(), Utilidades.verificarClasse(monstro)); Utilidades.esperar();
+            monstro.exibirStatus();
+
+            int turno = 1;
 
             while (heroi.estaVivo() && monstro.estaVivo()){
+                System.out.println("\n---INICIO DO" + Utilidades.verificarTurno(turno) + "TURNO---"); Utilidades.esperar();
+                turno++;
+
                 AcaoDeCombate acao;
 
                 acao = heroi.escolherAcao(monstro);
@@ -29,17 +40,22 @@ public class Fases implements Fase {
                     if (ajuda.verificarGatilho(heroi, monstro))
                         ajuda.executar(monstro);
 
+                    System.out.println("\n--------------------------"); Utilidades.esperar();
+
                     acao = monstro.escolherAcao(heroi);
                     acao.executar(monstro, heroi);
                 }
 
                 else{
-                    System.out.printf("%s, %s, foi derrotado!", monstro.getNome(), Utilidades.verificarClasse(monstro)); Utilidades.esperar();
+                    System.out.printf("\n%s, %s, foi derrotado!\n", monstro.getNome(), Utilidades.verificarClasse(monstro)); Utilidades.esperar();
+                    System.out.println("\n--------------------------"); Utilidades.esperar();
 
                     heroi.ganharExperiencia(monstro.getXpConcedido());
 
+                    heroi.exibirStatus();
+
                     if (Math.random() < 0.7){
-                        System.out.printf("%s, %s, dropou %s, sua arma!\n", monstro.getNome(), Utilidades.verificarClasse(monstro), monstro.getArma().getNome()); Utilidades.esperar();
+                        System.out.printf("\n%s, %s, dropou %s, sua arma!\n", monstro.getNome(), Utilidades.verificarClasse(monstro), monstro.getArma().getNome()); Utilidades.esperar();
 
                         boolean equipar = false;
 
@@ -53,18 +69,18 @@ public class Fases implements Fase {
                         if (equipar){
                             System.out.printf("\n%s ira equipar a arma largada pelo monstro!\n", heroi.getNome()); Utilidades.esperar();
                             heroi.setArma(monstro.droparLoot());
-                            System.out.printf("\n%s equipou '%s'", heroi.getNome(), heroi.getArma().getNome()); Utilidades.esperar();
+                            System.out.printf("\n%s equipou '%s'\n", heroi.getNome(), heroi.getArma().getNome()); Utilidades.esperar();
                         }
                         else{
-                            System.out.printf("\n%s nao ira equipar a arma largada pelo monstro.\n", heroi.getNome()); Utilidades.esperar();
+                            System.out.printf("\n%s nao ira equipar a arma largada pelo monstro.\n", heroi.getNome()); Utilidades.esperar(); 
                         }
                     }
-                    Monstros.remove(monstro);
                 }
             }
 
             if (!isConcluida()){
-                System.out.printf("\nAinda ha mais %d monstros para derrotar!\n", Monstros.size());
+                System.out.printf("\nAinda ha mais %d monstro(s) para derrotar!\n", Monstros.size()); Utilidades.esperar();
+                System.out.println("\n--------------------------\n"); Utilidades.esperar();
             }
         }
     }

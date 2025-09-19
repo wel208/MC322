@@ -16,7 +16,7 @@ public class HabilidadeEspecial implements AcaoDeCombate {
                 }
             }
         }
-        
+
         else{
             int distancia = Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos());
 
@@ -25,6 +25,7 @@ public class HabilidadeEspecial implements AcaoDeCombate {
             for (int i = 0; i < qtdAtque; i++){
                 System.out.print("Uhf! ");
                 if (Math.random() > alvo.getDodgeChance() && Math.random() < Math.min(0.9, (usuario.getAtributoUnico() + usuario.getSorte()) * 0.9)){
+                    contador++;
                     dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * distancia/6);
                 }
             }

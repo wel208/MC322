@@ -12,7 +12,7 @@ public class Atirador extends Heroi {
     //Construtor
     public Atirador(String nome, Arma arma){
         super(nome, arma);
-        this.pontosDeVida = 150;
+        this.pontosDeVida = 60;
         this.moveSpeed = 10;
         this.forca = 40;
         this.protecao = 0.4;
@@ -26,8 +26,8 @@ public class Atirador extends Heroi {
         System.out.printf("\n%d PONTOS DE VIDA;", pontosDeVida); Utilidades.esperar();
         System.out.printf("\nNIVEL %d e %d/%d de EXPERIENCIA;", getNivel(), getExperiencia(), getExpProximoNivel()); Utilidades.esperar();
         System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar();
-        System.out.printf("\n%.0f pontos de PRECISAO;", precisao); Utilidades.esperar();
-        System.out.printf("\n%.0f%% de SORTE;", sorte * 100); Utilidades.esperar();
+        System.out.printf("\n%.0f%% de PRECISAO;", precisao * 100); Utilidades.esperar();
+        System.out.printf("\n%.0f/100 de SORTE;", sorte * 100); Utilidades.esperar();
         System.out.printf("\n%s esta utilizando %s como ARMA;", nome, arma.getNome()); Utilidades.esperar();
         System.out.printf("\nCapacidade de dar %d ATAQUE(S) POR TURNO e pode percorrer %d METROS POR TURNO.\n", arma.getAttackSpeed(), moveSpeed); Utilidades.esperar();
     }
@@ -44,31 +44,34 @@ public class Atirador extends Heroi {
         double chance = Math.random();
         boolean seMover = false, atacarInim = false;
 
-        System.out.printf("\nO atirador esta a %d metros do monstro e ira ", distancia); Utilidades.esperar();
+        System.out.printf("\n%s, o atirador, esta a %d metros do monstro e ira ", nome, distancia); Utilidades.esperar();
 
-        if (distancia < distanciaBase * 0.3)
-            if (chance < 0.8)
+        if (distancia < distanciaBase * 0.3){
+            if (chance < 0.95)
                 seMover = true;
-            else if (chance < 0.95)
+            else if (chance < 0.99)
                 atacarInim = true;
+        }
 
-        else if (distancia <= distanciaBase * 0.8)
+        else if (distancia <= distanciaBase * 0.8){
             if (chance < 0.45)
                 seMover = true;
             else if (chance < 0.9)
                 atacarInim = true;
+        }
 
-        else if (distancia <= arma.getAttackRange())
+        else if (distancia <= arma.getAttackRange()){
             if (chance < 0.15)
                 seMover = true;
             else if (chance < 0.75)
                 atacarInim = true;
+        }
 
         else
             seMover = true;
 
         if (seMover){
-            if (distancia < arma.getAttackSpeed()){
+            if (distancia < arma.getAttackRange()){
                 System.out.println("se AFASTAR do inimigo para tentar atacar!\n"); Utilidades.esperar();
             }
             else{

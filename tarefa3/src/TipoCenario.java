@@ -1,8 +1,8 @@
 public enum TipoCenario {
     //Constantes
     CASTELO ("VAMOS! O castelo esta sendo invadido!"),
-    ACAMPAMENTO ("Tenha cuidado. Ha monstros la fora."),
-    VILAREJO ("Um vilarejo abandonado. Monstros tomaram conta deste lugar.");
+    VILAREJO ("Caramba, um vilarejo abandonado... Monstros tomaram conta deste lugar."),
+    ACAMPAMENTO ("Estamos num acampamento no meio da floresta. Tenha cuidado, ha monstros la fora.");
 
     //Atributos
     private final String descricao;

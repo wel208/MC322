@@ -1,3 +1,3 @@
 public interface AcaoDeCombate {
-    static void executar(Combatente usuario, Combatente alvo);
+    void executar(Combatente usuario, Combatente alvo);
 }

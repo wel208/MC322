@@ -4,7 +4,7 @@ public class AtaqueComum implements AcaoDeCombate{
         int contador = 0, dano = 0;
         int qtdAtque = usuario.getArma().getAttackSpeed();
 
-        if (usuario.getArma().getTipo() == "Corpo a Corpo"){
+        if ("Corpo a Corpo".equals(usuario.getArma().getTipo())){
 
             for (int i = 0; i < qtdAtque; i ++){
 
@@ -17,15 +17,15 @@ public class AtaqueComum implements AcaoDeCombate{
                     dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * multiplicador);
 
                     if (critico){
-                        System.out.printf("%s, %s, ACERTOU um ataque CRITICO em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), Utilidades.verificarClasse(alvo));
+                        System.out.printf("%s, %s, ACERTOU um ataque CRITICO em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), alvo.getNome());
                     }
                     else{
-                        System.out.printf("%s, %s, ACERTOU um ataque em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), Utilidades.verificarClasse(alvo));
+                        System.out.printf("%s, %s, ACERTOU um ataque em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), alvo.getNome());
                     }
                     Utilidades.esperar();
                 }
                 else{
-                    System.out.printf("%s ESQUIVOU do ataque de %s!\n", Utilidades.verificarClasse(alvo)); Utilidades.esperar();
+                    System.out.printf("%s ESQUIVOU do ataque de %s!\n", Utilidades.verificarClasse(alvo), usuario.getNome()); Utilidades.esperar();
                 }
             }
         }
@@ -41,18 +41,18 @@ public class AtaqueComum implements AcaoDeCombate{
                     if (Math.random() > alvo.getDodgeChance()){
                         contador++;
 
-                        int distancia = Utilidades.calcularDistancia(usuario.getPos(), usuario.getPos());
+                        double distancia = (double)Utilidades.calcularDistancia(usuario.getPos(), usuario.getPos());
 
                         boolean critico = Math.random() < usuario.getCriticalChance();
                         double multiplicador = critico ? 1.2 : 1.0;
 
-                        dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * distancia/8 * multiplicador);
+                        dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * multiplicador * distancia/7);
 
                         if (critico){
-                            System.out.printf("%s, %s, ACERTOU um ataque CRITICO em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), Utilidades.verificarClasse(alvo));
+                            System.out.printf("%s, %s, ACERTOU um ataque CRITICO em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), alvo.getNome());
                         }
                         else{
-                            System.out.printf("%s, %s, ACERTOU um ataque em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), Utilidades.verificarClasse(alvo));
+                            System.out.printf("%s, %s, ACERTOU um ataque em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), alvo.getNome());
                         }
                             Utilidades.esperar();
                     }
@@ -61,11 +61,12 @@ public class AtaqueComum implements AcaoDeCombate{
                     }
                 }
                 else{
-                    System.out.printf("%s, %s, ERROU seu alvo!");
+                    System.out.printf("%s, %s, ERROU seu alvo!\n", usuario.getNome(), Utilidades.verificarClasse(usuario));
                 }
             }
         }
 
-        System.out.printf("%s, %s, acertou %d de %d ataque(s) dados, causando %d de dano.", usuario.getNome(), Utilidades.verificarClasse(usuario), contador, qtdAtque, dano); Utilidades.esperar();
+        System.out.printf("%s, %s, acertou %d de %d ataque(s) dados, causando %d de dano.\n", usuario.getNome(), Utilidades.verificarClasse(usuario), contador, qtdAtque, dano); Utilidades.esperar();
+        alvo.statusParcial();
     }
 }

@@ -15,8 +15,8 @@ public class Esqueleto extends Monstro {
         this.pontosDeVidaMax = 50 + (nivel - 1) * 10;
         this.pontosDeVida = this.pontosDeVidaMax;
         this.protecao = 0.2 + (nivel - 1) * 0.03;
-        this.forca = 10 + (nivel - 1) * 2;
-        this.precisao = 0.5 + (nivel - 1) * 0.05;
+        this.forca = 15 + (nivel - 1) * 2;
+        this.precisao = 0.3 + (nivel - 1) * 0.05;
         this.moveSpeed = 10;
         this.xpConcedido = 15 + (nivel * 10);
         this.sorte = 0.3 + (nivel * 0.01);

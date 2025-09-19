@@ -20,7 +20,7 @@ public class Zumbi extends Monstro {
         System.out.printf("\nO ZUMBI está a %d metro(s) do herói e irá ", distancia);
 
         if (distancia <= arma.getAttackRange()){
-            System.out.println("ATACAR!\n"); Utilidades.esperar();
+            System.out.println("ATACAR!\n\n"); Utilidades.esperar();
             return acoes.get(1);
         }
         else{

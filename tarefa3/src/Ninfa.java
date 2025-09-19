@@ -13,7 +13,7 @@ public class Ninfa extends Monstro{
         this.pontosDeVidaMax = 100 + (nivelDificuldade - 1) * 20;
         this.pontosDeVida = this.pontosDeVidaMax;
         this.protecao = 0.4 + (nivelDificuldade - 1) * 0.01;
-        this.forca = 20 + (nivelDificuldade - 1) * 5;
+        this.forca = 40 + (nivelDificuldade - 1) * 3;
         this.moveSpeed = 3;
         this.xpConcedido = 30 + (nivelDificuldade * 15);
         this.sorte = 0.3 + (nivelDificuldade * 0.02);

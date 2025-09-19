@@ -11,12 +11,12 @@ public class ConstrutorDeCenario implements GeradorDeFases {
         
         for (int i = 0; i < n; i++){
             TipoCenario cenario;
-            if ((n + 1) % 3 == 0)
+            if ((i + 1) % 3 == 0)
                 cenario = TipoCenario.ACAMPAMENTO;
             else
                 cenario = TipoCenario.values()[r.nextInt(2)];
-
-            fases.add(new Fases(Utilidades.criarListaDeMonstro(cenario, n), cenario));
+                
+            fases.add(new Fases(Utilidades.criarListaDeMonstro(cenario, i), cenario));
         }
 
         return fases;

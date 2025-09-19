@@ -16,7 +16,7 @@ public class CavaleiroCorrompido extends Monstro {
     public AcaoDeCombate escolherAcao(Combatente alvo){
         int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
-        System.out.printf("\nO cavaleiro esta a %d metro(s) do heroi e ira ", distancia);
+        System.out.printf("\nO Cavaleiro Corrompido esta a %d metro(s) do heroi e ira ", distancia);
 
         if (distancia <= arma.getAttackRange()){
             System.out.println("ATACAR!\n"); Utilidades.esperar();

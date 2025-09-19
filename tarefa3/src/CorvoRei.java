@@ -8,12 +8,12 @@ public class CorvoRei extends Monstro {
     
     public CorvoRei(String nome, int nivelDificuldade, int pos, Arma arma){
         super(nome, nivelDificuldade, pos, arma);
-        this.pontosDeVidaMax = 60 + (nivelDificuldade - 1) * 15;
+        this.pontosDeVidaMax = 30 + (nivelDificuldade - 1) * 15;
         this.pontosDeVida = this.pontosDeVidaMax;
-        this.protecao = 0.3 + (nivelDificuldade - 1) * 0.05;
+        this.protecao = Math.min(0.5, 0.3 + (nivelDificuldade - 1) * 0.05);
         this.forca = 10 + nivelDificuldade;
         this.moveSpeed = 12;
-        this.xpConcedido = 20 + (nivelDificuldade * 15);
+        this.xpConcedido = 20 + (nivelDificuldade * 10);
         this.sorte = 0.15 + (nivelDificuldade * 0.03);
         this.acoes = List.of(new Mover(), new AtaqueComum());
     }

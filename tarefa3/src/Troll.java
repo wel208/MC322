@@ -6,7 +6,7 @@ public class Troll extends Monstro {
         this.pontosDeVidaMax = 80 + (nivel - 1) * 30;
         this.pontosDeVida = this.pontosDeVidaMax;
         this.protecao = 0.5 + (nivel - 1) * 0.04;
-        this.forca = 15 + (nivel - 1) * 3;
+        this.forca = 40 + (nivel - 1) * 2;
         this.moveSpeed = 4;
         this.xpConcedido = 50 + (nivel * 20);
         this.sorte = 0.3 + (nivel * 0.01);
