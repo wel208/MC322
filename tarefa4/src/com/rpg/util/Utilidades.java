@@ -49,7 +49,7 @@ public class Utilidades{
             return new Atirador(nome, escolherArma(armasAtirador));
     }
 
-    public static Monstro criarMonstro(TipoCenario cenario, int fase){
+    public static Monstro criarMonstro(TipoCenario cenario, int fase, Dificuldade dificuldade){
         int indice;
         String monstro;
         List<String> listaMonstros;
@@ -161,12 +161,12 @@ public class Utilidades{
             return "o Lutador";
     }
 
-    public static ArrayList<Monstro> criarListaDeMonstro(TipoCenario cenario, int nivel){
+    public static ArrayList<Monstro> criarListaDeMonstro(TipoCenario cenario, int nivel, Dificuldade dificuldade){
         ArrayList<Monstro> monstros = new ArrayList<>();
         int numMontros = random.nextInt(2, 6);
 
         for (int i = 0; i < numMontros; i++)
-            monstros.add(criarMonstro(cenario, nivel));
+            monstros.add(criarMonstro(cenario, nivel, dificuldade));
         
         return monstros;
     }

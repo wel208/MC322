@@ -8,7 +8,7 @@ import java.util.Random;
 public class ConstrutorDeCenario implements GeradorDeFases {
     
     //Métodos
-    public List<Fase> gerar(int n){
+    public List<Fase> gerar(int n, Dificuldade dificuldade){
         List<Fase> fases = new ArrayList<>();
         Random r = new Random();
         
@@ -19,7 +19,7 @@ public class ConstrutorDeCenario implements GeradorDeFases {
             else
                 cenario = TipoCenario.values()[r.nextInt(2)];
                 
-            fases.add(new Fases(Utilidades.criarListaDeMonstro(cenario, i), cenario));
+            fases.add(new Fases(Utilidades.criarListaDeMonstro(cenario, i, dificuldade), cenario));
         }
 
         return fases;
