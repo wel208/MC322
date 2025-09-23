@@ -1,3 +1,8 @@
+package com.rpg.personagens;
+
+import com.rpg.itens.*;
+import com.rpg.util.*;
+import com.rpg.combate.*;
 public abstract class Personagem implements Combatente{
 
     // Atributos base

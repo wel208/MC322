@@ -1,3 +1,8 @@
+package com.rpg.personagens;
+
+import com.rpg.itens.*;
+import com.rpg.util.*;
+import com.rpg.combate.*;
 /*
  * Classe de herói que não tem uma movimentação tão rápida
  * Executa ataques corpo a corpo
@@ -29,8 +34,8 @@ public class Lutador extends Heroi{
         System.out.printf("\n%.0f pontos de FORCA e %.0f pontos de PROTECAO;", forca, protecao * 100); Utilidades.esperar();
         System.out.printf("\n%d pontos de FURIA;", furia); Utilidades.esperar();
         System.out.printf("\n%.0f/100 pontos de SORTE;", sorte * 100); Utilidades.esperar();
-        System.out.printf("\n%s esta usando %s como ARMA;", nome, arma.nome); Utilidades.esperar();
-        System.out.printf("\ncapacidade de dar %d ATAQUES POR TURNO e pode percorrer %d METROS POR TURNO.\n", arma.attackSpeed, moveSpeed); Utilidades.esperar();
+        System.out.printf("\n%s esta usando %s como ARMA;", nome, arma.getNome()); Utilidades.esperar();
+        System.out.printf("\ncapacidade de dar %d ATAQUES POR TURNO e pode percorrer %d METROS POR TURNO.\n", arma.getAttackSpeed(), moveSpeed); Utilidades.esperar();
     }
 
     /*
@@ -43,7 +48,7 @@ public class Lutador extends Heroi{
 
         System.out.printf("\n%s, o lutador, esta a %d metros do monstro e ira ", nome, distancia);
 
-        if (distancia > arma.attackRange){
+        if (distancia > arma.getAttackRange()){
             System.out.println("CORRER NA DIRECAO DELE!\n"); Utilidades.esperar();
             return acoes.get(0);
         }

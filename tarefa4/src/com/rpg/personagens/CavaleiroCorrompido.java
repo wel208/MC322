@@ -1,3 +1,8 @@
+package com.rpg.personagens;
+
+import com.rpg.itens.*;
+import com.rpg.util.*;
+import com.rpg.combate.*;
 public class CavaleiroCorrompido extends Monstro {
 
    public CavaleiroCorrompido(String nome, int nivelDificuldade, int pos, Arma arma){

@@ -1,3 +1,7 @@
+package com.rpg.combate;
+
+import com.rpg.util.*;
+
 public class AtaqueComum implements AcaoDeCombate{
     
     public void executar(Combatente usuario, Combatente alvo){

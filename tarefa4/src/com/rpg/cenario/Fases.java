@@ -1,3 +1,10 @@
+package com.rpg.cenario;
+
+import com.rpg.personagens.*;
+import com.rpg.util.*;
+import com.rpg.combate.*;
+import com.rpg.eventos.*;
+
 import java.util.ArrayList;
 
 public class Fases implements Fase {

@@ -1,3 +1,4 @@
+package com.rpg.itens;
 public abstract class Arma implements Item {
     
     // Atributos

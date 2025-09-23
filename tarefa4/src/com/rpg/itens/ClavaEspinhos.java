@@ -1,3 +1,4 @@
+package com.rpg.itens;
 public class ClavaEspinhos extends Arma {
 
     //Construtor

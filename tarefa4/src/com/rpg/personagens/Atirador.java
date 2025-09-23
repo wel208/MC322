@@ -1,3 +1,8 @@
+package com.rpg.personagens;
+
+import com.rpg.itens.*;
+import com.rpg.util.*;
+import com.rpg.combate.*;
 /*
  * Classe de herói que tem movimentação rápida
  * Não possui muitos pontos de vida e proteção

@@ -1,5 +1,10 @@
 package com.rpg.util;
 
+import com.rpg.itens.*;
+import com.rpg.cenario.*;
+import com.rpg.personagens.*;
+import com.rpg.combate.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

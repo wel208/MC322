@@ -1,3 +1,8 @@
+package com.rpg.combate;
+
+import com.rpg.personagens.*;
+import com.rpg.util.*;
+
 public class HabilidadeEspecial implements AcaoDeCombate {
 
     public void executar(Combatente usuario, Combatente alvo){

@@ -1,3 +1,4 @@
+package com.rpg.itens;
 public class Crossbow extends Arma {
 
     //Construtor

@@ -1,3 +1,5 @@
+package com.rpg.cenario;
+
 public enum TipoCenario {
     //Constantes
     CASTELO ("VAMOS! O castelo esta sendo invadido!"),

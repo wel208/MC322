@@ -1,3 +1,8 @@
+package com.rpg.personagens;
+
+import com.rpg.itens.*;
+import com.rpg.util.*;
+import com.rpg.combate.*;
 public class Goblin extends Monstro{
     
     public Goblin(String nome, int nivelDificuldade, int pos, Arma arma){

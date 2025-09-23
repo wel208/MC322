@@ -1,3 +1,7 @@
+package com.rpg.combate;
+
+import com.rpg.util.*;
+import com.rpg.personagens.*;
 public class Mover implements AcaoDeCombate {
 
     @Override

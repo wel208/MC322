@@ -1,3 +1,7 @@
+package com.rpg.eventos;
+
+import com.rpg.combate.*;
+import com.rpg.util.*;
 public class AjudaExterna implements Evento {
 
     public boolean verificarGatilho(Combatente heroi, Combatente monstro){

@@ -1,3 +1,8 @@
+package com.rpg.personagens;
+
+import com.rpg.itens.*;
+import com.rpg.util.*;
+import com.rpg.combate.*;
 /*
  * Classe de monstro bem semelhante ao Arqueiro
  * Não possui muita vida ou proteção

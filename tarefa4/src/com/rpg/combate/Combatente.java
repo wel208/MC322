@@ -1,3 +1,6 @@
+package com.rpg.combate;
+
+import com.rpg.itens.*;
 public interface Combatente {
     String getNome();
     Arma getArma();

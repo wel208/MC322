@@ -1,3 +1,8 @@
+package com.rpg.personagens;
+
+import com.rpg.itens.*;
+import com.rpg.util.*;
+import com.rpg.combate.*;
 import java.util.List;
 
 public abstract class Heroi extends Personagem{
@@ -83,7 +88,7 @@ public abstract class Heroi extends Personagem{
     protected int getExpProximoNivel(){
         return expProximoNivel;
     }
-    protected int getNivel(){
+    public int getNivel(){
         return nivel;
     }
 

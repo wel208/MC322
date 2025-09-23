@@ -1,6 +1,8 @@
 package com.rpg.game;
 
 import com.rpg.util.*;
+import com.rpg.cenario.*;
+import com.rpg.personagens.*;
 
 import java.util.Random;
 import java.util.List;

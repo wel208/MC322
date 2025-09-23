@@ -1,3 +1,8 @@
+package com.rpg.personagens;
+
+import com.rpg.itens.*;
+import com.rpg.util.*;
+import com.rpg.combate.*;
 /*
  * Mulher que se transforma num enorme e forte monstro
  * Muitos pontos de vida e boa proteção
