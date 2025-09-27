@@ -2,20 +2,22 @@ package com.rpg.personagens;
 
 import com.rpg.itens.*;
 import com.rpg.util.*;
+import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 public class Zumbi extends Monstro {
 
     // Construtor
-    public Zumbi(String nome, int nivelDificuldade, int pos, Arma arma) {
-    super(nome, nivelDificuldade, pos, arma);
-    this.pontosDeVidaMax = 50 + (nivelDificuldade * 10);
-    this.pontosDeVida = this.pontosDeVidaMax;
-    this.protecao = 0.2 + (nivelDificuldade * 0.03);
-    this.forca = 15 + (nivelDificuldade * 4);
-    this.moveSpeed = 3 + nivelDificuldade;
-    this.xpConcedido = 30 + (nivelDificuldade * 10);
-    this.sorte = 0.2 + (nivelDificuldade * 0.01);
-    this.dodgeChance = 0.05 + (nivelDificuldade * 0.01);
+    public Zumbi(String nome, int nivel, Arma arma, Dificuldade dificuldade){
+        super(nome, nivel, arma, dificuldade);
+
+        this.pontosDeVidaMax = (int)(dificuldade.getMultiplicador() * (50 + (nivel * 10)));
+        this.pontosDeVida = this.pontosDeVidaMax;
+        this.protecao = 0.2 + (nivel * 0.03);
+        this.forca = dificuldade.getMultiplicador() * (15 + (nivel * 4));
+        this.moveSpeed = 3 + nivel;
+        this.xpConcedido = 30 + (nivel * 10);
+        this.sorte = 0.2 + (nivel * 0.01);
+        this.dodgeChance = 0.05 + (nivel * 0.01);
 }
 
     @Override

@@ -5,7 +5,7 @@ import com.rpg.util.*;
 import com.rpg.combate.*;
 public abstract class Personagem implements Combatente{
 
-    // Atributos base
+    //Atributos
     protected String nome;
     protected int pontosDeVida;
     protected int pontosDeVidaMax;

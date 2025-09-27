@@ -2,30 +2,33 @@ package com.rpg.personagens;
 
 import com.rpg.itens.*;
 import com.rpg.util.*;
+import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 import java.util.List;
 public abstract class Monstro extends Personagem implements Lootavel {
 
     // Atributos
-    protected int xpConcedido;      // Quantidade de experiência que o monstro concede ao herói que derrotá-lo
-    protected int nivelDificuldade; // Nível de dificuldade do monstro
+    protected int xpConcedido;         // Quantidade de experiência que o monstro concede ao herói que derrotá-lo
+    protected int nivel;               // Nível do monstro
+    protected Dificuldade dificuldade; //Dificuldade escolhida para o jogo
     protected List<Arma> listaDeArmasParaLargar;
     protected List<AcaoDeCombate> acoes = List.of(new Mover(), new AtaqueComum());
 
     // Construtor
-    public Monstro(String nome, int nivelDificuldade, int pos, Arma arma) {
+    public Monstro(String nome, int nivel, Arma arma, Dificuldade dificuldade) {
         super(nome);
-        this.nivelDificuldade = nivelDificuldade;
-        this.pos = pos;
+        this.dificuldade = dificuldade;
+        this.nivel = nivel;
+        this.pos = 0;
         this.arma = arma;
 
         // Valores padrão para todos os monstros
-        this.dodgeChance = 0.05 + (nivelDificuldade * 0.01); // Exemplo: 5% base + 1% por nível
+        this.dodgeChance = 0.05 + (nivel * 0.01); // Exemplo: 5% base + 1% por nível
     }
 
     @Override
     public void exibirStatus(){
-        System.out.printf("\n%s, %s, no nivel %d de dificuldade possui:\n", nome, Utilidades.verificarClasse(this), nivelDificuldade); Utilidades.esperar();
+        System.out.printf("\n%s, %s, no nivel %d possui:\n", nome, Utilidades.verificarClasse(this), nivel); Utilidades.esperar();
         System.out.printf("%d PONTOS DE VIDA;\n", pontosDeVida); Utilidades.esperar();
         System.out.printf("%.0f PONTOS DE PROTECAO;\n", protecao * 100); Utilidades.esperar();
         System.out.printf("%.0f PONTOS DE FORCA;\n", forca); Utilidades.esperar();

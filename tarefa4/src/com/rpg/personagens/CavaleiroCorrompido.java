@@ -2,19 +2,20 @@ package com.rpg.personagens;
 
 import com.rpg.itens.*;
 import com.rpg.util.*;
+import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 public class CavaleiroCorrompido extends Monstro {
 
-   public CavaleiroCorrompido(String nome, int nivelDificuldade, int pos, Arma arma){
-        super(nome, nivelDificuldade, pos, arma);
+   public CavaleiroCorrompido(String nome, int nivel, Arma arma, Dificuldade dificuldade){
+        super(nome, nivel, arma, dificuldade);
 
-        this.pontosDeVidaMax = 80 + (nivelDificuldade * 15);
+        this.pontosDeVidaMax = (int)(dificuldade.getMultiplicador() * (80 + (nivel * 15)));
         this.pontosDeVida = this.pontosDeVidaMax;
-        this.protecao = 0.2 + (nivelDificuldade * 0.03);
-        this.forca = 12 + (nivelDificuldade * 3);
-        this.sorte = 0.2 + (nivelDificuldade * 0.01);
+        this.protecao = 0.2 + (nivel * 0.03);
+        this.forca = dificuldade.getMultiplicador() * (12 + (nivel * 3));
+        this.sorte = 0.2 + (nivel * 0.01);
         this.moveSpeed = 5;
-        this.xpConcedido = 20 + (nivelDificuldade * 10);
+        this.xpConcedido = 20 + (nivel * 10);
 }
 
     @Override

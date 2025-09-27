@@ -2,19 +2,21 @@ package com.rpg.personagens;
 
 import com.rpg.itens.*;
 import com.rpg.util.*;
+import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 public class GoblinGigante extends Monstro {
 
     // Construtor
-    public GoblinGigante(String nome, int nivelDificuldade, int pos, Arma arma){
-        super(nome, nivelDificuldade, pos, arma);
-        this.pontosDeVidaMax = 80 + (nivelDificuldade - 1) * 20;
+    public GoblinGigante(String nome, int nivel, Arma arma, Dificuldade dificuldade){
+        super(nome, nivel, arma, dificuldade);
+
+        this.pontosDeVidaMax = (int)(dificuldade.getMultiplicador() * (80 + (nivel - 1) * 20));
         this.pontosDeVida = this.pontosDeVidaMax;
-        this.protecao = 0.4 + (nivelDificuldade - 1) * 0.05;
-        this.forca = 25 + (nivelDificuldade - 1) * 3;
+        this.protecao = 0.4 + (nivel - 1) * 0.05;
+        this.forca = dificuldade.getMultiplicador() * (25 + (nivel - 1) * 3);
         this.moveSpeed = 4;
-        this.xpConcedido = 25 + (nivelDificuldade * 15);
-        this.sorte = 0.1 + (nivelDificuldade * 0.01);
+        this.xpConcedido = 25 + (nivel * 15);
+        this.sorte = 0.1 + (nivel * 0.01);
     }
 
     @Override

@@ -2,16 +2,18 @@ package com.rpg.personagens;
 
 import com.rpg.itens.*;
 import com.rpg.util.*;
+import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 public class Troll extends Monstro {
 
     // Construtor
-    public Troll(String nome, int nivel, int pos, Arma arma){
-        super(nome, nivel, pos, arma);
-        this.pontosDeVidaMax = 80 + (nivel - 1) * 30;
+    public Troll(String nome, int nivel, Arma arma, Dificuldade dificuldade){
+        super(nome, nivel, arma, dificuldade);
+
+        this.pontosDeVidaMax = (int)(dificuldade.getMultiplicador() * (80 + (nivel - 1) * 30));
         this.pontosDeVida = this.pontosDeVidaMax;
         this.protecao = 0.5 + (nivel - 1) * 0.04;
-        this.forca = 40 + (nivel - 1) * 2;
+        this.forca = dificuldade.getMultiplicador() * (40 + (nivel - 1) * 2);
         this.moveSpeed = 4;
         this.xpConcedido = 50 + (nivel * 20);
         this.sorte = 0.3 + (nivel * 0.01);

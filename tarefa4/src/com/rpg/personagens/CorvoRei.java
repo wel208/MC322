@@ -2,6 +2,7 @@ package com.rpg.personagens;
 
 import com.rpg.itens.*;
 import com.rpg.util.*;
+import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 import java.util.Random;
 import java.util.List;
@@ -11,15 +12,16 @@ public class CorvoRei extends Monstro {
     private double precisao;
     private List<Arma> armasPossiveis = List.of(new GarrasCorvo(), new PenasCorvo());
     
-    public CorvoRei(String nome, int nivelDificuldade, int pos, Arma arma){
-        super(nome, nivelDificuldade, pos, arma);
-        this.pontosDeVidaMax = 30 + (nivelDificuldade - 1) * 15;
+    public CorvoRei(String nome, int nivel, Arma arma, Dificuldade dificuldade){
+        super(nome, nivel, arma, dificuldade);
+
+        this.pontosDeVidaMax = (int)(dificuldade.getMultiplicador() * (30 + (nivel - 1) * 15));
         this.pontosDeVida = this.pontosDeVidaMax;
-        this.protecao = Math.min(0.5, 0.3 + (nivelDificuldade - 1) * 0.05);
-        this.forca = 10 + nivelDificuldade;
+        this.protecao = Math.min(0.5, 0.3 + (nivel - 1) * 0.05);
+        this.forca = dificuldade.getMultiplicador() * (10 + nivel);
         this.moveSpeed = 12;
-        this.xpConcedido = 20 + (nivelDificuldade * 10);
-        this.sorte = 0.15 + (nivelDificuldade * 0.03);
+        this.xpConcedido = 20 + (nivel * 10);
+        this.sorte = 0.15 + (nivel * 0.03);
         this.acoes = List.of(new Mover(), new AtaqueComum());
     }
 
