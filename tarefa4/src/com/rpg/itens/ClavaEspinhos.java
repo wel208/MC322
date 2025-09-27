@@ -6,7 +6,7 @@ public class ClavaEspinhos extends Arma {
         this.nome = "Clava de Espinhos";
         this.tipo = "Corpo a Corpo";
         this.dano = 1.3;
-        this.minNivel = 5;
+        this.minNivel = 4;
         this.attackRange = 1;
         this.attackSpeed = 2;
     }

@@ -26,6 +26,8 @@ public class Fases implements Fase {
 
         for (; Monstros.size() > 0;){
             Monstro monstro = Monstros.remove(0);
+            
+            monstro.setPos(Utilidades.escolherPosicao(monstro, heroi.getPos()));
 
             System.out.printf("%s, %s, aparece para uma batalha! Vamos la!\n", monstro.getNome(), Utilidades.verificarClasse(monstro)); Utilidades.esperar();
             monstro.exibirStatus();

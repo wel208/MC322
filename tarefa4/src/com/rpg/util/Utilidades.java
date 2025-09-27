@@ -31,74 +31,111 @@ public class Utilidades{
     static List<Arma> armasAtirador = List.of(new Funda(), new Arco());
 
     //Possíveis armas que os monstros podem utilizar
-    static List<Arma> armasCavaleiroCorrompido = List.of(new Espada(), new Machado(), new ClavaComum(), new ClavaEspinhos());
-    static List<Arma> armasEsqueleto = List.of(new Funda(), new Arco(), new Crossbow(), new FacaArremesso());
-    static List<Arma> armasNinfa = List.of(new Lança(), new Adagas(), new Machado(), new ClavaEspinhos());
+    static List<Arma> armasCavaleiroCorrompido = List.of(new ClavaComum(), new Espada(), new Machado(), new ClavaEspinhos());
+    static List<Arma> armasEsqueleto = List.of(new Funda(), new Arco(), new FacaArremesso(), new Crossbow());
+    static List<Arma> armasNinfa = List.of(new Adagas(), new Lança(), new Machado(), new ClavaEspinhos());
+    static List<Arma> armasZumbi = List.of(new ClavaComum(), new Espada(), new Machado(), new ClavaEspinhos());
+    static List<Arma> armasGoblin = List.of(new Espada(), new Adagas(), new FacaArremesso(), new Lança());
+    static List<Arma> armasGoblinGigante = List.of(new Espada(), new Lança(), new Machado(), new ClavaEspinhos());    
+    static List<Arma> armasTroll = List.of(new Espada(), new Lança(), new Machado(), new ClavaEspinhos());
     static List<Arma> armasCorvoRei = List.of(new PenasCorvo(), new GarrasCorvo());
-    static List<Arma> armasZumbi = List.of(new Espada(), new Machado(), new ClavaComum(), new ClavaEspinhos());
-    static List<Arma> armasGoblin = List.of(new Espada(), new Lança(), new FacaArremesso(), new Adagas(), new Adagas());
-    static List<Arma> armasGoblinGigante = List.of(new Machado(), new ClavaEspinhos(), new Espada(), new Lança());    
-    static List<Arma> armasTroll = List.of(new Machado(), new ClavaEspinhos(), new Espada(), new Lança());
     
-    //Monstro presentes em cada um dos cenários
-    static List<String> monstrosCastelo = List.of("Goblin", "Cavaleiro Corrompido", "Troll", "Zumbi");
-    static List<String> monstrosVilarejo = List.of("Goblin", "Zumbi", "Troll", "Goblin Gigante");
-    static List<String> monstrosAcampamento = List.of("Ninfa da Floresta", "Cavaleiro Corrompido", "Goblin Gigante", "Corvo Rei");
+    //Objeto para utilização de aletoriedade
     static Random random = new Random();
 
     public static Heroi criarHeroi(){
         String nome = nomesHeroi[random.nextInt(nomesHeroi.length)];
         if (Math.random() < 0.5)
-            return new Lutador(nome, escolherArma(armasLutador));
+            return new Lutador(nome, escolherArma(armasLutador, null));
         else
-            return new Atirador(nome, escolherArma(armasAtirador));
+            return new Atirador(nome, escolherArma(armasAtirador, null));
     }
 
+    //Cria um monstro para ser adicionado na lista de monstros de uma fase
     public static Monstro criarMonstro(TipoCenario cenario, int nivel, Dificuldade dificuldade){
 
         int indice = random.nextInt(cenario.getMonstros().size());
         String monstro = cenario.getMonstros().get(indice);
 
         if (monstro.equals("Corvo Rei"))
-            return new CorvoRei(nomesCorvoRei[random.nextInt(nomesCorvoRei.length)], nivel, escolherArma(armasCorvoRei), dificuldade);
+            return new CorvoRei(nomesCorvoRei[random.nextInt(nomesCorvoRei.length)], nivel, escolherArma(armasCorvoRei, dificuldade), dificuldade);
+
         else if (monstro.equals("Esqueleto"))
-            return new Esqueleto(nomesEsqueleto[random.nextInt(nomesEsqueleto.length)], nivel, escolherArma(armasEsqueleto), dificuldade);
+            return new Esqueleto(nomesEsqueleto[random.nextInt(nomesEsqueleto.length)], nivel, escolherArma(armasEsqueleto, dificuldade), dificuldade);
+
         else if (monstro.equals("Goblin"))
-            return new Goblin(nomesGoblin[random.nextInt(nomesGoblin.length)], nivel, escolherArma(armasGoblin), dificuldade);
+            return new Goblin(nomesGoblin[random.nextInt(nomesGoblin.length)], nivel, escolherArma(armasGoblin, dificuldade), dificuldade);
+
         else if (monstro.equals("Ninfa da Floresta"))
-            return new Ninfa(nomesNinfa[random.nextInt(nomesNinfa.length)], nivel, escolherArma(armasNinfa), dificuldade);
+            return new Ninfa(nomesNinfa[random.nextInt(nomesNinfa.length)], nivel, escolherArma(armasNinfa, dificuldade), dificuldade);
+
         else if (monstro.equals("Cavaleiro Corrompido"))
-            return new CavaleiroCorrompido(nomesCavaleiroCorrompido[random.nextInt(nomesCavaleiroCorrompido.length)], nivel, escolherArma(armasCavaleiroCorrompido), dificuldade);
+            return new CavaleiroCorrompido(nomesCavaleiroCorrompido[random.nextInt(nomesCavaleiroCorrompido.length)], nivel, escolherArma(armasCavaleiroCorrompido, dificuldade), dificuldade);
+
         else if (monstro.equals("Zumbi"))
-            return new Zumbi(nomesZumbi[random.nextInt(nomesZumbi.length)], nivel, escolherArma(armasZumbi), dificuldade);
+            return new Zumbi(nomesZumbi[random.nextInt(nomesZumbi.length)], nivel, escolherArma(armasZumbi, dificuldade), dificuldade);
+
         else if (monstro.equals("Goblin Gigante"))
-            return new GoblinGigante(nomesGoblinGigante[random.nextInt(nomesGoblinGigante.length)], nivel, escolherArma(armasGoblinGigante), dificuldade);
+            return new GoblinGigante(nomesGoblinGigante[random.nextInt(nomesGoblinGigante.length)], nivel, escolherArma(armasGoblinGigante, dificuldade), dificuldade);
+
         else
-            return new Troll(nomesTroll[random.nextInt(nomesTroll.length)], nivel, escolherArma(armasTroll), dificuldade);
+            return new Troll(nomesTroll[random.nextInt(nomesTroll.length)], nivel, escolherArma(armasTroll, dificuldade), dificuldade);
     }
 
-    private static Arma escolherArma(List<Arma> armas){
-        return armas.get(random.nextInt(armas.size()));
+    /*
+     *Escolhe a arma do monstro com base na dificuldade do jogo
+     *Quanto mais difícil, melhor a arma
+     *O herói não depende da dificuldade do jogo para definir sua arma
+    */
+    private static Arma escolherArma(List<Arma> armas, Dificuldade dificuldade){
+        int inicio = 0, fim = 2;
+
+        if (dificuldade.equals(null))
+            return armas.get(random.nextInt(armas.size()));
+        
+        if (dificuldade.equals(Dificuldade.FACIL)){
+            inicio = 0;
+            fim = 2;
+        }
+        else if (dificuldade.equals(Dificuldade.MEDIO)){
+            inicio = 1;
+            fim = 3;
+        }
+        else{
+            inicio = 2;
+            fim = 4;
+        }
+
+        return armas.get(random.nextInt(inicio, fim));
     }
 
-    //Escolhe 
+    //Define a posição do monstro considerando a posição atual do herói
     public static int escolherPosicao(Combatente monstro, int posHeroi){
+
         if (monstro instanceof CorvoRei)
             return posHeroi + 12 + random.nextInt(-3, 3);
+
         else if (monstro instanceof Esqueleto)
             return posHeroi + 16 + random.nextInt(-4, 2);
+
         else if (monstro instanceof Goblin)
             return posHeroi + 10 + random.nextInt(-2, 4);
+
         else if (monstro instanceof Ninfa)
             return posHeroi + 3 + random.nextInt(-2, 2);
+
         else if (monstro instanceof CavaleiroCorrompido)
             return posHeroi + 10 + random.nextInt(-2, 2);
+
         else if (monstro instanceof Zumbi)
             return posHeroi + 8 + random.nextInt(-2, 3);
+
         else if (monstro instanceof GoblinGigante)
             return posHeroi + 10 + random.nextInt(-3, 2);
+
         else if (monstro instanceof Troll)
             return posHeroi + 10 + random.nextInt(-3, 2);
+
         else
             return posHeroi + 12 + random.nextInt(-4, 0);
     }
@@ -149,9 +186,10 @@ public class Utilidades{
             return "o Lutador";
     }
 
+    //Método que cria uma lista de monstros para uma fase
     public static ArrayList<Monstro> criarListaDeMonstro(TipoCenario cenario, int nivel, Dificuldade dificuldade){
         ArrayList<Monstro> monstros = new ArrayList<>();
-        int numMontros = random.nextInt(2, 6);
+        int numMontros = random.nextInt(3, 6);
 
         for (int i = 0; i < numMontros; i++)
             monstros.add(criarMonstro(cenario, nivel, dificuldade));

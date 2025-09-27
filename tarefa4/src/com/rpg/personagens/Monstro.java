@@ -19,7 +19,6 @@ public abstract class Monstro extends Personagem implements Lootavel {
         super(nome);
         this.dificuldade = dificuldade;
         this.nivel = nivel;
-        this.pos = 0;
         this.arma = arma;
 
         // Valores padrão para todos os monstros
