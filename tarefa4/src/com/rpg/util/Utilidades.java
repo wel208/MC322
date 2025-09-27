@@ -43,6 +43,7 @@ public class Utilidades{
     //Objeto para utilização de aletoriedade
     static Random random = new Random();
 
+    //Criação do herói, chances iguais de ser lutador ou atirador
     public static Heroi criarHeroi(){
         String nome = nomesHeroi[random.nextInt(nomesHeroi.length)];
         if (Math.random() < 0.5)
