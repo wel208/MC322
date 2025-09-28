@@ -37,10 +37,31 @@ public class InputManager {
     }
 
     public static String lerString(String mensagem){
-        System.out.print(mensagem);
+        String input = null;
 
-        String linha = scanner.nextLine();
-        return linha;
+        while (true){      
+            try{
+                System.out.print(mensagem);
+                input = scanner.nextLine().trim();
+
+                if (input.isEmpty()){
+                    System.out.println("Entrada vazia, digite uma linha valida");
+                    continue;
+                }
+
+                for (char c : input.toCharArray()){
+                    if (Character.isDigit(c))
+                        throw new IllegalArgumentException("A linha não deve conter numeros!");
+                }
+                break;
+
+            } catch (IllegalArgumentException e){
+                System.out.println("Erro: " + e.getMessage());
+            }
+
+        }
+        
+        return input;
     }
 
     public static boolean lerSimNao(String mensagem){

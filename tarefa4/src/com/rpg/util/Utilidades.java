@@ -13,7 +13,7 @@ import java.util.Random;
 public class Utilidades{
 
     //Strings para printar qual o atual turno em uma batalha
-    static String[] turnosDezenas = {"", " DECIMO", " VIGESIMO", " TRIGESIMO", " QUADRAGESIMO", " QUINQUAGESIMO"};
+    static String[] turnosDezenas = {"", " DECIMO", " VIGESIMO", " TRIGESIMO", " QUADRAGESIMO", " QUINQUAGESIMO", " SEXAGESIMO", "SEPTUAGESIMO", "OCTOGESIMO", "NONAGESIMO"};
     static String[] turnosUnidades = {"", "PRIMEIRO ", "SEGUNDO ", "TERCEIRO ", "QUARTO ", "QUINTO ", "SEXTO ", "SETIMO ", "OITAVO ", "NONO "};
     
     //Possíveis nomes para cada classe de personagem
@@ -234,17 +234,20 @@ public class Utilidades{
         return InputManager.lerInteiro(menu, 1, 5);
     }
 
+    
     public static void apresentarHerois(){
         String apresentacao = 
             "\n" +
             "==================================================================" +
             "\nExistem duas classes de heróis:\n" +
+
             "\nO Lutador: guerreiro que possui habilidades com armas de curto alcance e busca sempre estar próximo de seus inimigos." +
             "\nO lutador possui boa quantidade de pontos de vida, forca e protecao.\n" +
+
             "\nO Atirador: guerreiro que possui habilidade com armas de longo alcance, procurando sempre estar mais longe do inimigo para ser mais efetivo." +
             "\nO atirador possui menos, mas nao pouca, quantidade de pontos de vida, forca e protecao.\n" +
             "==================================================================" +
-            "\nPressione ENTER para continuar.";
+            "\nPressione ENTER para continuar. ";
         
         InputManager.esperarEnter(apresentacao);
     }
@@ -277,7 +280,7 @@ public class Utilidades{
 
         System.out.println("==================================================================");
 
-        InputManager.esperarEnter("Pressione ENTER para voltar ao menu principal.");
+        InputManager.esperarEnter("Pressione ENTER para voltar ao menu principal. ");
     }
 
     public static void apresentarCenarios(){

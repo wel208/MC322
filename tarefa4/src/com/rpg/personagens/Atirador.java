@@ -17,7 +17,7 @@ public class Atirador extends Heroi {
     //Construtor
     public Atirador(String nome, Arma arma){
         super(nome, arma);
-        this.pontosDeVidaMax = 60;
+        this.pontosDeVidaMax = 70;
         this.pontosDeVida = pontosDeVidaMax;
         this.moveSpeed = 10;
         this.forca = 40;

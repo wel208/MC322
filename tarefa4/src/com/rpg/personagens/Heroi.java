@@ -63,10 +63,10 @@ public abstract class Heroi extends Personagem{
         expProximoNivel += 15;
         forca += 3;
         protecao += 0.05;
-        pontosDeVidaMax += 20;
+        pontosDeVidaMax += 10;
         sorte += 0.02;
 
-        receberCura(30);
+        receberCura(20);
         protecao = Math.min(0.9, protecao);
         sorte = Math.min(0.9, sorte);
 
