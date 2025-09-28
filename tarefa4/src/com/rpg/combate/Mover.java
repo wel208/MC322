@@ -54,8 +54,8 @@ public class Mover implements AcaoDeCombate {
             ataque.executar(usuario, alvo);
         }
         else{
-            int distancia = Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos());
-            System.out.printf("%s se movimentou e agora esta a %d metros de %s, %s!\n", usuario.getNome(), distancia, alvo.getNome(), Utilidades.verificarClasse(alvo)); Utilidades.esperar();
+            double distancia = Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos());
+            System.out.printf("%s se movimentou e agora esta a %.0f metros de %s, %s!\n", usuario.getNome(), distancia, alvo.getNome(), Utilidades.verificarClasse(alvo)); Utilidades.esperar();
         }
     }
 }

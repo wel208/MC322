@@ -51,7 +51,9 @@ public class InputManager {
 
                 for (char c : input.toCharArray()){
                     if (Character.isDigit(c))
-                        throw new IllegalArgumentException("A linha não deve conter numeros!");
+                        throw new IllegalArgumentException("A linha não deve conter numeros.");
+                    else if (!Character.isLetter(c) && !Character.isWhitespace(c))
+                        throw new IllegalArgumentException("A linha nao pode conter caracteres especiais.");
                 }
                 break;
 

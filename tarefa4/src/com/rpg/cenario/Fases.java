@@ -4,16 +4,15 @@ import com.rpg.personagens.*;
 import com.rpg.util.*;
 import com.rpg.combate.*;
 import com.rpg.eventos.*;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class Fases implements Fase {
 
     //Atributos
-    protected ArrayList<Monstro> Monstros;
+    protected List<Monstro> Monstros;
     protected TipoCenario cenario;
 
-    public Fases(ArrayList<Monstro> Monstros, TipoCenario cenario){
+    public Fases(List<Monstro> Monstros, TipoCenario cenario){
         this.Monstros = Monstros;
         this.cenario = cenario;
     }
@@ -24,16 +23,14 @@ public class Fases implements Fase {
 
         System.out.println("\n--------------------------\n"); Utilidades.esperar();
 
-        for (; Monstros.size() > 0;){
-            Monstro monstro = Monstros.remove(0);
-            
+        int monstrosDerrotados = 0;
+        for (Monstro monstro : Monstros){
             monstro.setPos(Utilidades.escolherPosicao(monstro, heroi.getPos()));
 
             System.out.printf("%s, %s, aparece para uma batalha! Vamos la!\n", monstro.getNome(), Utilidades.verificarClasse(monstro)); Utilidades.esperar();
             monstro.exibirStatus();
 
             int turno = 1;
-
             while (heroi.estaVivo() && monstro.estaVivo()){
                 System.out.println("\n---INICIO DO" + Utilidades.verificarTurno(turno) + "TURNO---"); Utilidades.esperar();
                 turno++;
@@ -56,40 +53,65 @@ public class Fases implements Fase {
                 }
 
                 else{
+                    monstrosDerrotados++;
                     System.out.printf("\n%s, %s, foi derrotado!\n", monstro.getNome(), Utilidades.verificarClasse(monstro)); Utilidades.esperar();
                     System.out.println("\n--------------------------"); Utilidades.esperar();
 
                     heroi.ganharExperiencia(monstro.getXpConcedido());
 
-                    heroi.exibirStatus();
-
-                    if (Math.random() < 0.7){
+                    int caso;
+                    if (Math.random() < 0.6 * monstro.getDificuldade().getMultiplicador()){
+                        caso = 1;
                         System.out.printf("\n%s, %s, dropou %s, sua arma!\n", monstro.getNome(), Utilidades.verificarClasse(monstro), monstro.getArma().getNome()); Utilidades.esperar();
+                    }
+                    else{
+                        caso = 2;
+                        System.out.printf("\n%s, %s, NAO dropou sua arma!\n", monstro.getNome(), Utilidades.verificarClasse(monstro), monstro.getArma().getNome()); Utilidades.esperar();
+                    }
 
-                        boolean equipar = false;
+                    while (true){
+                        int escolha = Utilidades.exibirMenuPosBatalha(caso);
 
-                        if (heroi.getNivel() >= monstro.getArma().getMinNivel() && 
-                            heroi.getArma().getDano() < monstro.getArma().getDano() && 
-                            heroi.getArma().getTipo().equals(monstro.getArma().getTipo()) &&
-                            heroi.getArma().getNome() != monstro.getArma().getNome()){
-                                equipar = true;
-                        }
-
-                        if (equipar){
-                            System.out.printf("\n%s ira equipar a arma largada pelo monstro!\n", heroi.getNome()); Utilidades.esperar();
-                            heroi.setArma(monstro.droparLoot());
-                            System.out.printf("\n%s equipou '%s'\n", heroi.getNome(), heroi.getArma().getNome()); Utilidades.esperar();
+                        if (caso == 1){
+                            if (escolha == 1){
+                                break;
+                            }
+                            else if (escolha == 2){
+                                Utilidades.tentarEquiparArma(heroi, monstro.droparLoot());
+                            }
+                            else if(escolha == 3){
+                                Utilidades.compararArmas(heroi.getArma(), monstro.droparLoot());
+                            }
+                            else if (escolha == 4){
+                                heroi.exibirStatus();
+                            }
+                            else if (escolha == 5){
+                                Utilidades.apresentarInfoDaFase(this, monstrosDerrotados);
+                            }
+                            else if (escolha == 6){
+                                Utilidades.encerrarJogo();
+                            }
                         }
                         else{
-                            System.out.printf("\n%s nao ira equipar a arma largada pelo monstro.\n", heroi.getNome()); Utilidades.esperar(); 
+                            if (escolha == 1){
+                                break;
+                            }
+                            else if (escolha == 2){
+                                heroi.exibirStatus();
+                            }
+                            else if (escolha == 3){
+                                Utilidades.apresentarInfoDaFase(this, monstrosDerrotados);
+                            }
+                            else if (escolha == 4){
+                                Utilidades.encerrarJogo();
+                            }
                         }
                     }
                 }
             }
 
             if (!isConcluida()){
-                System.out.printf("\nAinda ha mais %d monstro(s) para derrotar!\n", Monstros.size()); Utilidades.esperar();
-                System.out.println("\n--------------------------\n"); Utilidades.esperar();
+                System.out.println("\n\n--------------------------\n"); Utilidades.esperar();
             }
         }
     }
@@ -98,7 +120,18 @@ public class Fases implements Fase {
         return cenario.getDescricao();
     }
 
+    public List<Monstro> getMonstros(){
+        return Monstros;
+    }
+
     public boolean isConcluida(){
-        return Monstros.size() == 0;
+        boolean monstroVivo = false;
+        for (Monstro monstro : Monstros){
+            if (monstro.getPontosDeVida() > 0){
+                monstroVivo = true;
+                break;
+            }
+        }
+        return !monstroVivo;
     }
 }

@@ -28,10 +28,10 @@ public abstract class Personagem implements Combatente{
         System.out.printf("\n%s, %s, está com %d PONTOS DE VIDA.\n", nome, Utilidades.verificarClasse(this), pontosDeVida); Utilidades.esperar();
     }
 
-    public int receberDano(double forca){
-        pontosDeVida -= (int)(forca * (1 - protecao));
+    public double receberDano(double forca){
+        pontosDeVida -= (forca * (1.0 - protecao));
         if (pontosDeVida < 0) pontosDeVida = 0;
-        return (int)(forca * (1 - protecao));
+        return (forca * (1.0 - protecao));
     }
 
     public void receberCura(int cura){

@@ -27,10 +27,10 @@ public class CorvoRei extends Monstro {
 
     @Override
     public AcaoDeCombate escolherAcao(Combatente alvo){
-        int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
+        double distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
         double chance = Math.random();
 
-        System.out.printf("\nO CORVO REI esta a %d metro(s) do %s e ira ", distancia, Utilidades.verificarClasse(alvo));
+        System.out.printf("\nO CORVO REI esta a %.0f metro(s) do %s e ira ", distancia, Utilidades.verificarClasse(alvo));
 
         if (distancia <= 1){
             System.out.println("SE MOVER!\n"); Utilidades.esperar();

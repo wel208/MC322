@@ -13,22 +13,23 @@ public class Main {
     public static void main (String[] args){
 
         while (true){
-            int opcao = Utilidades.exibirMenuPrincipal();
+            int escolha = Utilidades.exibirMenuPrincipal();
 
-            if (opcao == 1){
+            if (escolha == 1){
                 break;
             }
-            else if (opcao == 2){
+            else if (escolha == 2){
                 Utilidades.apresentarHerois();
             }
-            else if (opcao == 3){
+            else if (escolha == 3){
                 Utilidades.apresentarArmas();
             }
-            else if (opcao == 4){
+            else if (escolha == 4){
                 Utilidades.apresentarCenarios();
             }
-            else if (opcao == 5){
-                return;
+            else if (escolha == 5){
+                InputManager.fecharScanner();
+                System.exit(0);
             }
         }
 

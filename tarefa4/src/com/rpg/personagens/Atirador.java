@@ -45,12 +45,12 @@ public class Atirador extends Heroi {
      */
     @Override
     public AcaoDeCombate escolherAcao(Combatente alvo){
-        int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
+        double distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
         double distanciaBase = (double)arma.getAttackRange();
         double chance = Math.random();
         boolean seMover = false, atacarInim = false;
 
-        System.out.printf("\n%s, o atirador, esta a %d metros do monstro e ira ", nome, distancia); Utilidades.esperar();
+        System.out.printf("\n%s, o atirador, esta a %.0f metros do monstro e ira ", nome, distancia); Utilidades.esperar();
 
         if (distancia < distanciaBase * 0.3){
             if (chance < 0.95)

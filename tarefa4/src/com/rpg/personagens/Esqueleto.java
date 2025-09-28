@@ -31,12 +31,12 @@ public class Esqueleto extends Monstro {
 
     @Override
     public AcaoDeCombate escolherAcao(Combatente alvo){
-        int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
+        double distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
         int distanciaBase = arma.getAttackRange();
         double chance = Math.random();
         boolean atacarInim = false;
 
-        System.out.printf("\nO esqueleto esta a %d metro(s) do nosso heroi e ira ", distancia); 
+        System.out.printf("\nO esqueleto esta a %.0f metro(s) do nosso heroi e ira ", distancia); 
 
         if (distancia <= distanciaBase * 0.3)
             if (chance <= 0.2)

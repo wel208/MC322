@@ -28,9 +28,9 @@ public class Ninfa extends Monstro{
 
     @Override
     public AcaoDeCombate escolherAcao(Combatente alvo){
-        int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
+        double distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
-        System.out.printf("\nA NINFA está a %d metros do nosso herói e ira ", distancia);
+        System.out.printf("\nA NINFA está a %.0f metros do nosso herói e ira ", distancia);
 
         if (distancia <= arma.getAttackRange()){
             System.out.print("ATACAR!\n"); Utilidades.esperar();

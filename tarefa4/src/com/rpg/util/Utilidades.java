@@ -4,7 +4,11 @@ import com.rpg.itens.*;
 import com.rpg.cenario.*;
 import com.rpg.personagens.*;
 import com.rpg.combate.*;
+import com.rpg.exceptions.ArmasIguaisException;
+import com.rpg.exceptions.NaoPossuiNivelException;
+import com.rpg.exceptions.TipoErradoDeArmaException;
 import com.rpg.game.InputManager;
+import com.rpg.game.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -173,7 +177,7 @@ public class Utilidades{
     }
 
     //Calcula e retorna a distância entre o herói e o monstro
-    public static int calcularDistancia(int pos1, int pos2){
+    public static double calcularDistancia(int pos1, int pos2){
         return Math.abs(pos1 - pos2);
     }
 
@@ -234,7 +238,7 @@ public class Utilidades{
         return InputManager.lerInteiro(menu, 1, 5);
     }
 
-    
+
     public static void apresentarHerois(){
         String apresentacao = 
             "\n" +
@@ -302,7 +306,7 @@ public class Utilidades{
         System.out.println("\n==================================================================");
         System.out.println("Tabela com cenarios x monstros:\n");
 
-        System.out.println("                   | Castelo | Vilarejo Abandonado | Acampamento da Floresta");
+        System.out.println("                      | Castelo | Vilarejo Abandonado | Acampamento da Floresta");
         System.out.println("------------------------------------------------------------------------------------------------------");
 
         for (String monstro : monstrosDoJogo){
@@ -342,5 +346,84 @@ public class Utilidades{
             return Dificuldade.MEDIO;
         else
             return Dificuldade.DIFICIL;
+    }
+
+    public static int exibirMenuPosBatalha(int caso){
+        String menu = (caso == 1) ?
+            "\n" + 
+            "==================================================================" +
+            "\n[1] Continuar jogo" +
+            "\n[2] Tentar equipar nova arma" +
+            "\n[3] Comparar arma atual e arma dropada" +
+            "\n[4] Ver informacoes do heroi" + 
+            "\n[5] Ver informacoes desta Fase" +
+            "\n[6] Desistir do jogo\n" +
+            "==================================================================" +
+            "\nDigite sua opcao > "
+            :
+            "\n" + 
+            "==================================================================" +
+            "\n[1] Continuar jogo" +
+            "\n[2] Ver informacoes do heroi" + 
+            "\n[3] Ver informacoes desta Fase" +
+            "\n[4] Desistir do jogo\n" +
+            "==================================================================" +
+            "\nDigite sua opcao > ";
+        
+        int max = (caso == 1) ? 6 : 4;
+
+        return InputManager.lerInteiro(menu, 1, max);
+    }
+
+    public static void tentarEquiparArma(Heroi heroi, Arma arma){
+
+        try{
+            if (heroi.getArma().equals(arma))
+                throw new ArmasIguaisException();
+            else if (heroi instanceof Lutador  && arma.getTipo().equals("Longo Alcance") ||
+                     heroi instanceof Atirador && arma.getTipo().equals("Corpo a Corpo"))
+                throw new TipoErradoDeArmaException();
+            else if (heroi.getNivel() < arma.getMinNivel())
+                throw new NaoPossuiNivelException();
+            heroi.setArma(arma);
+        } catch (ArmasIguaisException e){
+            System.out.println(e.getMessage());
+        } catch (TipoErradoDeArmaException e){
+            System.out.println(e.getMessage());
+        } catch (NaoPossuiNivelException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void compararArmas(Arma arma1, Arma arma2){
+        System.out.println("\n==================================================================");
+        System.out.println("Comparacao entre " + arma1.getNome() + " e " + arma2.getNome() + ":\n");
+
+        System.out.println("Nome da Arma      | Tipo          | Mult. de Dano | Alcance | Vel. de Ataque | Nivel Min. para equipar");
+        System.out.println("------------------------------------------------------------------------------------------------------");
+
+        for (Arma arma : List.of(arma1, arma2)){
+            System.out.printf("%-17s | %-13s | %-13.1f | %-7d | %-14d | %d\n", 
+                arma.getNome(), arma.getTipo(), arma.getDano(), arma.getAttackRange(), arma.getAttackSpeed(), arma.getMinNivel());
+        }
+
+        System.out.println("==================================================================");
+
+        InputManager.esperarEnter("Pressione ENTER para voltar ao menu pos-turno. ");
+    }
+
+    public static void apresentarInfoDaFase(Fases faseAtual, int monstrosDerrotados){
+        System.out.println("\n==================================================================");
+        System.out.println("Voce ja derrotou " + monstrosDerrotados + " dos " + faseAtual.getMonstros().size() + " monstros desta fase." + "\n");
+
+        System.out.println("Voce ainda precisa derrotar " + (faseAtual.getMonstros().size() - monstrosDerrotados) + " monstro para passar de fase.");
+        System.out.println("==================================================================");
+
+        InputManager.esperarEnter("Pressione ENTER para voltar ao menu pos-turno. ");
+    }
+
+    public static void encerrarJogo(){
+        System.out.println("Voltando para o menu principal..."); esperar();
+        Main.main(null);
     }
 }

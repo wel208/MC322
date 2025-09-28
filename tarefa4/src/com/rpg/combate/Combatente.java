@@ -16,7 +16,7 @@ public interface Combatente {
     int getPontosDeVida();
     int getPontosDeVidaMax();
     boolean estaVivo();
-    int receberDano(double dano);
+    double receberDano(double dano);
     void receberCura(int cura);
     AcaoDeCombate escolherAcao(Combatente alvo);
     void statusParcial();

@@ -6,7 +6,8 @@ import com.rpg.util.*;
 public class HabilidadeEspecial implements AcaoDeCombate {
 
     public void executar(Combatente usuario, Combatente alvo){
-        int contador = 0, dano = 0;
+        int contador = 0;
+        double dano = 0;
         int qtdAtque = (usuario instanceof Lutador) ? usuario.getArma().getAttackSpeed() + (int)usuario.getAtributoUnico() : usuario.getArma().getAttackSpeed() + 2;
 
         if (usuario instanceof Lutador){
@@ -23,7 +24,7 @@ public class HabilidadeEspecial implements AcaoDeCombate {
         }
 
         else{
-            int distancia = Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos());
+            double distancia = Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos());
 
             System.out.printf("%s ATIRARA %d PROJETEIS NESTE TURNO!\n\n", usuario.getNome(), qtdAtque);
 
@@ -31,11 +32,11 @@ public class HabilidadeEspecial implements AcaoDeCombate {
                 System.out.print("Uhf! ");
                 if (Math.random() > alvo.getDodgeChance() && Math.random() < Math.min(0.9, (usuario.getAtributoUnico() + usuario.getSorte()) * 0.9)){
                     contador++;
-                    dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * distancia/6);
+                    dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * (distancia/2.0));
                 }
             }
         }
 
-        System.out.printf("\n\nO nosso heroi acertou %d ataques(s), causando %d de dano!\n", contador, dano); Utilidades.esperar();
+        System.out.printf("\n\nO nosso heroi acertou %d ataque(s), causando %.0f de dano!\n", contador, dano); Utilidades.esperar();
     }
 }

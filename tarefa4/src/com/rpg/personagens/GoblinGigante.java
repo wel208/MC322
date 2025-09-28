@@ -21,9 +21,9 @@ public class GoblinGigante extends Monstro {
 
     @Override
     public AcaoDeCombate escolherAcao(Combatente alvo){
-        int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
+        double distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
-        System.out.printf("\nO GOBLIN GIGANTE está a %d metro(s) do herói e irá ", distancia);
+        System.out.printf("\nO GOBLIN GIGANTE está a %.0f metro(s) do herói e irá ", distancia);
 
         if (distancia <= arma.getAttackRange()){
             System.out.println("ATACAR!\n"); Utilidades.esperar();

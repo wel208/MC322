@@ -42,4 +42,8 @@ public abstract class Monstro extends Personagem implements Lootavel {
     public int getXpConcedido(){
         return xpConcedido;
     }
+
+    public Dificuldade getDificuldade(){
+        return dificuldade;
+    }  
 }

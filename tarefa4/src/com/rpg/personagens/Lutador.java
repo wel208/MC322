@@ -45,9 +45,9 @@ public class Lutador extends Heroi{
      */
     @Override
     public AcaoDeCombate escolherAcao(Combatente alvo){
-        int distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
+        double distancia = Utilidades.calcularDistancia(pos, alvo.getPos());
 
-        System.out.printf("\n%s, o lutador, esta a %d metros do monstro e ira ", nome, distancia);
+        System.out.printf("\n%s, o lutador, esta a %.0f metros do monstro e ira ", nome, distancia);
 
         if (distancia > arma.getAttackRange()){
             System.out.println("CORRER NA DIRECAO DELE!\n"); Utilidades.esperar();
