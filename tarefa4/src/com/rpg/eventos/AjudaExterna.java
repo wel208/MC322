@@ -2,6 +2,8 @@ package com.rpg.eventos;
 
 import com.rpg.combate.*;
 import com.rpg.util.*;
+ 
+//Evento que acontece quando o heroi esta com pouca vida e já causou boa quantidade de dano ao monstro
 public class AjudaExterna implements Evento {
 
     public boolean verificarGatilho(Combatente heroi, Combatente monstro){

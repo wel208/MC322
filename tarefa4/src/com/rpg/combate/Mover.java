@@ -9,6 +9,7 @@ public class Mover implements AcaoDeCombate {
 
         boolean chegou = false;
 
+        //Lógica de movimento específica do Corvo Rei
         if (usuario instanceof CorvoRei){
             if (Math.random() < 0.5)
                 usuario.setPos(usuario.getPos() + usuario.getMoveSpeed());
@@ -16,6 +17,7 @@ public class Mover implements AcaoDeCombate {
                 usuario.setPos(usuario.getPos() - usuario.getMoveSpeed());
         }
 
+        //Lógica de movimento de personagens que atacam no Corpo a Corpo
         else if ("Corpo a Corpo".equals(usuario.getArma().getTipo())){
             int direcao = usuario.getPos() < alvo.getPos() ? 1 : -1;
 
@@ -30,6 +32,7 @@ public class Mover implements AcaoDeCombate {
             }
         }
 
+        //Lógica de movimento de personagens que atacam a Longa distância
         else{
             boolean afastando = Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos()) < usuario.getArma().getAttackRange();
             int direcao;
@@ -49,6 +52,7 @@ public class Mover implements AcaoDeCombate {
             }
         }
 
+        //Se o persongaem alcancou uma distância ideal para atacar durante a movimentação, ele atacará
         if (chegou){
             AtaqueComum ataque = new AtaqueComum();
             ataque.executar(usuario, alvo);

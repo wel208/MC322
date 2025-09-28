@@ -265,7 +265,6 @@ public class Utilidades{
 
         System.out.println("Classe   | Pontos de vida | Forca | Protecao | Vel. de Movimento");
         System.out.println("------------------------------------------------------------------------------------------------------");
-
         System.out.printf("Lutador  | %-14d | %-5d | %-8d | %d m/turno\n",120, 70, 60, 7);
         System.out.printf("Atirador | %-14d | %-5d | %-8d | %d m/turno\n",70, 40, 40, 9);
         System.out.println("==================================================================");

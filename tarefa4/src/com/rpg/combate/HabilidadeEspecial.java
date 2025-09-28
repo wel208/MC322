@@ -10,6 +10,7 @@ public class HabilidadeEspecial implements AcaoDeCombate {
         double dano = 0;
         int qtdAtque = (usuario instanceof Lutador) ? usuario.getArma().getAttackSpeed() + (int)usuario.getAtributoUnico() : usuario.getArma().getAttackSpeed() + 2;
 
+        //lógica da habilidade especial do Lutador
         if (usuario instanceof Lutador){
 
             System.out.printf("RHHAAAA!! O NOSSO HEROI ENTROU EM FURIA E ATACARA %d VEZES NESTE TURNO!\n\n", qtdAtque); Utilidades.esperar();
@@ -23,6 +24,7 @@ public class HabilidadeEspecial implements AcaoDeCombate {
             }
         }
 
+        //Lógica da habilidade especial do Atirador
         else{
             double distancia = Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos());
 

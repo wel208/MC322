@@ -17,6 +17,7 @@ public class Fases implements Fase {
         this.cenario = cenario;
     }
 
+    //Método que executa cada uma das fases do jogo 
     public void iniciar(Heroi heroi){
 
         cenario.descreverCenario();
@@ -24,12 +25,19 @@ public class Fases implements Fase {
         System.out.println("\n--------------------------\n"); Utilidades.esperar();
 
         int monstrosDerrotados = 0;
+
+        //For que percorre todos os monstros presentes na fase 
         for (Monstro monstro : Monstros){
+            if (!heroi.estaVivo())
+                break;
+
+            //Define a posição do monstro com base na posição do herói
             monstro.setPos(Utilidades.escolherPosicao(monstro, heroi.getPos()));
 
             System.out.printf("%s, %s, aparece para uma batalha! Vamos la!\n", monstro.getNome(), Utilidades.verificarClasse(monstro)); Utilidades.esperar();
             monstro.exibirStatus();
 
+            //For para cada um dos turnos de uma batalha
             for (int turno = 1; turno <= 100 && monstro.estaVivo(); turno++){
                 System.out.println("\n---INICIO DO" + Utilidades.verificarTurno(turno) + "TURNO---"); Utilidades.esperar();
                 turno++;
@@ -62,6 +70,8 @@ public class Fases implements Fase {
                     heroi.ganharExperiencia(monstro.getXpConcedido());
 
                     int caso;
+
+                    //If-else que diz se o monstro irá dropar a arma ou não
                     if (Math.random() < 0.6 * monstro.getDificuldade().getMultiplicador()){
                         caso = 1;
                         System.out.printf("\n%s, %s, dropou %s, sua arma!\n", monstro.getNome(), Utilidades.verificarClasse(monstro), monstro.getArma().getNome()); Utilidades.esperar();
@@ -71,6 +81,7 @@ public class Fases implements Fase {
                         System.out.printf("\n%s, %s, NAO dropou sua arma!\n", monstro.getNome(), Utilidades.verificarClasse(monstro), monstro.getArma().getNome()); Utilidades.esperar();
                     }
 
+                    //Loop para apresentação do menu pós-combate
                     while (true){
                         int escolha = Utilidades.exibirMenuPosBatalha(caso);
 

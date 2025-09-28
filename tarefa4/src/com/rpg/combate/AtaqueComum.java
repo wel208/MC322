@@ -9,6 +9,7 @@ public class AtaqueComum implements AcaoDeCombate{
         double dano = 0;
         int qtdAtque = usuario.getArma().getAttackSpeed();
 
+        //Lógica de funcionamento de um ataque utilizando uma arma corpo a corpo
         if ("Corpo a Corpo".equals(usuario.getArma().getTipo())){
 
             for (int i = 0; i < qtdAtque; i ++){
@@ -35,6 +36,7 @@ public class AtaqueComum implements AcaoDeCombate{
             }
         }
 
+        //Lógica de funcionamento de um ataque utilizando uma arma de longo alcance
         else{
             
             for (int i = 0; i < qtdAtque; i++){

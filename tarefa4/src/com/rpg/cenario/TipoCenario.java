@@ -10,7 +10,7 @@ public enum TipoCenario {
 
     //Atributos
     private final String descricao;
-    private final List<String> monstros;
+    private final List<String> monstros; //Monstros que podem aparecer no cenario definido
 
     //Construtor
     TipoCenario(String descricao, List<String> monstros){
