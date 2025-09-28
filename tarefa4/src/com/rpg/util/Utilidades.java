@@ -264,7 +264,7 @@ public class Utilidades{
         System.out.println("Tabela com os atributos iniciais:\n");
 
         System.out.println("Classe   | Pontos de vida | Forca | Protecao | Vel. de Movimento");
-        System.out.println("------------------------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------");
         System.out.printf("Lutador  | %-14d | %-5d | %-8d | %d m/turno\n",120, 70, 60, 7);
         System.out.printf("Atirador | %-14d | %-5d | %-8d | %d m/turno\n",70, 40, 40, 9);
         System.out.println("==================================================================");
@@ -323,7 +323,7 @@ public class Utilidades{
         System.out.println("Tabela com cenarios x monstros:\n");
 
         System.out.println("                      | Castelo | Vilarejo Abandonado | Acampamento da Floresta");
-        System.out.println("------------------------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------");
 
         for (String monstro : monstrosDoJogo){
             System.out.printf("%-21s |   %s   |         %s         |            %s\n", monstro,
