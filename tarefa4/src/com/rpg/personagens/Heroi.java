@@ -20,12 +20,10 @@ public abstract class Heroi extends Personagem{
         this.pos = 0;
         this.nivel = 0;
         this.experiencia = 0;
-        this.expProximoNivel = 20;
+        this.expProximoNivel = 30;
         this.sorte = 0.3;
         this.criticalChance = 0.05;
     }
-
-    //Métodos
 
     /*
      * Metódo chamado ao derrotar um inimigo
@@ -62,8 +60,8 @@ public abstract class Heroi extends Personagem{
     private void subirDeNivel(){ //Método que melhora os atributos do herói ao subir de nível
         experiencia = experiencia - expProximoNivel;
         nivel++;
-        expProximoNivel += 10;
-        forca += 5;
+        expProximoNivel += 15;
+        forca += 3;
         protecao += 0.05;
         pontosDeVidaMax += 20;
         sorte += 0.02;
@@ -72,7 +70,7 @@ public abstract class Heroi extends Personagem{
         protecao = Math.min(0.9, protecao);
         sorte = Math.min(0.9, sorte);
 
-        if (nivel % 2 == 0){    //A cada dois niveis o herói começa a dar um ataque a mais por turno e tem um aumento do atributo único
+        if (nivel % 2 == 0){    //A cada dois niveis o herói tem um aumento do atributo único
             this.melhorarAtributoUnico();
         }
     }
