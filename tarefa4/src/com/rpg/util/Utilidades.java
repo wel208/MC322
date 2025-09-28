@@ -4,6 +4,7 @@ import com.rpg.itens.*;
 import com.rpg.cenario.*;
 import com.rpg.personagens.*;
 import com.rpg.combate.*;
+import com.rpg.game.InputManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,15 @@ public class Utilidades{
     static List<Arma> armasLutador = List.of(new Espada(), new ClavaComum());
     static List<Arma> armasAtirador = List.of(new Funda(), new Arco());
 
-    //Possíveis armas que os monstros podem utilizar
+    //Todas as armas e monstros existentes do jogo
+    static List<Arma> armasDoJogo = List.of(new Adagas(), new Arco(), new ClavaComum(), new ClavaEspinhos(), new Crossbow(), new Espada(), new FacaArremesso(), new Funda(), new GarrasCorvo(), new Lança(), new Machado(), new PenasCorvo());
+    static List<String> monstrosDoJogo = List.of("Cavaleiro Corrompido", "Corvo Rei", "Esqueleto", "Goblin", "Goblin Gigante", "Ninfa da Floresta", "Troll", "Zumbi");
+
+    /*
+     * Possíveis armas que os monstros podem utilizar
+     * Elas estão organizadas da mais fraca para a mais forte para cada monstro, exceto o Corvo Rei
+     * Quanto maior a dificuldade, melhor a arma que o monstro usará
+     */
     static List<Arma> armasCavaleiroCorrompido = List.of(new ClavaComum(), new Espada(), new Machado(), new ClavaEspinhos());
     static List<Arma> armasEsqueleto = List.of(new Funda(), new Arco(), new FacaArremesso(), new Crossbow());
     static List<Arma> armasNinfa = List.of(new Adagas(), new Lança(), new Machado(), new ClavaEspinhos());
@@ -45,11 +54,32 @@ public class Utilidades{
 
     //Criação do herói, chances iguais de ser lutador ou atirador
     public static Heroi criarHeroi(){
-        String nome = nomesHeroi[random.nextInt(nomesHeroi.length)];
-        if (Math.random() < 0.5)
+        String mensagem = 
+            "\nEscolha a classe do seu herói\n" +
+            "==================================================================" +
+            "\n[1] Lutador" + 
+            "\n[2] Atirador\n" +
+            "==================================================================" +
+            "\nDigite sua opcao > ";
+        
+        int classe = InputManager.lerInteiro(mensagem, 1, 2);
+        String nome = InputManager.lerString("\nDigite o nome do seu herói > ");
+
+        if (classe == 1)
             return new Lutador(nome, escolherArma(armasLutador, null));
         else
             return new Atirador(nome, escolherArma(armasAtirador, null));
+    }
+
+    //Método que cria uma lista de monstros para uma fase
+    public static ArrayList<Monstro> criarListaDeMonstro(TipoCenario cenario, int nivel, Dificuldade dificuldade){
+        ArrayList<Monstro> monstros = new ArrayList<>();
+        int numMontros = random.nextInt(3, 6);
+
+        for (int i = 0; i < numMontros; i++)
+            monstros.add(criarMonstro(cenario, nivel, dificuldade));
+        
+        return monstros;
     }
 
     //Cria um monstro para ser adicionado na lista de monstros de uma fase
@@ -89,9 +119,10 @@ public class Utilidades{
      *O herói não depende da dificuldade do jogo para definir sua arma
     */
     private static Arma escolherArma(List<Arma> armas, Dificuldade dificuldade){
-        int inicio = 0, fim = 2;
+        int inicio, fim;
 
-        if (dificuldade.equals(null))
+        //Caso especial para os heróis e CorvoRei, que possuem apenas duas armas iniciais possíveis
+        if (armas.size() == 2)
             return armas.get(random.nextInt(armas.size()));
         
         if (dificuldade.equals(Dificuldade.FACIL)){
@@ -141,26 +172,9 @@ public class Utilidades{
             return posHeroi + 12 + random.nextInt(-4, 0);
     }
 
-    //Metódo que auxilia a identificar que turno estamos para printar corretamente por extenso
-    public static String verificarTurno(int turno){
-        int dezena = turno / 10;
-        int unidade = turno - (dezena * 10);
-        return turnosDezenas[dezena] + " " + turnosUnidades[unidade];
-    }
-
     //Calcula e retorna a distância entre o herói e o monstro
     public static int calcularDistancia(int pos1, int pos2){
         return Math.abs(pos1 - pos2);
-    }
-
-    //Método para fazer uma pausa entre operações/prints do programa
-    public static void esperar() {
-        try{
-            Thread.sleep(200);
-        } 
-        catch (InterruptedException e){
-            Thread.currentThread().interrupt();
-        }
     }
 
     //Retorna de qual classe concreta o personagem é
@@ -187,14 +201,143 @@ public class Utilidades{
             return "o Lutador";
     }
 
-    //Método que cria uma lista de monstros para uma fase
-    public static ArrayList<Monstro> criarListaDeMonstro(TipoCenario cenario, int nivel, Dificuldade dificuldade){
-        ArrayList<Monstro> monstros = new ArrayList<>();
-        int numMontros = random.nextInt(3, 6);
+    //Metódo que auxilia a identificar que turno estamos para printar corretamente por extenso
+    public static String verificarTurno(int turno){
+        int dezena = turno / 10;
+        int unidade = turno - (dezena * 10);
+        return turnosDezenas[dezena] + " " + turnosUnidades[unidade];
+    }
 
-        for (int i = 0; i < numMontros; i++)
-            monstros.add(criarMonstro(cenario, nivel, dificuldade));
+    //Método para fazer uma pausa entre operações/prints do programa
+    public static void esperar() {
+        try{
+            Thread.sleep(500);
+        } 
+        catch (InterruptedException e){
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    //Métodos utilizados para controlar menus de interação com o usuário
+    public static int exibirMenuPrincipal(){
+        String menu =
+            "\n" + 
+            "==================================================================" +
+            "\n[1] Iniciar novo jogo" +
+            "\n[2] Conhecer as Classes de Heróis" + 
+            "\n[3] Conhecer as Classes de Armas" + 
+            "\n[4] Conhecer os Cenarios de Batalha" +
+            "\n[5] Sair do jogo\n" +
+            "==================================================================" +
+            "\nDigite sua opcao > ";
         
-        return monstros;
+        return InputManager.lerInteiro(menu, 1, 5);
+    }
+
+    public static void apresentarHerois(){
+        String apresentacao = 
+            "\n" +
+            "==================================================================" +
+            "\nExistem duas classes de heróis:\n" +
+            "\nO Lutador: guerreiro que possui habilidades com armas de curto alcance e busca sempre estar próximo de seus inimigos." +
+            "\nO lutador possui boa quantidade de pontos de vida, forca e protecao.\n" +
+            "\nO Atirador: guerreiro que possui habilidade com armas de longo alcance, procurando sempre estar mais longe do inimigo para ser mais efetivo." +
+            "\nO atirador possui menos, mas nao pouca, quantidade de pontos de vida, forca e protecao.\n" +
+            "==================================================================" +
+            "\nPressione ENTER para continuar.";
+        
+        InputManager.esperarEnter(apresentacao);
+    }
+
+    public static void apresentarArmas(){
+        String apresentacao =
+            "\n" +
+            "==================================================================" +
+            "\nExistem dois tipos de arma:" +
+            "\nDe Curto Alcance: Espada, Adagas, Clava Comum, Clava com Espinhos, Lança, Machado e Garras de Corvo" +
+            "\nDeLongo Alcance: Arco e flecha, Crossbow, Faca de Arremesso, Funda e Penas de Corvo\n" +
+            "==================================================================" +
+            "\nDeseja ver detalhes de cada arma? (s/n) > ";
+        
+        if (InputManager.lerSimNao(apresentacao))
+            apresentarDetalhesDasArmas();
+    }
+
+    private static void apresentarDetalhesDasArmas(){
+        System.out.println("\n==================================================================");
+        System.out.println("Tabela com todas as armas:\n");
+
+        System.out.println("Nome da Arma      | Tipo          | Mult. de Dano | Alcance | Vel. de Ataque | Nivel Min. para equipar");
+        System.out.println("------------------------------------------------------------------------------------------------------");
+
+        for (Arma arma : armasDoJogo){
+            System.out.printf("%-17s | %-13s | %-13.1f | %-7d | %-14d | %d\n", 
+                arma.getNome(), arma.getTipo(), arma.getDano(), arma.getAttackRange(), arma.getAttackSpeed(), arma.getMinNivel());
+        }
+
+        System.out.println("==================================================================");
+
+        InputManager.esperarEnter("Pressione ENTER para voltar ao menu principal.");
+    }
+
+    public static void apresentarCenarios(){
+        String apresentacao =
+            "\n" +
+            "==================================================================" +
+            "\nExistem tres cenarios onde se pode ocorrer batalhas:" +
+            "\nO Castelo, O Vilarejo Abandonado e o Acampamento da Floresta.\n" +
+            "\nCada cenario possui uma lista de possíveis monstros que podem aparecer para batalhar com você.\n" +
+            "\nO Acampamento é o local mais perigoso do nosso jogo.\n" +
+            "==================================================================" +
+            "\nDeseja ver quais sao os monstros de cada cenario? (s/n) > ";
+        
+        if (InputManager.lerSimNao(apresentacao))
+            apresentarMonstros();
+    }
+
+    private static void apresentarMonstros(){
+        System.out.println("\n==================================================================");
+        System.out.println("Tabela com cenarios x monstros:\n");
+
+        System.out.println("                   | Castelo | Vilarejo Abandonado | Acampamento da Floresta");
+        System.out.println("------------------------------------------------------------------------------------------------------");
+
+        for (String monstro : monstrosDoJogo){
+            System.out.printf("%-21s |   %s   |         %s         |            %s\n", monstro,
+                verificarMonstroNoCenario(monstro, TipoCenario.CASTELO),
+                verificarMonstroNoCenario(monstro, TipoCenario.VILAREJO),
+                verificarMonstroNoCenario(monstro, TipoCenario.ACAMPAMENTO));
+        }
+
+        System.out.println("\n==================================================================");
+
+        InputManager.esperarEnter("Pressione ENTER para voltar ao menu principal.");
+    }
+
+    private static String verificarMonstroNoCenario(String monstro, TipoCenario cenario){
+        if (cenario.getMonstros().contains(monstro))
+            return "Sim";
+        else
+            return "Nao";
+    }
+
+    public static Dificuldade escolherDificuldade(){
+        String menu = 
+            "\nEscolha a dificuldade do jogo\n" +
+            "==================================================================" +
+            "\n[1] Facil" +
+            "\n[2] Medio" + 
+            "\n[3] Dificil\n" +
+            "==================================================================" +
+            "\nDigite sua opcao > ";
+        
+        int dificuldade = InputManager.lerInteiro(menu, 1, 3);
+
+        if (dificuldade == 1)
+            return Dificuldade.FACIL;
+        else if (dificuldade == 2)
+            return Dificuldade.MEDIO;
+        else
+            return Dificuldade.DIFICIL;
     }
 }

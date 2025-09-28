@@ -8,10 +8,34 @@ import java.util.Random;
 import java.util.List;
 
 public class Main {
-    
+
+    static Random r = new Random();
     public static void main (String[] args){
-        Random r = new Random();
-        
+
+        while (true){
+            int opcao = Utilidades.exibirMenuPrincipal();
+
+            if (opcao == 1){
+                break;
+            }
+            else if (opcao == 2){
+                Utilidades.apresentarHerois();
+            }
+            else if (opcao == 3){
+                Utilidades.apresentarArmas();
+            }
+            else if (opcao == 4){
+                Utilidades.apresentarCenarios();
+            }
+            else if (opcao == 5){
+                return;
+            }
+        }
+
+        Dificuldade dificuldade = Utilidades.escolherDificuldade();
+
+        System.out.println("Dificuldade escolhida: " + dificuldade.getDificuldade());
+
         Heroi heroi = Utilidades.criarHeroi();
 
         System.out.printf("\nVoce se chama %s, %s, e ira enfrentar muitos monstros nesse jogo!\n", heroi.getNome(), Utilidades.verificarClasse(heroi)); Utilidades.esperar();
@@ -19,7 +43,7 @@ public class Main {
         heroi.exibirStatus();
 
         ConstrutorDeCenario construtor = new ConstrutorDeCenario();
-        List<Fase> fases = construtor.gerar(r.nextInt(3, 9));
+        List<Fase> fases = construtor.gerar(r.nextInt(3, 9), dificuldade);
 
         System.out.printf("\n--------------------------\n\nO nosso jogo tera %d fases. Boa sorte!\n\n--------------------------\n", fases.size()); Utilidades.esperar();
 

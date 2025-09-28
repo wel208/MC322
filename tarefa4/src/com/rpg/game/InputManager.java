@@ -11,7 +11,7 @@ public class InputManager {
     public static int lerInteiro(String mensagem, int min, int max){
         while (true){
 
-            System.out.println(mensagem + " (" + min + "-" + "): ");
+            System.out.print(mensagem);
             String input = null;
 
             try{
@@ -37,7 +37,7 @@ public class InputManager {
     }
 
     public static String lerString(String mensagem){
-        System.out.println(mensagem);
+        System.out.print(mensagem);
 
         String linha = scanner.nextLine();
         return linha;
@@ -45,7 +45,7 @@ public class InputManager {
 
     public static boolean lerSimNao(String mensagem){
         while (true){
-            System.out.println(mensagem + "(s/n)");
+            System.out.print(mensagem);
             String input = null;
 
             try{
@@ -69,7 +69,7 @@ public class InputManager {
     }
 
     public static void esperarEnter(String mensagem){
-        System.out.println(mensagem);
+        System.out.print(mensagem);
         scanner.nextLine();
     }
 

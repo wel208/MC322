@@ -6,7 +6,7 @@ public enum TipoCenario {
     //Constantes
     CASTELO ("VAMOS! O castelo esta sendo invadido!", List.of("Goblin", "Cavaleiro Corrompido", "Troll", "Zumbi")),
     VILAREJO ("Caramba, um vilarejo abandonado... Monstros tomaram conta deste lugar.", List.of("Goblin", "Zumbi", "Troll", "Goblin Gigante")),
-    ACAMPAMENTO ("Estamos num acampamento no meio da floresta. Tenha cuidado, ha monstros la fora.", List.of("Ninfa da Floresta", "Cavaleiro Corrompido", "Goblin Gigante", "Corvo Rei"));
+    ACAMPAMENTO ("Estamos num acampamento no meio da floresta. Tenha cuidado, ha monstros la fora.", List.of("Ninfa da Floresta", "Cavaleiro Corrompido", "Goblin Gigante", "Corvo Rei", "Troll"));
 
     //Atributos
     private final String descricao;
