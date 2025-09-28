@@ -30,8 +30,7 @@ public class Fases implements Fase {
             System.out.printf("%s, %s, aparece para uma batalha! Vamos la!\n", monstro.getNome(), Utilidades.verificarClasse(monstro)); Utilidades.esperar();
             monstro.exibirStatus();
 
-            int turno = 1;
-            while (heroi.estaVivo() && monstro.estaVivo()){
+            for (int turno = 1; turno <= 100 && monstro.estaVivo(); turno++){
                 System.out.println("\n---INICIO DO" + Utilidades.verificarTurno(turno) + "TURNO---"); Utilidades.esperar();
                 turno++;
 
@@ -50,6 +49,9 @@ public class Fases implements Fase {
 
                     acao = monstro.escolherAcao(heroi);
                     acao.executar(monstro, heroi);
+
+                    if (!heroi.estaVivo())
+                        break;
                 }
 
                 else{
@@ -109,9 +111,10 @@ public class Fases implements Fase {
                     }
                 }
             }
-
+            if (!heroi.estaVivo())
+                break;
             if (!isConcluida()){
-                System.out.println("\n\n--------------------------\n"); Utilidades.esperar();
+                System.out.println("\n--------------------------\n"); Utilidades.esperar();
             }
         }
     }

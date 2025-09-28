@@ -61,6 +61,9 @@ public class Main {
         if (heroi.estaVivo())
             System.out.println("\nPARABENS! VOCE VENCEU TODAS AS FASES!");
         else
-            System.out.println("\nO heroi morreu.\nGAME OVER!");
+            System.out.println("\nO heroi morreu.\n\nGAME OVER!");
+
+        InputManager.fecharScanner();
+        System.exit(0);
     }
 }

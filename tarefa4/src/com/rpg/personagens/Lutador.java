@@ -18,12 +18,13 @@ public class Lutador extends Heroi{
     //Construtor
     public Lutador(String nome, Arma arma){ //Atributos predefinidos para um lutador de nível 0
         super(nome, arma);
-        this.pontosDeVidaMax = 120;
+        this.pontosDeVidaMax = 110;
         this.pontosDeVida = pontosDeVidaMax;
         this.moveSpeed = 7;
         this.forca = 70;
         this.protecao = 0.6;
         this.furia = 1;
+        this.dodgeChance = 0.4;
     }
 
     //Métodos

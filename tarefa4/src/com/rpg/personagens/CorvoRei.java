@@ -57,4 +57,10 @@ public class CorvoRei extends Monstro {
     public double getAtributoUnico(){
         return precisao;
     }
+
+    @Override
+    public Arma droparLoot(){
+        Random r = new Random();
+        return armasPossiveis.get(r.nextInt(2));
+    }
 }

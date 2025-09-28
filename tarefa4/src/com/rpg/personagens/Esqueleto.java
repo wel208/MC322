@@ -24,7 +24,7 @@ public class Esqueleto extends Monstro {
         this.protecao = 0.2 + (nivel - 1) * 0.03;
         this.forca = dificuldade.getMultiplicador() * (15 + (nivel - 1) * 2);
         this.precisao = 0.3 + (nivel - 1) * 0.05;
-        this.moveSpeed = 10;
+        this.moveSpeed = 8;
         this.xpConcedido = 15 + (nivel * 10);
         this.sorte = 0.3 + (nivel * 0.01);
     }

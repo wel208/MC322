@@ -14,7 +14,7 @@ public class Zumbi extends Monstro {
         this.pontosDeVida = this.pontosDeVidaMax;
         this.protecao = 0.2 + (nivel * 0.03);
         this.forca = dificuldade.getMultiplicador() * (15 + (nivel * 4));
-        this.moveSpeed = 3 + nivel;
+        this.moveSpeed = 6;
         this.xpConcedido = 30 + (nivel * 10);
         this.sorte = 0.2 + (nivel * 0.01);
         this.dodgeChance = 0.05 + (nivel * 0.01);

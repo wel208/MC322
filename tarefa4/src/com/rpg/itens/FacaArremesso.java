@@ -5,8 +5,8 @@ public class FacaArremesso extends Arma {
     public FacaArremesso(){
         this.nome = "Faca de Arremesso";
         this.tipo = "Longo Alcance";
-        this.dano = 0.9;
-        this.minNivel = 2;
+        this.dano = 0.8;
+        this.minNivel = 1;
         this.attackRange = 10;
         this.attackSpeed = 3;
     }

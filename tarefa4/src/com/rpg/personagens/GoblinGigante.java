@@ -14,7 +14,7 @@ public class GoblinGigante extends Monstro {
         this.pontosDeVida = this.pontosDeVidaMax;
         this.protecao = 0.4 + (nivel - 1) * 0.05;
         this.forca = dificuldade.getMultiplicador() * (25 + (nivel - 1) * 3);
-        this.moveSpeed = 4;
+        this.moveSpeed = 6;
         this.xpConcedido = 25 + (nivel * 15);
         this.sorte = 0.1 + (nivel * 0.01);
     }

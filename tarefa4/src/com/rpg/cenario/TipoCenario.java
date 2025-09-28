@@ -4,9 +4,9 @@ import java.util.List;
 
 public enum TipoCenario {
     //Constantes
-    CASTELO ("VAMOS! O castelo esta sendo invadido!", List.of("Goblin", "Cavaleiro Corrompido", "Troll", "Zumbi")),
-    VILAREJO ("Caramba, um vilarejo abandonado... Monstros tomaram conta deste lugar.", List.of("Goblin", "Zumbi", "Troll", "Goblin Gigante")),
-    ACAMPAMENTO ("Estamos num acampamento no meio da floresta. Tenha cuidado, ha monstros la fora.", List.of("Ninfa da Floresta", "Cavaleiro Corrompido", "Goblin Gigante", "Corvo Rei", "Troll"));
+    CASTELO ("VAMOS! O castelo esta sendo invadido!", List.of("Goblin", "Cavaleiro Corrompido", "Troll", "Zumbi", "Esqueleto")),
+    VILAREJO ("Caramba, um vilarejo abandonado... Monstros tomaram conta deste lugar.", List.of("Goblin", "Zumbi", "Troll", "Goblin Gigante", "Esqueleto")),
+    ACAMPAMENTO ("Estamos num acampamento no meio da floresta. Tenha cuidado, ha monstros la fora.", List.of("Ninfa da Floresta", "Cavaleiro Corrompido", "Goblin Gigante", "Corvo Rei", "Troll", "Esqueleto"));
 
     //Atributos
     private final String descricao;

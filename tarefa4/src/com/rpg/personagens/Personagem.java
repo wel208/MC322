@@ -29,9 +29,9 @@ public abstract class Personagem implements Combatente{
     }
 
     public double receberDano(double forca){
-        pontosDeVida -= (forca * (1.0 - protecao));
+        pontosDeVida -= (int)(forca * (1.0 - protecao));
         if (pontosDeVida < 0) pontosDeVida = 0;
-        return (forca * (1.0 - protecao));
+        return (int)(forca * (1.0 - protecao));
     }
 
     public void receberCura(int cura){

@@ -14,7 +14,7 @@ public class CavaleiroCorrompido extends Monstro {
         this.protecao = 0.2 + (nivel * 0.03);
         this.forca = dificuldade.getMultiplicador() * (12 + (nivel * 3));
         this.sorte = 0.2 + (nivel * 0.01);
-        this.moveSpeed = 5;
+        this.moveSpeed = 7;
         this.xpConcedido = 20 + (nivel * 10);
 }
 

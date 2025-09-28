@@ -19,10 +19,11 @@ public class Atirador extends Heroi {
         super(nome, arma);
         this.pontosDeVidaMax = 70;
         this.pontosDeVida = pontosDeVidaMax;
-        this.moveSpeed = 10;
+        this.moveSpeed = 9;
         this.forca = 40;
         this.protecao = 0.4;
         this.precisao = 0.3;
+        this.dodgeChance = 0.25;
     }
     
     //Métodos
@@ -67,9 +68,9 @@ public class Atirador extends Heroi {
         }
 
         else if (distancia <= arma.getAttackRange()){
-            if (chance < 0.15)
+            if (chance < 0.1)
                 seMover = true;
-            else if (chance < 0.75)
+            else if (chance < 0.85)
                 atacarInim = true;
         }
 

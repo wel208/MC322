@@ -32,7 +32,7 @@ public class HabilidadeEspecial implements AcaoDeCombate {
                 System.out.print("Uhf! ");
                 if (Math.random() > alvo.getDodgeChance() && Math.random() < Math.min(0.9, (usuario.getAtributoUnico() + usuario.getSorte()) * 0.9)){
                     contador++;
-                    dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * (distancia/2.0));
+                    dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * distancia/6);
                 }
             }
         }

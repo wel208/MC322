@@ -35,7 +35,7 @@ public class Utilidades{
     static List<Arma> armasLutador = List.of(new Espada(), new ClavaComum());
     static List<Arma> armasAtirador = List.of(new Funda(), new Arco());
 
-    //Todas as armas e monstros existentes do jogo
+    //Todas as armas, monstros e herois existentes do jogo
     static List<Arma> armasDoJogo = List.of(new Adagas(), new Arco(), new ClavaComum(), new ClavaEspinhos(), new Crossbow(), new Espada(), new FacaArremesso(), new Funda(), new GarrasCorvo(), new Lança(), new Machado(), new PenasCorvo());
     static List<String> monstrosDoJogo = List.of("Cavaleiro Corrompido", "Corvo Rei", "Esqueleto", "Goblin", "Goblin Gigante", "Ninfa da Floresta", "Troll", "Zumbi");
 
@@ -178,7 +178,7 @@ public class Utilidades{
 
     //Calcula e retorna a distância entre o herói e o monstro
     public static double calcularDistancia(int pos1, int pos2){
-        return Math.abs(pos1 - pos2);
+        return (double)Math.abs(pos1 - pos2);
     }
 
     //Retorna de qual classe concreta o personagem é
@@ -215,7 +215,7 @@ public class Utilidades{
     //Método para fazer uma pausa entre operações/prints do programa
     public static void esperar() {
         try{
-            Thread.sleep(500);
+            Thread.sleep(250);
         } 
         catch (InterruptedException e){
             Thread.currentThread().interrupt();
@@ -246,14 +246,31 @@ public class Utilidades{
             "\nExistem duas classes de heróis:\n" +
 
             "\nO Lutador: guerreiro que possui habilidades com armas de curto alcance e busca sempre estar próximo de seus inimigos." +
-            "\nO lutador possui boa quantidade de pontos de vida, forca e protecao.\n" +
+            "\nEle possui boa quantidade de pontos de vida, forca e protecao." +
+            "\nO Lutador possui 'furia' como atributo unico, quando ele utiliza a furia, consegue atacar mais vezes em um mesmo turno\n" +
 
             "\nO Atirador: guerreiro que possui habilidade com armas de longo alcance, procurando sempre estar mais longe do inimigo para ser mais efetivo." +
-            "\nO atirador possui menos, mas nao pouca, quantidade de pontos de vida, forca e protecao.\n" +
+            "\nEle possui menos, mas nao pouca, quantidade de pontos de vida, forca e protecao." +
+            "\nO Atirador tem 'precisao' como atributo unico, quanto maior seu nivel, mais chance tem de acertar seu alvo\n" +
             "==================================================================" +
-            "\nPressione ENTER para continuar. ";
+            "\nDeseja ver os atributos de cada classe detalhadamente? (s/n) > ";
         
-        InputManager.esperarEnter(apresentacao);
+        if (InputManager.lerSimNao(apresentacao))
+            apresentarAtributosHerois();
+    }
+
+    private static void apresentarAtributosHerois(){
+        System.out.println("\n==================================================================");
+        System.out.println("Tabela com os atributos iniciais:\n");
+
+        System.out.println("Classe   | Pontos de vida | Forca | Protecao | Vel. de Movimento");
+        System.out.println("------------------------------------------------------------------------------------------------------");
+
+        System.out.printf("Lutador  | %-14d | %-5d | %-8d | %d m/turno\n",120, 70, 60, 7);
+        System.out.printf("Atirador | %-14d | %-5d | %-8d | %d m/turno\n",70, 40, 40, 9);
+        System.out.println("==================================================================");
+
+        InputManager.esperarEnter("Pressione ENTER para voltar ao menu principal. ");
     }
 
     public static void apresentarArmas(){
@@ -262,7 +279,7 @@ public class Utilidades{
             "==================================================================" +
             "\nExistem dois tipos de arma:" +
             "\nDe Curto Alcance: Espada, Adagas, Clava Comum, Clava com Espinhos, Lança, Machado e Garras de Corvo" +
-            "\nDeLongo Alcance: Arco e flecha, Crossbow, Faca de Arremesso, Funda e Penas de Corvo\n" +
+            "\nDe Longo Alcance: Arco e flecha, Crossbow, Faca de Arremesso, Funda e Penas de Corvo\n" +
             "==================================================================" +
             "\nDeseja ver detalhes de cada arma? (s/n) > ";
         
@@ -385,7 +402,10 @@ public class Utilidades{
                 throw new TipoErradoDeArmaException();
             else if (heroi.getNivel() < arma.getMinNivel())
                 throw new NaoPossuiNivelException();
-            heroi.setArma(arma);
+            else{
+                heroi.setArma(arma);
+                System.out.println(heroi.getNome() + " equipou " + arma.getNome() + "!");
+            }
         } catch (ArmasIguaisException e){
             System.out.println(e.getMessage());
         } catch (TipoErradoDeArmaException e){
@@ -416,7 +436,7 @@ public class Utilidades{
         System.out.println("\n==================================================================");
         System.out.println("Voce ja derrotou " + monstrosDerrotados + " dos " + faseAtual.getMonstros().size() + " monstros desta fase." + "\n");
 
-        System.out.println("Voce ainda precisa derrotar " + (faseAtual.getMonstros().size() - monstrosDerrotados) + " monstro para passar de fase.");
+        System.out.println("Voce ainda precisa derrotar " + (faseAtual.getMonstros().size() - monstrosDerrotados) + " monstro(s) para passar de fase.");
         System.out.println("==================================================================");
 
         InputManager.esperarEnter("Pressione ENTER para voltar ao menu pos-turno. ");

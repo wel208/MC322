@@ -6,7 +6,7 @@ public class PenasCorvo extends Arma {
         this.nome = "Penas de Corvo";
         this.tipo = "Longo Alcance";
         this.dano = 0.9;
-        this.minNivel = 3;
+        this.minNivel = 4;
         this.attackRange = 30;
         this.attackSpeed = 4;
     }

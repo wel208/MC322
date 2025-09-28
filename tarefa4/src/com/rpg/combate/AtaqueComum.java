@@ -46,12 +46,12 @@ public class AtaqueComum implements AcaoDeCombate{
                     if (Math.random() > alvo.getDodgeChance()){
                         contador++;
 
-                        double distancia = (double)Utilidades.calcularDistancia(usuario.getPos(), usuario.getPos());
+                        double distancia = Utilidades.calcularDistancia(usuario.getPos(), alvo.getPos());
 
                         boolean critico = Math.random() < usuario.getCriticalChance();
                         double multiplicador = critico ? 1.2 : 1.0;
 
-                        dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * multiplicador * (distancia/3.0));
+                        dano += alvo.receberDano(usuario.getForca() * usuario.getArma().getDano() * multiplicador * distancia/7);
 
                         if (critico){
                             System.out.printf("%s, %s, ACERTOU um ataque CRITICO em %s!\n", usuario.getNome(), Utilidades.verificarClasse(usuario), alvo.getNome());
