@@ -215,7 +215,7 @@ public class Utilidades{
     //Método para fazer uma pausa entre operações/prints do programa
     public static void esperar() {
         try{
-            Thread.sleep(250);
+            Thread.sleep(50);
         } 
         catch (InterruptedException e){
             Thread.currentThread().interrupt();
@@ -431,7 +431,7 @@ public class Utilidades{
         InputManager.esperarEnter("Pressione ENTER para voltar ao menu pos-turno. ");
     }
 
-    public static void apresentarInfoDaFase(Fases faseAtual, int monstrosDerrotados){
+    public static void apresentarInfoDaFase(Fase faseAtual, int monstrosDerrotados){
         System.out.println("\n==================================================================");
         System.out.println("Voce ja derrotou " + monstrosDerrotados + " dos " + faseAtual.getMonstros().size() + " monstros desta fase." + "\n");
 

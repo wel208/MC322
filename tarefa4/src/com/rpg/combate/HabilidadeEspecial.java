@@ -40,5 +40,6 @@ public class HabilidadeEspecial implements AcaoDeCombate {
         }
 
         System.out.printf("\n\nO nosso heroi acertou %d ataque(s), causando %.0f de dano!\n", contador, dano); Utilidades.esperar();
+        alvo.statusParcial();
     }
 }

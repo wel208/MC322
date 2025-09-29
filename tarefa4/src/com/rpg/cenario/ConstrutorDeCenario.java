@@ -22,7 +22,7 @@ public class ConstrutorDeCenario implements GeradorDeFases {
             else
                 cenario = TipoCenario.values()[r.nextInt(2)];
                 
-            fases.add(new Fases(Utilidades.criarListaDeMonstro(cenario, i, dificuldade), cenario));
+            fases.add(new FasesDeCombate(Utilidades.criarListaDeMonstro(cenario, i, dificuldade), cenario));
         }
 
         return fases;
