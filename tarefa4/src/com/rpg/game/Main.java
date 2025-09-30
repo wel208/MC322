@@ -46,9 +46,9 @@ public class Main {
         System.out.printf("\nVoce se chama %s, %s, e ira enfrentar muitos monstros nesse jogo!\n", heroi.getNome(), Utilidades.verificarClasse(heroi)); Utilidades.esperar();
         heroi.exibirStatus();
 
-        //Construção das fases do jogo, serão geradas entre 3 e 8 fases em um jogo
+        //Construção das fases do jogo, serão geradas entre 3 e 5 fases em um jogo
         ConstrutorDeCenario construtor = new ConstrutorDeCenario();
-        List<Fase> fases = construtor.gerar(r.nextInt(3, 9), dificuldade);
+        List<Fase> fases = construtor.gerar(r.nextInt(3, 6), dificuldade);
 
         System.out.printf("\n--------------------------\n\nO nosso jogo tera %d fases. Boa sorte!\n\n--------------------------\n", fases.size()); Utilidades.esperar();
 

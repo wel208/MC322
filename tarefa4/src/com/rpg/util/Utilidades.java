@@ -78,7 +78,9 @@ public class Utilidades{
     //Método que cria uma lista de monstros para uma fase
     public static ArrayList<Monstro> criarListaDeMonstro(TipoCenario cenario, int nivel, Dificuldade dificuldade){
         ArrayList<Monstro> monstros = new ArrayList<>();
-        int numMontros = random.nextInt(3, 6);
+
+        //Cria de 2 a 4 monstros por fase
+        int numMontros = random.nextInt(2, 5);
 
         for (int i = 0; i < numMontros; i++)
             monstros.add(criarMonstro(cenario, nivel, dificuldade));
