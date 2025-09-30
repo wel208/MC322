@@ -83,6 +83,8 @@ public class Main {
                     System.out.println("\n---INICIO DO" + Utilidades.verificarTurno(turno) + "TURNO---"); Utilidades.esperar();
                     turno++;
 
+                    f.getEfeito().aplicarEfeito(heroi);
+                    
                     AcaoDeCombate acao;
 
                     acao = heroi.escolherAcao(monstro);
@@ -108,6 +110,7 @@ public class Main {
                         System.out.printf("\n%s, %s, foi derrotado!\n", monstro.getNome(), Utilidades.verificarClasse(monstro)); Utilidades.esperar();
                         System.out.println("\n--------------------------"); Utilidades.esperar();
 
+                        f.getEfeito().removerEfeito(heroi);
                         heroi.ganharExperiencia(monstro.getXpConcedido());
 
                         int caso;

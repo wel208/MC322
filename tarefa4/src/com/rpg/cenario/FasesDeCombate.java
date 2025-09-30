@@ -9,15 +9,18 @@ public class FasesDeCombate implements Fase {
     //Atributos
     protected List<Monstro> Monstros;
     protected TipoCenario cenario;
+    protected EfeitoDoCenario efeito;
 
-    public FasesDeCombate(List<Monstro> Monstros, TipoCenario cenario){
+    public FasesDeCombate(List<Monstro> Monstros, TipoCenario cenario, EfeitoDoCenario efeito){
         this.Monstros = Monstros;
         this.cenario = cenario;
+        this.efeito = efeito;
     }
 
     //Método que executa cada uma das fases do jogo 
     public void iniciar(Heroi heroi){
         cenario.descreverCenario();
+        efeito.descreverEfeito();
     }
 
     public String getTipoDeCenario(){
@@ -26,6 +29,10 @@ public class FasesDeCombate implements Fase {
 
     public List<Monstro> getMonstros(){
         return Monstros;
+    }
+
+    public EfeitoDoCenario getEfeito(){
+        return efeito;
     }
 
     public boolean isConcluida(){

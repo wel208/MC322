@@ -7,4 +7,5 @@ public interface Fase {
     boolean isConcluida();
     String getTipoDeCenario();
     List<Monstro> getMonstros();
+    EfeitoDoCenario getEfeito();
 }
