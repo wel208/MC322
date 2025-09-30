@@ -11,7 +11,7 @@ public class Goblin extends Monstro{
 
         this.pontosDeVidaMax = (int)(dificuldade.getMultiplicador() * (40 + (nivel - 1) * 8));
         this.pontosDeVida = this.pontosDeVidaMax;
-        this.protecao = 0.2 + (nivel - 1) * 0.02;
+        this.protecao = Math.min(0.4, 0.2 + (nivel - 1) * 0.02);
         this.forca = dificuldade.getMultiplicador() * (25 + (nivel - 1) * 2);
         this.moveSpeed = 8;
         this.xpConcedido = 10 + (nivel * 8);

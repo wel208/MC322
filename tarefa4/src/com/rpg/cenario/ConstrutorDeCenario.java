@@ -15,7 +15,7 @@ public class ConstrutorDeCenario implements GeradorDeFases {
         
         for (int i = 1; i <= n; i++){
             TipoCenario cenario;
-            EfeitoDoCenario efeito;
+            EfeitoDeCenario efeito;
 
             //Toda fase multipla de 3 sera no Acampamento da Floresta
             if (i % 3 == 0)
@@ -23,12 +23,12 @@ public class ConstrutorDeCenario implements GeradorDeFases {
             else
                 cenario = TipoCenario.values()[r.nextInt(2)];
 
-            if (cenario.equals(TipoCenario.ACAMPAMENTO))
-                efeito = EfeitoDoCenario.CORAGEM;
+            if (cenario.equals(TipoCenario.CASTELO))
+                efeito = EfeitoDeCenario.CORAGEM;
             else if (cenario.equals(TipoCenario.VILAREJO))
-                efeito = EfeitoDoCenario.RAIVA;
+                efeito = EfeitoDeCenario.RAIVA;
             else
-                efeito = EfeitoDoCenario.MEDO;
+                efeito = EfeitoDeCenario.MEDO;
                 
             fases.add(new FasesDeCombate(Utilidades.criarListaDeMonstro(cenario, i, dificuldade), cenario, efeito));
         }

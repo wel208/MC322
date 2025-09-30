@@ -10,6 +10,7 @@ public abstract class Personagem implements Combatente{
     protected int pontosDeVida;
     protected int pontosDeVidaMax;
     protected double protecao;
+    protected double protecaoMax;
     protected double forca;
     protected int moveSpeed;
     protected int pos;
@@ -21,6 +22,7 @@ public abstract class Personagem implements Combatente{
     // Construtor
     public Personagem(String nome){
         this.nome = nome;
+        this.protecaoMax = 0.9;
     }
 
     // Métodos utilitários

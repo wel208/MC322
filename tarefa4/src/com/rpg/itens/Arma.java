@@ -26,7 +26,7 @@ public abstract class Arma implements Item {
         return nome;
     }
 
-    public String getTipoString() {
+    public String getStringTipo() {
         return tipo.getTipoString();
     }
 
@@ -39,10 +39,10 @@ public abstract class Arma implements Item {
     }
 
     public void aumentaAttackSpeed(){
-        attackSpeed++;
+        attackSpeed += 1;
     }
     
     public void resetaAttackSpeed(){
-        attackSpeed--;
+        attackSpeed -= 1;
     }
 }

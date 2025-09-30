@@ -11,7 +11,7 @@ public class CavaleiroCorrompido extends Monstro {
 
         this.pontosDeVidaMax = (int)(dificuldade.getMultiplicador() * (80 + (nivel * 15)));
         this.pontosDeVida = this.pontosDeVidaMax;
-        this.protecao = 0.2 + (nivel * 0.03);
+        this.protecao = Math.min(0.8, 0.2 + (nivel * 0.03));
         this.forca = dificuldade.getMultiplicador() * (12 + (nivel * 3));
         this.sorte = 0.2 + (nivel * 0.01);
         this.moveSpeed = 7;

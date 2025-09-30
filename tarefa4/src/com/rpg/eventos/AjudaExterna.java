@@ -19,6 +19,6 @@ public class AjudaExterna implements Evento {
 
     public void executar(Combatente alvo){
         double dano = alvo.receberDano(100);
-        System.out.printf("\n%s, %s, recebeu %d de dano!\n",alvo.getNome(), Utilidades.verificarClasse(alvo), dano);
+        System.out.printf("\n%s, %s, recebeu %.0f de dano!\n", alvo.getNome(), Utilidades.verificarClasse(alvo), dano);
     }
 }

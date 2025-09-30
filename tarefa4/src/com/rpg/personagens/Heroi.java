@@ -68,7 +68,7 @@ public abstract class Heroi extends Personagem{
         sorte += 0.02;
 
         receberCura(20);
-        protecao = Math.min(0.9, protecao);
+        protecao = Math.min(protecaoMax, protecao);
         sorte = Math.min(0.9, sorte);
 
         if (nivel % 2 == 0){    //A cada dois niveis o herói tem um aumento do atributo único

@@ -17,7 +17,7 @@ import com.rpg.personagens.*;
 public class Utilidades{
 
     //Strings para printar qual o atual turno em uma batalha
-    static String[] turnosDezenas = {"", " DECIMO", " VIGESIMO", " TRIGESIMO", " QUADRAGESIMO", " QUINQUAGESIMO", " SEXAGESIMO", "SEPTUAGESIMO", "OCTOGESIMO", "NONAGESIMO"};
+    static String[] turnosDezenas = {"", " DECIMO", " VIGESIMO", " TRIGESIMO", " QUADRAGESIMO", " QUINQUAGESIMO", " SEXAGESIMO", " SEPTUAGESIMO", " OCTOGESIMO", " NONAGESIMO"};
     static String[] turnosUnidades = {"", "PRIMEIRO ", "SEGUNDO ", "TERCEIRO ", "QUARTO ", "QUINTO ", "SEXTO ", "SETIMO ", "OITAVO ", "NONO "};
     
     //Possíveis nomes para cada classe de personagem
@@ -297,7 +297,7 @@ public class Utilidades{
 
         for (Arma arma : armasDoJogo){
             System.out.printf("%-17s | %-13s | %-13.1f | %-7d | %-14d | %d\n", 
-                arma.getNome(), arma.getTipoString(), arma.getDano(), arma.getAttackRange(), arma.getAttackSpeed(), arma.getMinNivel());
+                arma.getNome(), arma.getStringTipo(), arma.getDano(), arma.getAttackRange(), arma.getAttackSpeed(), arma.getMinNivel());
         }
 
         System.out.println("==================================================================");
@@ -425,7 +425,7 @@ public class Utilidades{
 
         for (Arma arma : List.of(arma1, arma2)){
             System.out.printf("%-17s | %-13s | %-13.1f | %-7d | %-14d | %d\n", 
-                arma.getNome(), arma.getTipo(), arma.getDano(), arma.getAttackRange(), arma.getAttackSpeed(), arma.getMinNivel());
+                arma.getNome(), arma.getStringTipo(), arma.getDano(), arma.getAttackRange(), arma.getAttackSpeed(), arma.getMinNivel());
         }
 
         System.out.println("==================================================================");

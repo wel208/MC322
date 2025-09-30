@@ -9,9 +9,9 @@ public class FasesDeCombate implements Fase {
     //Atributos
     protected List<Monstro> Monstros;
     protected TipoCenario cenario;
-    protected EfeitoDoCenario efeito;
+    protected EfeitoDeCenario efeito;
 
-    public FasesDeCombate(List<Monstro> Monstros, TipoCenario cenario, EfeitoDoCenario efeito){
+    public FasesDeCombate(List<Monstro> Monstros, TipoCenario cenario, EfeitoDeCenario efeito){
         this.Monstros = Monstros;
         this.cenario = cenario;
         this.efeito = efeito;
@@ -31,7 +31,7 @@ public class FasesDeCombate implements Fase {
         return Monstros;
     }
 
-    public EfeitoDoCenario getEfeito(){
+    public EfeitoDeCenario getEfeito(){
         return efeito;
     }
 

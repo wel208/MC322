@@ -84,7 +84,7 @@ public class Main {
                     turno++;
 
                     f.getEfeito().aplicarEfeito(heroi);
-                    
+
                     AcaoDeCombate acao;
 
                     acao = heroi.escolherAcao(monstro);
@@ -101,6 +101,8 @@ public class Main {
                         acao = monstro.escolherAcao(heroi);
                         acao.executar(monstro, heroi);
 
+                        f.getEfeito().removerEfeito(heroi);
+                        
                         if (!heroi.estaVivo())
                             break;
                     }

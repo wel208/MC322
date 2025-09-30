@@ -12,7 +12,7 @@ public class Troll extends Monstro {
 
         this.pontosDeVidaMax = (int)(dificuldade.getMultiplicador() * (80 + (nivel - 1) * 30));
         this.pontosDeVida = this.pontosDeVidaMax;
-        this.protecao = 0.5 + (nivel - 1) * 0.04;
+        this.protecao = Math.min(0.5, 0.5 + (nivel - 1) * 0.04);
         this.forca = dificuldade.getMultiplicador() * (40 + (nivel - 1) * 2);
         this.moveSpeed = 6;
         this.xpConcedido = 50 + (nivel * 20);

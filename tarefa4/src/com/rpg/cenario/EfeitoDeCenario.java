@@ -2,7 +2,7 @@ package com.rpg.cenario;
 
 import com.rpg.personagens.*;
 
-public enum EfeitoDoCenario {
+public enum EfeitoDeCenario {
     CORAGEM ("O heroi fica mais corajoso no Castelo e ataca uma vez a mais por turno."){
         @Override
         public void aplicarEfeito(Heroi heroi){
@@ -37,12 +37,12 @@ public enum EfeitoDoCenario {
 
     private final String descricao;
 
-    private EfeitoDoCenario(String descricao){
+    private EfeitoDeCenario(String descricao){
         this.descricao = descricao;
     }
 
     public void descreverEfeito(){
-        System.out.println(descricao);
+        System.out.println("\n" + descricao);
     }
 
     public abstract void aplicarEfeito(Heroi heroi);
