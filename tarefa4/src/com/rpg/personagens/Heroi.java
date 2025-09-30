@@ -81,6 +81,20 @@ public abstract class Heroi extends Personagem{
         this.arma = novaArma;
     }
 
+    public void aumentaProtecao(double mult){
+        protecao = protecao * (1 + mult);
+    }
+    public void resetaProtecao(double mult){
+        protecao = protecao / (1 + mult);
+    }
+
+    public void diminuiEsquiva(double mult){
+        dodgeChance = dodgeChance * (1 + mult);
+    }
+    public void resetaEsquiva(double mult){
+        dodgeChance = dodgeChance / (1 + mult);
+    }
+
     protected int getExperiencia(){
         return experiencia;
     }

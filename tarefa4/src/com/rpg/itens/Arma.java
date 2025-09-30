@@ -37,4 +37,12 @@ public abstract class Arma implements Item {
     public int getMinNivel() {
         return minNivel;
     }
+
+    public void aumentaAttackSpeed(){
+        attackSpeed++;
+    }
+    
+    public void resetaAttackSpeed(){
+        attackSpeed--;
+    }
 }
