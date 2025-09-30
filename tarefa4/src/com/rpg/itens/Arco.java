@@ -4,7 +4,7 @@ public class Arco extends Arma {
     //Construtor
     public Arco(){
         this.nome = "Arco e Flecha";
-        this.tipo = "Longo Alcance";
+        this.tipo = TipoDeArma.LONGO_ALCANCE;
         this.dano = 0.9;
         this.minNivel = 0;
         this.attackRange = 25;

@@ -54,6 +54,9 @@ public class Main {
 
         //For que roda cada uma das fases do jogo
         for (int i = 1; i <= fases.size(); i++){
+            if (!heroi.estaVivo())
+                    break;
+
             System.out.println("\nINICIO DA " + i + "º FASE!\n\n--------------------------\n"); Utilidades.esperar();
             
             Fase f = fases.get(i - 1);
@@ -160,15 +163,7 @@ public class Main {
                         }
                     }
                 }
-                if (!heroi.estaVivo())
-                    break;
-                if (!f.isConcluida()){
-                    System.out.println("\n--------------------------\n"); Utilidades.esperar();
-                }
             }
-
-                if (!heroi.estaVivo())
-                    break;
         }
 
         //Momento em que o jogo se encerra

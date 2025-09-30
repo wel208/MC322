@@ -295,7 +295,7 @@ public class Utilidades{
 
         for (Arma arma : armasDoJogo){
             System.out.printf("%-17s | %-13s | %-13.1f | %-7d | %-14d | %d\n", 
-                arma.getNome(), arma.getTipo(), arma.getDano(), arma.getAttackRange(), arma.getAttackSpeed(), arma.getMinNivel());
+                arma.getNome(), arma.getTipoString(), arma.getDano(), arma.getAttackRange(), arma.getAttackSpeed(), arma.getMinNivel());
         }
 
         System.out.println("==================================================================");
@@ -396,8 +396,8 @@ public class Utilidades{
         try{
             if (heroi.getArma().equals(arma))
                 throw new ArmasIguaisException();
-            else if (heroi instanceof Lutador  && arma.getTipo().equals("Longo Alcance") ||
-                     heroi instanceof Atirador && arma.getTipo().equals("Corpo a Corpo"))
+            else if (heroi instanceof Lutador  && arma.getTipo().equals(TipoDeArma.LONGO_ALCANCE) ||
+                     heroi instanceof Atirador && arma.getTipo().equals(TipoDeArma.CURTO_ALCANCE))
                 throw new TipoErradoDeArmaException();
             else if (heroi.getNivel() < arma.getMinNivel())
                 throw new NaoPossuiNivelException();

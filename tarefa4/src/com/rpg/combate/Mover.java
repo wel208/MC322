@@ -1,5 +1,6 @@
 package com.rpg.combate;
 
+import com.rpg.itens.TipoDeArma;
 import com.rpg.personagens.*;
 import com.rpg.util.*;
 public class Mover implements AcaoDeCombate {
@@ -18,7 +19,7 @@ public class Mover implements AcaoDeCombate {
         }
 
         //Lógica de movimento de personagens que atacam no Corpo a Corpo
-        else if ("Corpo a Corpo".equals(usuario.getArma().getTipo())){
+        else if (usuario.getArma().getTipo().equals(TipoDeArma.CURTO_ALCANCE)){
             int direcao = usuario.getPos() < alvo.getPos() ? 1 : -1;
 
             for (int i = 0; i < usuario.getMoveSpeed(); i++){

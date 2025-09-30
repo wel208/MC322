@@ -1,5 +1,6 @@
 package com.rpg.combate;
 
+import com.rpg.itens.TipoDeArma;
 import com.rpg.util.*;
 
 public class AtaqueComum implements AcaoDeCombate{
@@ -10,7 +11,7 @@ public class AtaqueComum implements AcaoDeCombate{
         int qtdAtque = usuario.getArma().getAttackSpeed();
 
         //Lógica de funcionamento de um ataque utilizando uma arma corpo a corpo
-        if ("Corpo a Corpo".equals(usuario.getArma().getTipo())){
+        if (usuario.getArma().getTipo().equals(TipoDeArma.CURTO_ALCANCE)){
 
             for (int i = 0; i < qtdAtque; i ++){
 

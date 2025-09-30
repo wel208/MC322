@@ -3,7 +3,7 @@ public abstract class Arma implements Item {
     
     // Atributos
     protected String nome;
-    protected String tipo;
+    protected TipoDeArma tipo;
     protected double dano;
     protected int minNivel;
     protected int attackRange;
@@ -26,7 +26,11 @@ public abstract class Arma implements Item {
         return nome;
     }
 
-    public String getTipo() {
+    public String getTipoString() {
+        return tipo.getTipoString();
+    }
+
+    public TipoDeArma getTipo() {
         return tipo;
     }
 
