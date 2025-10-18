@@ -22,7 +22,7 @@ public class GerenciadorDePersistencia {
 
             marshaller.marshal(b, new File("saves/" + nomeBatalha + ".xml"));
 
-            System.out.println("\nJogo salvo com sucesso!\n"); Utilidades.esperar();
+            System.out.println("\nJogo salvo com sucesso!"); Utilidades.esperar();
         }
         catch (JAXBException e){
             e.printStackTrace();

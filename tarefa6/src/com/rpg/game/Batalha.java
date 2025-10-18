@@ -9,7 +9,7 @@ import com.rpg.combate.*;
 import com.rpg.eventos.AjudaExterna;
 import com.rpg.save.GerenciadorDePersistencia;
 import com.rpg.util.Utilidades;
-
+import com.rpg.itens.*;
 @XmlRootElement(name = "batalha")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Batalha {
@@ -56,7 +56,7 @@ public class Batalha {
 
             int monstrosDerrotados = 0;
 
-            System.out.println("Estamos na " + nFase + "ª fase do jogo!");
+            System.out.println("\nEstamos na " + nFase + "ª fase do jogo!");
             System.out.println("\n--------------------------\n"); Utilidades.esperar();
 
             //For que percorre todos os monstros presentes na fase 
@@ -116,11 +116,18 @@ public class Batalha {
                         heroi.ganharExperiencia(monstro.getXpConcedido());
 
                         int caso;
+                        Arma armaDropada = null;
 
                         //If-else que diz se o monstro irá dropar a arma ou não
                         if (Math.random() < 0.6 * monstro.getDificuldade().getMultiplicador()){
                             caso = 1;
-                            System.out.printf("\n%s, %s, dropou %s, sua arma!\n", monstro.getNome(), Utilidades.verificarClasse(monstro), monstro.getArma().getNome()); Utilidades.esperar();
+                            armaDropada = monstro.getArma();
+                            if (monstro instanceof CorvoRei){
+                                System.out.printf("\n%s, %s, dropou %s!\n", monstro.getNome(), Utilidades.verificarClasse(monstro), armaDropada.getNome()); Utilidades.esperar();
+                            }
+                            else{
+                                System.out.printf("\n%s, %s, dropou %s, sua arma!\n", monstro.getNome(), Utilidades.verificarClasse(monstro), armaDropada.getNome()); Utilidades.esperar();
+                            }
                         }
                         else{
                             caso = 2;
@@ -138,10 +145,10 @@ public class Batalha {
                                     break;
                                 }
                                 else if (escolha == 2){
-                                    Utilidades.tentarEquiparArma(heroi, monstro.droparLoot());
+                                    Utilidades.tentarEquiparArma(heroi, armaDropada);
                                 }
                                 else if(escolha == 3){
-                                    Utilidades.compararArmas(heroi.getArma(), monstro.droparLoot());
+                                    Utilidades.compararArmas(heroi.getArma(), armaDropada);
                                 }
                                 else if (escolha == 4){
                                     heroi.exibirStatus();

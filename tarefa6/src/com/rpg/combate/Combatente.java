@@ -1,6 +1,10 @@
 package com.rpg.combate;
-
 import com.rpg.itens.*;
+import com.rpg.personagens.*;
+import javax.xml.bind.annotation.*;
+
+@XmlSeeAlso({Heroi.class, Monstro.class})
+@XmlAccessorType(XmlAccessType.FIELD)
 public interface Combatente {
     String getNome();
     Arma getArma();
