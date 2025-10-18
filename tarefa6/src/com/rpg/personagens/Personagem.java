@@ -3,6 +3,9 @@ package com.rpg.personagens;
 import com.rpg.combate.*;
 import com.rpg.itens.*;
 import com.rpg.util.*;
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({Atirador.class, Lutador.class, CavaleiroCorrompido.class, CorvoRei.class, Esqueleto.class, Goblin.class, GoblinGigante.class, Ninfa.class, Troll.class, Zumbi.class})
 public abstract class Personagem implements Combatente{
 
     //Atributos
@@ -17,7 +20,23 @@ public abstract class Personagem implements Combatente{
     protected double criticalChance;
     protected double sorte;
     protected double dodgeChance;
+    @XmlElements({
+        @XmlElement(name="adagas", type=Adagas.class),
+        @XmlElement(name="arco", type=Arco.class),
+        @XmlElement(name="clavaComum", type=ClavaComum.class),
+        @XmlElement(name="clavaEspinhos", type=ClavaEspinhos.class),
+        @XmlElement(name="crossbow", type=Crossbow.class),
+        @XmlElement(name="espada", type=Espada.class),
+        @XmlElement(name="facaArremesso", type=FacaArremesso.class),
+        @XmlElement(name="funda", type=Funda.class),
+        @XmlElement(name="garrasCorvo", type=GarrasCorvo.class),
+        @XmlElement(name="lança", type=Lança.class),
+        @XmlElement(name="machado", type=Machado.class),
+        @XmlElement(name="penasCorvo", type=PenasCorvo.class)
+    })
     protected Arma arma;
+
+    public Personagem(){}
 
     // Construtor
     public Personagem(String nome){
@@ -50,6 +69,7 @@ public abstract class Personagem implements Combatente{
     public String getNome(){
         return nome;
     }
+    @XmlTransient
     public Arma getArma(){
         return arma;
     }

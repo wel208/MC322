@@ -4,7 +4,14 @@ import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 import com.rpg.itens.*;
 import com.rpg.util.*;
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "zumbi")
 public class Zumbi extends Monstro {
+
+    public Zumbi(){
+        super("nome", 1, null, null);
+    }
 
     // Construtor
     public Zumbi(String nome, int nivel, Arma arma, Dificuldade dificuldade){

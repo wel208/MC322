@@ -3,13 +3,19 @@ package com.rpg.personagens;
 import com.rpg.combate.*;
 import com.rpg.itens.*;
 import com.rpg.util.*;
-
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "atirador")
 public class Atirador extends Heroi {
 
     //Atributos
     private double precisao;
 
     //Construtor
+    public Atirador(){
+        super("nome", null);
+    }
+
     public Atirador(String nome, Arma arma){
         super(nome, arma);
         this.pontosDeVidaMax = 70;

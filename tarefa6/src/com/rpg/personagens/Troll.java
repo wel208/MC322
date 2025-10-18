@@ -4,7 +4,14 @@ import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 import com.rpg.itens.*;
 import com.rpg.util.*;
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "troll")
 public class Troll extends Monstro {
+
+    public Troll(){
+        super("nome", 1, null, null);
+    }
 
     // Construtor
     public Troll(String nome, int nivel, Arma arma, Dificuldade dificuldade){

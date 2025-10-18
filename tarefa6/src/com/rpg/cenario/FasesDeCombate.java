@@ -4,13 +4,18 @@ import java.util.List;
 
 import com.rpg.combate.Combatente;
 import com.rpg.personagens.*;
-
+import javax.xml.bind.annotation.*;
+@XmlRootElement(name = "fasesDeCombate")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class FasesDeCombate implements Fase {
 
     //Atributos
+    @XmlElementRef
     private List<Monstro> Monstros;
     private TipoCenario cenario;
     private EfeitoDeCenario efeito;
+
+    public FasesDeCombate(){}
 
     //Construtor
     public FasesDeCombate(List<Monstro> Monstros, TipoCenario cenario, EfeitoDeCenario efeito){

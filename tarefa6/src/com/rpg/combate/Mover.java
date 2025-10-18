@@ -1,10 +1,14 @@
 package com.rpg.combate;
-
 import com.rpg.itens.TipoDeArma;
 import com.rpg.personagens.*;
 import com.rpg.util.*;
+import javax.xml.bind.annotation.*;
+@XmlRootElement(name = "mover")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Mover implements AcaoDeCombate {
 
+    public Mover(){}
+    
     @Override
     public void executar(Combatente usuario, Combatente alvo){
 

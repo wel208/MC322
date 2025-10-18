@@ -37,7 +37,7 @@ public class GerenciadorDePersistencia {
 
             Batalha batalhaCarregada = (Batalha) unmarshaller.unmarshal(new File("saves/" + nomeBatalha + ".xml"));
 
-            System.out.println("\nJogo carregado com sucesso!\n"); Utilidades.esperar();
+            System.out.println("\nJogo carregado com sucesso!"); Utilidades.esperar();
             return batalhaCarregada;
         }
         catch (JAXBException e){

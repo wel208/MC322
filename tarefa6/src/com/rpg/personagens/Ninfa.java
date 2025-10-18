@@ -4,9 +4,15 @@ import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 import com.rpg.itens.*;
 import com.rpg.util.*;
-
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "ninfa")
 public class Ninfa extends Monstro{
     
+    public Ninfa(){
+        super("nome", 1, null, null);
+    }
+
     //Construtor
     public Ninfa(String nome, int nivel, Arma arma, Dificuldade dificuldade){
         super(nome, nivel, arma, dificuldade);

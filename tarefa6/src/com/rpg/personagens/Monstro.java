@@ -1,11 +1,15 @@
 package com.rpg.personagens;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 import com.rpg.itens.*;
 import com.rpg.util.*;
+import javax.xml.bind.annotation.*;
+@XmlSeeAlso({Atirador.class, Lutador.class, CavaleiroCorrompido.class, CorvoRei.class, Esqueleto.class, Goblin.class, GoblinGigante.class, Ninfa.class, Troll.class, Zumbi.class})
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Monstro extends Personagem implements Lootavel {
 
     // Atributos
@@ -13,7 +17,11 @@ public abstract class Monstro extends Personagem implements Lootavel {
     protected int nivel;               // Nível do monstro
     protected Dificuldade dificuldade; //Dificuldade escolhida para o jogo
     protected List<Arma> listaDeArmasParaLargar;
-    protected List<AcaoDeCombate> acoes = List.of(new Mover(), new AtaqueComum());
+    @XmlElements({
+        @XmlElement(name="mover", type=Mover.class),
+        @XmlElement(name="ataqueComum", type=AtaqueComum.class)
+    })
+    protected List<AcaoDeCombate> acoes = new ArrayList<>(List.of(new Mover(), new AtaqueComum()));
 
     // Construtor
     public Monstro(String nome, int nivel, Arma arma, Dificuldade dificuldade) {

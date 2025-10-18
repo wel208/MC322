@@ -14,6 +14,7 @@ public class Main {
 
         boolean jogoSalvo = Utilidades.haJogoSalvo();
         Batalha batalha = null;
+        boolean carregouJogo = false;
 
         int escolha;
         //Loop para exibição do menu principal do jogo
@@ -25,11 +26,12 @@ public class Main {
             }
             else if (escolha == 2){
                 if (jogoSalvo){
-                    batalha = GerenciadorDePersistencia.carregarBatalha("save1");
+                    batalha = Batalha.carregarJogo("save1");
+                    carregouJogo = true;
                     break;
                 }
                 else{
-                    System.out.println("\nNao ha nenhum jogo salvo.\n"); Utilidades.esperar();
+                    System.out.println("\nNao ha nenhum jogo salvo."); Utilidades.esperar();
                 }
             }
             else if (escolha == 3){
@@ -47,7 +49,7 @@ public class Main {
             }
         }
 
-        if (batalha == null){
+        if (!carregouJogo){
             //Escolha da Dificuldade do jogo
             Dificuldade dificuldade = Utilidades.escolherDificuldade();
             System.out.println("Dificuldade escolhida: " + dificuldade.getDificuldade());

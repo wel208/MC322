@@ -4,7 +4,14 @@ import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 import com.rpg.itens.*;
 import com.rpg.util.*;
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "goblinGigante")
 public class GoblinGigante extends Monstro {
+
+    public GoblinGigante(){
+        super("nome", 1, null, null);
+    }
 
     // Construtor
     public GoblinGigante(String nome, int nivel, Arma arma, Dificuldade dificuldade){

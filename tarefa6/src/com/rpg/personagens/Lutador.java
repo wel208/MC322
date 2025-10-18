@@ -3,12 +3,17 @@ package com.rpg.personagens;
 import com.rpg.combate.*;
 import com.rpg.itens.*;
 import com.rpg.util.*;
-
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "lutador")
 public class Lutador extends Heroi{
 
     //Atributos
     private int furia;
 
+    public Lutador(){
+        super("nome", null);
+    }
     //Construtor
     public Lutador(String nome, Arma arma){ //Atributos predefinidos para um lutador de nível 0
         super(nome, arma);

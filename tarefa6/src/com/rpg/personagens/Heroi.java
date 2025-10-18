@@ -1,18 +1,26 @@
 package com.rpg.personagens;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.rpg.combate.*;
 import com.rpg.itens.*;
 import com.rpg.util.*;
-
+import javax.xml.bind.annotation.*;
+@XmlSeeAlso({Lutador.class, Atirador.class})
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Heroi extends Personagem{
 
     //Atributos
     private int experiencia;        //Quantidade de experiência que o herói possui em seu nível atual
     private int expProximoNivel;    //Indica a quantidade de experiência necessária para subir de nível
     private int nivel;              //Nível de experiência do personagem
-    protected List<AcaoDeCombate> acoes = List.of(new Mover(), new AtaqueComum(), new HabilidadeEspecial());
+    @XmlElements({
+        @XmlElement(name="mover", type=Mover.class),
+        @XmlElement(name="ataqueComum", type=AtaqueComum.class),
+        @XmlElement(name="habilidadeEspecial", type=HabilidadeEspecial.class)
+    })
+    protected List<AcaoDeCombate> acoes = new ArrayList<>(List.of(new Mover(), new AtaqueComum(), new HabilidadeEspecial()));
 
     //Construtor
     public Heroi(String nome, Arma arma){ //Valores predefinidos para um heroi de nível 0

@@ -1,7 +1,7 @@
 package com.rpg.game;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.rpg.cenario.*;
 import com.rpg.personagens.*;
@@ -11,11 +11,16 @@ import com.rpg.save.GerenciadorDePersistencia;
 import com.rpg.util.Utilidades;
 
 @XmlRootElement(name = "batalha")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Batalha {
 
     //Atributos
     private String nomeBatalha;
+    @XmlElements({
+        @XmlElement(name="fasesDeCombate", type=FasesDeCombate.class)
+    })
     private List<Fase> listaDeFases;
+    @XmlElementRef
     private Heroi heroi;
 
     public Batalha(){}
@@ -28,7 +33,7 @@ public class Batalha {
     }
 
     //Métodos
-    public Batalha carregarJogo(String nomeArquivo){
+    public static Batalha carregarJogo(String nomeArquivo){
         return GerenciadorDePersistencia.carregarBatalha(nomeArquivo);
     }
 
@@ -171,6 +176,7 @@ public class Batalha {
                                     Utilidades.apresentarInfoDaFase(f, monstrosDerrotados);
                                 }
                                 else if (escolha == 4){
+                                    jogoSalvo = true;
                                     GerenciadorDePersistencia.salvarBatalha(this, nomeBatalha);
                                 }
                                 else if (escolha == 5){

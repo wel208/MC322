@@ -348,7 +348,7 @@ public class Utilidades{
     }
 
     public static boolean haJogoSalvo(){
-        File arquivo = new File("saves");
+        File arquivo = new File("saves/save1.xml");
         return arquivo.exists();
     }
 

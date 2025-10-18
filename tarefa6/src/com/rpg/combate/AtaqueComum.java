@@ -1,10 +1,13 @@
 package com.rpg.combate;
-
 import com.rpg.itens.TipoDeArma;
 import com.rpg.util.*;
-
+import javax.xml.bind.annotation.*;
+@XmlRootElement(name = "ataqueComum")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AtaqueComum implements AcaoDeCombate{
     
+    public AtaqueComum(){}
+
     public void executar(Combatente usuario, Combatente alvo){
         int contador = 0;
         double dano = 0;

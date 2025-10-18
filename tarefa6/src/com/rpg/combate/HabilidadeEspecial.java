@@ -1,10 +1,13 @@
 package com.rpg.combate;
-
 import com.rpg.personagens.*;
 import com.rpg.util.*;
-
+import javax.xml.bind.annotation.*;
+@XmlRootElement(name = "habilidadeEspecial")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class HabilidadeEspecial implements AcaoDeCombate {
 
+    public HabilidadeEspecial(){}
+    
     public void executar(Combatente usuario, Combatente alvo){
         int contador = 0;
         double dano = 0;

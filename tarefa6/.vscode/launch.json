@@ -8,14 +8,7 @@
             "type": "java",
             "name": "Current File",
             "request": "launch",
-            "mainClass": "${file}",
-            "classPaths": [
-            "bin",
-            "lib/jakarta.xml.bind-api-4.1.1.jar",
-            "lib/jaxb-runtime-2.3.1.jar",
-            "lib/istack-commons-runtime-4.1.0.jar",
-            "lib/jakarta.activation-api-2.1.1.jar"
-            ]
+            "mainClass": "${file}"
         },
         {
             "type": "java",

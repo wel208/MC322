@@ -6,14 +6,20 @@ import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 import com.rpg.itens.*;
 import com.rpg.util.*;
-
 import java.util.List;
-
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "corvoRei")
 public class CorvoRei extends Monstro {
 
     private double precisao;
     private List<Arma> armasPossiveis = List.of(new GarrasCorvo(), new PenasCorvo());
     
+    public CorvoRei(){
+        super("nome", 1, null, null);
+    }
+
+    //Construtor
     public CorvoRei(String nome, int nivel, Arma arma, Dificuldade dificuldade){
         super(nome, nivel, arma, dificuldade);
 

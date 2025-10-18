@@ -4,8 +4,16 @@ import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 import com.rpg.itens.*;
 import com.rpg.util.*;
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "goblin")
 public class Goblin extends Monstro{
     
+    public Goblin(){
+        super("nome", 1, null, null);
+    }
+
+    //Construtor
     public Goblin(String nome, int nivel, Arma arma, Dificuldade dificuldade){
         super(nome, nivel, arma, dificuldade);
 

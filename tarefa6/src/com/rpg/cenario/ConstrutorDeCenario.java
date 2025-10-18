@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 import com.rpg.util.*;
-
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "construtorDeCenario")
 public class ConstrutorDeCenario implements GeradorDeFases {
     
     //Métodos

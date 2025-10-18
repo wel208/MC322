@@ -4,11 +4,17 @@ import com.rpg.cenario.Dificuldade;
 import com.rpg.combate.*;
 import com.rpg.itens.*;
 import com.rpg.util.*;
-
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "esqueleto")
 public class Esqueleto extends Monstro {
     
     //Atributos
     private double precisao;
+
+    public Esqueleto(){
+        super("nome", 1, null, null);
+    }
 
     //Construtor
     public Esqueleto(String nome, int nivel, Arma arma, Dificuldade dificuldade){

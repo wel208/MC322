@@ -1,4 +1,7 @@
 package com.rpg.itens;
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "penasCorvo")
 public class PenasCorvo extends Arma {
 
     //Construtor
