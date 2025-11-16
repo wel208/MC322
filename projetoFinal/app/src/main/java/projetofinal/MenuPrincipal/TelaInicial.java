@@ -1,25 +1,17 @@
 package projetofinal.MenuPrincipal;
 
-import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.Scene;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
+import projetofinal.Jogadores.Jogador;
 import projetofinal.Util.*;
-import java.awt.Toolkit;
-import java.awt.Dimension;
-
-public class TelaInicial extends Application {
+import projetofinal.game.Main;
+public class TelaInicial {
 
     // Tela inicial que aguarda o usuário pressionar qualquer tecla para continuar
-    @Override
-    public void start(Stage primaryStage) {
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        primaryStage.setWidth(screenSize.getWidth());
-        primaryStage.setHeight(screenSize.getHeight());
-        primaryStage.setResizable(false);
+    public static Scene telaInicial(Stage primaryStage) {
 
         StackPane layout = new StackPane();
         Label textoInicial = new Label("Aperte qualquer tecla para continuar");
@@ -29,15 +21,7 @@ public class TelaInicial extends Application {
 
         Scene cenaInicial = new Scene(layout);
 
-        cenaInicial.setOnKeyPressed(event -> {
-            if (event.getCode() != null){
-                primaryStage.setScene(Menu(primaryStage));
-                primaryStage.show();
-            }
-        });
-
-        primaryStage.setScene(cenaInicial);
-        primaryStage.show();
+        return cenaInicial;
     }
 
     /*
@@ -46,7 +30,7 @@ public class TelaInicial extends Application {
      * - Visualização do ranking de pontuação e vitórias dos jogadores
      * - Iniciar o jogo
      */
-    private Scene Menu(Stage primaryStage) {
+    public static Scene menuPrincipal(Stage primaryStage, Jogador J1, Jogador J2) {
 
         // Locais para os nomes dos jogadores
         Label l1J1 = new Label(Utilidades.letrasENumeros.get(0));
@@ -70,7 +54,83 @@ public class TelaInicial extends Application {
         Button l3J2Up = new Button("▲");
         Button l3J2Down = new Button("▼");
 
-        // Organização dos elementos na tela
+        // Mostrar o nome dos jogadores
+        Label nomeJ1 = new Label("Jogador 1: " + J1.getNome());
+        Label nomeJ2 = new Label("Jogador 2: " + J2.getNome());
+
+        /*
+         * Definição das ações dos botões:
+         * - Atualiza a letra/número exibido no label correspondente
+         * - Atualiza o nome do jogador com base nas letras/números selecionados
+         */
+        l1J1Up.setOnAction(e -> {
+            l1J1.setText(atualizarLetra(l1J1.getText(), true));
+            J1.setNome(atualizarNomeJogador(l1J1.getText(), l2J1.getText(), l3J1.getText()));
+            nomeJ1.setText("Jogador 1: " + J1.getNome());
+        });
+        l1J1Down.setOnAction(e -> {
+            l1J1.setText(atualizarLetra(l1J1.getText(), false));
+            J1.setNome(atualizarNomeJogador(l1J1.getText(), l2J1.getText(), l3J1.getText()));
+            nomeJ1.setText("Jogador 1: " + J1.getNome());
+        });
+        l1J2Up.setOnAction(e -> {
+            l1J2.setText(atualizarLetra(l1J2.getText(), true));
+            J2.setNome(atualizarNomeJogador(l1J2.getText(), l2J2.getText(), l3J2.getText()));
+            nomeJ2.setText("Jogador 2: " + J2.getNome());
+        });
+        l1J2Down.setOnAction(e -> {
+            l1J2.setText(atualizarLetra(l1J2.getText(), false));
+            J2.setNome(atualizarNomeJogador(l1J2.getText(), l2J2.getText(), l3J2.getText()));
+            nomeJ2.setText("Jogador 2: " + J2.getNome());
+        });
+        l2J1Up.setOnAction(e -> {
+            l2J1.setText(atualizarLetra(l2J1.getText(), true));
+            J1.setNome(atualizarNomeJogador(l1J1.getText(), l2J1.getText(), l3J1.getText()));
+            nomeJ1.setText("Jogador 1: " + J1.getNome());
+        });
+        l2J1Down.setOnAction(e -> {
+            l2J1.setText(atualizarLetra(l2J1.getText(), false));
+            J1.setNome(atualizarNomeJogador(l1J1.getText(), l2J1.getText(), l3J1.getText()));
+            nomeJ1.setText("Jogador 1: " + J1.getNome());
+        });
+        l2J2Up.setOnAction(e -> {
+            l2J2.setText(atualizarLetra(l2J2.getText(), true));
+            J2.setNome(atualizarNomeJogador(l1J2.getText(), l2J2.getText(), l3J2.getText()));
+            nomeJ2.setText("Jogador 2: " + J2.getNome());
+        });
+        l2J2Down.setOnAction(e -> {
+            l2J2.setText(atualizarLetra(l2J2.getText(), false));
+            J2.setNome(atualizarNomeJogador(l1J2.getText(), l2J2.getText(), l3J2.getText()));
+            nomeJ2.setText("Jogador 2: " + J2.getNome());
+        });
+        l3J1Up.setOnAction(e -> {
+            l3J1.setText(atualizarLetra(l3J1.getText(), true));
+            J1.setNome(atualizarNomeJogador(l1J1.getText(), l2J1.getText(), l3J1.getText()));
+            nomeJ1.setText("Jogador 1: " + J1.getNome());
+        });
+        l3J1Down.setOnAction(e -> {
+            l3J1.setText(atualizarLetra(l3J1.getText(), false));
+            J1.setNome(atualizarNomeJogador(l1J1.getText(), l2J1.getText(), l3J1.getText()));
+            nomeJ1.setText("Jogador 1: " + J1.getNome());
+        });
+        l3J2Up.setOnAction(e -> {
+            l3J2.setText(atualizarLetra(l3J2.getText(), true));
+            J2.setNome(atualizarNomeJogador(l1J2.getText(), l2J2.getText(), l3J2.getText()));
+            nomeJ2.setText("Jogador 2: " + J2.getNome());
+        });
+        l3J2Down.setOnAction(e -> {
+            l3J2.setText(atualizarLetra(l3J2.getText(), false));
+            J2.setNome(atualizarNomeJogador(l1J2.getText(), l2J2.getText(), l3J2.getText()));
+            nomeJ2.setText("Jogador 2: " + J2.getNome());
+        });
+
+        // Botão para iniciar o jogo
+        Button iniciarJogo = new Button("Iniciar Jogo");
+        iniciarJogo.setOnAction(event -> {
+            Main.executarJogo();
+        });
+
+        // Organização dos botões e labels na tela
         VBox vBoxl1 = new VBox(10, l1J1Up, l1J1, l1J1Down, l1J2Up, l1J2, l1J2Down);
         VBox vBoxl2 = new VBox(10, l2J1Up, l2J1, l2J1Down, l2J2Up, l2J2, l2J2Down);
         VBox vBoxl3 = new VBox(10, l3J1Up, l3J1, l3J1Down, l3J2Up, l3J2, l3J2Down);
@@ -79,50 +139,18 @@ public class TelaInicial extends Application {
         vBoxl3.setAlignment(Pos.CENTER);
         HBox hBoxNomes = new HBox(10, vBoxl1, vBoxl2, vBoxl3);
         hBoxNomes.setAlignment(Pos.CENTER);
+        VBox iniciar = new VBox(20, hBoxNomes, iniciarJogo);
+        iniciar.setAlignment(Pos.CENTER);
+        VBox nomes = new VBox(10, nomeJ1, nomeJ2);
 
-        // Definição das ações dos botões
-        l1J1Up.setOnAction(e -> {
-            l1J1.setText(atualizarLetra(l1J1.getText(), true));
-        });
-        l1J1Down.setOnAction(e -> {
-            l1J1.setText(atualizarLetra(l1J1.getText(), false));
-        });
-        l1J2Up.setOnAction(e -> {
-            l1J2.setText(atualizarLetra(l1J2.getText(), true));
-        });
-        l1J2Down.setOnAction(e -> {
-            l1J2.setText(atualizarLetra(l1J2.getText(), false));
-        });
-        l2J1Up.setOnAction(e -> {
-            l2J1.setText(atualizarLetra(l2J1.getText(), true));
-        });
-        l2J1Down.setOnAction(e -> {
-            l2J1.setText(atualizarLetra(l2J1.getText(), false));
-        });
-        l2J2Up.setOnAction(e -> {
-            l2J2.setText(atualizarLetra(l2J2.getText(), true));
-        });
-        l2J2Down.setOnAction(e -> {
-            l2J2.setText(atualizarLetra(l2J2.getText(), false));
-        });
-        l3J1Up.setOnAction(e -> {
-            l3J1.setText(atualizarLetra(l3J1.getText(), true));
-        });
-        l3J1Down.setOnAction(e -> {
-            l3J1.setText(atualizarLetra(l3J1.getText(), false));
-        });
-        l3J2Up.setOnAction(e -> {
-            l3J2.setText(atualizarLetra(l3J2.getText(), true));
-        });
-        l3J2Down.setOnAction(e -> {
-            l3J2.setText(atualizarLetra(l3J2.getText(), false));
-        });
+        StackPane stack = new StackPane();
+        stack.getChildren().addAll(nomes, iniciar);   
 
-        return new Scene(hBoxNomes);
+        return new Scene(stack);
     }
 
     // Método que avança ou retrocede a letra ou o número atual na lista de letras e números
-    private String atualizarLetra(String letraAtual, boolean incrementar) {
+    private static String atualizarLetra(String letraAtual, boolean incrementar) {
         int index = Utilidades.letrasENumeros.indexOf(letraAtual);
         if (incrementar){
             index = (index + 1) % Utilidades.letrasENumeros.size();
@@ -133,7 +161,7 @@ public class TelaInicial extends Application {
         return Utilidades.letrasENumeros.get(index);
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    private static String atualizarNomeJogador(String l1, String l2, String l3) {
+        return l1 + l2 + l3;
     }
 }

@@ -40,7 +40,7 @@ java {
 
 application {
     // Define a classe principal para a aplicação.
-    mainClass = 'projetofinal.MenuPrincipal.TelaInicial'
+    mainClass = 'projetofinal.game.Main'
 }
 
 tasks.named('test') {
