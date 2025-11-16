@@ -5,18 +5,28 @@ import javafx.scene.control.*;
 import javafx.scene.Scene;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
-import projetofinal.Jogadores.Jogador;
+import projetofinal.Jogadores.*;
 import projetofinal.Util.*;
 import projetofinal.game.Main;
+import javafx.scene.image.*;
 public class TelaInicial {
 
     // Tela inicial que aguarda o usuário pressionar qualquer tecla para continuar
     public static Scene telaInicial(Stage primaryStage) {
 
+        // Chamada da imagem de fundo
+        Image img = new Image(TelaInicial.class.getResourceAsStream("/tetris.png"));
+        ImageView backgroundView = new ImageView(img);
+
+        // Configuração da imagem de fundo
+        backgroundView.fitWidthProperty().bind(primaryStage.widthProperty());
+        backgroundView.fitHeightProperty().bind(primaryStage.heightProperty());
+        backgroundView.setOpacity(0.8);
+
         StackPane layout = new StackPane();
         Label textoInicial = new Label("Aperte qualquer tecla para continuar");
 
-        layout.getChildren().add(textoInicial);
+        layout.getChildren().addAll(backgroundView, textoInicial);
         layout.setAlignment(Pos.CENTER);
 
         Scene cenaInicial = new Scene(layout);
@@ -130,6 +140,14 @@ public class TelaInicial {
             Main.executarJogo();
         });
 
+        // Botão para voltar à tela inicial
+        Button voltarTelaInicial = new Button("Voltar à Tela Inicial");
+        voltarTelaInicial.setOnAction(event -> {
+            J1.setNome("AAA");
+            J2.setNome("AAA");
+            Main.executarTelaInicial(primaryStage);
+        });
+
         // Organização dos botões e labels na tela
         VBox vBoxl1 = new VBox(10, l1J1Up, l1J1, l1J1Down, l1J2Up, l1J2, l1J2Down);
         VBox vBoxl2 = new VBox(10, l2J1Up, l2J1, l2J1Down, l2J2Up, l2J2, l2J2Down);
@@ -139,14 +157,16 @@ public class TelaInicial {
         vBoxl3.setAlignment(Pos.CENTER);
         HBox hBoxNomes = new HBox(10, vBoxl1, vBoxl2, vBoxl3);
         hBoxNomes.setAlignment(Pos.CENTER);
-        VBox iniciar = new VBox(20, hBoxNomes, iniciarJogo);
+        HBox hBoxBotoes = new HBox(10, voltarTelaInicial, iniciarJogo);
+        hBoxBotoes.setAlignment(Pos.CENTER);
+        VBox iniciar = new VBox(10, hBoxNomes, hBoxBotoes);
         iniciar.setAlignment(Pos.CENTER);
         VBox nomes = new VBox(10, nomeJ1, nomeJ2);
 
-        StackPane stack = new StackPane();
-        stack.getChildren().addAll(nomes, iniciar);   
+        StackPane layout = new StackPane();
+        layout.getChildren().addAll(nomes, iniciar);   
 
-        return new Scene(stack);
+        return new Scene(layout);
     }
 
     // Método que avança ou retrocede a letra ou o número atual na lista de letras e números

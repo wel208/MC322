@@ -4,15 +4,13 @@ import javafx.stage.Stage;
 import projetofinal.Jogadores.Jogador;
 import projetofinal.MenuPrincipal.TelaInicial;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-
 import java.awt.Toolkit;
 import java.awt.Dimension;
 
 public class Main extends Application {
 
-    private Jogador jogador1;
-    private Jogador jogador2;
+    private static Jogador jogador1;
+    private static Jogador jogador2;
 
     @Override
     public void start(Stage primaryStage) {
@@ -27,7 +25,7 @@ public class Main extends Application {
         executarTelaInicial(primaryStage);
     }
 
-    public void executarTelaInicial(Stage primaryStage) {
+    public static void executarTelaInicial(Stage primaryStage) {
         Scene telaInicial = TelaInicial.telaInicial(primaryStage);
 
         telaInicial.setOnKeyPressed(event -> {
@@ -40,7 +38,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public void executarMenuPrincipal(Stage primaryStage) {
+    public static void executarMenuPrincipal(Stage primaryStage) {
         Scene menuPrincipal = TelaInicial.menuPrincipal(primaryStage, jogador1, jogador2);
         primaryStage.setScene(menuPrincipal);
     }
