@@ -43,12 +43,12 @@ public class TelaInicial {
     public static Scene menuPrincipal(Stage primaryStage, Jogador J1, Jogador J2) {
 
         // Locais para os nomes dos jogadores
-        Label l1J1 = new Label(Utilidades.letrasENumeros.get(0));
-        Label l2J1 = new Label(Utilidades.letrasENumeros.get(0));
-        Label l3J1 = new Label(Utilidades.letrasENumeros.get(0));
-        Label l1J2 = new Label(Utilidades.letrasENumeros.get(0));
-        Label l2J2 = new Label(Utilidades.letrasENumeros.get(0));
-        Label l3J2 = new Label(Utilidades.letrasENumeros.get(0));
+        Label l1J1 = new Label("A");
+        Label l2J1 = new Label("A");
+        Label l3J1 = new Label("A");
+        Label l1J2 = new Label("A");
+        Label l2J2 = new Label("A");
+        Label l3J2 = new Label("A");
 
         // Botões para alterar as letras dos nomes dos jogadores
         Button l1J1Up = new Button("▲");

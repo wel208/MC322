@@ -1,5 +1,4 @@
 package projetofinal.Blocos;
-
 public class O extends Bloco {
     public O() {
         matriz = new int[][] {

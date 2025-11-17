@@ -6,6 +6,7 @@ import projetofinal.MenuPrincipal.TelaInicial;
 import javafx.scene.Scene;
 import java.awt.Toolkit;
 import java.awt.Dimension;
+import projetofinal.Tabuleiro.*;
 
 public class Main extends Application {
 
@@ -19,8 +20,8 @@ public class Main extends Application {
         primaryStage.setHeight(screenSize.getHeight());
         primaryStage.setResizable(false);
 
-        jogador1 = new Jogador("AAA");
-        jogador2 = new Jogador("AAA");
+        jogador1 = new Jogador(new Tabuleiro());
+        jogador2 = new Jogador(new Tabuleiro());
 
         executarTelaInicial(primaryStage);
     }

@@ -1,5 +1,4 @@
 package projetofinal.Blocos;
-
 public class J extends Bloco {
     public J() {
         matriz = new int[][] {
@@ -8,8 +7,7 @@ public class J extends Bloco {
             {0, 0, 0, 0},
             {0, 0, 0, 0}
         };
-        color = 2;
+        color = 4;
         resetarPosicao();
     }
-    
 }

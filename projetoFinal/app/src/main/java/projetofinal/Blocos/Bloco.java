@@ -1,4 +1,6 @@
 package projetofinal.Blocos;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Bloco implements BlocoInterface {
     protected int[][] matriz;
@@ -21,6 +23,10 @@ public abstract class Bloco implements BlocoInterface {
         posY++;
     }
 
+    public void moverCima() {
+        posY--;
+    }
+
     @Override
     public void rotacionar() {
         int matrizRotacionada[][] = new int[4][4];
@@ -37,12 +43,28 @@ public abstract class Bloco implements BlocoInterface {
         pos[1] = posY;
         return pos;
     }
+
+    public List<int[]> getAbsoluteCoord(){
+        List<int[]> coords = new ArrayList<>();
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++){
+                if(matriz[i][j] != 0){
+                    int x = posX + j;
+                    int y = posY + i;
+                    coords.add(new int[]{x, y});
+                }
+            }
+        }
+        return coords;
+    }
     @Override
-    public int getForma() {
+    public int getColor() {
         return color;
     }
     public void resetarPosicao() {
         posX = 5;
         posY = 0;
     }
+
+    
 }
