@@ -10,13 +10,15 @@ public class Jogador {
     public Bloco blocoAtual;
     private int pontos;
     private boolean perdeu;
-    private GeradorDeBlocos bag = new GeradorDeBlocos();
+    private GeradorDeBlocos bag;
 
     public Jogador(Tabuleiro tabuleiro) {
         this.nome = "AAA";
         this.tabuleiro = tabuleiro;
+        blocoAtual = null;
         this.pontos = 0;
         this.perdeu = false;
+        this.bag = new GeradorDeBlocos();
     }
 
     public String getNome() { return nome; }

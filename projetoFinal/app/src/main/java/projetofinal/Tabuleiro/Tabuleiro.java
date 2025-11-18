@@ -3,13 +3,14 @@ package projetofinal.Tabuleiro;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import projetofinal.Blocos.*;
 
 public class Tabuleiro {
-    private final int altura = 20;
+    private final int altura = 23;
     private final int largura = 10;
 
-    private int[][] tab;
+    public int[][] tab;
 
     public Tabuleiro() {
         tab = new int[altura][largura];
@@ -23,18 +24,16 @@ public class Tabuleiro {
             if (x < 0 || x >= largura || y < 0)
                 return Validacao.LIMITE;
             if (y >= altura || tab[y][x] != 0){
-                fixarBloco(bloco);
                 return Validacao.COLISAO;
             }
         }
         return Validacao.OK;
     }
 
-    private void fixarBloco(Bloco bloco) {
+    public void fixarBloco(Bloco bloco) {
         for (int[] coord : bloco.getAbsoluteCoord()) {
             int x = coord[0];
             int y = coord[1];
-            
             tab[y][x] = bloco.getColor();
         }
     }
@@ -81,7 +80,7 @@ public class Tabuleiro {
 
     public boolean atingiuTopo() {
         for (int x = 0; x < largura; x++) {
-            if (tab[0][x] != 0)
+            if (tab[2][x] != 0)
                 return true;
         }
         return false;

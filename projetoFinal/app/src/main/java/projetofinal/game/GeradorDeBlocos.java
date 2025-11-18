@@ -12,7 +12,7 @@ public class GeradorDeBlocos{
         recarregarBag();
     }
 
-    private void recarregarBag() {
+    public void recarregarBag() {
         bag.clear();
         bag.add(new I());
         bag.add(new O());

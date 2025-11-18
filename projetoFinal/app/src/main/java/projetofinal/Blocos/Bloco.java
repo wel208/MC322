@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Bloco implements BlocoInterface {
-    protected int[][] matriz;
+    public int[][] matriz;
     protected int posX;
     protected int posY;
     protected int color;
@@ -32,9 +32,10 @@ public abstract class Bloco implements BlocoInterface {
         int matrizRotacionada[][] = new int[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                matrizRotacionada[i][j] = matriz[4 - j - 1][4 - i];
+                matrizRotacionada[j][3 - i] = matriz[i][j];
             }
         }
+        matriz = matrizRotacionada;
     }
     @Override
     public int[] getPosicao() {

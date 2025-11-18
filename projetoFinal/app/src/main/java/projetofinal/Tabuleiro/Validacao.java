@@ -1,4 +1,4 @@
-package projetofinal.Tabuleiro;
+package projetofinal.Tabuleiro  ;
 
 public enum Validacao {
     LIMITE,

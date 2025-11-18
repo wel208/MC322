@@ -1,8 +1,8 @@
 package projetofinal.game;
-
 import projetofinal.Blocos.*;
-import projetofinal.Jogadores.Jogador;
+import projetofinal.Jogadores.*;
 import projetofinal.Tabuleiro.*;
+import javafx.scene.input.KeyCode;
 
 public class Game implements GameInterface {
 
@@ -10,7 +10,7 @@ public class Game implements GameInterface {
     private Jogador player2;
 
     private boolean pausado;
-    private boolean terminado;
+    public boolean terminado;
 
     public Game() {
         this.player1 = new Jogador(new Tabuleiro());
@@ -32,40 +32,71 @@ public class Game implements GameInterface {
         player1.getTabuleiro().limpar();
         player2.getTabuleiro().limpar();
 
-        player1.getBag().recarregarBag();
-        player2.getBag().recarregarBag();
+        player1.setBlocoAtual(player1.getBag().proximoBloco());
+        player2.setBlocoAtual(player2.getBag().proximoBloco());
     }
 
     @Override
-    public void atualizar() {
+    public void atualizar(KeyCode tecla) {
         if (pausado || terminado)
             return;
 
-        atualizarPlayer(player1, player2);
-        atualizarPlayer(player2, player1);
+        Jogador playerAtual;
+        Jogador playerOutro;
+        
+        if (tecla == KeyCode.A || tecla == KeyCode.D || tecla == KeyCode.S || tecla == KeyCode.W) {
+            playerAtual = player1;
+            playerOutro = player2;
+        } 
+        else {
+            playerAtual = player2;
+            playerOutro = player1;
+        }
+
+        atualizarPlayer(playerAtual, playerOutro, tecla);
     }
 
-    private void atualizarPlayer(Jogador atual, Jogador outro) {
+    private void atualizarPlayer(Jogador atual, Jogador outro, KeyCode tecla) {
 
         Bloco bloco = atual.getBlocoAtual();
         Tabuleiro tab = atual.getTabuleiro();
         int linhasFeitas = 0;
-        
-        bloco.moverEsquerda();
-        if (tab.posicaoValida(bloco) != Validacao.OK)
-            bloco.moverDireita();
-        
-        bloco.moverDireita();
-        if (tab.posicaoValida(bloco) != Validacao.OK)
-            bloco.moverEsquerda();
 
-        bloco.moverBaixo();
-        if (tab.posicaoValida(bloco) == Validacao.COLISAO) {
-            atual.setBlocoAtual(atual.getBag().proximoBloco());
-            linhasFeitas = tab.verificarLinhas();
-            atual.adicionarPontos(linhasFeitas);
-            if (linhasFeitas >= 2)
-                outro.getTabuleiro().adicionarLinhasIncompletas(linhasFeitas);
+        switch(tecla){
+        case KeyCode.A:
+        case KeyCode.LEFT:
+            bloco.moverEsquerda();
+            if (tab.posicaoValida(bloco) != Validacao.OK)
+                bloco.moverDireita();
+        break;
+        case KeyCode.D:
+        case KeyCode.RIGHT:
+            bloco.moverDireita();
+            if (tab.posicaoValida(bloco) != Validacao.OK)
+                bloco.moverEsquerda();
+        break;
+        case KeyCode.S:
+        case KeyCode.DOWN:
+            bloco.moverBaixo();
+            if (tab.posicaoValida(bloco) == Validacao.COLISAO) {
+                bloco.moverCima();
+                tab.fixarBloco(bloco);
+                atual.blocoAtual = atual.getBag().proximoBloco();
+                linhasFeitas = tab.verificarLinhas();
+                atual.adicionarPontos(linhasFeitas);
+                if (linhasFeitas >= 2)
+                    outro.getTabuleiro().adicionarLinhasIncompletas(linhasFeitas);
+            }
+        break;
+        case KeyCode.W:
+        case KeyCode.UP:
+            bloco.rotacionar();
+            if (tab.posicaoValida(bloco) == Validacao.COLISAO) {
+                bloco.moverCima();
+            }
+        break;
+        default:
+            return;
         }
         if (tab.atingiuTopo()) {
                 atual.perder();
@@ -73,6 +104,7 @@ public class Game implements GameInterface {
         }
     }
     
+
     @Override
     public int[] getPontos() {
         int[] pontos = new int[2];

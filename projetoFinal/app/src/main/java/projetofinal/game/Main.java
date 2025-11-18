@@ -1,17 +1,14 @@
 package projetofinal.game;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import projetofinal.Jogadores.Jogador;
 import projetofinal.MenuPrincipal.TelaInicial;
 import javafx.scene.Scene;
 import java.awt.Toolkit;
 import java.awt.Dimension;
-import projetofinal.Tabuleiro.*;
 
 public class Main extends Application {
 
-    private static Jogador jogador1;
-    private static Jogador jogador2;
+    private static Game jogo;
 
     @Override
     public void start(Stage primaryStage) {
@@ -20,9 +17,8 @@ public class Main extends Application {
         primaryStage.setHeight(screenSize.getHeight());
         primaryStage.setResizable(false);
 
-        jogador1 = new Jogador(new Tabuleiro());
-        jogador2 = new Jogador(new Tabuleiro());
-
+        jogo = new Game();
+        
         executarTelaInicial(primaryStage);
     }
 
@@ -40,12 +36,13 @@ public class Main extends Application {
     }
 
     public static void executarMenuPrincipal(Stage primaryStage) {
-        Scene menuPrincipal = TelaInicial.menuPrincipal(primaryStage, jogador1, jogador2);
+        Scene menuPrincipal = TelaInicial.menuPrincipal(primaryStage, jogo.getPlayer1(), jogo.getPlayer2());
         primaryStage.setScene(menuPrincipal);
     }
 
-    public static void executarJogo() {
-        
+    public static void executarJogo(Stage primaryStage) {
+        Scene telaJogo = TelaGame.telaJogo(jogo, primaryStage);
+        primaryStage.setScene(telaJogo);
     }
 
     public static void main(String[] args) {
