@@ -3,6 +3,7 @@ package projetofinal.game;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import java.util.List;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -78,35 +79,27 @@ public class TelaGame {
 
         cenaJogo.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.A){
-                game.getPlayer1().getBlocoAtual().moverEsquerda();
                 game.atualizar(KeyCode.A);
             }
             else if (event.getCode() == KeyCode.D){
-                game.getPlayer1().getBlocoAtual().moverDireita();
                 game.atualizar(KeyCode.D);
             }
             else if (event.getCode() == KeyCode.W){
-                game.getPlayer1().getBlocoAtual().rotacionar();
                 game.atualizar(KeyCode.W);
             }
             else if (event.getCode() == KeyCode.S){
-                game.getPlayer1().getBlocoAtual().moverBaixo();
                 game.atualizar(KeyCode.S);
             }
             else if (event.getCode() == KeyCode.LEFT){
-                game.getPlayer2().getBlocoAtual().moverEsquerda();
                 game.atualizar(KeyCode.LEFT);
             }
             else if (event.getCode() == KeyCode.RIGHT){
-                game.getPlayer2().getBlocoAtual().moverDireita();
                 game.atualizar(KeyCode.RIGHT);
             }
             else if (event.getCode() == KeyCode.UP){
-                game.getPlayer2().getBlocoAtual().rotacionar();
                 game.atualizar(KeyCode.UP);
             }
             else if (event.getCode() == KeyCode.DOWN){
-                game.getPlayer2().getBlocoAtual().moverBaixo();
                 game.atualizar(KeyCode.DOWN);
             }
             else if (event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.P){
@@ -127,39 +120,68 @@ public class TelaGame {
         for (int i = 0; i < 20; i++){
             for (int j = 0; j < 10; j++){
                 if (jogador.getTabuleiro().getGrade()[i][j] == 0){
-                    gc.setFill(Color.BLACK); // Exemplo de cor
-                    gc.fillRect(j * 25, i * 25, 25, 25);
+                    gc.setFill(Color.BLACK);
                 }
                 else if (jogador.getTabuleiro().getGrade()[i][j] == 1){
                     gc.setFill(Color.LIGHTBLUE);
-                    gc.fillRect(j * 25, i * 25, 25, 25);
                 }
                 else if (jogador.getTabuleiro().getGrade()[i][j] == 2){
                     gc.setFill(Color.ORANGE);
-                    gc.fillRect(j * 25, i * 25, 25, 25);
                 }
                 else if (jogador.getTabuleiro().getGrade()[i][j] == 3){
                     gc.setFill(Color.GREEN);
-                    gc.fillRect(j * 25, i * 25, 25, 25);
                 }
                 else if (jogador.getTabuleiro().getGrade()[i][j] == 4){
                     gc.setFill(Color.YELLOW);
-                    gc.fillRect(j * 25, i * 25, 25, 25);
                 }
                 else if (jogador.getTabuleiro().getGrade()[i][j] == 5){
                     gc.setFill(Color.RED);
-                    gc.fillRect(j * 25, i * 25, 25, 25);
                 }
                 else if (jogador.getTabuleiro().getGrade()[i][j] == 6){
                     gc.setFill(Color.PURPLE);
-                    gc.fillRect(j * 25, i * 25, 25, 25);
                 }
                 else if (jogador.getTabuleiro().getGrade()[i][j] == 7){
                     gc.setFill(Color.BLUE);
-                    gc.fillRect(j * 25, i * 25, 25, 25);
                 }
+
+                gc.fillRect(j * 25, i * 25, 25, 25);
             }
         }
+
+        List<int[]> blocoCaindo = jogador.getBlocoAtual().getAbsoluteCoord();
+
+        int y;
+        int x;
+        
+        for (int k = 0; k < 4; k++){
+            y = blocoCaindo.get(k)[0];
+            x = blocoCaindo.get(k)[1];
+
+            if (jogador.getBlocoAtual().getColor() == 1){
+                gc.setFill(Color.LIGHTBLUE);
+            }
+            else if (jogador.getBlocoAtual().getColor() == 2){
+                gc.setFill(Color.ORANGE);
+            }
+            else if (jogador.getBlocoAtual().getColor() == 3){
+                gc.setFill(Color.GREEN);
+            }
+            else if (jogador.getBlocoAtual().getColor() == 4){
+                gc.setFill(Color.YELLOW);
+            }
+            else if (jogador.getBlocoAtual().getColor() == 5){
+                gc.setFill(Color.RED);
+            }
+            else if (jogador.getBlocoAtual().getColor() == 6){
+                gc.setFill(Color.PURPLE);
+            }
+            else if (jogador.getBlocoAtual().getColor() == 7){
+                gc.setFill(Color.BLUE);
+            }
+
+            gc.fillRect(y * 25, x * 25, 25, 25);
+        }
+
         gc.setStroke(Color.GRAY);
         for (int i = 0; i <= 250; i += 25){ 
             for (int j = 0; j <= 500; j += 25) 

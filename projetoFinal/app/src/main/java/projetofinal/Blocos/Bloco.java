@@ -44,7 +44,7 @@ public abstract class Bloco implements BlocoInterface {
         pos[1] = posY;
         return pos;
     }
-
+    
     public List<int[]> getAbsoluteCoord(){
         List<int[]> coords = new ArrayList<>();
         for(int i = 0; i < 4; i++){

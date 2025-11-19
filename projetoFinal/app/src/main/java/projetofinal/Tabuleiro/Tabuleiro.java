@@ -23,9 +23,8 @@ public class Tabuleiro {
 
             if (x < 0 || x >= largura || y < 0)
                 return Validacao.LIMITE;
-            if (y >= altura || tab[y][x] != 0){
+            if (y >= altura || tab[y][x] != 0)
                 return Validacao.COLISAO;
-            }
         }
         return Validacao.OK;
     }
