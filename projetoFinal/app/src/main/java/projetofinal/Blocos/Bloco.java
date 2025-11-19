@@ -4,6 +4,10 @@ import java.util.List;
 
 public abstract class Bloco implements BlocoInterface {
     public int[][] matriz;
+    public int[][] matriz1;
+    public int[][] matriz2;
+    public int[][] matriz3;
+    public int[][] matriz4;
     protected int posX;
     protected int posY;
     protected int color;
@@ -29,14 +33,48 @@ public abstract class Bloco implements BlocoInterface {
 
     @Override
     public void rotacionar() {
-        int matrizRotacionada[][] = new int[4][4];
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                matrizRotacionada[j][3 - i] = matriz[i][j];
+
+        int[][] novaMatriz = new int[4][4];
+
+        if (matriz.equals(matriz1))
+            for (int i = 0; i < 4; i++){
+                for (int j = 0; j < 4; j++){
+                    novaMatriz[i][j] = matriz2[i][j];
+                }
             }
-        }
-        matriz = matrizRotacionada;
+
+        else if (matriz.equals(matriz2))
+            for (int i = 0; i < 4; i++){
+                for (int j = 0; j < 4; j++){
+                    novaMatriz[i][j] = matriz3[i][j];
+                }
+            }
+
+        else if (matriz.equals(matriz3))
+            for (int i = 0; i < 4; i++){
+                for (int j = 0; j < 4; j++){
+                    novaMatriz[i][j] = matriz4[i][j];
+                }
+            }
+
+        else
+            for (int i = 0; i < 4; i++){
+                for (int j = 0; j < 4; j++){
+                    novaMatriz[i][j] = matriz1[i][j];
+                }
+            }
+        
+        matriz = novaMatriz;
+
+        // int matrizRotacionada[][] = new int[4][4];
+        // for (int i = 0; i < 4; i++) {
+        //     for (int j = 0; j < 4; j++) {
+        //         matrizRotacionada[j][3 - i] = matriz[i][j];
+        //     }
+        // }
+        // matriz = matrizRotacionada;
     }
+    
     @Override
     public int[] getPosicao() {
         int pos [] = new int[2];
@@ -66,6 +104,4 @@ public abstract class Bloco implements BlocoInterface {
         posX = 5;
         posY = 0;
     }
-
-    
 }

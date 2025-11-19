@@ -7,7 +7,7 @@ import java.util.Random;
 import projetofinal.Blocos.*;
 
 public class Tabuleiro {
-    private final int altura = 23;
+    private final int altura = 20;
     private final int largura = 10;
 
     public int[][] tab;
@@ -112,7 +112,7 @@ public class Tabuleiro {
                 if (x == buraco) {
                     tab[y][x] = 0;  
                 } else {
-                    tab[y][x] = 1; 
+                    tab[y][x] = 8; 
                 }
             }
         }

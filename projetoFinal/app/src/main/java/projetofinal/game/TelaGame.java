@@ -8,6 +8,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
+import javafx.animation.*;
+import java.util.HashSet;
+import java.util.Set;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -15,6 +18,17 @@ import projetofinal.Jogadores.Jogador;
 
 public class TelaGame {
     
+    private static final long UM_SEGUNDO = 1_000_000_000L;
+    private static long ultimoTick = 0;
+
+    private static final long TEMPO_MOV_LATERAL = 90_000_000L;
+    private static long ultimoMovLateralJ1 = 0;
+    private static long ultimoMovLateralJ2 = 0;
+
+    private static final long TEMPO_QUEDA = 40_000_000L;
+    private static long ultimaQuedaJ1 = 0;
+    private static long ultimaQuedaJ2 = 0;
+
     public static Scene telaJogo(Game game, Stage primaryStage){
 
         Canvas tab1 = new Canvas(250, 500);
@@ -77,38 +91,73 @@ public class TelaGame {
         
         Scene cenaJogo = new Scene(tela);
 
+        Set<KeyCode> teclasPressionadas = new HashSet<>();
+
         cenaJogo.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.A){
-                game.atualizar(KeyCode.A);
-            }
-            else if (event.getCode() == KeyCode.D){
-                game.atualizar(KeyCode.D);
-            }
-            else if (event.getCode() == KeyCode.W){
+            teclasPressionadas.add(event.getCode());
+
+            if (event.getCode() == KeyCode.W){
                 game.atualizar(KeyCode.W);
             }
-            else if (event.getCode() == KeyCode.S){
-                game.atualizar(KeyCode.S);
-            }
-            else if (event.getCode() == KeyCode.LEFT){
-                game.atualizar(KeyCode.LEFT);
-            }
-            else if (event.getCode() == KeyCode.RIGHT){
-                game.atualizar(KeyCode.RIGHT);
-            }
-            else if (event.getCode() == KeyCode.UP){
+            if (event.getCode() == KeyCode.UP){
                 game.atualizar(KeyCode.UP);
             }
-            else if (event.getCode() == KeyCode.DOWN){
-                game.atualizar(KeyCode.DOWN);
-            }
-            else if (event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.P){
+            if (event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.P){
                 game.pausar();
             }
-
-            atualizarTela(game, game.getPlayer1(), gc1);
-            atualizarTela(game, game.getPlayer2(), gc2);
         });
+
+        cenaJogo.setOnKeyReleased(event -> {
+            teclasPressionadas.remove(event.getCode());
+        });
+        new AnimationTimer() {
+            @Override
+            public void handle(long now){
+
+                if (now - ultimoTick >= UM_SEGUNDO){
+                    game.atualizar(KeyCode.S);
+                    game.atualizar(KeyCode.DOWN);
+                    ultimoTick = now;
+                }
+
+                if (now - ultimoMovLateralJ1 >= TEMPO_MOV_LATERAL){
+                    if (teclasPressionadas.contains(KeyCode.A)){
+                    game.atualizar(KeyCode.A);
+                    }
+                    if (teclasPressionadas.contains(KeyCode.D)){
+                        game.atualizar(KeyCode.D);
+                    }
+                    ultimoMovLateralJ1 = now;
+                }
+                
+                if (now - ultimoMovLateralJ2 >= TEMPO_MOV_LATERAL){
+                    if (teclasPressionadas.contains(KeyCode.LEFT)){
+                       game.atualizar(KeyCode.LEFT);
+                    }
+                    if (teclasPressionadas.contains(KeyCode.RIGHT)){
+                        game.atualizar(KeyCode.RIGHT);
+                    }
+                    ultimoMovLateralJ2 = now;
+                }
+
+                if (now - ultimaQuedaJ1 >= TEMPO_QUEDA){    
+                    if (teclasPressionadas.contains(KeyCode.S)){
+                        game.atualizar(KeyCode.S);
+                    }
+                    ultimaQuedaJ1 = now;
+                }
+
+                if (now - ultimaQuedaJ2 >= TEMPO_QUEDA){    
+                    if (teclasPressionadas.contains(KeyCode.DOWN)){
+                        game.atualizar(KeyCode.DOWN);
+                    }
+                    ultimaQuedaJ2 = now;
+                }
+
+                atualizarTela(game, game.getPlayer1(), gc1);
+                atualizarTela(game, game.getPlayer2(), gc2);
+            }
+        }.start();
 
         return cenaJogo;
     }
@@ -119,30 +168,26 @@ public class TelaGame {
 
         for (int i = 0; i < 20; i++){
             for (int j = 0; j < 10; j++){
-                if (jogador.getTabuleiro().getGrade()[i][j] == 0){
+                int elemento = jogador.getTabuleiro().getGrade()[i][j];
+
+                if (elemento == 0)
                     gc.setFill(Color.BLACK);
-                }
-                else if (jogador.getTabuleiro().getGrade()[i][j] == 1){
+                else if (elemento == 1)
                     gc.setFill(Color.LIGHTBLUE);
-                }
-                else if (jogador.getTabuleiro().getGrade()[i][j] == 2){
+                else if (elemento == 2)
                     gc.setFill(Color.ORANGE);
-                }
-                else if (jogador.getTabuleiro().getGrade()[i][j] == 3){
+                else if (elemento == 3) 
                     gc.setFill(Color.GREEN);
-                }
-                else if (jogador.getTabuleiro().getGrade()[i][j] == 4){
+                else if (elemento == 4)
                     gc.setFill(Color.YELLOW);
-                }
-                else if (jogador.getTabuleiro().getGrade()[i][j] == 5){
+                else if (elemento == 5)
                     gc.setFill(Color.RED);
-                }
-                else if (jogador.getTabuleiro().getGrade()[i][j] == 6){
+                else if (elemento == 6)
                     gc.setFill(Color.PURPLE);
-                }
-                else if (jogador.getTabuleiro().getGrade()[i][j] == 7){
+                else if (elemento == 7)
                     gc.setFill(Color.BLUE);
-                }
+                else if (elemento == 8)
+                    gc.setFill(Color.DARKGRAY);
 
                 gc.fillRect(j * 25, i * 25, 25, 25);
             }
@@ -150,36 +195,39 @@ public class TelaGame {
 
         List<int[]> blocoCaindo = jogador.getBlocoAtual().getAbsoluteCoord();
 
-        int y;
-        int x;
+        int x, y;
         
         for (int k = 0; k < 4; k++){
-            y = blocoCaindo.get(k)[0];
-            x = blocoCaindo.get(k)[1];
+            x = blocoCaindo.get(k)[0];
+            y = blocoCaindo.get(k)[1];
 
-            if (jogador.getBlocoAtual().getColor() == 1){
+            for (int i = y; i < 20; i++){
+                if (jogador.getTabuleiro().getGrade()[i][x] == 0){
+                    gc.setFill(Color.DARKSLATEGRAY);
+                    gc.fillRect(x * 25, i * 25, 25, 25);
+                }
+            }
+
+            int corBloco = jogador.getBlocoAtual().getColor();
+
+            if (corBloco == 0)
+                gc.setFill(Color.BLACK);
+            else if (corBloco == 1)
                 gc.setFill(Color.LIGHTBLUE);
-            }
-            else if (jogador.getBlocoAtual().getColor() == 2){
+            else if (corBloco == 2)
                 gc.setFill(Color.ORANGE);
-            }
-            else if (jogador.getBlocoAtual().getColor() == 3){
+            else if (corBloco == 3)
                 gc.setFill(Color.GREEN);
-            }
-            else if (jogador.getBlocoAtual().getColor() == 4){
+            else if (corBloco == 4)
                 gc.setFill(Color.YELLOW);
-            }
-            else if (jogador.getBlocoAtual().getColor() == 5){
+            else if (corBloco == 5)
                 gc.setFill(Color.RED);
-            }
-            else if (jogador.getBlocoAtual().getColor() == 6){
+            else if (corBloco == 6)
                 gc.setFill(Color.PURPLE);
-            }
-            else if (jogador.getBlocoAtual().getColor() == 7){
+            else if (corBloco == 7)
                 gc.setFill(Color.BLUE);
-            }
 
-            gc.fillRect(y * 25, x * 25, 25, 25);
+            gc.fillRect(x * 25, y * 25, 25, 25);
         }
 
         gc.setStroke(Color.GRAY);

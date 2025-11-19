@@ -1,6 +1,5 @@
 package projetofinal.Blocos;
 
-
 public interface BlocoInterface {
     void moverDireita();
     void moverEsquerda();
