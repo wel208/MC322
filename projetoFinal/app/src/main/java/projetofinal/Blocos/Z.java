@@ -2,9 +2,9 @@ package projetofinal.Blocos;
 public class Z extends Bloco {
 
     public static final int[][] matriz1 = new int[][]{
-            {0, 0, 0, 0},
             {7, 7, 0, 0},
             {0, 7, 7, 0},
+            {0, 0, 0, 0},
             {0, 0, 0, 0}
         };
         
@@ -16,9 +16,9 @@ public class Z extends Bloco {
         };
 
     public static final int[][] matriz3 = new int[][]{
-            {0, 0, 0, 0},
             {7, 7, 0, 0},
             {0, 7, 7, 0},
+            {0, 0, 0, 0},
             {0, 0, 0, 0}
         };
         
@@ -30,12 +30,7 @@ public class Z extends Bloco {
         };
 
     public Z() {
-        matriz = new int[][]{
-            {0, 0, 0, 0},
-            {7, 7, 0, 0},
-            {0, 7, 7, 0},
-            {0, 0, 0, 0}
-        };
+        matriz = matriz1;
         color = 7;
         resetarPosicao();
     }
