@@ -13,6 +13,7 @@ import javafx.animation.*;
 import java.util.HashSet;
 import java.util.Set;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import projetofinal.Jogadores.Jogador;
@@ -32,6 +33,8 @@ public class TelaGame {
     private static final long TEMPO_QUEDA = 40_000_000L;
     private static long ultimaQuedaJ1 = 0;
     private static long ultimaQuedaJ2 = 0;
+
+    private static AnimationTimer timer;
 
     public static Scene telaJogo(Game game, Stage primaryStage){
 
@@ -77,14 +80,14 @@ public class TelaGame {
 
         gcNext1.setFill(Color.BLACK);
         gcNext1.fillRect(0, 0, canvasNext1.getWidth(), canvasNext1.getHeight());
-        
+
         VBox status1 = new VBox(5, pontosJogador1, nivelJogador1, linhasJogador1);
         VBox holdJ1 = new VBox(hold1, canvasHoldJ1);
         VBox lado1J1 = new VBox(350, holdJ1, status1);
         lado1J1.setAlignment(Pos.CENTER);
 
         VBox nextJ1 = new VBox(next1, canvasNext1);
-        VBox lado2J1 = new VBox(250, nextJ1, nome1);
+        VBox lado2J1 = new VBox(200, nextJ1, nome1);
         lado2J1.setAlignment(Pos.CENTER);
 
         HBox jogo1 = new HBox(15, lado1J1, tab1, lado2J1);
@@ -123,15 +126,29 @@ public class TelaGame {
         lado1J2.setAlignment(Pos.CENTER);
 
         VBox nextJ2 = new VBox(next2, canvasNext2);
-        VBox lado2J2 = new VBox(250, nextJ2, nome2);
+        VBox lado2J2 = new VBox(200, nextJ2, nome2);
         lado2J2.setAlignment(Pos.CENTER);
 
         HBox jogo2 = new HBox(15, lado1J2, tab2, lado2J2);
         jogo2.setAlignment(Pos.CENTER);
 
-        HBox tela = new HBox(400, jogo1, jogo2);
-        tela.setAlignment(Pos.CENTER);
+        HBox jogos = new HBox(400, jogo1, jogo2);
+        jogos.setAlignment(Pos.CENTER);
+
+        //Elementos do menu de pausa
+        Label jogoPausado = new Label("");
+        Label acoesNaPausa = new Label("");
+        VBox pausa = new VBox(20, jogoPausado, acoesNaPausa);
+        pausa.setAlignment(Pos.CENTER);
+
+        //Elementos que aparecem após o jogo acabar
+        Label jogoTerminado = new Label("");
+        Label jogadorVencedor = new Label("");
+        Label pontuacaoVencedor = new Label("");
+        VBox telaDeFim = new VBox(10, jogoTerminado, jogadorVencedor, pontuacaoVencedor);
+        telaDeFim.setAlignment(Pos.CENTER);
         
+        StackPane tela = new StackPane(jogos, pausa, telaDeFim);
         Scene cenaJogo = new Scene(tela);
 
         Set<KeyCode> teclasPressionadas = new HashSet<>();
@@ -151,15 +168,40 @@ public class TelaGame {
             if (event.getCode() == KeyCode.SHIFT){
                 game.atualizar(KeyCode.SHIFT);
             }
-            if (event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.P){
+            if (event.getCode() == KeyCode.R){
+                if (game.pausado()){
+                    game.reiniciar();
+                    jogoPausado.setText("");
+                    acoesNaPausa.setText("");
+                }
+            }
+            if ((event.getCode() == KeyCode.M && game.pausado()) || (event.getCode() != null && game.terminado())){
+                    game.reiniciar();
+                    timer.stop();
+                    ultimoMovLateralJ1 = 0;
+                    ultimoMovLateralJ2 = 0;
+                    ultimaQuedaJ1 = 0;
+                    ultimaQuedaJ2 = 0;
+                    Main.executarMenuPrincipal(primaryStage);
+            }
+            if ((event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.P) && !game.terminado()){
                 game.pausar();
+                if (game.pausado()){
+                    jogoPausado.setText("JOGO PAUSADO");
+                    acoesNaPausa.setText("Pressione 'R' para reiniciar o jogo    Pressione 'M' para voltar ao menu principal");
+                }
+                else{
+                    jogoPausado.setText("");
+                    acoesNaPausa.setText("");
+                }
             }
         });
 
         cenaJogo.setOnKeyReleased(event -> {
             teclasPressionadas.remove(event.getCode());
         });
-        new AnimationTimer() {
+
+        timer = new AnimationTimer() {
             @Override
             public void handle(long now){
 
@@ -203,6 +245,19 @@ public class TelaGame {
                     ultimaQuedaJ2 = now;
                 }
 
+                if (teclasPressionadas.contains(KeyCode.M) && game.pausado()){
+                    teclasPressionadas.clear();
+                    stop();
+                }
+
+                if (game.terminado()){
+                    Jogador vencedor = game.getPlayer1().perdeu() ? game.getPlayer2() : game.getPlayer1();
+                    jogoTerminado.setText("O JOGO ACABOU");
+                    jogadorVencedor.setText(vencedor.getNome() + " VENCEU!");
+                    pontuacaoVencedor.setText("Pontuação: " + vencedor.getPontos() + "   Nível: " + vencedor.getNivel() + "   Nº de Linhas: " + vencedor.getNLinhas());
+                    stop();
+                }
+
                 atualizarTabuleiro(game.getPlayer1(), gc1);
                 atualizarTabuleiro(game.getPlayer2(), gc2);
                 atualizarHold(game.getPlayer1(), gcHold1);
@@ -216,7 +271,9 @@ public class TelaGame {
                 linhasJogador1.setText("Linhas: " + game.getPlayer1().getNLinhas());
                 linhasJogador2.setText("Linhas: " + game.getPlayer2().getNLinhas());
             }
-        }.start();
+        };
+
+        timer.start();
 
         return cenaJogo;
     }

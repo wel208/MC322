@@ -44,6 +44,12 @@ public class Jogador {
         this.nome = nome;
     }
 
+    public void resetPontuacao(){
+        pontos = 0;
+        nLinhas = 0;
+        nivel = 0;
+    }
+
     public void adicionarPontos(int linhas) {
         // regra simples (pode mudar depois)
         pontos += 100 + linhas * 200;

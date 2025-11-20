@@ -16,8 +16,6 @@ public class Main extends Application {
         primaryStage.setWidth(screenSize.getWidth());
         primaryStage.setHeight(screenSize.getHeight());
         primaryStage.setResizable(false);
-
-        jogo = new Game();
         
         executarTelaInicial(primaryStage);
     }
@@ -25,6 +23,8 @@ public class Main extends Application {
     public static void executarTelaInicial(Stage primaryStage) {
         Scene telaInicial = TelaInicial.telaInicial(primaryStage);
 
+        jogo = new Game();
+        
         telaInicial.setOnKeyPressed(event -> {
             if (event.getCode() != null){
                 executarMenuPrincipal(primaryStage);

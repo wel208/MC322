@@ -29,6 +29,9 @@ public class Game implements GameInterface {
         pausado = false;
         terminado = false;
 
+        player1.resetPontuacao();
+        player2.resetPontuacao();
+
         player1.getTabuleiro().limpar();
         player2.getTabuleiro().limpar();
 
@@ -131,4 +134,7 @@ public class Game implements GameInterface {
 
     public Jogador getPlayer1() { return player1; }
     public Jogador getPlayer2() { return player2; }
+
+    public boolean pausado() { return pausado; }
+    public boolean terminado() { return terminado; }
 }
