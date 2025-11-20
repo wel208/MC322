@@ -44,7 +44,7 @@ public class Game implements GameInterface {
         Jogador playerAtual;
         Jogador playerOutro;
         
-        if (tecla == KeyCode.A || tecla == KeyCode.D || tecla == KeyCode.S || tecla == KeyCode.W) {
+        if (tecla == KeyCode.A || tecla == KeyCode.D || tecla == KeyCode.S || tecla == KeyCode.W || tecla == KeyCode.Q) {
             playerAtual = player1;
             playerOutro = player2;
         } 
@@ -90,17 +90,34 @@ public class Game implements GameInterface {
         break;
         case KeyCode.W:
         case KeyCode.UP:
-            bloco.rotacionar();
-            if (tab.posicaoValida(bloco) == Validacao.COLISAO) {
+            bloco.rotacionarSH();
+            if (tab.posicaoValida(bloco) != Validacao.OK) {
                 bloco.moverCima();
+                if (tab.posicaoValida(bloco) != Validacao.OK) {
+                    bloco.moverBaixo();
+                    bloco.moverEsquerda();
+                }
+                    if (tab.posicaoValida(bloco) != Validacao.OK) {
+                        bloco.moverDireita();
+                        bloco.moverDireita();
+                    }
+                        if (tab.posicaoValida(bloco) != Validacao.OK) {
+                            bloco.moverEsquerda();
+                            bloco.rotacionarSA();
+                        }
             }
+        break;
+        case KeyCode.Q:
+        case KeyCode.SHIFT:
+            atual.hold();
         break;
         default:
             return;
         }
+
         if (tab.atingiuTopo()) {
-                atual.perder();
-                terminado = true;
+            atual.perder();
+            terminado = true;
         }
     }
     

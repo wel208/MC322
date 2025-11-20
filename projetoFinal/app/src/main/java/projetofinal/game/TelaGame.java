@@ -2,6 +2,7 @@ package projetofinal.game;
 
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
+import java.lang.Math;
 import javafx.scene.Scene;
 import java.util.List;
 import javafx.scene.canvas.Canvas;
@@ -21,6 +22,8 @@ public class TelaGame {
     private static final long UM_SEGUNDO = 1_000_000_000L;
     private static long ultimoTick = 0;
 
+    private static final long DECIMO_DE_SEGUNDO = 100_000_000L;
+
     private static final long TEMPO_MOV_LATERAL = 90_000_000L;
     private static long ultimoMovLateralJ1 = 0;
     private static long ultimoMovLateralJ2 = 0;
@@ -38,7 +41,7 @@ public class TelaGame {
 
         Label pontosJogador1 = new Label("Pontuação: " + game.getPlayer1().getPontos());
         Label nivelJogador1 = new Label("Nível: " + game.getPlayer1().getPontos());
-        Label linhasJogador1 = new Label("Linhas: " + 0);
+        Label linhasJogador1 = new Label("Linhas: " + game.getPlayer1().getNLinhas());
         Label hold1 = new Label("Hold");
         Label next1 = new Label("Next");
         Label nome1 = new Label(game.getPlayer1().getNome());
@@ -63,7 +66,7 @@ public class TelaGame {
 
         Label pontosJogador2 = new Label("Pontuação: " + game.getPlayer2().getPontos());
         Label nivelJogador2 = new Label("Nível: " + game.getPlayer2().getPontos());
-        Label linhasJogador2 = new Label("Linhas: " + 0);
+        Label linhasJogador2 = new Label("Linhas: " + game.getPlayer2().getNLinhas());
         Label hold2 = new Label("Hold");
         Label next2 = new Label("Next");
         Label nome2 = new Label(game.getPlayer2().getNome());
@@ -102,6 +105,12 @@ public class TelaGame {
             if (event.getCode() == KeyCode.UP){
                 game.atualizar(KeyCode.UP);
             }
+            if (event.getCode() == KeyCode.Q){
+                game.atualizar(KeyCode.Q);
+            }
+            if (event.getCode() == KeyCode.SHIFT){
+                game.atualizar(KeyCode.SHIFT);
+            }
             if (event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.P){
                 game.pausar();
             }
@@ -114,7 +123,7 @@ public class TelaGame {
             @Override
             public void handle(long now){
 
-                if (now - ultimoTick >= UM_SEGUNDO){
+                if (now - ultimoTick >= UM_SEGUNDO - ((long)Math.min(game.getPlayer1().getNivel(), game.getPlayer2().getNivel()) - (long)1) * DECIMO_DE_SEGUNDO){
                     game.atualizar(KeyCode.S);
                     game.atualizar(KeyCode.DOWN);
                     ultimoTick = now;
@@ -156,6 +165,12 @@ public class TelaGame {
 
                 atualizarTela(game, game.getPlayer1(), gc1);
                 atualizarTela(game, game.getPlayer2(), gc2);
+                pontosJogador1.setText("Pontuação: " + game.getPlayer1().getPontos());
+                pontosJogador2.setText("Pontuação: " + game.getPlayer2().getPontos());
+                nivelJogador1.setText("Nível: " + game.getPlayer1().getNivel());
+                nivelJogador2.setText("Nível: " + game.getPlayer2().getNivel());
+                linhasJogador1.setText("Linhas: " + game.getPlayer1().getNLinhas());
+                linhasJogador2.setText("Linhas: " + game.getPlayer2().getNLinhas());   
             }
         }.start();
 

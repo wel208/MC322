@@ -4,7 +4,8 @@ public interface BlocoInterface {
     void moverDireita();
     void moverEsquerda();
     void moverBaixo();
-    void rotacionar();
+    void rotacionarSH();
+    void rotacionarSA();
     int[] getPosicao();
     int getColor();
 }

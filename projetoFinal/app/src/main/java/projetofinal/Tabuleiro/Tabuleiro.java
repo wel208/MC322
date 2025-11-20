@@ -73,7 +73,7 @@ public class Tabuleiro {
         for (int linha : linhasParaRemover) {
             removerLinha(linha);
         }
-
+        
         return linhasParaRemover.size();
     }
 
