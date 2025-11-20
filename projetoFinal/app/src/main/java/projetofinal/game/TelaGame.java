@@ -16,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import projetofinal.Jogadores.Jogador;
+import projetofinal.Blocos.*;
 
 public class TelaGame {
     
@@ -38,13 +39,22 @@ public class TelaGame {
         GraphicsContext gc1 = tab1.getGraphicsContext2D();
         Canvas tab2 = new Canvas(250, 500);
         GraphicsContext gc2 = tab2.getGraphicsContext2D();
+        Canvas canvasHoldJ1 = new Canvas(120, 80);
+        GraphicsContext gcHold1 = canvasHoldJ1.getGraphicsContext2D();
+        Canvas canvasHoldJ2 = new Canvas(120, 80);
+        GraphicsContext gcHold2 = canvasHoldJ2.getGraphicsContext2D();
 
         Label pontosJogador1 = new Label("Pontuação: " + game.getPlayer1().getPontos());
         Label nivelJogador1 = new Label("Nível: " + game.getPlayer1().getPontos());
         Label linhasJogador1 = new Label("Linhas: " + game.getPlayer1().getNLinhas());
+        pontosJogador1.setAlignment(Pos.CENTER);
+        nivelJogador1.setAlignment(Pos.CENTER);
+        linhasJogador1.setAlignment(Pos.CENTER);
         Label hold1 = new Label("Hold");
+        hold1.setAlignment(Pos.CENTER);
         Label next1 = new Label("Next");
-        Label nome1 = new Label(game.getPlayer1().getNome());
+        next1.setAlignment(Pos.CENTER);
+        Label nome1 = new Label(game.getPlayer2().getNome());
 
         gc1.setFill(Color.BLACK);
         gc1.fillRect(0, 0, tab1.getWidth(), tab1.getHeight());
@@ -53,22 +63,31 @@ public class TelaGame {
             for (int j = 0; j <= 500; j += 25) 
                 gc1.strokeRect(i, j, 25, 25);
         }
+
+        gcHold1.setFill(Color.BLACK);
+        gcHold1.fillRect(0, 0, canvasHoldJ1.getWidth(), canvasHoldJ1.getWidth());
         
         VBox status1 = new VBox(5, pontosJogador1, nivelJogador1, linhasJogador1);
-        VBox lado1J1 = new VBox(400, hold1, status1);
+        VBox holdJ1 = new VBox(hold1, canvasHoldJ1);
+        VBox lado1J1 = new VBox(350, holdJ1, status1);
         lado1J1.setAlignment(Pos.CENTER);
 
         VBox lado2J1 = new VBox(450, next1, nome1);
         lado2J1.setAlignment(Pos.CENTER);
 
-        HBox jogo1 = new HBox(30, lado1J1, tab1, lado2J1);
+        HBox jogo1 = new HBox(15, lado1J1, tab1, lado2J1);
         jogo1.setAlignment(Pos.CENTER);
 
         Label pontosJogador2 = new Label("Pontuação: " + game.getPlayer2().getPontos());
         Label nivelJogador2 = new Label("Nível: " + game.getPlayer2().getPontos());
         Label linhasJogador2 = new Label("Linhas: " + game.getPlayer2().getNLinhas());
+        pontosJogador2.setAlignment(Pos.CENTER);
+        nivelJogador2.setAlignment(Pos.CENTER);
+        linhasJogador2.setAlignment(Pos.CENTER);
         Label hold2 = new Label("Hold");
+        hold2.setAlignment(Pos.CENTER);
         Label next2 = new Label("Next");
+        next2.setAlignment(Pos.CENTER);
         Label nome2 = new Label(game.getPlayer2().getNome());
 
         gc2.setFill(Color.BLACK);
@@ -78,15 +97,19 @@ public class TelaGame {
             for (int j = 0; j <= 500; j += 25) 
                 gc2.strokeRect(i, j, 25, 25);
         }
+
+        gcHold2.setFill(Color.BLACK);
+        gcHold2.fillRect(0, 0, canvasHoldJ2.getWidth(), canvasHoldJ2.getWidth());
         
         VBox status2 = new VBox(5, pontosJogador2, nivelJogador2, linhasJogador2);
-        VBox lado1J2 = new VBox(400, hold2, status2);
+        VBox holdJ2 = new VBox(hold2, canvasHoldJ2);
+        VBox lado1J2 = new VBox(350, holdJ2, status2);
         lado1J2.setAlignment(Pos.CENTER);
 
         VBox lado2J2 = new VBox(450, next2, nome2);
         lado2J2.setAlignment(Pos.CENTER);
 
-        HBox jogo2 = new HBox(30, lado1J2, tab2, lado2J2);
+        HBox jogo2 = new HBox(15, lado1J2, tab2, lado2J2);
         jogo2.setAlignment(Pos.CENTER);
 
         HBox tela = new HBox(500, jogo1, jogo2);
@@ -163,21 +186,23 @@ public class TelaGame {
                     ultimaQuedaJ2 = now;
                 }
 
-                atualizarTela(game, game.getPlayer1(), gc1);
-                atualizarTela(game, game.getPlayer2(), gc2);
+                atualizarTabuleiro(game.getPlayer1(), gc1);
+                atualizarTabuleiro(game.getPlayer2(), gc2);
+                atualizarHold(game.getPlayer1(), gcHold1);
+                atualizarHold(game.getPlayer2(), gcHold2);
                 pontosJogador1.setText("Pontuação: " + game.getPlayer1().getPontos());
                 pontosJogador2.setText("Pontuação: " + game.getPlayer2().getPontos());
                 nivelJogador1.setText("Nível: " + game.getPlayer1().getNivel());
                 nivelJogador2.setText("Nível: " + game.getPlayer2().getNivel());
                 linhasJogador1.setText("Linhas: " + game.getPlayer1().getNLinhas());
-                linhasJogador2.setText("Linhas: " + game.getPlayer2().getNLinhas());   
+                linhasJogador2.setText("Linhas: " + game.getPlayer2().getNLinhas());
             }
         }.start();
 
         return cenaJogo;
     }
 
-    public static void atualizarTela(Game game, Jogador jogador, GraphicsContext gc){
+    private static void atualizarTabuleiro(Jogador jogador, GraphicsContext gc){
         
         gc.clearRect(0, 0, 250, 500);
 
@@ -249,6 +274,83 @@ public class TelaGame {
         for (int i = 0; i <= 250; i += 25){ 
             for (int j = 0; j <= 500; j += 25) 
                 gc.strokeRect(i, j, 25, 25);
+        }
+    }
+    
+    private static void atualizarHold(Jogador jogador, GraphicsContext gc){
+
+        if (!jogador.guardou())
+            return;
+
+        gc.clearRect(0, 0, 120, 80);
+        
+        gc.setFill(Color.BLACK);
+        gc.setStroke(Color.GRAY);
+        gc.fillRect(0, 0, 120, 80);
+
+        int corBloco = jogador.getGuardado().getColor();
+
+        if (corBloco == 1){
+            gc.setFill(Color.LIGHTBLUE);
+            gc.fillRect(20, 30, 80, 20);
+            for (int i = 0; i < 4; i++){
+                gc.fillRect(20 + i * 20, 30, 20, 20);
+                gc.strokeRect(20 + i * 20, 30, 20, 20);
+            }
+        }
+        else if (corBloco == 2){
+            gc.setFill(Color.ORANGE);
+            gc.fillRect(30, 20, 20, 20);
+            gc.strokeRect(30, 20, 20, 20);
+            for (int i = 0; i < 3; i++){
+                gc.fillRect(30 + i * 20, 40, 20, 20);
+                gc.strokeRect(30 + i * 20, 40, 20, 20);
+            }
+        }
+        else if (corBloco == 3){
+            gc.setFill(Color.GREEN);
+            gc.fillRect(70, 20, 20, 20);
+            gc.strokeRect(70, 20, 20, 20);
+            for (int i = 0; i < 3; i++){
+                gc.fillRect(30 + i * 20, 40, 20, 20);
+                gc.strokeRect(30 + i * 20, 40, 20, 20);
+            }
+        }
+        else if (corBloco == 4){
+            gc.setFill(Color.YELLOW);
+            gc.fillRect(40, 20, 40, 40);
+            for (int i = 0; i < 2; i++){
+                gc.strokeRect(40 + i * 20, 20 , 20, 20);
+                gc.strokeRect(40 + i * 20, 40, 20, 20);
+            }
+        }
+        else if (corBloco == 5){
+            gc.setFill(Color.RED);
+            for (int i = 0; i < 2; i++){
+                gc.fillRect(30 + i * 20, 40, 20, 20);
+                gc.fillRect(50 + i * 20, 20, 20, 20);
+                gc.strokeRect(30 + i * 20, 40, 20, 20);
+                gc.strokeRect(50 + i * 20, 20, 20, 20);
+            }
+        }
+        else if (corBloco == 6){
+            gc.setFill(Color.PURPLE);
+            gc.fillRect(50, 20, 20, 20);
+            gc.strokeRect(50, 20, 20, 20);
+
+            for (int i = 0; i < 3; i++){
+                gc.fillRect(30 + i * 20, 40, 20, 20);
+                gc.strokeRect(30 + i * 20, 40, 20, 20);
+            }
+        }
+        else if (corBloco == 7){
+            gc.setFill(Color.BLUE);
+            for (int i = 0; i < 2; i++){
+                gc.fillRect(50 + i * 20, 40, 20, 20);
+                gc.fillRect(30 + i * 20, 20, 20, 20);
+                gc.strokeRect(50 + i * 20, 40, 20, 20);
+                gc.strokeRect(30 + i * 20, 20, 20, 20);
+            }
         }
     }
 }

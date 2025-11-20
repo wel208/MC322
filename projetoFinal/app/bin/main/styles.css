@@ -1,0 +1,14 @@
+.label {
+    -fx-text-fill: blue;
+    -fx-font-size: 16pt;
+    font-size: 16pt;
+}
+
+Button {
+    -fx-font-weight: bold;
+    -fx-border-radius: 10px;
+    -fx-cursor: hand;
+    -fx-width: 100em;
+    -fx-pref-width: 250px; /* Sets preferred width to 150 pixels */
+    -fx-min-width: 100px; /* Ensures a minimum width of 100 pixels */
+}

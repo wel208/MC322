@@ -120,7 +120,6 @@ public class Game implements GameInterface {
             terminado = true;
         }
     }
-    
 
     @Override
     public int[] getPontos() {

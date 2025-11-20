@@ -36,6 +36,8 @@ public class Jogador {
     public Tabuleiro getTabuleiro() { return tabuleiro; }
     public GeradorDeBlocos getBag() { return bag; }
     public Bloco getBlocoAtual() { return blocoAtual; }
+    public Bloco getGuardado() {return guardado; }
+    public boolean guardou() { return guardou; }
     public boolean perdeu() { return perdeu; }
 
     public void setNome(String nome) {
