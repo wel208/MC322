@@ -3,7 +3,6 @@ package projetofinal.MenuPrincipal;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.Scene;
-import java.io.File;
 import javafx.collections.FXCollections;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
@@ -157,7 +156,6 @@ public class TelaInicial {
         ranking.setMaxWidth(265);
         ranking.setMaxHeight(280);
         PontuacoesSalvas pontuacoes = new PontuacoesSalvas();
-        File pontos = new File("saves/pontuacoes.xml");
         pontuacoes.carregarRank();
 
         // Colunas presentes na tabela de ranking

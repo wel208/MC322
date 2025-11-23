@@ -3,8 +3,6 @@ package projetofinal.game;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import java.lang.Math;
-import java.security.Key;
-
 import javafx.scene.Scene;
 import java.util.List;
 import javafx.scene.canvas.Canvas;
