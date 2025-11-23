@@ -47,7 +47,7 @@ public class Game implements GameInterface {
         Jogador playerAtual;
         Jogador playerOutro;
         
-        if (tecla == KeyCode.A || tecla == KeyCode.D || tecla == KeyCode.S || tecla == KeyCode.W || tecla == KeyCode.Q) {
+        if (tecla == KeyCode.A || tecla == KeyCode.D || tecla == KeyCode.S || tecla == KeyCode.W || tecla == KeyCode.Q || tecla == KeyCode.E) {
             playerAtual = player1;
             playerOutro = player2;
         } 
@@ -88,7 +88,7 @@ public class Game implements GameInterface {
                 linhasFeitas = tab.verificarLinhas();
                 atual.adicionarPontos(linhasFeitas);
                 if (linhasFeitas >= 2)
-                    outro.getTabuleiro().adicionarLinhasIncompletas(linhasFeitas);
+                    outro.getTabuleiro().adicionarLinhasIncompletas(linhasFeitas - 1);
             }
         break;
         case KeyCode.W:
@@ -113,6 +113,22 @@ public class Game implements GameInterface {
         case KeyCode.Q:
         case KeyCode.SHIFT:
             atual.hold();
+        break;
+        case KeyCode.E:
+        case KeyCode.NUMPAD0:
+            for (;;){
+                bloco.moverBaixo();
+                if (tab.posicaoValida(bloco) == Validacao.COLISAO){
+                    bloco.moverCima();
+                    tab.fixarBloco(bloco);
+                    atual.blocoAtual = atual.getBag().proximoBloco();
+                    linhasFeitas = tab.verificarLinhas();
+                    atual.adicionarPontos(linhasFeitas);
+                    if (linhasFeitas >= 2)
+                        outro.getTabuleiro().adicionarLinhasIncompletas(linhasFeitas - 1);
+                    break;
+                }
+            }
         break;
         default:
             return;

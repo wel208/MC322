@@ -3,11 +3,17 @@ package projetofinal.MenuPrincipal;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.Scene;
+import java.io.File;
+import javafx.collections.FXCollections;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.collections.ObservableList;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
 import projetofinal.Jogadores.*;
 import projetofinal.Util.*;
 import projetofinal.game.Main;
+import projetofinal.saves.JogadorAuxiliar;
+import projetofinal.saves.PontuacoesSalvas;
 import javafx.scene.image.*;
 public class TelaInicial {
 
@@ -64,10 +70,6 @@ public class TelaInicial {
         Button l3J2Up = new Button("▲");
         Button l3J2Down = new Button("▼");
 
-        // Mostrar o nome dos jogadores
-        Label nomeJ1 = new Label("Jogador 1: " + J1.getNome());
-        Label nomeJ2 = new Label("Jogador 2: " + J2.getNome());
-
         /*
          * Definição das ações dos botões:
          * - Atualiza a letra/número exibido no label correspondente
@@ -76,62 +78,50 @@ public class TelaInicial {
         l1J1Up.setOnAction(e -> {
             l1J1.setText(atualizarLetra(l1J1.getText(), true));
             J1.setNome(atualizarNomeJogador(l1J1.getText(), l2J1.getText(), l3J1.getText()));
-            nomeJ1.setText("Jogador 1: " + J1.getNome());
         });
         l1J1Down.setOnAction(e -> {
             l1J1.setText(atualizarLetra(l1J1.getText(), false));
             J1.setNome(atualizarNomeJogador(l1J1.getText(), l2J1.getText(), l3J1.getText()));
-            nomeJ1.setText("Jogador 1: " + J1.getNome());
         });
         l1J2Up.setOnAction(e -> {
             l1J2.setText(atualizarLetra(l1J2.getText(), true));
             J2.setNome(atualizarNomeJogador(l1J2.getText(), l2J2.getText(), l3J2.getText()));
-            nomeJ2.setText("Jogador 2: " + J2.getNome());
         });
         l1J2Down.setOnAction(e -> {
             l1J2.setText(atualizarLetra(l1J2.getText(), false));
             J2.setNome(atualizarNomeJogador(l1J2.getText(), l2J2.getText(), l3J2.getText()));
-            nomeJ2.setText("Jogador 2: " + J2.getNome());
         });
         l2J1Up.setOnAction(e -> {
             l2J1.setText(atualizarLetra(l2J1.getText(), true));
             J1.setNome(atualizarNomeJogador(l1J1.getText(), l2J1.getText(), l3J1.getText()));
-            nomeJ1.setText("Jogador 1: " + J1.getNome());
         });
         l2J1Down.setOnAction(e -> {
             l2J1.setText(atualizarLetra(l2J1.getText(), false));
             J1.setNome(atualizarNomeJogador(l1J1.getText(), l2J1.getText(), l3J1.getText()));
-            nomeJ1.setText("Jogador 1: " + J1.getNome());
         });
         l2J2Up.setOnAction(e -> {
             l2J2.setText(atualizarLetra(l2J2.getText(), true));
             J2.setNome(atualizarNomeJogador(l1J2.getText(), l2J2.getText(), l3J2.getText()));
-            nomeJ2.setText("Jogador 2: " + J2.getNome());
         });
         l2J2Down.setOnAction(e -> {
             l2J2.setText(atualizarLetra(l2J2.getText(), false));
             J2.setNome(atualizarNomeJogador(l1J2.getText(), l2J2.getText(), l3J2.getText()));
-            nomeJ2.setText("Jogador 2: " + J2.getNome());
         });
         l3J1Up.setOnAction(e -> {
             l3J1.setText(atualizarLetra(l3J1.getText(), true));
             J1.setNome(atualizarNomeJogador(l1J1.getText(), l2J1.getText(), l3J1.getText()));
-            nomeJ1.setText("Jogador 1: " + J1.getNome());
         });
         l3J1Down.setOnAction(e -> {
             l3J1.setText(atualizarLetra(l3J1.getText(), false));
             J1.setNome(atualizarNomeJogador(l1J1.getText(), l2J1.getText(), l3J1.getText()));
-            nomeJ1.setText("Jogador 1: " + J1.getNome());
         });
         l3J2Up.setOnAction(e -> {
             l3J2.setText(atualizarLetra(l3J2.getText(), true));
             J2.setNome(atualizarNomeJogador(l1J2.getText(), l2J2.getText(), l3J2.getText()));
-            nomeJ2.setText("Jogador 2: " + J2.getNome());
         });
         l3J2Down.setOnAction(e -> {
             l3J2.setText(atualizarLetra(l3J2.getText(), false));
             J2.setNome(atualizarNomeJogador(l1J2.getText(), l2J2.getText(), l3J2.getText()));
-            nomeJ2.setText("Jogador 2: " + J2.getNome());
         });
 
         // Botão para iniciar o jogo
@@ -161,10 +151,46 @@ public class TelaInicial {
         hBoxBotoes.setAlignment(Pos.CENTER);
         VBox iniciar = new VBox(10, hBoxNomes, hBoxBotoes);
         iniciar.setAlignment(Pos.CENTER);
-        VBox nomes = new VBox(10, nomeJ1, nomeJ2);
+
+        // Verifica se há pontuações a serem apresentadas na tela inicial
+        TableView<JogadorAuxiliar> ranking = new TableView<>();
+        ranking.setMaxWidth(265);
+        ranking.setMaxHeight(280);
+        PontuacoesSalvas pontuacoes = new PontuacoesSalvas();
+        File pontos = new File("saves/pontuacoes.xml");
+        pontuacoes.carregarRank();
+
+        // Colunas presentes na tabela de ranking
+        TableColumn<JogadorAuxiliar, String> colNome = new TableColumn<>("Nome");
+        TableColumn<JogadorAuxiliar, Integer> colPontuacao = new TableColumn<>("Pontuação");
+        TableColumn<JogadorAuxiliar, Integer> colNivel = new TableColumn<>("Nível");
+        TableColumn<JogadorAuxiliar, Integer> colNLinhas = new TableColumn<>("Nº de Linhas");
+
+        // Configurando de onde a tabela pega os dados
+        colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colPontuacao.setCellValueFactory(new PropertyValueFactory<>("pontuacao"));
+        colNivel.setCellValueFactory(new PropertyValueFactory<>("nivel"));
+        colNLinhas.setCellValueFactory(new PropertyValueFactory<>("nLinhas"));
+
+        // Adiciona as colunas na tabela
+        ranking.getColumns().add(colNome);
+        ranking.getColumns().add(colPontuacao);
+        ranking.getColumns().add(colNivel);
+        ranking.getColumns().add(colNLinhas);
+
+        // Definindo o tamanho das colunas
+        colNome.setMaxWidth(50);
+        colPontuacao.setMaxWidth(80);
+        colNivel.setMaxWidth(50);
+        colNLinhas.setMaxWidth(100);
+
+        ObservableList<JogadorAuxiliar> dados = FXCollections.observableArrayList(pontuacoes.getRank());
+        ranking.setItems(dados);
 
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(nomes, iniciar);   
+        layout.getChildren().addAll(ranking, iniciar);   
+
+        StackPane.setAlignment(ranking, Pos.TOP_LEFT);
 
         return new Scene(layout);
     }

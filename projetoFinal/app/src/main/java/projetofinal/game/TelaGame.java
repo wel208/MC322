@@ -3,6 +3,8 @@ package projetofinal.game;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import java.lang.Math;
+import java.security.Key;
+
 import javafx.scene.Scene;
 import java.util.List;
 import javafx.scene.canvas.Canvas;
@@ -17,6 +19,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import projetofinal.Jogadores.Jogador;
+import projetofinal.saves.JogadorAuxiliar;
+import projetofinal.saves.PontuacoesSalvas;
 import projetofinal.Blocos.*;
 
 public class TelaGame {
@@ -25,6 +29,8 @@ public class TelaGame {
     private static long ultimoTick = 0;
 
     private static final long DECIMO_DE_SEGUNDO = 100_000_000L;
+
+    private static long MOMENTO_DA_VITORIA = 0;
 
     private static final long TEMPO_MOV_LATERAL = 90_000_000L;
     private static long ultimoMovLateralJ1 = 0;
@@ -155,27 +161,16 @@ public class TelaGame {
 
         cenaJogo.setOnKeyPressed(event -> {
             teclasPressionadas.add(event.getCode());
+            KeyCode tecla = event.getCode();
 
-            if (event.getCode() == KeyCode.W){
-                game.atualizar(KeyCode.W);
+            if (tecla.equals(KeyCode.W) || tecla.equals(KeyCode.UP) || tecla.equals(KeyCode.Q) || tecla.equals(KeyCode.SHIFT) || tecla.equals(KeyCode.E) || tecla.equals(KeyCode.NUMPAD0))
+                game.atualizar(tecla);
+            if (event.getCode() == KeyCode.R && game.pausado()){
+                game.reiniciar();
+                jogoPausado.setText("");
+                acoesNaPausa.setText("");
             }
-            if (event.getCode() == KeyCode.UP){
-                game.atualizar(KeyCode.UP);
-            }
-            if (event.getCode() == KeyCode.Q){
-                game.atualizar(KeyCode.Q);
-            }
-            if (event.getCode() == KeyCode.SHIFT){
-                game.atualizar(KeyCode.SHIFT);
-            }
-            if (event.getCode() == KeyCode.R){
-                if (game.pausado()){
-                    game.reiniciar();
-                    jogoPausado.setText("");
-                    acoesNaPausa.setText("");
-                }
-            }
-            if ((event.getCode() == KeyCode.M && game.pausado()) || (event.getCode() != null && game.terminado())){
+            if ((event.getCode() == KeyCode.M && game.pausado()) || game.terminado()){
                     game.reiniciar();
                     timer.stop();
                     ultimoMovLateralJ1 = 0;
@@ -205,6 +200,27 @@ public class TelaGame {
             @Override
             public void handle(long now){
 
+                Boolean terminou = false;
+                if (game.terminado() && !terminou){
+                    terminou = true;
+
+                    Jogador vencedor = game.getPlayer1().perdeu() ? game.getPlayer2() : game.getPlayer1();
+                    jogoTerminado.setText("O JOGO ACABOU");
+                    jogadorVencedor.setText(vencedor.getNome() + " VENCEU!");
+                    pontuacaoVencedor.setText("Pontuação: " + vencedor.getPontos() + "   Nível: " + vencedor.getNivel() + "   Nº de Linhas: " + vencedor.getNLinhas());
+
+                    PontuacoesSalvas ranking = new PontuacoesSalvas();
+                    ranking.carregarRank();
+                    
+                    ranking.atualizarRank(new JogadorAuxiliar(game.getPlayer1().getNome(), game.getPlayer1().getNivel(), game.getPlayer1().getNLinhas(), game.getPlayer1().getPontos()));
+                    ranking.atualizarRank(new JogadorAuxiliar(game.getPlayer2().getNome(), game.getPlayer2().getNivel(), game.getPlayer2().getNLinhas(), game.getPlayer2().getPontos()));
+
+                    MOMENTO_DA_VITORIA = now;
+                }
+
+                if (terminou && now - MOMENTO_DA_VITORIA >= (long)5 * UM_SEGUNDO)
+                    stop();
+
                 if (now - ultimoTick >= UM_SEGUNDO - ((long)Math.max(game.getPlayer1().getNivel(), game.getPlayer2().getNivel()) - (long)1) * DECIMO_DE_SEGUNDO){
                     game.atualizar(KeyCode.S);
                     game.atualizar(KeyCode.DOWN);
@@ -213,7 +229,7 @@ public class TelaGame {
 
                 if (now - ultimoMovLateralJ1 >= TEMPO_MOV_LATERAL){
                     if (teclasPressionadas.contains(KeyCode.A)){
-                    game.atualizar(KeyCode.A);
+                        game.atualizar(KeyCode.A);
                     }
                     if (teclasPressionadas.contains(KeyCode.D)){
                         game.atualizar(KeyCode.D);
@@ -247,14 +263,6 @@ public class TelaGame {
 
                 if (teclasPressionadas.contains(KeyCode.M) && game.pausado()){
                     teclasPressionadas.clear();
-                    stop();
-                }
-
-                if (game.terminado()){
-                    Jogador vencedor = game.getPlayer1().perdeu() ? game.getPlayer2() : game.getPlayer1();
-                    jogoTerminado.setText("O JOGO ACABOU");
-                    jogadorVencedor.setText(vencedor.getNome() + " VENCEU!");
-                    pontuacaoVencedor.setText("Pontuação: " + vencedor.getPontos() + "   Nível: " + vencedor.getNivel() + "   Nº de Linhas: " + vencedor.getNLinhas());
                     stop();
                 }
 

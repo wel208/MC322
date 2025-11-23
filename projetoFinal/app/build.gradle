@@ -29,6 +29,9 @@ dependencies {
     implementation "org.openjfx:javafx-controls:21:win"
     implementation "org.openjfx:javafx-fxml:21:win"
     implementation "org.openjfx:javafx-graphics:21:win"
+
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.3'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.3'
 }
 
 // Aplica uma toolchain Java específica para facilitar o trabalho em diferentes ambientes.
