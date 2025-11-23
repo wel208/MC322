@@ -14,44 +14,45 @@ import java.util.Comparator;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PontuacoesSalvas {
 
-    @XmlElements({@XmlElement(name = "rank", type=JogadorAuxiliar.class)})
-    private List<JogadorAuxiliar> rank = new ArrayList<>();
+    @XmlElements({@XmlElement(name = "rankVitorias", type=JogadorAuxiliar.class)})
+    private List<JogadorAuxiliar> rankVitorias = new ArrayList<>();
+    @XmlElements({@XmlElement(name = "rankPontuacao", type=JogadorAuxiliar.class)})
+    private List<JogadorAuxiliar> rankPontuacao = new ArrayList<>();
+    @XmlElements({@XmlElement(name = "jogadores", type=JogadorAuxiliar.class)})
+    private List<JogadorAuxiliar> jogadores = new ArrayList<>();
 
-    public void atualizarRank(JogadorAuxiliar jogador){
-        JogadorAuxiliar existente = null;
+    public void atualizarRank(JogadorAuxiliar jogador, boolean venceu){
+        boolean jogadorExistente = false;
 
-        if (rank.size() == 0){
-            rank.add(jogador);
-            salvarRank();
-            return;
-        }
-
-        // Verifica se o nome do jogador já está no ranking
-        for (JogadorAuxiliar i : rank){
-            if (jogador.getNome().equals(i.getNome())){
-                existente = i;
+        for (JogadorAuxiliar j : jogadores){
+            if (jogador.getNome().equals(j.getNome())){
+                jogadorExistente = true;
+                if (venceu) j.aumentarVitorias();
+                if (jogador.getPontuacao() > j.getPontuacao()){
+                    j.setPontuacao(jogador.getPontuacao());
+                    j.setNLinhas(jogador.getNLinhas());
+                    j.setNivel(jogador.getNivel());
+                }
                 break;
             }
         }
 
-        // Se estiver, atualiza a lista e remove os dados antigos
-        if (existente != null){
-            if (jogador.getPontuacao() > existente.getPontuacao()){
-                rank.add(jogador);
-                rank.remove(existente);
-            }
+        if (!jogadorExistente){
+            jogadores.add(jogador);
+            if (venceu) jogador.aumentarVitorias();
         }
 
-        // Se o jogador não está na lista, adiciona nela
-        else
-            rank.add(jogador);
+        rankPontuacao = new ArrayList<>(jogadores);
+        rankVitorias = new ArrayList<>(jogadores);
 
-        // Organiza o ranking com todos os jogadores
-        rank.sort(Comparator.comparing(JogadorAuxiliar::getPontuacao).reversed());
+        rankPontuacao.sort(Comparator.comparing(JogadorAuxiliar::getPontuacao).reversed());
+        rankVitorias.sort(Comparator.comparing(JogadorAuxiliar::getVitorias).reversed());
 
-        // Caso haja mais de 10 pessoas no ranking, remove a última
-        if (rank.size() > 10)
-            rank.removeLast();
+        while (rankPontuacao.size() > 10)
+            rankPontuacao.removeLast();
+
+        while (rankVitorias.size() > 10) 
+            rankVitorias.removeLast();
 
         salvarRank();
     }
@@ -70,7 +71,9 @@ public class PontuacoesSalvas {
 
             PontuacoesSalvas pontuacaoCarregada = (PontuacoesSalvas) unmarshaller.unmarshal(new File("saves/pontuacoes.xml"));
 
-            setRank(pontuacaoCarregada.rank);
+            setJogadores(pontuacaoCarregada.jogadores);
+            setRankPontuacao(pontuacaoCarregada.rankPontuacao);
+            setRankVitorias(pontuacaoCarregada.rankVitorias);
         } 
         catch (JAXBException e) {
             e.printStackTrace();
@@ -95,11 +98,13 @@ public class PontuacoesSalvas {
         }
         catch (JAXBException e){
             e.printStackTrace();
-            System.out.println("Erro ao salvar as pontuacoes.");
         }
     }
 
-    public List<JogadorAuxiliar> getRank() { return rank; }
+    public List<JogadorAuxiliar> getRankPontuacao() { return rankPontuacao; }
+    public List<JogadorAuxiliar> getRankVitorias() { return rankVitorias; }
 
-    private void setRank(List<JogadorAuxiliar> rank){ this.rank = rank; }
+    private void setRankPontuacao(List<JogadorAuxiliar> rank) { rankPontuacao = rank; }
+    private void setRankVitorias(List<JogadorAuxiliar> rank) { rankVitorias = rank; }
+    private void setJogadores(List<JogadorAuxiliar> jogadores) { this.jogadores = jogadores; }
 }

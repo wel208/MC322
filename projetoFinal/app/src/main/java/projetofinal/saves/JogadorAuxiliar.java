@@ -10,6 +10,7 @@ public class JogadorAuxiliar {
     private int nivel;
     private int nLinhas;
     private int pontuacao;
+    private int nVitorias;
 
     public JogadorAuxiliar(){}
     
@@ -18,10 +19,19 @@ public class JogadorAuxiliar {
         this.nivel = nivel;
         this.nLinhas = nLinhas;
         this.pontuacao = pontuacao;
+        nVitorias = 0;
     }
 
     public String getNome() { return nome; }
     public int getNivel() { return nivel; }
     public int getNLinhas() { return nLinhas; }
-    public int getPontuacao() {return pontuacao; }
+    public int getPontuacao() { return pontuacao; }
+    public int getVitorias() { return nVitorias; }
+
+    public void setPontuacao(int pontuacao) { this.pontuacao = pontuacao; }
+    public void setNivel(int nivel) { this.nivel = nivel; }
+    public void setNLinhas(int nLinhas) { this.nLinhas = nLinhas; }
+    public void aumentarVitorias(){
+        nVitorias += 1;
+    }
 }

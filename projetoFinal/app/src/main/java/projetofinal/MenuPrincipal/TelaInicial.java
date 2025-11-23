@@ -48,12 +48,12 @@ public class TelaInicial {
     public static Scene menuPrincipal(Stage primaryStage, Jogador J1, Jogador J2) {
 
         // Locais para os nomes dos jogadores
-        Label l1J1 = new Label("A");
-        Label l2J1 = new Label("A");
-        Label l3J1 = new Label("A");
-        Label l1J2 = new Label("A");
-        Label l2J2 = new Label("A");
-        Label l3J2 = new Label("A");
+        Label l1J1 = new Label(String.valueOf(J1.getNome().charAt(0)));
+        Label l2J1 = new Label(String.valueOf(J1.getNome().charAt(1)));
+        Label l3J1 = new Label(String.valueOf(J1.getNome().charAt(2)));
+        Label l1J2 = new Label(String.valueOf(J2.getNome().charAt(0)));
+        Label l2J2 = new Label(String.valueOf(J2.getNome().charAt(1)));
+        Label l3J2 = new Label(String.valueOf(J2.getNome().charAt(2)));
 
         // Botões para alterar as letras dos nomes dos jogadores
         Button l1J1Up = new Button("▲");
@@ -151,44 +151,74 @@ public class TelaInicial {
         VBox iniciar = new VBox(10, hBoxNomes, hBoxBotoes);
         iniciar.setAlignment(Pos.CENTER);
 
-        // Verifica se há pontuações a serem apresentadas na tela inicial
-        TableView<JogadorAuxiliar> ranking = new TableView<>();
-        ranking.setMaxWidth(265);
-        ranking.setMaxHeight(280);
+        // Inicializa o ranking de pontuação
+        TableView<JogadorAuxiliar> rankingPontuacao = new TableView<>();
+        rankingPontuacao.setMaxWidth(265);
+        rankingPontuacao.setMaxHeight(280);
         PontuacoesSalvas pontuacoes = new PontuacoesSalvas();
         pontuacoes.carregarRank();
 
         // Colunas presentes na tabela de ranking
-        TableColumn<JogadorAuxiliar, String> colNome = new TableColumn<>("Nome");
-        TableColumn<JogadorAuxiliar, Integer> colPontuacao = new TableColumn<>("Pontuação");
-        TableColumn<JogadorAuxiliar, Integer> colNivel = new TableColumn<>("Nível");
-        TableColumn<JogadorAuxiliar, Integer> colNLinhas = new TableColumn<>("Nº de Linhas");
+        TableColumn<JogadorAuxiliar, String> colNomeP = new TableColumn<>("Nome");
+        TableColumn<JogadorAuxiliar, Integer> colPontuacaoP = new TableColumn<>("Pontuação");
+        TableColumn<JogadorAuxiliar, Integer> colNivelP = new TableColumn<>("Nível");
+        TableColumn<JogadorAuxiliar, Integer> colNLinhasP = new TableColumn<>("Nº de Linhas");
 
         // Configurando de onde a tabela pega os dados
-        colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colPontuacao.setCellValueFactory(new PropertyValueFactory<>("pontuacao"));
-        colNivel.setCellValueFactory(new PropertyValueFactory<>("nivel"));
-        colNLinhas.setCellValueFactory(new PropertyValueFactory<>("nLinhas"));
+        colNomeP.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colPontuacaoP.setCellValueFactory(new PropertyValueFactory<>("pontuacao"));
+        colNivelP.setCellValueFactory(new PropertyValueFactory<>("nivel"));
+        colNLinhasP.setCellValueFactory(new PropertyValueFactory<>("nLinhas"));
 
         // Adiciona as colunas na tabela
-        ranking.getColumns().add(colNome);
-        ranking.getColumns().add(colPontuacao);
-        ranking.getColumns().add(colNivel);
-        ranking.getColumns().add(colNLinhas);
+        rankingPontuacao.getColumns().add(colNomeP);
+        rankingPontuacao.getColumns().add(colPontuacaoP);
+        rankingPontuacao.getColumns().add(colNivelP);
+        rankingPontuacao.getColumns().add(colNLinhasP);
 
         // Definindo o tamanho das colunas
-        colNome.setMaxWidth(50);
-        colPontuacao.setMaxWidth(80);
-        colNivel.setMaxWidth(50);
-        colNLinhas.setMaxWidth(100);
+        colNomeP.setMaxWidth(50);
+        colPontuacaoP.setMaxWidth(80);
+        colNivelP.setMaxWidth(50);
+        colNLinhasP.setMaxWidth(100);
 
-        ObservableList<JogadorAuxiliar> dados = FXCollections.observableArrayList(pontuacoes.getRank());
-        ranking.setItems(dados);
+        ObservableList<JogadorAuxiliar> dados = FXCollections.observableArrayList(pontuacoes.getRankPontuacao());
+        rankingPontuacao.setItems(dados);
+
+        // Inicializa o ranking de vitórias
+        TableView<JogadorAuxiliar> rankingVitorias = new TableView<>();
+        rankingVitorias.setMaxWidth(350);
+        rankingVitorias.setMaxHeight(280);
+
+        // Colunas do ranking de vitórias
+        TableColumn<JogadorAuxiliar, String> colNomeV = new TableColumn<>("Nome");
+        TableColumn<JogadorAuxiliar, Integer> colVitoriasV = new TableColumn<>("Nº de Vitórias");
+        TableColumn<JogadorAuxiliar, Integer> colPontuacaoV = new TableColumn<>("Pontuação");
+        TableColumn<JogadorAuxiliar, Integer> colNivelV = new TableColumn<>("Nível");
+        TableColumn<JogadorAuxiliar, Integer> colNLinhasV = new TableColumn<>("Nº de Linhas");
+
+        // Configurando de onde as colunas pegam os dados
+        colNomeV.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colVitoriasV.setCellValueFactory(new PropertyValueFactory<>("vitorias"));
+        colPontuacaoV.setCellValueFactory(new PropertyValueFactory<>("pontuacao"));
+        colNivelV.setCellValueFactory(new PropertyValueFactory<>("nivel"));
+        colNLinhasV.setCellValueFactory(new PropertyValueFactory<>("nLinhas"));
+
+        // Adiciona as colunas na segunda tabela
+        rankingVitorias.getColumns().add(colNomeV);
+        rankingVitorias.getColumns().add(colVitoriasV);
+        rankingVitorias.getColumns().add(colPontuacaoV);
+        rankingVitorias.getColumns().add(colNivelV);
+        rankingVitorias.getColumns().add(colNLinhasV);
+
+        dados = FXCollections.observableArrayList(pontuacoes.getRankVitorias());
+        rankingVitorias.setItems(dados);
 
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(ranking, iniciar);   
+        layout.getChildren().addAll(rankingPontuacao, rankingVitorias, iniciar);   
 
-        StackPane.setAlignment(ranking, Pos.TOP_LEFT);
+        StackPane.setAlignment(rankingPontuacao, Pos.TOP_LEFT);
+        StackPane.setAlignment(rankingVitorias, Pos.TOP_RIGHT);
 
         return new Scene(layout);
     }

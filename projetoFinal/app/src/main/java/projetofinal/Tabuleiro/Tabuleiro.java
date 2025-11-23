@@ -79,7 +79,7 @@ public class Tabuleiro {
 
     public boolean atingiuTopo() {
         for (int x = 0; x < largura; x++) {
-            if (tab[2][x] != 0)
+            if (tab[0][x] != 0)
                 return true;
         }
         return false;

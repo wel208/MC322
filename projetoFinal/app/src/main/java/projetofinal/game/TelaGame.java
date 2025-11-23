@@ -28,8 +28,6 @@ public class TelaGame {
 
     private static final long DECIMO_DE_SEGUNDO = 100_000_000L;
 
-    private static long MOMENTO_DA_VITORIA = 0;
-
     private static final long TEMPO_MOV_LATERAL = 90_000_000L;
     private static long ultimoMovLateralJ1 = 0;
     private static long ultimoMovLateralJ2 = 0;
@@ -38,9 +36,13 @@ public class TelaGame {
     private static long ultimaQuedaJ1 = 0;
     private static long ultimaQuedaJ2 = 0;
 
+    private static boolean podeSairDoJogo = false;
+
     private static AnimationTimer timer;
 
     public static Scene telaJogo(Game game, Stage primaryStage){
+
+        podeSairDoJogo = false;
 
         // Criação da parte visual dos tabuleiros, Holds e Nexts
         Canvas tab1 = new Canvas(250, 500);
@@ -69,7 +71,7 @@ public class TelaGame {
         hold1.setAlignment(Pos.CENTER);
         Label next1 = new Label("Next");
         next1.setAlignment(Pos.CENTER);
-        Label nome1 = new Label(game.getPlayer2().getNome());
+        Label nome1 = new Label(game.getPlayer1().getNome());
 
         gc1.setFill(Color.BLACK);
         gc1.fillRect(0, 0, tab1.getWidth(), tab1.getHeight());
@@ -168,7 +170,7 @@ public class TelaGame {
                 jogoPausado.setText("");
                 acoesNaPausa.setText("");
             }
-            if ((event.getCode() == KeyCode.M && game.pausado()) || game.terminado()){
+            if ((event.getCode() == KeyCode.M && game.pausado()) || (game.terminado() && podeSairDoJogo)){
                     game.reiniciar();
                     timer.stop();
                     ultimoMovLateralJ1 = 0;
@@ -198,9 +200,7 @@ public class TelaGame {
             @Override
             public void handle(long now){
 
-                Boolean terminou = false;
-                if (game.terminado() && !terminou){
-                    terminou = true;
+                if (game.terminado()){
 
                     Jogador vencedor = game.getPlayer1().perdeu() ? game.getPlayer2() : game.getPlayer1();
                     jogoTerminado.setText("O JOGO ACABOU");
@@ -210,14 +210,20 @@ public class TelaGame {
                     PontuacoesSalvas ranking = new PontuacoesSalvas();
                     ranking.carregarRank();
                     
-                    ranking.atualizarRank(new JogadorAuxiliar(game.getPlayer1().getNome(), game.getPlayer1().getNivel(), game.getPlayer1().getNLinhas(), game.getPlayer1().getPontos()));
-                    ranking.atualizarRank(new JogadorAuxiliar(game.getPlayer2().getNome(), game.getPlayer2().getNivel(), game.getPlayer2().getNLinhas(), game.getPlayer2().getPontos()));
+                    ranking.atualizarRank(new JogadorAuxiliar(game.getPlayer1().getNome(), game.getPlayer1().getNivel(), game.getPlayer1().getNLinhas(), game.getPlayer1().getPontos()), !game.getPlayer1().perdeu());
+                    ranking.atualizarRank(new JogadorAuxiliar(game.getPlayer2().getNome(), game.getPlayer2().getNivel(), game.getPlayer2().getNLinhas(), game.getPlayer2().getPontos()), !game.getPlayer2().perdeu());
+                    timer.stop();
 
-                    MOMENTO_DA_VITORIA = now;
+                    PauseTransition espera = new PauseTransition(javafx.util.Duration.seconds(3));
+
+                    espera.setOnFinished(event -> {
+                        podeSairDoJogo = true;
+                    });
+
+                    espera.play();
+
+                    return;
                 }
-
-                if (terminou && now - MOMENTO_DA_VITORIA >= (long)5 * UM_SEGUNDO)
-                    stop();
 
                 if (now - ultimoTick >= UM_SEGUNDO - ((long)Math.max(game.getPlayer1().getNivel(), game.getPlayer2().getNivel()) - (long)1) * DECIMO_DE_SEGUNDO){
                     game.atualizar(KeyCode.S);
