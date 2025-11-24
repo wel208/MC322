@@ -46,7 +46,7 @@ public class PontuacoesSalvas {
         rankVitorias = new ArrayList<>(jogadores);
 
         rankPontuacao.sort(Comparator.comparing(JogadorAuxiliar::getPontuacao).reversed());
-        rankVitorias.sort(Comparator.comparing(JogadorAuxiliar::getVitorias).reversed());
+        rankVitorias.sort(Comparator.comparing(JogadorAuxiliar::getVitorias).reversed().thenComparing(JogadorAuxiliar::getPontuacao).reversed());
 
         while (rankPontuacao.size() > 10)
             rankPontuacao.removeLast();
