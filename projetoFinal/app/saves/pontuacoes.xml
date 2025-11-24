@@ -5,13 +5,20 @@
         <nivel>6</nivel>
         <nLinhas>18</nLinhas>
         <pontuacao>10100</pontuacao>
-        <nVitorias>3</nVitorias>
+        <nVitorias>4</nVitorias>
     </rankVitorias>
     <rankVitorias>
-        <nome>VAL</nome>
+        <nome>CAM</nome>
         <nivel>3</nivel>
-        <nLinhas>3</nLinhas>
-        <pontuacao>3500</pontuacao>
+        <nLinhas>10</nLinhas>
+        <pontuacao>5200</pontuacao>
+        <nVitorias>1</nVitorias>
+    </rankVitorias>
+    <rankVitorias>
+        <nome>LED</nome>
+        <nivel>4</nivel>
+        <nLinhas>6</nLinhas>
+        <pontuacao>5000</pontuacao>
         <nVitorias>0</nVitorias>
     </rankVitorias>
     <rankVitorias>
@@ -22,10 +29,10 @@
         <nVitorias>0</nVitorias>
     </rankVitorias>
     <rankVitorias>
-        <nome>LED</nome>
-        <nivel>4</nivel>
-        <nLinhas>6</nLinhas>
-        <pontuacao>5000</pontuacao>
+        <nome>VAL</nome>
+        <nivel>3</nivel>
+        <nLinhas>3</nLinhas>
+        <pontuacao>3500</pontuacao>
         <nVitorias>0</nVitorias>
     </rankVitorias>
     <rankPontuacao>
@@ -33,7 +40,14 @@
         <nivel>6</nivel>
         <nLinhas>18</nLinhas>
         <pontuacao>10100</pontuacao>
-        <nVitorias>3</nVitorias>
+        <nVitorias>4</nVitorias>
+    </rankPontuacao>
+    <rankPontuacao>
+        <nome>CAM</nome>
+        <nivel>3</nivel>
+        <nLinhas>10</nLinhas>
+        <pontuacao>5200</pontuacao>
+        <nVitorias>1</nVitorias>
     </rankPontuacao>
     <rankPontuacao>
         <nome>LED</nome>
@@ -61,13 +75,20 @@
         <nivel>6</nivel>
         <nLinhas>18</nLinhas>
         <pontuacao>10100</pontuacao>
-        <nVitorias>3</nVitorias>
+        <nVitorias>4</nVitorias>
     </jogadores>
     <jogadores>
-        <nome>VAL</nome>
+        <nome>CAM</nome>
         <nivel>3</nivel>
-        <nLinhas>3</nLinhas>
-        <pontuacao>3500</pontuacao>
+        <nLinhas>10</nLinhas>
+        <pontuacao>5200</pontuacao>
+        <nVitorias>1</nVitorias>
+    </jogadores>
+    <jogadores>
+        <nome>LED</nome>
+        <nivel>4</nivel>
+        <nLinhas>6</nLinhas>
+        <pontuacao>5000</pontuacao>
         <nVitorias>0</nVitorias>
     </jogadores>
     <jogadores>
@@ -78,10 +99,10 @@
         <nVitorias>0</nVitorias>
     </jogadores>
     <jogadores>
-        <nome>LED</nome>
-        <nivel>4</nivel>
-        <nLinhas>6</nLinhas>
-        <pontuacao>5000</pontuacao>
+        <nome>VAL</nome>
+        <nivel>3</nivel>
+        <nLinhas>3</nLinhas>
+        <pontuacao>3500</pontuacao>
         <nVitorias>0</nVitorias>
     </jogadores>
 </pontuacoes>

@@ -42,11 +42,12 @@ public class PontuacoesSalvas {
             if (venceu) jogador.aumentarVitorias();
         }
 
+        jogadores.sort(Comparator.comparing(JogadorAuxiliar::getPontuacao).reversed());
+        
         rankPontuacao = new ArrayList<>(jogadores);
         rankVitorias = new ArrayList<>(jogadores);
 
-        rankPontuacao.sort(Comparator.comparing(JogadorAuxiliar::getPontuacao).reversed());
-        rankVitorias.sort(Comparator.comparing(JogadorAuxiliar::getVitorias).reversed().thenComparing(JogadorAuxiliar::getPontuacao).reversed());
+        rankVitorias.sort(Comparator.comparing(JogadorAuxiliar::getVitorias).reversed());
 
         while (rankPontuacao.size() > 10)
             rankPontuacao.removeLast();
