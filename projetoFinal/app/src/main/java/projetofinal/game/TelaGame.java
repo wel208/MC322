@@ -163,7 +163,7 @@ public class TelaGame {
             teclasPressionadas.add(event.getCode());
             KeyCode tecla = event.getCode();
 
-            if (tecla.equals(KeyCode.W) || tecla.equals(KeyCode.UP) || tecla.equals(KeyCode.Q) || tecla.equals(KeyCode.SHIFT) || tecla.equals(KeyCode.E) || tecla.equals(KeyCode.NUMPAD0))
+            if (tecla.equals(KeyCode.W) || tecla.equals(KeyCode.I) || tecla.equals(KeyCode.Q) || tecla.equals(KeyCode.U) || tecla.equals(KeyCode.E) || tecla.equals(KeyCode.O))
                 game.atualizar(tecla);
             if (event.getCode() == KeyCode.R && game.pausado()){
                 game.reiniciar();
@@ -214,6 +214,9 @@ public class TelaGame {
                     ranking.atualizarRank(new JogadorAuxiliar(game.getPlayer2().getNome(), game.getPlayer2().getNivel(), game.getPlayer2().getNLinhas(), game.getPlayer2().getPontos()), !game.getPlayer2().perdeu());
                     timer.stop();
 
+                    game.getPlayer1().resetPontuacao();
+                    game.getPlayer2().resetPontuacao();
+
                     PauseTransition espera = new PauseTransition(javafx.util.Duration.seconds(3));
 
                     espera.setOnFinished(event -> {
@@ -227,7 +230,7 @@ public class TelaGame {
 
                 if (now - ultimoTick >= UM_SEGUNDO - ((long)Math.max(game.getPlayer1().getNivel(), game.getPlayer2().getNivel()) - (long)1) * DECIMO_DE_SEGUNDO){
                     game.atualizar(KeyCode.S);
-                    game.atualizar(KeyCode.DOWN);
+                    game.atualizar(KeyCode.K);
                     ultimoTick = now;
                 }
 
@@ -242,11 +245,11 @@ public class TelaGame {
                 }
                 
                 if (now - ultimoMovLateralJ2 >= TEMPO_MOV_LATERAL){
-                    if (teclasPressionadas.contains(KeyCode.LEFT)){
-                       game.atualizar(KeyCode.LEFT);
+                    if (teclasPressionadas.contains(KeyCode.L)){
+                       game.atualizar(KeyCode.L);
                     }
-                    if (teclasPressionadas.contains(KeyCode.RIGHT)){
-                        game.atualizar(KeyCode.RIGHT);
+                    if (teclasPressionadas.contains(KeyCode.J)){
+                        game.atualizar(KeyCode.J);
                     }
                     ultimoMovLateralJ2 = now;
                 }
@@ -259,8 +262,8 @@ public class TelaGame {
                 }
 
                 if (now - ultimaQuedaJ2 >= TEMPO_QUEDA){    
-                    if (teclasPressionadas.contains(KeyCode.DOWN)){
-                        game.atualizar(KeyCode.DOWN);
+                    if (teclasPressionadas.contains(KeyCode.K)){
+                        game.atualizar(KeyCode.K);
                     }
                     ultimaQuedaJ2 = now;
                 }

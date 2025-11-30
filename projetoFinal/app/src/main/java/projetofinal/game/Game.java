@@ -67,19 +67,19 @@ public class Game implements GameInterface {
 
         switch(tecla){
         case KeyCode.A:
-        case KeyCode.LEFT:
+        case KeyCode.J:
             bloco.moverEsquerda();
             if (tab.posicaoValida(bloco) != Validacao.OK)
                 bloco.moverDireita();
         break;
         case KeyCode.D:
-        case KeyCode.RIGHT:
+        case KeyCode.L:
             bloco.moverDireita();
             if (tab.posicaoValida(bloco) != Validacao.OK)
                 bloco.moverEsquerda();
         break;
         case KeyCode.S:
-        case KeyCode.DOWN:
+        case KeyCode.K:
             bloco.moverBaixo();
             if (tab.posicaoValida(bloco) == Validacao.COLISAO) {
                 bloco.moverCima();
@@ -92,7 +92,7 @@ public class Game implements GameInterface {
             }
         break;
         case KeyCode.W:
-        case KeyCode.UP:
+        case KeyCode.I:
             bloco.rotacionarSH();
             if (tab.posicaoValida(bloco) != Validacao.OK) {
                 bloco.moverCima();
@@ -111,11 +111,11 @@ public class Game implements GameInterface {
             }
         break;
         case KeyCode.Q:
-        case KeyCode.SHIFT:
+        case KeyCode.U:
             atual.hold();
         break;
         case KeyCode.E:
-        case KeyCode.NUMPAD0:
+        case KeyCode.O:
             for (;;){
                 bloco.moverBaixo();
                 if (tab.posicaoValida(bloco) == Validacao.COLISAO){

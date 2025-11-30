@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <pontuacoes>
     <rankVitorias>
+        <nome>GGO</nome>
+        <nivel>5</nivel>
+        <nLinhas>27</nLinhas>
+        <pontuacao>11500</pontuacao>
+        <nVitorias>9</nVitorias>
+    </rankVitorias>
+    <rankVitorias>
         <nome>WEL</nome>
         <nivel>6</nivel>
         <nLinhas>18</nLinhas>
         <pontuacao>10100</pontuacao>
-        <nVitorias>4</nVitorias>
+        <nVitorias>6</nVitorias>
+    </rankVitorias>
+    <rankVitorias>
+        <nome>KUR</nome>
+        <nivel>4</nivel>
+        <nLinhas>12</nLinhas>
+        <pontuacao>7000</pontuacao>
+        <nVitorias>2</nVitorias>
+    </rankVitorias>
+    <rankVitorias>
+        <nome>AAA</nome>
+        <nivel>8</nivel>
+        <nLinhas>36</nLinhas>
+        <pontuacao>16600</pontuacao>
+        <nVitorias>1</nVitorias>
     </rankVitorias>
     <rankVitorias>
         <nome>CAM</nome>
@@ -15,10 +36,31 @@
         <nVitorias>1</nVitorias>
     </rankVitorias>
     <rankVitorias>
+        <nome>DDD</nome>
+        <nivel>2</nivel>
+        <nLinhas>0</nLinhas>
+        <pontuacao>1100</pontuacao>
+        <nVitorias>1</nVitorias>
+    </rankVitorias>
+    <rankVitorias>
+        <nome>BOA</nome>
+        <nivel>4</nivel>
+        <nLinhas>10</nLinhas>
+        <pontuacao>6000</pontuacao>
+        <nVitorias>0</nVitorias>
+    </rankVitorias>
+    <rankVitorias>
         <nome>LED</nome>
         <nivel>4</nivel>
         <nLinhas>6</nLinhas>
         <pontuacao>5000</pontuacao>
+        <nVitorias>0</nVitorias>
+    </rankVitorias>
+    <rankVitorias>
+        <nome>CJR</nome>
+        <nivel>3</nivel>
+        <nLinhas>6</nLinhas>
+        <pontuacao>4800</pontuacao>
         <nVitorias>0</nVitorias>
     </rankVitorias>
     <rankVitorias>
@@ -28,19 +70,40 @@
         <pontuacao>3800</pontuacao>
         <nVitorias>0</nVitorias>
     </rankVitorias>
-    <rankVitorias>
-        <nome>VAL</nome>
-        <nivel>3</nivel>
-        <nLinhas>3</nLinhas>
-        <pontuacao>3500</pontuacao>
-        <nVitorias>0</nVitorias>
-    </rankVitorias>
+    <rankPontuacao>
+        <nome>AAA</nome>
+        <nivel>8</nivel>
+        <nLinhas>36</nLinhas>
+        <pontuacao>16600</pontuacao>
+        <nVitorias>1</nVitorias>
+    </rankPontuacao>
+    <rankPontuacao>
+        <nome>GGO</nome>
+        <nivel>5</nivel>
+        <nLinhas>27</nLinhas>
+        <pontuacao>11500</pontuacao>
+        <nVitorias>9</nVitorias>
+    </rankPontuacao>
     <rankPontuacao>
         <nome>WEL</nome>
         <nivel>6</nivel>
         <nLinhas>18</nLinhas>
         <pontuacao>10100</pontuacao>
-        <nVitorias>4</nVitorias>
+        <nVitorias>6</nVitorias>
+    </rankPontuacao>
+    <rankPontuacao>
+        <nome>KUR</nome>
+        <nivel>4</nivel>
+        <nLinhas>12</nLinhas>
+        <pontuacao>7000</pontuacao>
+        <nVitorias>2</nVitorias>
+    </rankPontuacao>
+    <rankPontuacao>
+        <nome>BOA</nome>
+        <nivel>4</nivel>
+        <nLinhas>10</nLinhas>
+        <pontuacao>6000</pontuacao>
+        <nVitorias>0</nVitorias>
     </rankPontuacao>
     <rankPontuacao>
         <nome>CAM</nome>
@@ -57,6 +120,13 @@
         <nVitorias>0</nVitorias>
     </rankPontuacao>
     <rankPontuacao>
+        <nome>CJR</nome>
+        <nivel>3</nivel>
+        <nLinhas>6</nLinhas>
+        <pontuacao>4800</pontuacao>
+        <nVitorias>0</nVitorias>
+    </rankPontuacao>
+    <rankPontuacao>
         <nome>ISA</nome>
         <nivel>3</nivel>
         <nLinhas>3</nLinhas>
@@ -71,11 +141,39 @@
         <nVitorias>0</nVitorias>
     </rankPontuacao>
     <jogadores>
+        <nome>AAA</nome>
+        <nivel>8</nivel>
+        <nLinhas>36</nLinhas>
+        <pontuacao>16600</pontuacao>
+        <nVitorias>1</nVitorias>
+    </jogadores>
+    <jogadores>
+        <nome>GGO</nome>
+        <nivel>5</nivel>
+        <nLinhas>27</nLinhas>
+        <pontuacao>11500</pontuacao>
+        <nVitorias>9</nVitorias>
+    </jogadores>
+    <jogadores>
         <nome>WEL</nome>
         <nivel>6</nivel>
         <nLinhas>18</nLinhas>
         <pontuacao>10100</pontuacao>
-        <nVitorias>4</nVitorias>
+        <nVitorias>6</nVitorias>
+    </jogadores>
+    <jogadores>
+        <nome>KUR</nome>
+        <nivel>4</nivel>
+        <nLinhas>12</nLinhas>
+        <pontuacao>7000</pontuacao>
+        <nVitorias>2</nVitorias>
+    </jogadores>
+    <jogadores>
+        <nome>BOA</nome>
+        <nivel>4</nivel>
+        <nLinhas>10</nLinhas>
+        <pontuacao>6000</pontuacao>
+        <nVitorias>0</nVitorias>
     </jogadores>
     <jogadores>
         <nome>CAM</nome>
@@ -92,6 +190,13 @@
         <nVitorias>0</nVitorias>
     </jogadores>
     <jogadores>
+        <nome>CJR</nome>
+        <nivel>3</nivel>
+        <nLinhas>6</nLinhas>
+        <pontuacao>4800</pontuacao>
+        <nVitorias>0</nVitorias>
+    </jogadores>
+    <jogadores>
         <nome>ISA</nome>
         <nivel>3</nivel>
         <nLinhas>3</nLinhas>
@@ -103,6 +208,34 @@
         <nivel>3</nivel>
         <nLinhas>3</nLinhas>
         <pontuacao>3500</pontuacao>
+        <nVitorias>0</nVitorias>
+    </jogadores>
+    <jogadores>
+        <nome>LEO</nome>
+        <nivel>2</nivel>
+        <nLinhas>3</nLinhas>
+        <pontuacao>2800</pontuacao>
+        <nVitorias>0</nVitorias>
+    </jogadores>
+    <jogadores>
+        <nome>777</nome>
+        <nivel>2</nivel>
+        <nLinhas>0</nLinhas>
+        <pontuacao>1200</pontuacao>
+        <nVitorias>0</nVitorias>
+    </jogadores>
+    <jogadores>
+        <nome>DDD</nome>
+        <nivel>2</nivel>
+        <nLinhas>0</nLinhas>
+        <pontuacao>1100</pontuacao>
+        <nVitorias>1</nVitorias>
+    </jogadores>
+    <jogadores>
+        <nome>GGN</nome>
+        <nivel>0</nivel>
+        <nLinhas>0</nLinhas>
+        <pontuacao>0</pontuacao>
         <nVitorias>0</nVitorias>
     </jogadores>
 </pontuacoes>

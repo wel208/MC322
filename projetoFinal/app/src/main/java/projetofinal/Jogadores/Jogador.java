@@ -2,7 +2,6 @@ package projetofinal.Jogadores;
 import projetofinal.Blocos.*;
 import projetofinal.Tabuleiro.*;
 import projetofinal.game.*;
-
 public class Jogador {
 
     private String nome;
@@ -48,13 +47,18 @@ public class Jogador {
         pontos = 0;
         nLinhas = 0;
         nivel = 0;
+        guardou = false;
+        bag.resetRotacoes();
+        guardado = null;
+        bag.resetBags();
+        perdeu = false;
     }
 
     public void adicionarPontos(int linhas) {
         // regra simples (pode mudar depois)
         pontos += 100 + linhas * 200;
         nLinhas += linhas;
-        nivel = 1 + bag.getRotacoes() / 2;
+        nivel = Math.min(1 + bag.getRotacoes() / 2, 10);
         guardou = false;
     }
 

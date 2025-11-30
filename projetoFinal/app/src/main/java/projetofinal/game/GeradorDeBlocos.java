@@ -56,4 +56,16 @@ public class GeradorDeBlocos{
 
     public List<Bloco> getNextList() {return next; }
     public int getRotacoes() { return rotacoes; }
+    public void resetRotacoes() { rotacoes = 0; }
+
+    public void resetBags(){
+        bag1.clear();
+        bag2.clear();
+        next.clear();
+        
+        recarregarBag(bag1);
+        recarregarBag(bag2);
+        for(int i = 0; i<4; i++)
+            next.add(proximoBloco_next());
+    }
 }
