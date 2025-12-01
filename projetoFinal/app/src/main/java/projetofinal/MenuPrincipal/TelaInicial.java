@@ -126,7 +126,8 @@ public class TelaInicial {
         // Botão para iniciar o jogo
         Button iniciarJogo = new Button("Iniciar Jogo");
         iniciarJogo.setOnAction(event -> {
-            Main.executarJogo(primaryStage);
+            if (!J1.getNome().equals(J2.getNome()))
+                Main.executarJogo(primaryStage);
         });
 
         // Botão para voltar à tela inicial
